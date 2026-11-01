@@ -61,17 +61,64 @@
   .case li { margin: 4px 0; }
   .case li b { color: var(--text); font-weight: 600; }
   @media (max-width: 860px) { .case { grid-template-columns: 1fr; gap: 16px; } .case .cols { grid-template-columns: 1fr; } .case aside .big { font-size: 54px; } }
+
+  /* ---------- hero with AI tools bubble cluster ---------- */
+  .hero-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 30px; align-items: center; }
+  .page-hero .hero-split h1 { max-width: 10ch; font-size: clamp(56px, 6.4vw, 104px); }
+  .tools { position: relative; }
+  .tools-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .tools-label b { font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+  .tools-label span { font-size: 12px; color: var(--dim); }
+  .bubbles { position: relative; height: clamp(440px, calc(100vh - 260px), 580px); --mx: 0; --my: 0; }
+  .bubble { position: absolute; left: 0; top: 0; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+    transform: translate(calc(var(--mx) * var(--d) * 1px), calc(var(--my) * var(--d) * 1px)); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .bubble .in { position: relative; width: 100%; height: 100%; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; cursor: default;
+    background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.10), rgba(255,255,255,0) 45%), radial-gradient(circle at 50% 50%, #191919, #0c0c0c 70%);
+    border: 1.5px solid var(--c); box-shadow: 0 10px 30px rgba(0,0,0,.55), 0 0 22px -6px var(--c), inset 0 0 18px -8px var(--c);
+    opacity: 0; transform: scale(.4); animation: pop .7s cubic-bezier(.2,1.4,.4,1) forwards, float var(--fd) ease-in-out var(--fdel) infinite alternate;
+    animation-delay: var(--pd), calc(var(--pd) + .7s); transition: box-shadow .25s, border-color .25s; }
+  .bubble .mono { font: 400 calc(var(--s) * .3)/1 'Anton', Impact, sans-serif; color: var(--c); letter-spacing: .02em; }
+  .bubble .mono img { display: block; width: calc(var(--s) * .42); height: calc(var(--s) * .42); object-fit: contain; }
+  .bubble .nm { max-width: 86%; font: 700 calc(var(--s) * .105)/1.1 'Barlow', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #e8e3db; }
+  .bubble:hover { z-index: 5; }
+  .bubble:hover .in, .bubble:focus-within .in { box-shadow: 0 16px 40px rgba(0,0,0,.6), 0 0 34px -2px var(--c), inset 0 0 24px -6px var(--c); }
+  .bubble .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 6px); width: max-content; max-width: 220px; padding: 8px 12px; border-radius: 4px;
+    background: #f2efe9; color: #111; font: 600 12.5px/1.35 'Barlow', sans-serif; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+  .bubble .tip small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #8a1a1d; margin-bottom: 2px; }
+  .bubble:hover .tip, .bubble:focus-within .tip { opacity: 1; transform: translate(-50%, 0); }
+  @keyframes pop { to { opacity: 1; transform: scale(1); } }
+  @keyframes float { from { translate: 0 -5px; } to { translate: 0 6px; } }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 4px; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #a39e96; }
+  .legend i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+  @media (max-width: 960px) {
+    .hero-split { grid-template-columns: 1fr; gap: 34px; }
+    .page-hero .hero-split h1 { max-width: 12ch; font-size: clamp(54px, 12vw, 110px); }
+    .bubbles { height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .bubble { position: relative; margin: 0; transform: none !important; left: auto !important; top: auto !important; --s: 88px !important; }
+    .bubble .tip { display: none; }
+  }
+  @media (max-width: 420px) { .bubble { --s: 78px !important; } }
+  @media (prefers-reduced-motion: reduce) { .bubble .in { animation: none; opacity: 1; transform: none; } .bubble { transition: none; } }
 </style>
 </head>
 <body>
 <script src="/assets/menu.js"></script>
 
 <header class="page-hero">
-  <div class="wrap">
-    <p class="kicker">Workflow · Behind the work</p>
-    <h1>Human first. Tool second.</h1>
-    <p class="lead">The brief leads. The tools follow. This is how I take a project from idea to delivery, where AI speeds up the work, and human judgment decides what's good enough to ship.</p>
-    <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#case-studies">Case studies</a></div>
+  <div class="wrap hero-split">
+    <div>
+      <p class="kicker">Workflow · Behind the work</p>
+      <h1>Human first. Tool second.</h1>
+      <p class="lead">The brief leads. The tools follow. This is how I take a project from idea to delivery, where AI speeds up the work, and human judgment decides what's good enough to ship.</p>
+      <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#case-studies">Case studies</a></div>
+    </div>
+    <div class="tools" aria-labelledby="toolsTitle">
+      <div class="tools-label"><b id="toolsTitle">My production toolkit</b><span id="toolsCount"></span></div>
+      <div class="bubbles" id="bubbles" role="list"></div>
+      <ul class="legend" id="legend" aria-label="Tool categories"></ul>
+    </div>
   </div>
 </header>
 
@@ -275,5 +322,107 @@
   </div>
 </footer>
 <script>document.querySelectorAll('.yr').forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+<script>
+/* ---------- AI tools bubble cluster ----------
+   To add or remove a tool, edit TOOLS below.
+   size: 1 = large, 2 = medium, 3 = small.  cat: one of the CATS keys.
+   logo (optional): path to an official logo file, e.g. '/assets/tools/suno.svg'. Without it the bubble shows a monogram. */
+(function () {
+  var CATS = {
+    ai:    { label: 'AI & agents',      c: '#f2b632' },
+    video: { label: 'Video & avatars',  c: '#e3262b' },
+    image: { label: 'Image & design',   c: '#ff7a45' },
+    audio: { label: 'Audio & music',    c: '#f2efe9' },
+    d3:    { label: '3D',               c: '#c08a52' }
+  };
+  var TOOLS = [
+    { name: 'Claude',         mono: 'Cl', cat: 'ai',    size: 1, use: 'Scripts, research and site builds' },
+    { name: 'ChatGPT',        mono: 'GPT', cat: 'ai',   size: 1, use: 'Prompt drafting and image concepts' },
+    { name: 'Higgsfield',     mono: 'Hf', cat: 'video', size: 1, use: 'Cinematic AI video shots' },
+    { name: 'Suno',           mono: 'Su', cat: 'audio', size: 1, use: 'Jingles, anthems and covers' },
+    { name: 'ElevenLabs',     mono: 'XI', cat: 'audio', size: 1, use: 'Voiceover, dubbing and voice cloning' },
+    { name: 'CapCut',         mono: 'Cc', cat: 'video', size: 1, use: 'Editing, captions and finishing' },
+    { name: 'Gemini',         mono: 'Ge', cat: 'ai',    size: 2, use: 'Research and Veo video' },
+    { name: 'HeyGen',         mono: 'Hg', cat: 'video', size: 2, use: 'AI presenters and avatars' },
+    { name: 'TopView',        mono: 'Tv', cat: 'video', size: 2, use: 'AI video and product avatars' },
+    { name: 'Leonardo',       mono: 'Le', cat: 'image', size: 2, use: 'Image generation and variations' },
+    { name: 'Grok',           mono: 'Gk', cat: 'ai',    size: 2, use: 'Grok Imagine visuals' },
+    { name: 'Notion',         mono: 'N',  cat: 'ai',    size: 2, use: 'Planning, briefs and portfolio' },
+    { name: 'OpenArt',        mono: 'Oa', cat: 'image', size: 2, use: 'Image workflows and editing' },
+    { name: 'Blender',        mono: 'Bl', cat: 'd3',    size: 2, use: '3D blockouts and scenes' },
+    { name: 'Antigravity',    mono: 'Ag', cat: 'ai',    size: 3, use: 'Agent-driven coding' },
+    { name: 'Lovart',         mono: 'Lv', cat: 'image', size: 3, use: 'AI design layouts' },
+    { name: 'Arcads',         mono: 'Ar', cat: 'video', size: 3, use: 'AI UGC ad videos' },
+    { name: 'MakeUGC',        mono: 'MU', cat: 'video', size: 3, use: 'UGC-style ad creatives' },
+    { name: 'Meshy',          mono: 'Me', cat: 'd3',    size: 3, use: 'AI 3D models' },
+    { name: 'Epidemic Sound', mono: 'ES', cat: 'audio', size: 3, use: 'Licensed music and sound effects' }
+  ];
+  var SIZES = { 1: 118, 2: 96, 3: 80 };
+
+  var box = document.getElementById('bubbles');
+  document.getElementById('toolsCount').textContent = TOOLS.length + ' tools';
+  document.getElementById('legend').innerHTML = Object.keys(CATS).map(function (k) {
+    return '<li style="--c:' + CATS[k].c + '"><i></i>' + CATS[k].label + '</li>';
+  }).join('');
+
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  var els = TOOLS.map(function (t, i) {
+    var el = document.createElement('div');
+    var s = SIZES[t.size] || 80, cat = CATS[t.cat] || CATS.ai;
+    el.className = 'bubble';
+    el.setAttribute('role', 'listitem');
+    el.style.cssText = '--s:' + s + 'px;--c:' + cat.c + ';--d:' + (4 - t.size) * 6 + ';--pd:' + (0.25 + i * 0.06).toFixed(2) + 's;--fd:' + (4.5 + (i * 7 % 10) / 3).toFixed(2) + 's;--fdel:0s';
+    el.innerHTML = '<div class="in" tabindex="0" aria-label="' + esc(t.name + ': ' + t.use) + '">' +
+      '<span class="mono">' + (t.logo ? '<img src="' + t.logo + '" alt="">' : esc(t.mono)) + '</span>' +
+      '<span class="nm">' + esc(t.name) + '</span></div>' +
+      '<div class="tip" role="tooltip"><small>' + esc(cat.label) + '</small>' + esc(t.use) + '</div>';
+    box.appendChild(el);
+    return { el: el, r: s / 2 + 5, x: 0, y: 0 };
+  });
+
+  // simple circle packing: start on a spiral, then push overlapping bubbles apart while pulling toward the centre
+  function layout() {
+    if (getComputedStyle(els[0].el).position !== 'absolute') return;   // small screens use the wrapped layout
+    var W = box.clientWidth, H = box.clientHeight, cx = W / 2, cy = H / 2;
+    // shrink every bubble a little when the box is small, so 20 tools always fit
+    var need = TOOLS.reduce(function (a, t) { var s = SIZES[t.size] || 80; return a + s * s; }, 0) * 0.785;
+    var k = Math.max(0.62, Math.min(1, Math.sqrt((W * H * 0.6) / need)));
+    els.forEach(function (b, i) { var s = Math.round((SIZES[TOOLS[i].size] || 80) * k); b.el.style.setProperty('--s', s + 'px'); b.r = s / 2 + 5; });
+    els.forEach(function (b, i) {
+      var a = i * 2.39996, d = 14 * Math.sqrt(i + 1) * 4.2;
+      b.x = cx + Math.cos(a) * d; b.y = cy + Math.sin(a) * d * 0.9;
+    });
+    for (var it = 0; it < 400; it++) {
+      for (var i = 0; i < els.length; i++) {
+        var p = els[i];
+        p.x += (cx - p.x) * 0.012; p.y += (cy - p.y) * 0.012;
+        for (var j = i + 1; j < els.length; j++) {
+          var q = els[j], dx = q.x - p.x, dy = q.y - p.y, dist = Math.sqrt(dx * dx + dy * dy) || 0.01, min = p.r + q.r;
+          if (dist < min) {
+            var push = (min - dist) / 2, ux = dx / dist, uy = dy / dist;
+            p.x -= ux * push; p.y -= uy * push; q.x += ux * push; q.y += uy * push;
+          }
+        }
+        p.x = Math.max(p.r, Math.min(W - p.r, p.x));
+        p.y = Math.max(p.r + 6, Math.min(H - p.r, p.y));
+      }
+    }
+    els.forEach(function (b) { b.el.style.left = b.x.toFixed(1) + 'px'; b.el.style.top = b.y.toFixed(1) + 'px'; });
+  }
+  layout();
+  var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 150); });
+
+  // gentle parallax: bubbles drift with the mouse (bigger ones move less)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var hero = box.closest('.page-hero');
+    hero.addEventListener('mousemove', function (e) {
+      var r = box.getBoundingClientRect();
+      box.style.setProperty('--mx', ((e.clientX - (r.left + r.width / 2)) / r.width).toFixed(3));
+      box.style.setProperty('--my', ((e.clientY - (r.top + r.height / 2)) / r.height).toFixed(3));
+    });
+    hero.addEventListener('mouseleave', function () { box.style.setProperty('--mx', 0); box.style.setProperty('--my', 0); });
+  }
+})();
+</script>
 </body>
 </html>
