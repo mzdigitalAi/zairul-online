@@ -1,0 +1,256 @@
+/* ==========================================================================
+   zairul.online gallery theme
+   Loaded LAST on /images/, /videos/ and /audio/ so the three gallery apps
+   match the rest of the site (black, gold, red · Anton + Barlow).
+   It only restyles: no gallery feature or admin tool is changed.
+   ========================================================================== */
+
+html:root {
+  color-scheme: dark;
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --raised: #1f1f1f;
+  --ink: #f2efe9;
+  --muted: #a39e96;
+  --line: rgba(255, 255, 255, .10);
+  --accent: #e3262b;
+  --on-accent: #fff;
+  --danger: #ff6b6b;
+  --soft: rgba(242, 182, 50, .12);
+  --player: rgba(10, 10, 10, .96);
+  --focus: #f2b632;
+  --gold: #f2b632;
+  --red: #e3262b;
+}
+
+html body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Barlow', 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+}
+html button, html input, html select, html textarea { font-family: inherit; }
+html ::selection { background: rgba(242, 182, 50, .35); }
+html a:focus-visible, html button:focus-visible, html input:focus-visible, html select:focus-visible, html textarea:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 3px;
+}
+
+/* ---------- headings & small labels ---------- */
+html h1, html h2 {
+  font-family: 'Anton', Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+html .intro h1 { font-size: clamp(40px, 4.8vw, 72px); line-height: .92; margin-bottom: 14px; }
+html h2 { font-size: 28px; line-height: 1.05; letter-spacing: .02em; }
+html h3 { font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; color: var(--gold); }
+html .eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--muted);
+}
+html .intro .eyebrow, html .eyebrow.accent, html .accent { color: var(--red); }
+html .intro .subtitle, html .intro p.muted { color: #d2cdc5; font-size: 17px; line-height: 1.55; max-width: 680px; }
+html .count, html p.count {
+  font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+}
+html .muted, html .small, html .fine, html .subtitle { color: var(--muted); }
+
+/* ---------- page shell ---------- */
+html .shell { background: transparent; }
+html main {
+  background:
+    radial-gradient(ellipse 55% 340px at 92% 0%, rgba(227, 38, 43, .20), transparent 70%),
+    radial-gradient(ellipse 40% 260px at 0% 0%, rgba(242, 182, 50, .06), transparent 70%);
+  background-repeat: no-repeat;
+}
+html .intro {
+  position: relative;
+  margin: 40px 0 30px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+html .topbar { border-bottom: 1px solid var(--line); }
+
+/* the site menu already shows the logo, so the gallery's own logo block is hidden */
+html .sidebar .brand, html .mobile-brand { display: none !important; }
+
+/* ---------- sidebar ---------- */
+html .sidebar {
+  background: #0d0d0d;
+  border-right: 1px solid var(--line);
+  padding-top: 34px;
+}
+html .sidebar > .eyebrow { margin: 22px 12px 10px; color: #77726b; }
+html .sidebar > .eyebrow:first-of-type { margin-top: 0; }
+html .nav, html .category {
+  border-radius: 3px;
+  font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: #bdb8b0;
+  border-left: 2px solid transparent;
+}
+html .nav:hover, html .category:hover { background: var(--raised); color: #fff; }
+html .nav.active, html .nav.selected, html .category.active, html .sidebar .selected {
+  background: rgba(242, 182, 50, .10);
+  color: var(--gold);
+  border-left-color: var(--gold);
+  font-weight: 700;
+}
+html .sidebar-bottom p { font-family: 'Anton', Impact, sans-serif; font-size: 18px; line-height: 1.15; text-transform: uppercase; color: #5f5a54; letter-spacing: .02em; }
+html .sidebar-bottom a, html .sidebar-bottom button, html .sidebar-bottom .quiet {
+  font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none;
+}
+html .sidebar-bottom a:hover, html .sidebar-bottom button:hover { color: var(--gold); background: transparent; }
+
+/* ---------- buttons ---------- */
+html button { border-radius: 3px; }
+html button:hover { background: var(--raised); }
+html .primary, html a.primary, html .action-link.primary {
+  background: var(--red); color: #fff; border: 1.5px solid var(--red); border-radius: 3px;
+  font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+}
+html .primary:hover, html a.primary:hover { background: #ff3a3f; border-color: #ff3a3f; color: #fff; }
+html .secondary, html a.secondary {
+  background: transparent; color: var(--ink); border: 1.5px solid rgba(242, 239, 233, .55); border-radius: 3px;
+  font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+}
+html .secondary:hover, html a.secondary:hover { border-color: var(--gold); color: var(--gold); background: transparent; }
+html .quiet, html .text-button { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+html .quiet:hover, html .text-button:hover { color: var(--gold); background: transparent; }
+html .danger { color: var(--danger); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+html .danger:hover { background: rgba(255, 107, 107, .12); }
+html .round {
+  background: rgba(10, 10, 10, .8); border: 1px solid rgba(255, 255, 255, .18); color: #fff; border-radius: 50%;
+}
+html .round:hover { background: var(--red); border-color: var(--red); }
+html .chip, html .mobile-scopes button {
+  border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #cfc9c0;
+}
+html .chip.selected, html .mobile-scopes button.selected { background: var(--gold); border-color: var(--gold); color: #140d00; }
+
+/* ---------- inputs ---------- */
+html input:not([type=checkbox]):not([type=range]):not([type=file]), html select, html textarea {
+  background: #111; color: var(--ink); border: 1px solid rgba(255, 255, 255, .14); border-radius: 3px;
+}
+html input:focus, html select:focus, html textarea:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(242, 182, 50, .18); }
+html .search-wrap, html .search input {
+  background: #111 !important; border: 1px solid rgba(255, 255, 255, .12) !important; border-radius: 3px;
+}
+html .search-wrap input { border: 0 !important; background: transparent !important; box-shadow: none !important; }
+html .search-icon { border-color: var(--gold); }
+html .search-icon:after { background: var(--gold); }
+html label { color: #cfc9c0; }
+html .filter-fields label, html .filters label {
+  font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #8d877e;
+}
+html .filter-fields select, html .filters select { font-size: 13px; letter-spacing: 0; text-transform: none; }
+html input[type=checkbox], html input[type=range] { accent-color: var(--red); }
+
+/* ---------- image cards ---------- */
+html .card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  transition: border-color .2s, transform .25s, box-shadow .25s;
+}
+html .card:hover { border-color: rgba(242, 182, 50, .6); transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .5); background: var(--surface); }
+html .card-info { padding: 12px 14px 14px; }
+html .card-title { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 17px; letter-spacing: .03em; text-transform: uppercase; }
+html .card-model { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+html .card .badge, html .cover .badge, html .draft-badge {
+  background: var(--red); color: #fff; border: 0; border-radius: 3px;
+  font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+}
+
+/* ---------- video cards ---------- */
+html .video-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  transition: border-color .2s, transform .25s, box-shadow .25s;
+}
+html .video-card:hover { background: var(--surface); border-color: rgba(242, 182, 50, .6); transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .5); }
+html .cover, html .source-cover { background: #111; }
+html .source-name { font-family: 'Anton', Impact, sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .03em; color: #5f5a54; }
+html .cover .play {
+  background: var(--red); color: #fff; border: 0; box-shadow: 0 4px 20px rgba(0, 0, 0, .6), 0 0 0 6px rgba(227, 38, 43, .25);
+  transition: transform .2s;
+}
+html .video-card:hover .play { transform: scale(1.1); }
+html .video-stage { background: #050505; }
+html .embed-frame { background: #000; border-radius: 4px; }
+html .playback-note { color: #77726b; font-size: 13px; }
+
+/* ---------- audio cards ---------- */
+html .art-button { background: #111; border: 1px solid var(--line); border-radius: 6px; transition: border-color .2s, transform .25s, box-shadow .25s; }
+html .art-button:hover { background: #111; border-color: rgba(242, 182, 50, .6); transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .5); }
+html .art-play { background: var(--red); color: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, .55); }
+html .track-card.is-current .art-button { outline: 2px solid var(--gold); outline-offset: 3px; }
+html .track-title { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 18px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.15; }
+html .track-artist { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+html .track-description { color: #8d877e; }
+html .track-more { color: var(--muted); }
+
+/* now-playing bar */
+html .now-playing {
+  background: var(--player);
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, var(--red), var(--gold), transparent) 1;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, .6);
+}
+html .now-copy strong { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 17px; letter-spacing: .03em; text-transform: uppercase; }
+html .mini-art { background: var(--raised); border-radius: 4px; }
+html .transport-buttons button { color: #cfc9c0; }
+html .transport-buttons button:hover:not(:disabled) { color: #fff; background: var(--raised); }
+html .play-main { color: #fff !important; background: var(--red) !important; border-radius: 50% !important; width: 48px; height: 48px; min-width: 48px !important; padding: 0 !important; display: grid; place-items: center; }
+html .play-main:hover:not(:disabled) { background: #ff3a3f !important; }
+html .play-main:disabled { background: #3a1416 !important; }
+html .timeline, html .volume { color: #8d877e; }
+html .download { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+
+/* ---------- dialogs: image/video viewer, track details, owner tools ---------- */
+html dialog {
+  background: #0f0f0f; color: var(--ink); border: 1px solid rgba(255, 255, 255, .12); border-radius: 6px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, .8);
+}
+html dialog::backdrop { background: rgba(0, 0, 0, .82); backdrop-filter: blur(6px); }
+html .viewer { background: #050505; border: 0; border-radius: 0; }
+html .image-stage { background: #050505; }
+html .viewer-controls span { background: rgba(10, 10, 10, .8); border: 1px solid rgba(255, 255, 255, .12); color: #cfc9c0; font-size: 12px; letter-spacing: .12em; }
+html .prompt-panel { background: #0f0f0f; border-left: 1px solid var(--line); }
+html .prompt-panel h2, html .detail-copy h2, html .review-copy h2 { font-size: 30px; }
+html .prompt-heading h3, html .panel-scroll h3 { color: var(--gold); letter-spacing: .18em; font-size: 11px; }
+html .prompt-text { color: #ddd8d0; }
+html .prompt-panel dl { border-top-color: var(--line); }
+html .prompt-panel dt { color: #77726b; text-transform: uppercase; letter-spacing: .12em; font-size: 10.5px; }
+html .panel-footer { border-top-color: var(--line); background: #0f0f0f; }
+html .tag { background: transparent; border: 1px solid rgba(242, 182, 50, .45); color: var(--gold); border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+html .dialog-header, html .editor-header, html .editor-footer { background: #0f0f0f; border-color: var(--line); }
+html .detail-art, html .upload-panel, html .upload-column, html .review-image, html .review-video { background: #141414; }
+html .upload-box, html .art-upload { background: #0a0a0a; border: 1px dashed rgba(242, 182, 50, .45); border-radius: 6px; }
+html .upload-box:hover, html .art-upload:hover { border-color: var(--gold); }
+html .upload-symbol { color: var(--gold); }
+html .auth-divider { color: #77726b; }
+html .auth-divider::before, html .auth-divider::after { border-color: var(--line); }
+
+/* ---------- notices, empty states, toast, footer ---------- */
+html .notice { background: #141414; border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 3px; }
+html .notice.error, html .error { border-left-color: var(--red); }
+html .empty { background: #0f0f0f; border: 1px dashed rgba(255, 255, 255, .14); border-radius: 6px; }
+html .empty svg, html .empty-icon { color: var(--gold); }
+html .toast, html #toast { background: var(--gold); color: #140d00; border-radius: 3px; font-weight: 600; box-shadow: 0 10px 40px rgba(0, 0, 0, .6); }
+html footer {
+  border-top: 1px solid var(--line); color: #77726b;
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 760px) {
+  html .intro { margin: 26px 0 22px; padding-bottom: 20px; }
+  html .intro h1 { font-size: clamp(38px, 11vw, 56px); }
+  html .intro .subtitle, html .intro p.muted { font-size: 15.5px; }
+  html .topbar { min-height: 0; padding: 14px 0; }
+  html .card-title { font-size: 14px; }
+  html .card-model { font-size: 10px; }
+  html .track-title { font-size: 15px; }
+  html .play-main { width: 44px; height: 44px; min-width: 44px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html .card:hover, html .video-card:hover, html .art-button:hover { transform: none; }
+}
