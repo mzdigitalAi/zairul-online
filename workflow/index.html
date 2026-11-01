@@ -78,7 +78,8 @@
     opacity: 0; transform: scale(.4); animation: pop .7s cubic-bezier(.2,1.4,.4,1) forwards, float var(--fd) ease-in-out var(--fdel) infinite alternate;
     animation-delay: var(--pd), calc(var(--pd) + .7s); transition: box-shadow .25s, border-color .25s; }
   .bubble .mono { font: 400 calc(var(--s) * .3)/1 'Anton', Impact, sans-serif; color: var(--c); letter-spacing: .02em; }
-  .bubble .mono img { display: block; width: calc(var(--s) * .42); height: calc(var(--s) * .42); object-fit: contain; }
+  .bubble .mono img { display: block; width: calc(var(--s) * .44); height: calc(var(--s) * .44); object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+  .bubble .mono:has(img) { line-height: 0; margin-bottom: 2px; }
   .bubble .nm { max-width: 86%; font: 700 calc(var(--s) * .105)/1.1 'Barlow', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #e8e3db; }
   .bubble:hover { z-index: 5; }
   .bubble:hover .in, .bubble:focus-within .in { box-shadow: 0 16px 40px rgba(0,0,0,.6), 0 0 34px -2px var(--c), inset 0 0 24px -6px var(--c); }
@@ -336,26 +337,26 @@
     d3:    { label: '3D',               c: '#c08a52' }
   };
   var TOOLS = [
-    { name: 'Claude',         mono: 'Cl', cat: 'ai',    size: 1, use: 'Scripts, research and site builds' },
-    { name: 'ChatGPT',        mono: 'GPT', cat: 'ai',   size: 1, use: 'Prompt drafting and image concepts' },
+    { name: 'Claude',         mono: 'Cl', cat: 'ai',    size: 1, use: 'Scripts, research and site builds', logo: '/assets/tools/claude.png' },
+    { name: 'ChatGPT',        mono: 'GPT', cat: 'ai',   size: 1, use: 'Prompt drafting and image concepts', logo: '/assets/tools/chatgpt.png' },
     { name: 'Higgsfield',     mono: 'Hf', cat: 'video', size: 1, use: 'Cinematic AI video shots' },
-    { name: 'Suno',           mono: 'Su', cat: 'audio', size: 1, use: 'Jingles, anthems and covers' },
-    { name: 'ElevenLabs',     mono: 'XI', cat: 'audio', size: 1, use: 'Voiceover, dubbing and voice cloning' },
-    { name: 'CapCut',         mono: 'Cc', cat: 'video', size: 1, use: 'Editing, captions and finishing' },
-    { name: 'Gemini',         mono: 'Ge', cat: 'ai',    size: 2, use: 'Research and Veo video' },
-    { name: 'HeyGen',         mono: 'Hg', cat: 'video', size: 2, use: 'AI presenters and avatars' },
-    { name: 'TopView',        mono: 'Tv', cat: 'video', size: 2, use: 'AI video and product avatars' },
-    { name: 'Leonardo',       mono: 'Le', cat: 'image', size: 2, use: 'Image generation and variations' },
-    { name: 'Grok',           mono: 'Gk', cat: 'ai',    size: 2, use: 'Grok Imagine visuals' },
-    { name: 'Notion',         mono: 'N',  cat: 'ai',    size: 2, use: 'Planning, briefs and portfolio' },
-    { name: 'OpenArt',        mono: 'Oa', cat: 'image', size: 2, use: 'Image workflows and editing' },
-    { name: 'Blender',        mono: 'Bl', cat: 'd3',    size: 2, use: '3D blockouts and scenes' },
-    { name: 'Antigravity',    mono: 'Ag', cat: 'ai',    size: 3, use: 'Agent-driven coding' },
-    { name: 'Lovart',         mono: 'Lv', cat: 'image', size: 3, use: 'AI design layouts' },
-    { name: 'Arcads',         mono: 'Ar', cat: 'video', size: 3, use: 'AI UGC ad videos' },
-    { name: 'MakeUGC',        mono: 'MU', cat: 'video', size: 3, use: 'UGC-style ad creatives' },
-    { name: 'Meshy',          mono: 'Me', cat: 'd3',    size: 3, use: 'AI 3D models' },
-    { name: 'Epidemic Sound', mono: 'ES', cat: 'audio', size: 3, use: 'Licensed music and sound effects' }
+    { name: 'Suno',           mono: 'Su', cat: 'audio', size: 1, use: 'Jingles, anthems and covers', logo: '/assets/tools/suno.png' },
+    { name: 'ElevenLabs',     mono: 'XI', cat: 'audio', size: 1, use: 'Voiceover, dubbing and voice cloning', logo: '/assets/tools/elevenlabs.png' },
+    { name: 'CapCut',         mono: 'Cc', cat: 'video', size: 1, use: 'Editing, captions and finishing', logo: '/assets/tools/capcut.png' },
+    { name: 'Gemini',         mono: 'Ge', cat: 'ai',    size: 2, use: 'Research and Veo video', logo: '/assets/tools/gemini.png' },
+    { name: 'HeyGen',         mono: 'Hg', cat: 'video', size: 2, use: 'AI presenters and avatars', logo: '/assets/tools/heygen.png' },
+    { name: 'TopView',        mono: 'Tv', cat: 'video', size: 2, use: 'AI video and product avatars', logo: '/assets/tools/topview.png' },
+    { name: 'Leonardo',       mono: 'Le', cat: 'image', size: 2, use: 'Image generation and variations', logo: '/assets/tools/leonardo.png' },
+    { name: 'Grok',           mono: 'Gk', cat: 'ai',    size: 2, use: 'Grok Imagine visuals', logo: '/assets/tools/grok.png' },
+    { name: 'Notion',         mono: 'N',  cat: 'ai',    size: 2, use: 'Planning, briefs and portfolio', logo: '/assets/tools/notion.png' },
+    { name: 'OpenArt',        mono: 'Oa', cat: 'image', size: 2, use: 'Image workflows and editing', logo: '/assets/tools/openart.png' },
+    { name: 'Blender',        mono: 'Bl', cat: 'd3',    size: 2, use: '3D blockouts and scenes', logo: '/assets/tools/blender.png' },
+    { name: 'Antigravity',    mono: 'Ag', cat: 'ai',    size: 3, use: 'Agent-driven coding', logo: '/assets/tools/antigravity.png' },
+    { name: 'Lovart',         mono: 'Lv', cat: 'image', size: 3, use: 'AI design layouts', logo: '/assets/tools/lovart.png' },
+    { name: 'Arcads',         mono: 'Ar', cat: 'video', size: 3, use: 'AI UGC ad videos', logo: '/assets/tools/arcads.png' },
+    { name: 'MakeUGC',        mono: 'MU', cat: 'video', size: 3, use: 'UGC-style ad creatives', logo: '/assets/tools/makeugc.png' },
+    { name: 'Meshy',          mono: 'Me', cat: 'd3',    size: 3, use: 'AI 3D models', logo: '/assets/tools/meshy.png' },
+    { name: 'Epidemic Sound', mono: 'ES', cat: 'audio', size: 3, use: 'Licensed music and sound effects', logo: '/assets/tools/epidemic-sound.png' }
   ];
   var SIZES = { 1: 118, 2: 96, 3: 80 };
 
