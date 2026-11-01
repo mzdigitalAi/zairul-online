@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workflow · Zairul MD TY</title>
+<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process and four case studies.">
+<meta property="og:title" content="Workflow · Zairul MD TY">
+<meta property="og:image" content="https://zairul.online/assets/og.jpg">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  .steps5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: s; list-style: none; margin-top: 34px; }
+  .steps5 li { counter-increment: s; padding: 22px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; border-top: 3px solid var(--red); }
+  .steps5 li::before { content: "0" counter(s); display: block; font: 400 34px/1 'Anton', sans-serif; color: var(--gold); margin-bottom: 14px; }
+  .steps5 b { display: block; font: 400 22px/1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 8px; }
+  .steps5 span { color: var(--muted); font-size: 15px; }
+  @media (max-width: 960px) { .steps5 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .steps5 { grid-template-columns: 1fr; } }
+
+  .callout { margin: 30px 0 10px; padding: 26px 28px; border-left: 4px solid var(--gold); background: linear-gradient(90deg, rgba(242,182,50,.08), transparent); border-radius: 0 6px 6px 0; }
+  .callout b { display: block; font: 400 24px/1.1 'Anton', sans-serif; text-transform: uppercase; margin-bottom: 10px; }
+  .callout p { color: #cfc9c0; }
+
+  .acc { margin-top: 34px; border-top: 1px solid var(--line); }
+  .acc details { border-bottom: 1px solid var(--line); }
+  .acc summary { display: flex; align-items: center; gap: 18px; padding: 20px 4px; cursor: pointer; list-style: none; }
+  .acc summary::-webkit-details-marker { display: none; }
+  .acc summary .n { flex: none; width: 46px; font: 400 30px/1 'Anton', sans-serif; color: var(--gold); }
+  .acc summary h3 { flex: 1; }
+  .acc summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #222; font-size: 20px; transition: transform .25s, background .2s; }
+  .acc details[open] summary::after { transform: rotate(45deg); background: var(--red); }
+  .acc .body { padding: 0 4px 26px 68px; }
+  .acc .body ul, .acc .body ol { margin: 12px 0 0 20px; color: var(--muted); }
+  .acc .body li { margin: 5px 0; }
+  .acc .human { margin-top: 16px; padding: 12px 16px; background: rgba(227,38,43,.08); border: 1px solid rgba(227,38,43,.3); border-radius: 5px; font-size: 15px; color: #e4ded6; }
+  .acc .human b { color: var(--gold); letter-spacing: .08em; text-transform: uppercase; font-size: 12px; margin-right: 6px; }
+  @media (max-width: 640px) { .acc .body { padding-left: 4px; } .acc summary .n { width: 36px; font-size: 24px; } }
+
+  .tbl { width: 100%; margin-top: 30px; border-collapse: collapse; font-size: 15.5px; }
+  .tbl th { text-align: left; padding: 14px 16px; font: 700 11px/1.2 'Barlow', sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); border-bottom: 2px solid var(--red); }
+  .tbl td { padding: 14px 16px; border-bottom: 1px solid var(--line); color: #cfc9c0; vertical-align: top; }
+  .tbl tr:hover td { background: rgba(255,255,255,.025); }
+  .tbl td:first-child { color: var(--text); font-weight: 600; }
+  .tbl-wrap { overflow-x: auto; }
+  @media (max-width: 720px) { .tbl { font-size: 14px; min-width: 620px; } }
+
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 26px; }
+  .flow span { padding: 10px 16px; border: 1px solid rgba(242,182,50,.45); border-radius: 999px; font: 700 12px/1 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+  .flow i { color: var(--red); font-style: normal; font-weight: 700; }
+
+  .case { display: grid; grid-template-columns: 300px 1fr; gap: 40px; padding: 46px 0; border-top: 1px solid var(--line); }
+  .case:first-of-type { border-top: 0; }
+  .case aside .big { font: 400 72px/0.9 'Anton', sans-serif; color: #262626; -webkit-text-stroke: 1px rgba(242,182,50,.5); }
+  .case aside h3 { font-size: 34px; margin: 14px 0 12px; }
+  .case aside .label { display: inline-block; padding: 5px 9px; border: 1px solid rgba(242,182,50,.4); border-radius: 3px; }
+  .case .goal { font-size: 19px; color: #e8e3db; margin-bottom: 18px; max-width: none; }
+  .case .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 22px; }
+  .case h4 { font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .case ul, .case ol { margin-left: 18px; color: var(--muted); font-size: 15.5px; }
+  .case li { margin: 4px 0; }
+  .case li b { color: var(--text); font-weight: 600; }
+  @media (max-width: 860px) { .case { grid-template-columns: 1fr; gap: 16px; } .case .cols { grid-template-columns: 1fr; } .case aside .big { font-size: 54px; } }
+</style>
+</head>
+<body>
+<script src="/assets/menu.js"></script>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="kicker">Workflow · Behind the work</p>
+    <h1>Human first. Tool second.</h1>
+    <p class="lead">The brief leads. The tools follow. This is how I take a project from idea to delivery, where AI speeds up the work, and human judgment decides what's good enough to ship.</p>
+    <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#case-studies">Case studies</a></div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="approach">
+    <div class="wrap">
+      <p class="label">01 / The approach</p>
+      <h2>Five steps, every project</h2>
+      <p>Whether it's an explainer video, a newsletter or an AI campaign, the work moves through the same five checkpoints.</p>
+      <ol class="steps5">
+        <li><b>Understand</b><span>Define the audience, goal and constraints.</span></li>
+        <li><b>Simplify</b><span>Find the core message and give it structure.</span></li>
+        <li><b>Create</b><span>Combine hands-on craft with the right AI-assisted tools.</span></li>
+        <li><b>Refine</b><span>Check accuracy, accessibility, consistency and relevance.</span></li>
+        <li><b>Deliver</b><span>Prepare polished assets and workflows for reuse.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <p class="label">02 / AI generated, human controlled</p>
+      <h2>AI-powered images, directed by human intent</h2>
+      <p>AI supports visual production; human judgment determines the purpose, visual direction, selection, refinement and final approval. The process combines structured prompting, controlled experimentation and hands-on image editing to create visuals that serve a clear communication goal, not simply images that look impressive.</p>
+
+      <div class="grid c2" style="margin-top:34px">
+        <div class="card"><span class="label">Approach A</span><h3>Full AI generation</h3><p>The subject, composition, environment, lighting and visual treatment are generated from a complete creative prompt. Human control begins before generation: defining the brief, choosing references, setting constraints and deciding what a successful result must communicate. Outputs are reviewed, corrected and prepared for their use, never accepted automatically.</p></div>
+        <div class="card"><span class="label">Approach B</span><h3>Partial AI generation</h3><p>AI-generated elements are combined with original photography, illustration, typography, retouching or compositing. AI may supply a background, object or environmental extension while important original elements stay protected. Human editing controls placement, perspective, lighting, colour and integration.</p></div>
+      </div>
+      <div class="callout"><b>Which one?</b><p>The brief decides. Full generation suits concept development and purpose-built scenes; partial generation is the right call when the work needs tight control over real products, existing assets, identity or layout.</p></div>
+
+      <div class="acc">
+        <details open>
+          <summary><span class="n">01</span><h3>Define the communication goal</h3></summary>
+          <div class="body">
+            <p>Start with the problem the image needs to solve: the message, audience, intended use, format and emotional response. Set practical requirements such as aspect ratio, output size, space for copy and placement across print or digital.</p>
+            <ul><li>Clarify what the viewer should notice, understand or feel.</li><li>Separate essential requirements from optional exploration.</li><li>Identify assets or details that must stay accurate and unchanged.</li><li>Decide whether full generation, partial generation or traditional production fits best.</li></ul>
+            <p class="human"><b>Human control</b>The creative brief sets the criteria every output is judged against.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">02</span><h3>Build the visual direction</h3></summary>
+          <div class="body">
+            <p>Translate the brief into a deliberate visual language before writing a prompt: subject, setting, composition, camera angle, lighting, palette, materials and degree of realism. References are chosen for specific qualities, not a vague style.</p>
+            <ul><li>Establish the focal point, hierarchy and balance.</li><li>Define framing, perspective, depth and negative space.</li><li>Specify lighting direction, softness, contrast and atmosphere.</li><li>Check brand suitability, cultural context and ethics.</li></ul>
+            <p class="human"><b>Human control</b>Art direction sets the boundaries of exploration.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">03</span><h3>Write the master prompt</h3></summary>
+          <div class="body">
+            <p>Convert the visual direction into a structured prompt with clear priorities, avoiding conflicting requirements and separating non-negotiables from areas where variation is welcome.</p>
+            <ol><li><b>Purpose and subject:</b> what the image depicts and needs to communicate.</li><li><b>Environment and composition:</b> setting, framing, placement, perspective, space for text.</li><li><b>Visual treatment:</b> lighting, palette, texture, materials, mood, realism.</li><li><b>Technical requirements:</b> aspect ratio, intended output, platform controls.</li><li><b>Constraints:</b> elements to preserve, unwanted content and errors to avoid.</li></ol>
+            <p class="human"><b>Human control</b>Prompt engineering turns creative intent into explicit, testable instructions.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">04</span><h3>Generate controlled variations</h3></summary>
+          <div class="body">
+            <p>Explore framing, pose, lighting, environment or realism in a controlled sequence, changing one major variable at a time so each decision is easy to evaluate.</p>
+            <ul><li>Keep the brief and essential constraints consistent.</li><li>Record the model, platform, prompt version and settings.</li><li>Keep useful alternatives with notes on what changed and why.</li><li>Use variations to answer creative questions, not to generate endlessly.</li></ul>
+            <p class="human"><b>Human control</b>I decide what to test and when there's enough evidence to move on.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">05</span><h3>Select and diagnose</h3></summary>
+          <div class="body">
+            <p>Compare outputs against the brief, not just visual impact: anatomy, perspective, object structure, lighting, authenticity, brand fit and how it works at its real placement size.</p>
+            <ul><li><b>Keep:</b> strong composition, atmosphere or details worth preserving.</li><li><b>Correct:</b> local problems fixable with targeted generation or editing.</li><li><b>Reject:</b> fundamental failures in meaning, accuracy, composition or suitability.</li></ul>
+            <p class="human"><b>Human control</b>Critical evaluation decides what deserves more production.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">06</span><h3>Refine, retouch and composite</h3></summary>
+          <div class="body">
+            <p>Targeted AI editing handles inpainting, outpainting, object replacement or background changes; conventional editing gives precision for masks, typography, colour correction and final compositing.</p>
+            <ol><li>Prepare the original asset and mark the exact area needing AI help.</li><li>Protect elements that must stay unchanged.</li><li>Generate the component or extension.</li><li>Composite with controlled scale, perspective, edges and depth.</li><li>Match light direction, shadows, reflections, colour and texture.</li><li>Inspect transitions so everything reads as one image.</li></ol>
+            <p class="human"><b>Human control</b>Retouching and compositing turn an AI output into a finished visual.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">07</span><h3>Quality assurance and approval</h3></summary>
+          <div class="body">
+            <ul><li><b>Realism and structure:</b> anatomy, proportions, perspective, shadows, reflections.</li><li><b>Consistency:</b> palette, lighting, style and continuity across related outputs.</li><li><b>Artefacts:</b> distorted details, repeated textures, halos, awkward edges.</li><li><b>Communication:</b> focal point, hierarchy, readability, emotional response.</li><li><b>Accessibility:</b> contrast, legibility and alt text.</li><li><b>Rights and representation:</b> reference permissions, likeness, misleading implications, disclosure.</li><li><b>Output specs:</b> dimensions, crop, resolution, colour and export format.</li></ul>
+            <p class="human"><b>Human control</b>An attractive output isn't automatically accurate, appropriate or ready to publish. Final approval stays human.</p>
+          </div>
+        </details>
+        <details>
+          <summary><span class="n">08</span><h3>Document and deliver</h3></summary>
+          <div class="body">
+            <p>A clear production record explains the decisions behind the result, not just the prompt: goal and audience, approach and why, master prompt and revisions, tools and settings, rejected variations, protected original assets, retouching steps, quality checks and the problem solved.</p>
+            <p class="human"><b>Human control</b>Documentation makes creative responsibility visible and repeatable.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="split">
+    <div class="wrap">
+      <p class="label">03 / Who does what</p>
+      <h2>Human direction vs. AI execution</h2>
+      <p>It's about responsibility, not a fixed split between tools. AI can assist with execution; I stay responsible for what's suitable, what needs correcting and what gets delivered.</p>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Human-directed responsibilities</th><th>AI-assisted execution</th></tr></thead>
+        <tbody>
+          <tr><td>Creative brief, message and audience intent</td><td>Initial visual generation</td></tr>
+          <tr><td>Ethical, cultural and brand considerations</td><td>Controlled variations and alternatives</td></tr>
+          <tr><td>Art direction, references and composition</td><td>Background or object generation and replacement</td></tr>
+          <tr><td>Prompt structure, priorities and constraints</td><td>Inpainting and outpainting</td></tr>
+          <tr><td>Selection, critique and problem diagnosis</td><td>Style, lighting and environment exploration</td></tr>
+          <tr><td>Retouching, compositing and typography</td><td>Resolution enhancement where appropriate</td></tr>
+          <tr><td>Quality assurance, final approval and delivery</td><td>Repetitive production assistance</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 style="margin-top:70px">Problems this solves</h2>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Creative challenge</th><th>AI-assisted approach</th><th>Human control</th></tr></thead>
+        <tbody>
+          <tr><td>Limited access to custom photography</td><td>Generate purpose-built subjects and scenes</td><td>Direct realism, composition and suitability for the brief</td></tr>
+          <tr><td>Slow concept exploration</td><td>Develop multiple visual directions rapidly</td><td>Select, critique and refine the strongest direction</td></tr>
+          <tr><td>Missing or unsuitable image elements</td><td>Generate only the required component</td><td>Integrate it precisely with original assets</td></tr>
+          <tr><td>Inconsistent campaign imagery</td><td>Reuse structured prompts and visual references</td><td>Keep palette, lighting and visual language consistent</td></tr>
+          <tr><td>High cost of early prototypes</td><td>Produce visual mock-ups before full production</td><td>Decide what stays AI-assisted and what needs traditional production</td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 style="margin-top:70px">Core principle</h2>
+      <div class="flow"><span>Human intent</span><i>→</i><span>Structured direction</span><i>→</i><span>AI generation</span><i>→</i><span>Critical selection</span><i>→</i><span>Controlled refinement</span><i>→</i><span>Quality assurance</span><i>→</i><span>Documented delivery</span></div>
+      <p style="margin-top:22px">AI accelerates exploration and execution. Human control gives the image its purpose, coherence and final standard of quality.</p>
+    </div>
+  </section>
+
+  <section class="section" id="case-studies">
+    <div class="wrap">
+      <p class="label">04 / Case studies</p>
+      <h2>Selected projects</h2>
+      <p>Four projects from my work at MECA, showing the brief, the challenge and how each was produced.</p>
+
+      <article class="case" id="explainer">
+        <aside><div class="big">01</div><h3>Employment-law explainer video</h3><span class="label">Video</span></aside>
+        <div>
+          <p class="goal">Turn a complex employment-law topic into a clear, engaging explainer for a professional audience.</p>
+          <p>Legal and technical information simplified without losing accuracy: structured scripting, visual hierarchy, motion and concise narration.</p>
+          <div class="cols">
+            <div><h4>The challenge</h4><ul><li>Make a complex subject understandable at a glance</li><li>Keep professional credibility and factual accuracy</li><li>Keep the pacing engaging for digital audiences</li></ul>
+              <h4 style="margin-top:22px">My contribution</h4><p>Research, scripting, visual direction, editing, motion graphics and final delivery.</p></div>
+            <div><h4>Process</h4><ol><li><b>Research</b> the core issue, sources and audience questions</li><li><b>Structure</b> a clear beginning, middle and end</li><li><b>Script</b> concise narration with visual cues</li><li><b>Storyboard</b> scenes, transitions and on-screen text</li><li><b>Produce</b> assets, record audio, first edit</li><li><b>Refine</b> clarity, pacing, accuracy and captions</li><li><b>Deliver</b> platform-ready versions</li></ol></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case" id="seminar">
+        <aside><div class="big">02</div><h3>Integrated seminar campaign</h3><span class="label">Campaign</span></aside>
+        <div>
+          <p class="goal">Build one consistent campaign that promotes a professional seminar across every audience touchpoint.</p>
+          <p>A coordinated visual system spanning promotional graphics, event information and supporting assets, designed for clarity, consistency and fast adaptation.</p>
+          <div class="cols">
+            <div><h4>The challenge</h4><ul><li>Keep many assets visually connected</li><li>Communicate event details quickly</li><li>Adapt the design across sizes and platforms</li></ul>
+              <h4 style="margin-top:22px">My contribution</h4><p>Art direction, campaign identity, graphic design, asset adaptation and production management.</p></div>
+            <div><h4>Process</h4><ol><li><b>Brief:</b> audience, proposition, schedule, channels</li><li><b>Message hierarchy:</b> topic, date, speakers, call to action</li><li><b>Creative direction:</b> concept and flexible system</li><li><b>Master design:</b> key visual and core layout</li><li><b>Adaptation:</b> social, email, presentation, event</li><li><b>Review:</b> details, brand and platform specs</li><li><b>Launch:</b> package, monitor and update</li></ol></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case" id="certificates">
+        <aside><div class="big">03</div><h3>Certificate automation workflow</h3><span class="label">Workflow</span></aside>
+        <div>
+          <p class="goal">An accurate, repeatable workflow for producing consistent certificates at scale.</p>
+          <p>A controlled visual template, structured participant data and a quality-assurance step that removes repetitive manual work.</p>
+          <div class="cols">
+            <div><h4>The challenge</h4><ul><li>Handle many names and details accurately</li><li>Keep formatting identical on every certificate</li><li>Cut production time without losing quality</li></ul>
+              <h4 style="margin-top:22px">My contribution</h4><p>Workflow mapping, template design, data preparation, automation and quality assurance.</p></div>
+            <div><h4>Process</h4><ol><li><b>Map</b> inputs, outputs, owners and common errors</li><li><b>Standardise</b> required fields and clean the list</li><li><b>Design</b> a flexible template with safe text areas</li><li><b>Connect</b> participant data to the template</li><li><b>Generate</b> with a repeatable batch process</li><li><b>Validate</b> names, titles, dates and missing records</li><li><b>Deliver</b> organised, consistently named files</li></ol></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case" id="ai-presenter">
+        <aside><div class="big">04</div><h3>AI presenter and visual storytelling</h3><span class="label">AI-assisted production</span></aside>
+        <div>
+          <p class="goal">Use AI tools with clear creative direction and human quality control to make purposeful multimedia content.</p>
+          <p>Concept development, prompt design, generated assets, editing and editorial judgment. AI supports production; human decisions shape the message, quality and final result.</p>
+          <div class="cols">
+            <div><h4>The challenge</h4><ul><li>Keep a consistent visual and presenter style</li><li>Avoid generic or inaccurate output</li><li>Keep editorial control, credibility and relevance</li></ul>
+              <h4 style="margin-top:22px">My contribution</h4><p>Concept development, creative direction, prompting, asset curation, editing and quality assurance.</p>
+              <p style="margin-top:16px"><a class="btn" href="/videos/">See the films</a></p></div>
+            <div><h4>Process</h4><ol><li><b>Define intent:</b> audience, message, tone, action</li><li><b>Design the system:</b> references, presenter style, rules</li><li><b>Prompt</b> scenes, delivery and supporting assets</li><li><b>Generate</b> several options, never just the first</li><li><b>Curate:</b> reject inconsistent or low-quality material</li><li><b>Edit</b> with narration, graphics, captions and sound</li><li><b>Quality-check</b> realism, continuity, facts and ethics</li><li><b>Deliver</b> and document reusable prompts</li></ol></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="cta"><h2>Have a brief?<br>Let's direct it.</h2><div class="btns"><a class="btn red" href="/contact/">Get in touch</a><a class="btn" href="/resume/">View resume</a></div></div>
+    <div class="small"><span>© <span class="yr">2026</span> Zairul MD TY</span><span>Human-directed. AI-assisted.</span><a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a></div>
+  </div>
+</footer>
+<script>document.querySelectorAll('.yr').forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+</body>
+</html>

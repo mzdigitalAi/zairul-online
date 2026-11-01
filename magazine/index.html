@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magazine · Zairul MD TY</title>
+<meta name="description" content="Editorial design by Zairul MD TY: MECA newsletters, IR Insights and training-course brochures, readable as page-turning flipbooks.">
+<meta property="og:title" content="Magazine · Zairul MD TY">
+<meta property="og:image" content="https://zairul.online/assets/img/newsletter-evolution.webp">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  .hero-split { display: grid; grid-template-columns: 1fr 1.05fr; gap: 50px; align-items: center; }
+  .hero-split figure { border-radius: 8px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(227,38,43,.15); animation: rise .9s .2s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-split figcaption { padding: 10px 14px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); background: var(--panel); }
+  @media (max-width: 960px) { .hero-split { grid-template-columns: 1fr; gap: 30px; } }
+
+  .funnel { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; margin-top: 32px; }
+  .funnel .arrow { display: grid; place-items: center; font: 400 40px/1 'Anton', sans-serif; color: var(--red); }
+  @media (max-width: 860px) { .funnel { grid-template-columns: 1fr; } .funnel .arrow { transform: rotate(90deg); } }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 26px; }
+  .chip { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: transparent; color: #cfc9c0; font: 700 12px/1 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+  .chip:hover { border-color: var(--gold); color: #fff; }
+  .chip.on { background: var(--gold); border-color: var(--gold); color: #140d00; }
+
+  .pubs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 26px 20px; }
+  .pub { display: flex; flex-direction: column; gap: 14px; padding: 0; background: none; border: 0; color: inherit; text-align: left; font: inherit; cursor: pointer; }
+  .pub[hidden] { display: none; }
+  @media (max-width: 560px) { .pubs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; } .ph { padding: 12px; } .ph b { font-size: 17px; } .ph em { font-size: 11px; } .pub strong { font-size: 16px; } .pub .note { display: none; } }
+  .cover { position: relative; aspect-ratio: 210 / 297; border-radius: 3px 6px 6px 3px; overflow: hidden; background: #181818; box-shadow: -6px 0 0 -3px #2a2a2a inset, 0 14px 30px rgba(0,0,0,.55); transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; transform-origin: left center; }
+  .cover img { width: 100%; height: 100%; object-fit: cover; }
+  .cover::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 14px; background: linear-gradient(90deg, rgba(0,0,0,.35), transparent); }
+  .pub.ready:hover .cover, .pub.ready:focus-visible .cover { transform: perspective(900px) rotateY(-14deg); box-shadow: 0 22px 44px rgba(0,0,0,.7), 0 0 0 1px var(--gold); }
+  .ph { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; background: linear-gradient(160deg, #262626, #121212); }
+  .ph::before { content: ""; position: absolute; left: 18px; right: 18px; top: 18px; height: 4px; background: var(--red); }
+  .ph b { font: 400 24px/1 'Anton', sans-serif; text-transform: uppercase; }
+  .ph em { font-style: normal; color: var(--gold); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; margin-top: 8px; }
+  .badge { position: absolute; right: 10px; top: 10px; padding: 5px 9px; border-radius: 3px; background: rgba(0,0,0,.72); font: 700 10px/1 'Barlow', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #bbb; }
+  .pub.ready .badge { background: var(--red); color: #fff; }
+  .pub.soon { cursor: default; }
+  .pub.soon .cover { opacity: .75; }
+  .pub.nudge .cover { animation: nudge .5s; }
+  @keyframes nudge { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  .pub .meta { display: grid; gap: 3px; }
+  .pub .grp { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+  .pub strong { font: 400 20px/1.1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em; }
+  .pub .iss { font-size: 14px; color: var(--muted); }
+  .pub .note { font-size: 13.5px; color: var(--dim); line-height: 1.45; margin-top: 4px; }
+  .err { color: var(--muted); }
+
+  /* ---------- reader ---------- */
+  .reading, .reading body { overflow: hidden; }
+  .reader { position: fixed; inset: 0; z-index: 1500; display: flex; flex-direction: column; background: radial-gradient(ellipse 70% 60% at 50% 45%, #2a2420, #0b0b0b 70%); }
+  .reader[hidden] { display: none; }
+  .r-top { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: rgba(8,8,8,.8); }
+  .r-top h2 { flex: 1; min-width: 0; font: 400 20px/1.1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .r-top .count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .ic { display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 10px; border-radius: 4px; border: 1px solid rgba(255,255,255,.18); background: #161616; color: #eee; font: 700 12px/1 'Barlow', sans-serif; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+  .ic:hover { border-color: var(--gold); color: var(--gold); }
+  .ic.x { background: var(--red); border-color: var(--red); color: #fff; font-size: 20px; }
+  .ic[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
+  .r-stage { position: relative; flex: 1; display: grid; place-items: center; min-height: 0; perspective: 2600px; }
+  .book { position: relative; display: flex; transform-style: preserve-3d; cursor: pointer; filter: drop-shadow(0 26px 40px rgba(0,0,0,.6)); }
+  .book .page { flex: 1; background: #fff center / 100% 100% no-repeat; }
+  .book .page.blank { background: transparent; }
+  .book:not(.single) #pageL:not(.blank) { box-shadow: inset -26px 0 40px -24px rgba(0,0,0,.45); }
+  .book:not(.single) #pageR:not(.blank) { box-shadow: inset 26px 0 40px -24px rgba(0,0,0,.35); }
+  .book.single #pageL { display: none; }
+  .loading .book { opacity: .25; }
+  .loading .r-stage::after { content: "Opening…"; position: absolute; font: 700 12px/1 'Barlow', sans-serif; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .leaf { position: absolute; top: 0; bottom: 0; width: 50%; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.45,.05,.25,1); z-index: 5; }
+  .leaf.right { left: 50%; transform-origin: left center; }
+  .leaf.left { left: 0; transform-origin: right center; }
+  .book.single .leaf.right { left: 0; width: 100%; }
+  .leaf.right.go { transform: rotateY(-180deg); }
+  .leaf.left.go { transform: rotateY(180deg); }
+  .leaf.back-in { transform: rotateY(-180deg); }
+  .leaf.back-in.go { transform: rotateY(0); }
+  .leaf .face { position: absolute; inset: 0; background: #fff center / 100% 100% no-repeat; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+  .leaf .face.back { transform: rotateY(180deg); }
+  .leaf .face.blank { background: linear-gradient(90deg, #ddd, #fff); }
+  .leaf .shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.25), transparent 40%); opacity: 0; transition: opacity .75s; }
+  .leaf.go .shade { opacity: 1; }
+  .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 54px; height: 54px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; font-size: 26px; cursor: pointer; transition: background .2s; }
+  .nav-btn:hover:not(:disabled) { background: var(--red); }
+  .nav-btn:disabled { opacity: .25; cursor: default; }
+  #prev { left: 18px; } #next { right: 18px; }
+  .thumbs { flex: none; height: 110px; display: flex; gap: 8px; padding: 10px 16px 14px; overflow-x: auto; border-top: 1px solid var(--line); background: rgba(8,8,8,.85); scrollbar-width: thin; }
+  .thumbs[hidden] { display: none; }
+  .thumbs button { flex: none; position: relative; width: 58px; aspect-ratio: 210 / 297; border: 2px solid transparent; border-radius: 3px; background: #222 center / cover no-repeat; cursor: pointer; }
+  .thumbs button span { position: absolute; left: 3px; bottom: 3px; padding: 1px 4px; border-radius: 2px; background: rgba(0,0,0,.7); font-size: 10px; color: #ddd; }
+  .thumbs button.on { border-color: var(--gold); }
+  .hint { padding: 0 0 8px; text-align: center; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+  @media (max-width: 640px) {
+    .nav-btn { width: 42px; height: 42px; font-size: 20px; top: auto; bottom: 10px; transform: none; }
+    #prev { left: 12px; } #next { right: 12px; }
+    .r-top .count, .ic.dl span { display: none; }
+    .r-top h2 { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<script src="/assets/menu.js"></script>
+
+<header class="page-hero">
+  <div class="wrap hero-split">
+    <div>
+      <p class="kicker">Magazine · Editorial design</p>
+      <h1>Editorial design</h1>
+      <p class="lead">Newsletters, IR Insights and training-course brochures for MECA, built in Adobe InDesign to turn dense employment-law updates into publications busy HR managers actually read.</p>
+      <div class="btns"><a class="btn red" href="#issues">Read the issues</a><a class="btn" href="#process">How I build them</a></div>
+    </div>
+    <figure>
+      <img src="/assets/img/newsletter-evolution.webp" alt="MECA newsletter: the January 2026 original next to my February 2026 redesign" width="1600" height="900">
+      <figcaption>Newsletter evolution · January → February 2026</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="issues">
+    <div class="wrap">
+      <p class="label">01 / The publications</p>
+      <h2>Flip through the issues</h2>
+      <p>Click a cover to open it. Turn pages with the arrows, your keyboard, a swipe or by clicking the page. I redesigned the newsletter from February to June 2026; January is the original format, kept for comparison.</p>
+      <div class="chips" id="chips" role="group" aria-label="Filter publications"></div>
+      <div class="pubs" id="pubs" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <p class="label">02 / Why it matters</p>
+      <h2>Two pieces, one funnel</h2>
+      <p>MECA (Malaysian Employers Consulting Agency) advises, represents and trains employers on employment law, Industrial Court disputes and HR compliance. The publications feed that business directly.</p>
+      <div class="funnel">
+        <div class="card"><span class="label">Authority &amp; retention</span><h3>Newsletter &amp; Insights</h3><p>Laws, court awards and HR policies change constantly. The newsletter turns legal updates into clear takeaways, proving MECA's ongoing value and keeping retainer clients renewing.</p></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="card"><span class="label">Lead generation &amp; revenue</span><h3>Course brochures</h3><p>Technical topics like domestic inquiries or Employment Act amendments become scannable sales assets, showing objectives, trainer credentials and HRD Corp claimable status so HR directors can justify the budget.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <p class="label">03 / Process</p>
+      <h2>How I build a publication</h2>
+      <div class="grid c3" style="margin-top:30px">
+        <div class="card"><span class="label">The challenge</span><p>Organise dense information without overwhelming the reader, balance authority with an approachable style, and stay consistent across articles and page types.</p></div>
+        <div class="card"><span class="label">My contribution</span><p>Editorial planning, grid development, layout, typography, image treatment and production.</p></div>
+        <div class="card"><span class="label">Tools &amp; techniques</span><p>Adobe InDesign · Modular grids · Typographic hierarchy · Publication templates · Colour-consistent image editing · Preflight and export.</p></div>
+      </div>
+      <ol class="grid c4" style="margin-top:16px;list-style:none">
+        <li class="card"><span class="label">1 · Content audit</span><p>Review articles, images, priorities and production needs.</p></li>
+        <li class="card"><span class="label">2 · Information architecture</span><p>Group content and map the reading sequence.</p></li>
+        <li class="card"><span class="label">3 · Visual direction</span><p>Typography, grid, colour and image treatment.</p></li>
+        <li class="card"><span class="label">4 · Layout</span><p>Covers, contents pages and editorial spreads.</p></li>
+        <li class="card"><span class="label">5 · Quality control</span><p>Spacing, alignment, consistency and readability.</p></li>
+        <li class="card"><span class="label">6 · Proofing</span><p>Copy, links, image quality, print and screen behaviour.</p></li>
+        <li class="card"><span class="label">7 · Delivery</span><p>Optimised digital and print-ready files.</p></li>
+        <li class="card" style="border-color:rgba(227,38,43,.5)"><span class="label">Result</span><p>A monthly system that's faster to produce and easier to read.</p></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<div class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
+  <div class="r-top">
+    <h2 id="rTitle">Publication</h2>
+    <span class="count" id="counter" aria-live="polite"></span>
+    <button class="ic" id="toggleThumbs" type="button" aria-pressed="true" title="Show or hide page thumbnails">Pages</button>
+    <button class="ic" id="full" type="button" title="Fullscreen" aria-label="Fullscreen">⤢</button>
+    <a class="ic dl" id="download" href="#" title="Download PDF">↓<span>&nbsp;PDF</span></a>
+    <button class="ic x" id="close" type="button" aria-label="Close reader">×</button>
+  </div>
+  <div class="r-stage">
+    <button class="nav-btn" id="prev" type="button" aria-label="Previous page">‹</button>
+    <div class="book" id="book"><div class="page blank" id="pageL"></div><div class="page blank" id="pageR"></div></div>
+    <button class="nav-btn" id="next" type="button" aria-label="Next page">›</button>
+  </div>
+  <div class="thumbs" id="thumbs"></div>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="cta"><h2>Need a publication<br>people will read?</h2><div class="btns"><a class="btn red" href="/contact/">Get in touch</a><a class="btn" href="/workflow/">See my workflow</a></div></div>
+    <div class="small"><span>© <span class="yr">2026</span> Zairul MD TY</span><span>Human-directed. AI-assisted.</span><a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a></div>
+  </div>
+</footer>
+<script>document.querySelectorAll('.yr').forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+<script src="/magazine/flipbook.js"></script>
+</body>
+</html>

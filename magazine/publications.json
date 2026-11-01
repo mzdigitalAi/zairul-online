@@ -1,0 +1,71 @@
+[
+  {
+    "title": "MECA Newsletter",
+    "issue": "June 2026",
+    "group": "Newsletter",
+    "pdf": "/magazine/pdfs/meca-newsletter-2026-06.pdf"
+  },
+  {
+    "title": "MECA Newsletter",
+    "issue": "May 2026",
+    "group": "Newsletter",
+    "pdf": "/magazine/pdfs/meca-newsletter-2026-05.pdf"
+  },
+  {
+    "title": "MECA Newsletter",
+    "issue": "April 2026",
+    "group": "Newsletter",
+    "pdf": "/magazine/pdfs/meca-newsletter-2026-04.pdf"
+  },
+  {
+    "title": "MECA Newsletter",
+    "issue": "March 2026",
+    "group": "Newsletter",
+    "pdf": "/magazine/pdfs/meca-newsletter-2026-03.pdf"
+  },
+  {
+    "title": "MECA Newsletter",
+    "issue": "February 2026",
+    "group": "Newsletter",
+    "note": "My first redesigned edition, with the new visual identity and editorial layout.",
+    "pdf": "/magazine/pdfs/meca-newsletter-2026-02.pdf"
+  },
+  {
+    "title": "MECA Newsletter",
+    "issue": "January 2026",
+    "group": "Newsletter",
+    "note": "The original format before my redesign, kept for comparison.",
+    "pdf": "/magazine/pdfs/meca-newsletter-2026-01.pdf"
+  },
+  {
+    "title": "MECA Insights",
+    "issue": "May 2026",
+    "group": "IR Insights",
+    "pdf": "/magazine/pdfs/meca-insights-2026-05.pdf"
+  },
+  {
+    "title": "MECA Insights",
+    "issue": "April 2026",
+    "group": "IR Insights",
+    "note": "The series moved from plain-text email updates to a designed PDF for registered clients.",
+    "pdf": "/magazine/pdfs/meca-insights-2026-04.pdf"
+  },
+  {
+    "title": "MECA IR Convention",
+    "issue": "2026",
+    "group": "Course brochure",
+    "pdf": "/magazine/pdfs/brochure-ir-convention-2026.pdf"
+  },
+  {
+    "title": "Would Your Dismissal Survive Court?",
+    "issue": "August 2026",
+    "group": "Course brochure",
+    "pdf": "/magazine/pdfs/brochure-dismissal-survive-court-2026-08.pdf"
+  },
+  {
+    "title": "Handling Misconduct & Domestic Inquiry",
+    "issue": "June 2026",
+    "group": "Course brochure",
+    "pdf": "/magazine/pdfs/brochure-misconduct-domestic-inquiry-2026-06.pdf"
+  }
+]
