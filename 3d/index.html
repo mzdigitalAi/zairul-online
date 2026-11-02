@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 3D · Zairul MD TY</title>
+<meta name="description" content="Photoreal 3D models by Zairul MD TY, generated with AI from directed reference images. Spin and zoom every model right in your browser.">
+<meta property="og:title" content="AI 3D · Zairul MD TY">
+<meta property="og:description" content="Photoreal 3D models generated with AI from directed reference images. Spin and zoom them in your browser.">
+<meta property="og:image" content="https://zairul.online/assets/og.jpg">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/assets/site.css?v=20261103">
+<script type="module" src="/assets/vendor/model-viewer-3.5.0.min.js"></script>
+<style>
+  model-viewer { --poster-color: transparent; --progress-bar-color: var(--gold); --progress-bar-height: 3px; background: transparent; }
+
+  /* ---------- hero ---------- */
+  .d3-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line);
+    background: radial-gradient(ellipse 60% 70% at 72% 55%, rgba(242,182,50,.13), transparent 70%), radial-gradient(ellipse 50% 60% at 10% 100%, rgba(227,38,43,.16), transparent 70%); }
+  .d3-hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 30px; align-items: center; min-height: 82vh; padding-top: 40px; padding-bottom: 40px; }
+  .d3-hero h1 { font: 400 clamp(64px, 11vw, 170px)/.86 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; margin: 14px 0 22px; }
+  .d3-hero h1 span { display: block; font: 600 clamp(13px, 1.4vw, 16px)/1 'Barlow', sans-serif; letter-spacing: .5em; color: var(--gold); margin-bottom: 18px; }
+  .d3-hero .lead { max-width: 560px; color: #d5cfc6; font-size: 18px; }
+  .d3-hero .specs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 30px; list-style: none; }
+  .d3-hero .specs li { padding: 7px 12px; border: 1px solid #3a3a3a; border-radius: 999px; font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #ddd; }
+  .d3-hero .stage { position: relative; height: min(78vh, 760px); }
+  .d3-hero .stage model-viewer { width: 100%; height: 100%; }
+  .d3-hero .stage .hint { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); font: 700 10.5px/1 'Barlow', sans-serif; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  @media (max-width: 860px) { .d3-hero .wrap { grid-template-columns: 1fr; min-height: 0; } .d3-hero .stage { height: 64vh; } }
+
+  /* ---------- galleries ---------- */
+  .billing { text-align: center; margin-bottom: 40px; }
+  .billing .label { display: inline-block; }
+  .billing h2 { margin-top: 8px; }
+  .billing p { margin: 0 auto; }
+  .models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; list-style: none; }
+  @media (max-width: 900px) { .models { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .model b { font-size: 20px; } }
+  .models > li { display: flex; }
+  .model { width: 100%; position: relative; display: flex; flex-direction: column; text-align: left; padding: 0; color: inherit; font: inherit; cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; transition: border-color .25s, transform .25s; }
+  .model:hover, .model:focus-visible { border-color: rgba(242,182,50,.6); transform: translateY(-4px); }
+  .model .ph { display: block; width: 100%; position: relative; aspect-ratio: 4 / 5; background: radial-gradient(ellipse 70% 60% at 50% 55%, #2a2a2e, #121214 75%); }
+  .model .ph img { position: absolute; inset: 6%; width: 88%; height: 88%; object-fit: contain; transition: transform .6s ease; }
+  .model:hover .ph img { transform: scale(1.05) rotate(-1deg); }
+  .model .spin { position: absolute; right: 10px; bottom: 10px; padding: 6px 9px; border-radius: 3px; background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.18); font: 700 10px/1 'Barlow', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #eee; }
+  .model .ai { position: absolute; top: 10px; right: 10px; padding: 4px 7px; border-radius: 3px; background: var(--gold); color: #111; font: 700 9.5px/1 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+  .model .meta { display: block; width: 100%; padding: 16px 16px 18px; border-top: 1px solid var(--line); }
+  .model b { display: block; font: 400 24px/1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; }
+  .model span.sub { display: block; margin-top: 7px; font: 500 13.5px/1.3 'Barlow', sans-serif; color: var(--muted); }
+
+  /* ---------- how ---------- */
+  .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; list-style: none; counter-reset: h; }
+  .how li { counter-increment: h; padding: 22px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; border-top: 3px solid var(--red); }
+  .how li::before { content: "0" counter(h); display: block; font: 400 30px/1 'Anton', sans-serif; color: var(--gold); margin-bottom: 12px; }
+  .how b { display: block; font: 400 21px/1.05 'Anton', sans-serif; text-transform: uppercase; margin-bottom: 8px; }
+  .how span { color: var(--muted); font-size: 15px; }
+  .note { margin-top: 26px; font-size: 14px; color: var(--muted); }
+  @media (max-width: 820px) { .how { grid-template-columns: 1fr; } }
+
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- viewer ---------- */
+  .viewer { width: min(1320px, 96vw); height: min(860px, 92vh); max-width: none; max-height: none; padding: 0; border: 1px solid rgba(242,182,50,.35); border-radius: 8px; background: #0d0d0f; color: var(--text); overflow: hidden; }
+  .viewer::backdrop { background: rgba(0,0,0,.82); backdrop-filter: blur(4px); }
+  .viewer .in { display: grid; grid-template-columns: minmax(0, 1fr) 330px; height: 100%; }
+  .viewer .canvas { position: relative; background: radial-gradient(ellipse 65% 60% at 50% 52%, #26262b, #0d0d0f 75%); }
+  .viewer model-viewer { width: 100%; height: 100%; }
+  .viewer .loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+  .viewer .side { display: flex; flex-direction: column; gap: 14px; padding: 28px 26px; border-left: 1px solid var(--line); overflow: auto; }
+  .viewer .side .label { display: block; }
+  .viewer h2 { font: 400 40px/.95 'Anton', sans-serif; text-transform: uppercase; }
+  .viewer p { color: var(--muted); font-size: 15px; }
+  .viewer dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin-top: 6px; font-size: 14px; }
+  .viewer dt { color: var(--muted); }
+  .viewer dd { margin: 0; color: var(--text); font-weight: 600; }
+  .viewer .ctl { display: flex; gap: 8px; margin-top: auto; padding-top: 10px; }
+  .viewer .ctl .btn { flex: 1; min-height: 42px; padding: 0 10px; font-size: 12px; }
+  .viewer .x { position: absolute; top: 12px; right: 12px; z-index: 3; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.55); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
+  .viewer .x:hover { border-color: var(--gold); color: var(--gold); }
+  .viewer .tips { font: 700 10.5px/1.5 'Barlow', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #8d877f; }
+  @media (max-width: 860px) {
+    .viewer { width: 100vw; height: 100dvh; border-radius: 0; border: 0; }
+    .viewer .in { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
+    .viewer .side { border-left: 0; border-top: 1px solid var(--line); padding: 18px 18px 20px; gap: 10px; max-height: 42vh; }
+    .viewer h2 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+<script src="/assets/menu.js?v=20261103"></script>
+
+<header class="d3-hero" aria-labelledby="d3Title">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Image to 3D · Directed reference · AI sculpted</p>
+      <h1 id="d3Title"><span>Zairul MD TY presents</span>AI 3D</h1>
+      <p class="lead">Photoreal 3D models of my cast and of Malaysian icons. I direct a clean studio reference image, then AI sculpts and textures it into a full 3D model. Spin, zoom and inspect every one of them right here in your browser.</p>
+      <ul class="specs"><li>Meshy 7.1 · Ultra 4K mesh</li><li>8K PBR textures</li><li>Nano Banana 2.1 references</li><li>Web-optimised</li></ul>
+      <a class="btn red" href="#cast">Explore the models</a>
+    </div>
+    <div class="stage">
+      <model-viewer id="heroMv" src="/assets/3d/zairul.glb" poster="/assets/3d/posters/zairul.webp" alt="3D model of Zairul, spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="0deg 85deg auto" loading="eager"></model-viewer>
+      <span class="hint">Drag to rotate</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="cast">
+    <div class="wrap">
+      <div class="billing rv"><p class="label">The cast</p><h2>In three dimensions</h2><p>Me and the AI characters from my films, turned into full 3D figures.</p></div>
+      <ul class="models" id="castGrid"></ul>
+    </div>
+  </section>
+
+  <section class="section" id="malaysia">
+    <div class="wrap">
+      <div class="billing rv"><p class="label">Made in Malaysia</p><h2>Icons in 3D</h2><p>Eight pieces of home, from the Petronas Twin Towers to a plate of nasi lemak.</p></div>
+      <ul class="models" id="iconGrid"></ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="label">How a picture becomes a model</p>
+      <h2>From one image to full 3D</h2>
+      <p>Every model here starts with a single image that I direct, so the AI gets a clean, well-lit subject to work from.</p>
+      <ol class="how">
+        <li><b>Directed reference</b><span>A studio reference made with Nano Banana 2.1: one subject, soft even light, full body in a relaxed A-pose for people.</span></li>
+        <li><b>AI sculpt &amp; texture</b><span>Meshy 7.1 builds the Ultra 4K mesh and paints 8K PBR textures: colour, roughness, metal and surface detail.</span></li>
+        <li><b>Built for the web</b><span>I compress each model (Draco geometry, 4K WebP textures) so it loads fast in any browser, from 2 to 13 MB.</span></li>
+      </ol>
+      <p class="note">Jane, Lina and John are AI-generated characters, not real people. Lina is modelled as a bust from her original portrait. All models are my own work and are shown for portfolio purposes only.</p>
+    </div>
+  </section>
+</main>
+
+<dialog class="viewer" id="viewer" aria-labelledby="vTitle">
+  <button class="x" id="vClose" aria-label="Close 3D viewer">×</button>
+  <div class="in">
+    <div class="canvas">
+      <model-viewer id="mv" camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="2500" rotation-per-second="14deg" interaction-prompt="auto" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" max-camera-orbit="auto auto 220%" ar ar-modes="webxr scene-viewer"></model-viewer>
+      <span class="loading" id="vLoad">Loading model…</span>
+    </div>
+    <div class="side">
+      <span class="label" id="vGroup"></span>
+      <h2 id="vTitle"></h2>
+      <p id="vDesc"></p>
+      <dl>
+        <dt>Triangles</dt><dd id="vTris"></dd>
+        <dt>Textures</dt><dd>4K PBR (WebP) · from 8K source</dd>
+        <dt>File size</dt><dd id="vSize"></dd>
+        <dt>Made with</dt><dd>Nano Banana 2.1 → Meshy 7.1</dd>
+      </dl>
+      <p class="tips">Drag to rotate · Scroll or pinch to zoom · Right-drag to pan</p>
+      <div class="ctl">
+        <button class="btn" id="vPrev" aria-label="Previous model">← Prev</button>
+        <button class="btn" id="vReset">Reset view</button>
+        <button class="btn" id="vNext" aria-label="Next model">Next →</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="cta"><h2>Want your product<br>in 3D?</h2><div class="btns"><a class="btn red" href="/contact/">Get in touch</a><a class="btn" href="/videos/">Watch the films</a></div></div>
+    <div class="small"><span>© <span class="yr">2026</span> Zairul MD TY</span><span>Human-directed. AI-assisted.</span><a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a></div>
+  </div>
+</footer>
+
+<script type="module">
+  customElements.whenDefined('model-viewer').then(function () {
+    customElements.get('model-viewer').dracoDecoderLocation = '/assets/draco/';
+  });
+</script>
+<script>
+(function () {
+  document.querySelectorAll('.yr').forEach(function (e) { e.textContent = new Date().getFullYear(); });
+
+  // slug, name, subtitle, description, triangles, MB, camera orbit, AI character?
+  var CAST = [
+    ['zairul', 'Zairul', 'The director, in 3D', 'Me, sculpted from a directed full-body reference: tweed blazer, black shirt and leather shoes.', '352,958', '2.7', '0deg 85deg auto'],
+    ['jane', 'Jane', 'AI character', 'Jane in a blue embroidered kurta with gold jhumka earrings, modelled head to toe.', '755,046', '4.3', '0deg 85deg auto', true],
+    ['lina', 'Lina', 'AI character · bust', 'Lina as a portrait bust, built from her original character portrait to keep her face exact.', '2,312,512', '8.6', '0deg 85deg auto', true],
+    ['john', 'John', 'AI character', 'John in an olive polo and dark trousers, the everyman of my films.', '274,608', '1.9', '0deg 85deg auto', true]
+  ];
+  var ICONS = [
+    ['petronas-twin-towers', 'Petronas Twin Towers', 'Kuala Lumpur', 'A museum-style scale model of the Twin Towers and their skybridge on a dark plinth.', '921,682', '12.9', '-25deg 78deg auto'],
+    ['lrt-train', 'LRT Train', 'Kuala Lumpur rail', 'A single light-rail carriage in white and red on a short length of track.', '1,168,262', '8.7', '-35deg 72deg auto'],
+    ['rumah-kampung', 'Rumah Kampung', 'Traditional Malay house', 'A weathered timber house on stilts with carved panels, a zinc roof and front stairs.', '1,058,370', '7.3', '-30deg 72deg auto'],
+    ['proton-saga', 'Proton Saga', 'The 1985 classic', 'The first Malaysian car, in its classic red.', '812,830', '5.4', '-40deg 72deg auto'],
+    ['wau-bulan', 'Wau Bulan', 'Moon kite', 'The traditional moon kite of Kelantan, with intricate floral patterns and tassels.', '234,010', '4.7', '0deg 85deg auto'],
+    ['kapcai', 'Kapcai', 'Everyday hero', 'The classic underbone motorcycle that every Malaysian knows, in blue and white.', '656,072', '4.8', '-50deg 78deg auto'],
+    ['nasi-lemak', 'Nasi Lemak', 'National favourite', 'Coconut rice on banana leaf with sambal, fried egg, peanuts, anchovies and cucumber.', '745,388', '5.0', '-10deg 55deg auto'],
+    ['keris', 'Keris', 'Malay heritage blade', 'A keris with a wavy blade and carved wooden hilt, beside its sheath.', '130,804', '3.7', '0deg 70deg auto']
+  ];
+  var list = [];
+  function card(m, group) {
+    var i = list.length; list.push({ m: m, group: group });
+    return '<li class="rv"><button class="model" type="button" data-i="' + i + '" aria-label="Open the 3D model of ' + m[1] + '">' +
+      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
+      (m[7] ? '<span class="ai">AI character</span>' : '') + '<span class="spin">⟲ 3D</span></span>' +
+      '<span class="meta"><b>' + m[1] + '</b><span class="sub">' + m[2] + '</span></span></button></li>';
+  }
+  document.getElementById('castGrid').innerHTML = CAST.map(function (m) { return card(m, 'The cast'); }).join('');
+  document.getElementById('iconGrid').innerHTML = ICONS.map(function (m) { return card(m, 'Made in Malaysia'); }).join('');
+
+  var dlg = document.getElementById('viewer'), mv = document.getElementById('mv'), cur = 0;
+  function show(i) {
+    cur = (i + list.length) % list.length;
+    var m = list[cur].m;
+    document.getElementById('vGroup').textContent = list[cur].group;
+    document.getElementById('vTitle').textContent = m[1];
+    document.getElementById('vDesc').textContent = m[3];
+    document.getElementById('vTris').textContent = m[4];
+    document.getElementById('vSize').textContent = m[5] + ' MB';
+    document.getElementById('vLoad').hidden = false;
+    mv.setAttribute('camera-orbit', m[6]);
+    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp');
+    mv.setAttribute('alt', '3D model of ' + m[1]);
+    mv.src = '/assets/3d/' + m[0] + '.glb';
+  }
+  mv.addEventListener('load', function () { document.getElementById('vLoad').hidden = true; });
+  mv.addEventListener('progress', function (e) { var p = Math.round((e.detail.totalProgress || 0) * 100); document.getElementById('vLoad').textContent = p < 100 ? 'Loading model… ' + p + '%' : ''; });
+  document.querySelectorAll('.model').forEach(function (b) { b.addEventListener('click', function () { show(+b.dataset.i); if (!dlg.open) dlg.showModal(); }); });
+  document.getElementById('vClose').onclick = function () { dlg.close(); };
+  document.getElementById('vPrev').onclick = function () { show(cur - 1); };
+  document.getElementById('vNext').onclick = function () { show(cur + 1); };
+  document.getElementById('vReset').onclick = function () { mv.cameraOrbit = list[cur].m[6]; mv.cameraTarget = 'auto auto auto'; mv.fieldOfView = 'auto'; };
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
+  dlg.addEventListener('close', function () { mv.removeAttribute('src'); });
+
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' }) : null;
+  document.querySelectorAll('.rv').forEach(function (el, k) { el.style.transitionDelay = ((k % 4) * 0.07).toFixed(2) + 's'; if (io) io.observe(el); else el.classList.add('in'); });
+})();
+</script>
+</body>
+</html>
