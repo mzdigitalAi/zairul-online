@@ -18,8 +18,8 @@ img { display: block; max-width: 100%; height: auto; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
 
-.wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
-@media (max-width: 720px) { .wrap { padding: 0 16px; } }
+.wrap { width: 100%; max-width: none; margin: 0 auto; padding: 0 clamp(16px, 4.5vw, 96px); }
+@media (min-width: 2400px) { .wrap { max-width: 2400px; } }
 
 /* page hero */
 .page-hero { position: relative; padding: 90px 0 70px; overflow: hidden; border-bottom: 1px solid var(--line);
