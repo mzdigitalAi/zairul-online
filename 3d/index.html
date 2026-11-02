@@ -200,7 +200,7 @@
   function card(m, group) {
     var i = list.length; list.push({ m: m, group: group });
     return '<li class="rv"><button class="model" type="button" data-i="' + i + '" aria-label="Open the 3D model of ' + m[1] + '">' +
-      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
+      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp?v=3" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
       (m[7] ? '<span class="ai">AI character</span>' : '') + '<span class="spin">⟲ 3D</span></span>' +
       '<span class="meta"><b>' + m[1] + '</b><span class="sub">' + m[2] + '</span></span></button></li>';
   }
