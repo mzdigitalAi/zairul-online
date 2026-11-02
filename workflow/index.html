@@ -102,6 +102,43 @@
   }
   @media (max-width: 420px) { .bubble { --s: 78px !important; } }
   @media (prefers-reduced-motion: reduce) { .bubble .in { animation: none; opacity: 1; transform: none; } .bubble { transition: none; } }
+
+  /* ---------- prompt library & licensed toolkit ---------- */
+  .libs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 34px; }
+  .lib { position: relative; padding: 24px 22px 22px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .lib::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--red), var(--gold)); }
+  .lib .num { font: 400 58px/0.9 'Anton', sans-serif; color: var(--gold); }
+  .lib .num small { font-size: 22px; margin-left: 4px; color: var(--text); }
+  .lib h3 { font-size: 22px; margin: 14px 0 6px; }
+  .lib .tag { display: inline-block; margin-bottom: 12px; padding: 4px 8px; border: 1px solid rgba(242,182,50,.4); border-radius: 3px; font: 700 10.5px/1 'Barlow', sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+  .lib p { color: var(--muted); font-size: 15px; }
+  @media (max-width: 900px) { .libs { grid-template-columns: 1fr; } }
+
+  .org { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 26px; list-style: none; counter-reset: o; }
+  .org li { counter-increment: o; padding: 18px; border: 1px solid var(--line); border-radius: 6px; }
+  .org li::before { content: "0" counter(o); display: block; font: 400 24px/1 'Anton', sans-serif; color: var(--red); margin-bottom: 10px; }
+  .org b { display: block; font: 400 19px/1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 6px; }
+  .org span { color: var(--muted); font-size: 14.5px; }
+  @media (max-width: 900px) { .org { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .org { grid-template-columns: 1fr; } }
+
+  .pgal { columns: 4 220px; column-gap: 12px; margin-top: 26px; }
+  .pgal figure { break-inside: avoid; margin: 0 0 12px; position: relative; border-radius: 6px; overflow: hidden; background: #161616; border: 1px solid var(--line); }
+  .pgal img { display: block; width: 100%; height: auto; transition: transform .5s ease; }
+  .pgal figure:hover img { transform: scale(1.04); }
+  .pgal figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px; background: linear-gradient(transparent, rgba(0,0,0,.85)); font: 700 11px/1.3 'Barlow', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #eee; }
+  @media (max-width: 600px) { .pgal { columns: 2; column-gap: 8px; } .pgal figure { margin-bottom: 8px; } .pgal figcaption { font-size: 9.5px; padding: 20px 8px 7px; } }
+  .fine { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+  .kit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
+  .kit section { padding: 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+  .kit h4 { display: flex; justify-content: space-between; gap: 10px; font: 700 11px/1.2 'Barlow', sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .kit h4 span { color: var(--muted); letter-spacing: .1em; }
+  .kit ul { list-style: none; display: flex; flex-wrap: wrap; gap: 7px; }
+  .kit li { padding: 7px 10px; border: 1px solid #333; border-radius: 4px; font-size: 13.5px; line-height: 1.25; color: #e4ded6; background: #151515; }
+  .kit li em { font-style: normal; color: var(--muted); font-size: 12px; }
+  @media (max-width: 960px) { .kit { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .kit { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -113,7 +150,7 @@
       <p class="kicker">Workflow · Behind the work</p>
       <h1>Human first. Tool second.</h1>
       <p class="lead">The brief leads. The tools follow. This is how I take a project from idea to delivery, where AI speeds up the work, and human judgment decides what's good enough to ship.</p>
-      <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#case-studies">Case studies</a></div>
+      <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#library">Prompt library</a><a class="btn" href="#case-studies">Case studies</a></div>
     </div>
     <div class="tools" aria-labelledby="toolsTitle">
       <div class="tools-label"><b id="toolsTitle">My production toolkit</b><span id="toolsCount"></span></div>
@@ -254,9 +291,86 @@
     </div>
   </section>
 
+  <section class="section" id="library">
+    <div class="wrap">
+      <p class="label">04 / How I organise it</p>
+      <h2>A prompt library and a licensed toolkit</h2>
+      <p>Since 2025 I've saved every prompt that works, together with the image it produced, in Notion. Next to it sits a library of specialist GPTs and Gemini Gems that I've bought from independent AI creators. New briefs start from tested building blocks, not a blank page.</p>
+
+      <div class="libs">
+        <article class="lib">
+          <div class="num">~50<small>prompts</small></div>
+          <h3>MZDigital-AI Prompt 2025</h3>
+          <span class="tag">ChatGPT · Gemini</span>
+          <p>Ads, posters, 3D icons, logos, dioramas and character figures. Each prompt is tagged with the AI model it was written for.</p>
+        </article>
+        <article class="lib">
+          <div class="num">~50<small>prompts</small></div>
+          <h3>MZDigital-AI Prompt 2026</h3>
+          <span class="tag">Visual prompts</span>
+          <p>Advertising, product, packaging, food, travel and automotive posters. Every prompt is stored with its output image, so I can see the result before reusing it.</p>
+        </article>
+        <article class="lib">
+          <div class="num">40+<small>tools</small></div>
+          <h3>Zairul AI Master '26</h3>
+          <span class="tag">Licensed GPTs &amp; Gems</span>
+          <p>Specialist assistants for posters, infographics, carousels, photography, video prompting and storyboards, credited to their makers below.</p>
+        </article>
+      </div>
+
+      <ol class="org">
+        <li><b>Capture</b><span>Save a prompt as soon as it gives a usable result, with the output image attached.</span></li>
+        <li><b>Tag</b><span>Label it by AI model and by use, like ads, food, travel or product.</span></li>
+        <li><b>Reuse</b><span>Start from a saved template and swap in the new brand, product and copy.</span></li>
+        <li><b>Renew</b><span>Start a fresh library each year as the models change, from 2025 to 2026.</span></li>
+      </ol>
+
+      <h3 style="margin-top:60px">From the 2026 library</h3>
+      <div class="pgal">
+        <figure><img src="/assets/prompts/travel-journal-collage.webp" width="320" height="577" loading="lazy" alt="Travel-journal collage poster of Paris"><figcaption>Travel journal collage</figcaption></figure>
+        <figure><img src="/assets/prompts/3d-isometric-architectural-diorama.webp" width="320" height="320" loading="lazy" alt="3D isometric diorama of a telco retail store"><figcaption>3D isometric diorama</figcaption></figure>
+        <figure><img src="/assets/prompts/quiet-rebel-a-cinematic-fragrance-ad.webp" width="320" height="569" loading="lazy" alt="Cinematic fragrance ad called Quiet Rebel"><figcaption>Cinematic fragrance ad</figcaption></figure>
+        <figure><img src="/assets/prompts/premium-packaging.webp" width="320" height="427" loading="lazy" alt="Durian popcorn packaging design"><figcaption>Packaging design</figcaption></figure>
+        <figure><img src="/assets/prompts/putrajaya-waterfront-travel-poster.webp" width="320" height="427" loading="lazy" alt="Minimal travel poster of Putrajaya"><figcaption>Putrajaya travel poster</figcaption></figure>
+        <figure><img src="/assets/prompts/art-nouveau-paper-collage-poster.webp" width="320" height="480" loading="lazy" alt="Art Nouveau paper-collage poster for a cordial drink"><figcaption>Art Nouveau collage</figcaption></figure>
+        <figure><img src="/assets/prompts/cinematic-food-advertising-poster.webp" width="320" height="320" loading="lazy" alt="Cinematic soup advertising poster"><figcaption>Food advertising poster</figcaption></figure>
+        <figure><img src="/assets/prompts/ultra-clean-automotive-poster.webp" width="320" height="569" loading="lazy" alt="Clean automotive poster of an electric MPV"><figcaption>Automotive poster</figcaption></figure>
+        <figure><img src="/assets/prompts/pop-up-travel-pass-diorama.webp" width="320" height="569" loading="lazy" alt="Pop-up diorama of Melaka on a transit pass"><figcaption>Pop-up travel pass</figcaption></figure>
+        <figure><img src="/assets/prompts/fresh-lifestyle-food-photography.webp" width="320" height="427" loading="lazy" alt="Lifestyle food photograph of a seafood shell-out"><figcaption>Lifestyle food photography</figcaption></figure>
+        <figure><img src="/assets/prompts/premium-modern-beverage-ad.webp" width="320" height="477" loading="lazy" alt="Street-style beverage advertisement"><figcaption>Beverage ad</figcaption></figure>
+        <figure><img src="/assets/prompts/cinematic-headphone-ad.webp" width="320" height="480" loading="lazy" alt="Cinematic headphone advertisement"><figcaption>Cinematic product ad</figcaption></figure>
+      </div>
+      <p class="fine">Concept work made from my saved prompts. Brand names appear in unsolicited spec concepts only, not client commissions.</p>
+
+      <h3 style="margin-top:60px">Licensed AI toolkit</h3>
+      <p>Bought from their creators and organised in Notion by task. I pick the right specialist for the job, then direct and check the output myself.</p>
+      <div class="kit">
+        <section><h4>Posters &amp; ads <span>10</span></h4><ul>
+          <li>IniPOSTERLY</li><li>Food &amp; Drink Poster Prompts</li><li>Food Lover Poster Generator</li><li>Ima Geru Grunge Poster</li><li>Poster Maker <em>· irtfacelessdigii</em></li><li>Hype ADS-MAKER</li><li>Hype POST-IT</li><li>Pro Thumbnail Generator</li><li>LakuIN <em>· Saprilpobud</em></li><li>RMP (Resepi Media Prompt)</li>
+        </ul></section>
+        <section><h4>Infographics &amp; carousels <span>13</span></h4><ul>
+          <li>INFOGEN FORGE Enterprise 8K</li><li>INFOGEN FORGE V2</li><li>INFOGEN FORGE Kid's Edition</li><li>Data Infographic Style <em>· Kusuma</em></li><li>3D Clean Infographic <em>· Kusuma</em></li><li>Education &amp; Editorial <em>· Kusuma</em></li><li>Carousel Infograf <em>· Kusuma</em></li><li>V.2 Pro Infographic Generator <em>· Pakguruh</em></li><li>Infographics Prompt Builder <em>· solusidigitalmu</em></li><li>Carousel Prompt Generator <em>· solusidigitalmu</em></li><li>Infograf Builder</li><li>Hype Carousel Maker</li><li>Premium Styles for NotebookLM</li>
+        </ul></section>
+        <section><h4>Photography &amp; image-to-image <span>5</span></h4><ul>
+          <li>PromptKit PRO for Photography</li><li>AlterShot 1.3 <em>· ForgeZard Labs</em></li><li>Vision Prompt – Replicate AI</li><li>Prompt AI Generator V2</li><li>WMP <em>· irtfacelessdigii</em></li>
+        </ul></section>
+        <section><h4>Video &amp; VFX prompting <span>6</span></h4><ul>
+          <li>Veo 3 Prompt Engineer Assistant</li><li>Video Prompt Generator (Veo 3, Sora)</li><li>Veo 3 Prompt Generator <em>· DigiMarket</em></li><li>Vision Prompt – Video to JSON</li><li>Video to Prompt</li><li>VFX AI Studio</li>
+        </ul></section>
+        <section><h4>Storyboards &amp; comics <span>4</span></h4><ul>
+          <li>MiniVerse Storyboard</li><li>Komik Builder</li><li>KOMIKILAT (Nano Banana)</li><li>Universal SOP 3D Simulator <em>· solusidigitalmu</em></li>
+        </ul></section>
+        <section><h4>Creative direction &amp; copy <span>6</span></h4><ul>
+          <li>AiVA ZYRA Creative Director</li><li>AI Design Partner</li><li>Master Prompt COPY-X</li><li>Gepetto</li><li>Universal Reparation Guidance <em>· solusidigitalmu</em></li><li>Content Creation with AI Guidelines</li>
+        </ul></section>
+      </div>
+      <p class="fine">Tool names are shown for reference only. They're paid products, so no access links are shared. I'm happy to walk through the full library in an interview.</p>
+    </div>
+  </section>
+
   <section class="section" id="case-studies">
     <div class="wrap">
-      <p class="label">04 / Case studies</p>
+      <p class="label">05 / Case studies</p>
       <h2>Selected projects</h2>
       <p>Four projects from my work at MECA, showing the brief, the challenge and how each was produced.</p>
 
