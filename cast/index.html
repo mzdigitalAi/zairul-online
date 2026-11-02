@@ -164,7 +164,7 @@
     return '<li class="member rv" tabindex="0" style="transition-delay:' + ((i % 5) * 0.08).toFixed(2) + 's">' +
       '<div class="ph"><img src="/assets/cast/' + c[0] + '.webp" width="480" height="600" loading="lazy" alt="Portrait of ' + c[1] + '">' +
       '<span class="no">' + ('0' + (i + 2)).slice(-2) + '</span>' + (c[3] ? '<span class="ai">AI character</span>' : '') + '</div>' +
-      '<b>' + c[1] + '</b><span class="as">as<em>' + c[2] + '</em></span></li>';
+      '<b>' + c[1] + '</b><span class="as">the<em>' + c[2] + '</em></span></li>';
   }).join('');
   var els = document.querySelectorAll('.rv');
   if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
