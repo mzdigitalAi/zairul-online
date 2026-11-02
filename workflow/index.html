@@ -122,13 +122,13 @@
   @media (max-width: 900px) { .org { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 480px) { .org { grid-template-columns: 1fr; } }
 
-  .pgal { columns: 230px; column-gap: 12px; margin-top: 26px; }
-  @media (min-width: 1600px) { .pgal { columns: 250px; } }
-  .pgal figure { break-inside: avoid; margin: 0 0 12px; position: relative; border-radius: 6px; overflow: hidden; background: #161616; border: 1px solid var(--line); }
-  .pgal img { display: block; width: 100%; height: auto; transition: transform .5s ease; }
+  .pgal { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin-top: 26px; }
+  @media (min-width: 1600px) { .pgal { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); } }
+  .pgal figure { margin: 0; aspect-ratio: 3 / 4; position: relative; border-radius: 6px; overflow: hidden; background: #161616; border: 1px solid var(--line); }
+  .pgal img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .5s ease; }
   .pgal figure:hover img { transform: scale(1.04); }
   .pgal figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px; background: linear-gradient(transparent, rgba(0,0,0,.85)); font: 700 11px/1.3 'Barlow', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #eee; }
-  @media (max-width: 600px) { .pgal { columns: 2; column-gap: 8px; } .pgal figure { margin-bottom: 8px; } .pgal figcaption { font-size: 9.5px; padding: 20px 8px 7px; } }
+  @media (max-width: 600px) { .pgal { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .pgal figcaption { font-size: 9.5px; padding: 20px 8px 7px; } }
   .fine { margin-top: 8px; font-size: 13px; color: var(--muted); }
 
   .kit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 30px; }
@@ -146,12 +146,12 @@
   .kfilter button:hover { border-color: var(--gold); }
   .kfilter button[aria-selected="true"] { background: var(--gold); border-color: var(--gold); color: #111; }
   .kfilter button[aria-selected="true"] span { color: #111; }
-  .kgrid { columns: 150px; column-gap: 10px; margin-top: 20px; }
-  .ktile { break-inside: avoid; margin: 0 0 10px; display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
-  .ktile[hidden] { display: none; }
+  .kgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); grid-auto-rows: 1fr; gap: 10px; margin-top: 20px; }
+  .ktile { margin: 0; display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+  .ktile[hidden] { display: none !important; }
   a.ktile:hover { border-color: var(--gold); transform: translateY(-2px); }
-  .ktile img { display: block; width: 100%; height: auto; background: #161616; }
-  .ktile .kb { padding: 8px 9px 9px; }
+  .ktile img { display: block; width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; object-position: center top; background: #161616; }
+  .ktile .kb { flex: 1; padding: 8px 9px 9px; }
   .ktile b { display: block; font-size: 12.5px; line-height: 1.25; color: var(--text); }
   .ktile .km { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 6px; margin-top: 5px; font-size: 10.5px; color: var(--muted); }
   .ktile .kp { flex: none; padding: 3px 5px; border-radius: 3px; font: 700 8.5px/1 'Barlow', sans-serif; letter-spacing: .12em; text-transform: uppercase; background: #262626; color: #ddd; }
@@ -159,7 +159,7 @@
   .ktile .kp.gem { background: #4f7cff; color: #fff; }
   .ktile .kp.app { background: var(--red); color: #fff; }
   .ktile .go { color: var(--gold); font-weight: 700; white-space: nowrap; }
-  @media (max-width: 600px) { .kgrid { columns: 2; column-gap: 8px; } .ktile { margin-bottom: 8px; } .ktile .kb { padding: 9px; } .ktile b { font-size: 13px; } }
+  @media (max-width: 600px) { .kgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .ktile .kb { padding: 9px; } .ktile b { font-size: 13px; } }
 </style>
 </head>
 <body>
