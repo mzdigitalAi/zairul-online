@@ -139,6 +139,26 @@
   .kit li em { font-style: normal; color: var(--muted); font-size: 12px; }
   @media (max-width: 960px) { .kit { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 600px) { .kit { grid-template-columns: 1fr; } }
+  .kfilter { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .kfilter button { padding: 9px 14px; border: 1px solid #3a3a3a; border-radius: 999px; background: transparent; color: #d8d2c8; font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+  .kfilter button span { color: var(--muted); margin-left: 6px; }
+  .kfilter button:hover { border-color: var(--gold); }
+  .kfilter button[aria-selected="true"] { background: var(--gold); border-color: var(--gold); color: #111; }
+  .kfilter button[aria-selected="true"] span { color: #111; }
+  .kgrid { columns: 5 190px; column-gap: 12px; margin-top: 20px; }
+  .ktile { break-inside: avoid; margin: 0 0 12px; display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+  .ktile[hidden] { display: none; }
+  a.ktile:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .ktile img { display: block; width: 100%; height: auto; background: #161616; }
+  .ktile .kb { padding: 11px 12px 12px; }
+  .ktile b { display: block; font-size: 14px; line-height: 1.25; color: var(--text); }
+  .ktile .km { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 7px; font-size: 12px; color: var(--muted); }
+  .ktile .kp { flex: none; padding: 3px 6px; border-radius: 3px; font: 700 9.5px/1 'Barlow', sans-serif; letter-spacing: .12em; text-transform: uppercase; background: #262626; color: #ddd; }
+  .ktile .kp.gpt { background: #10a37f; color: #fff; }
+  .ktile .kp.gem { background: #4f7cff; color: #fff; }
+  .ktile .kp.app { background: var(--red); color: #fff; }
+  .ktile .go { color: var(--gold); font-weight: 700; white-space: nowrap; }
+  @media (max-width: 600px) { .kgrid { columns: 2; column-gap: 8px; } .ktile { margin-bottom: 8px; } .ktile .kb { padding: 9px; } .ktile b { font-size: 13px; } }
 </style>
 </head>
 <body>
@@ -311,7 +331,7 @@
           <p>Advertising, product, packaging, food, travel and automotive posters. Every prompt is stored with its output image, so I can see the result before reusing it.</p>
         </article>
         <article class="lib">
-          <div class="num">40+<small>tools</small></div>
+          <div class="num">45<small>tools</small></div>
           <h3>Zairul AI Master '26</h3>
           <span class="tag">Licensed GPTs &amp; Gems</span>
           <p>Specialist assistants for posters, infographics, carousels, photography, video prompting and storyboards, credited to their makers below.</p>
@@ -344,27 +364,9 @@
 
       <h3 style="margin-top:60px">Licensed AI toolkit</h3>
       <p>Bought from their creators and organised in Notion by task. I pick the right specialist for the job, then direct and check the output myself.</p>
-      <div class="kit">
-        <section><h4>Posters &amp; ads <span>10</span></h4><ul>
-          <li>IniPOSTERLY</li><li>Food &amp; Drink Poster Prompts</li><li>Food Lover Poster Generator</li><li>Ima Geru Grunge Poster</li><li>Poster Maker <em>· irtfacelessdigii</em></li><li>Hype ADS-MAKER</li><li>Hype POST-IT</li><li>Pro Thumbnail Generator</li><li>LakuIN <em>· Saprilpobud</em></li><li>RMP (Resepi Media Prompt)</li>
-        </ul></section>
-        <section><h4>Infographics &amp; carousels <span>13</span></h4><ul>
-          <li>INFOGEN FORGE Enterprise 8K</li><li>INFOGEN FORGE V2</li><li>INFOGEN FORGE Kid's Edition</li><li>Data Infographic Style <em>· Kusuma</em></li><li>3D Clean Infographic <em>· Kusuma</em></li><li>Education &amp; Editorial <em>· Kusuma</em></li><li>Carousel Infograf <em>· Kusuma</em></li><li>V.2 Pro Infographic Generator <em>· Pakguruh</em></li><li>Infographics Prompt Builder <em>· solusidigitalmu</em></li><li>Carousel Prompt Generator <em>· solusidigitalmu</em></li><li>Infograf Builder</li><li>Hype Carousel Maker</li><li>Premium Styles for NotebookLM</li>
-        </ul></section>
-        <section><h4>Photography &amp; image-to-image <span>5</span></h4><ul>
-          <li>PromptKit PRO for Photography</li><li>AlterShot 1.3 <em>· ForgeZard Labs</em></li><li>Vision Prompt – Replicate AI</li><li>Prompt AI Generator V2</li><li>WMP <em>· irtfacelessdigii</em></li>
-        </ul></section>
-        <section><h4>Video &amp; VFX prompting <span>6</span></h4><ul>
-          <li>Veo 3 Prompt Engineer Assistant</li><li>Video Prompt Generator (Veo 3, Sora)</li><li>Veo 3 Prompt Generator <em>· DigiMarket</em></li><li>Vision Prompt – Video to JSON</li><li>Video to Prompt</li><li>VFX AI Studio</li>
-        </ul></section>
-        <section><h4>Storyboards &amp; comics <span>4</span></h4><ul>
-          <li>MiniVerse Storyboard</li><li>Komik Builder</li><li>KOMIKILAT (Nano Banana)</li><li>Universal SOP 3D Simulator <em>· solusidigitalmu</em></li>
-        </ul></section>
-        <section><h4>Creative direction &amp; copy <span>6</span></h4><ul>
-          <li>AiVA ZYRA Creative Director</li><li>AI Design Partner</li><li>Master Prompt COPY-X</li><li>Gepetto</li><li>Universal Reparation Guidance <em>· solusidigitalmu</em></li><li>Content Creation with AI Guidelines</li>
-        </ul></section>
-      </div>
-      <p class="fine">Tool names are shown for reference only. They're paid products, so no access links are shared. I'm happy to walk through the full library in an interview.</p>
+      <div class="kfilter" id="kfilter" role="tablist" aria-label="Filter tools by category"></div>
+      <div class="kgrid" id="kgrid"></div>
+      <p class="fine" id="kfine">Covers and names belong to each tool's creator, credited where known. These are paid tools, licensed to me.</p>
     </div>
   </section>
 
@@ -537,6 +539,89 @@
     });
     hero.addEventListener('mouseleave', function () { box.style.setProperty('--mx', 0); box.style.setProperty('--my', 0); });
   }
+})();
+</script>
+<script>
+(function () {
+  var SHOW_LINKS = true;
+  var CATS = { posters: 'Posters & ads', info: 'Infographics & carousels', photo: 'Photography & image-to-image', video: 'Video & VFX', story: 'Storyboards & comics', direct: 'Creative direction' };
+  var P = { gpt: 'Custom GPT', gem: 'Gemini Gem', app: 'AI Studio app', web: 'Web app', kit: 'Prompt kit', guide: 'Guide' };
+  // [cover, name, maker, platform, category, link]
+  var T = [
+    [0, 'PromptKit PRO for Photography', '', 'kit', 'photo', ''],
+    [1, 'IniPOSTERLY', '', 'kit', 'posters', ''],
+    [2, 'AI Design Partner', 'iniprompt', 'gpt', 'direct', 'https://chatgpt.com/g/g-6a4de508e04c8191bfd7c3248692997b-ai-design-partner-v2-0-by-iniprompt'],
+    [3, 'Food & Drink Poster Prompts', '', 'kit', 'posters', ''],
+    [4, 'Video to Prompt', 'AI Akademi', 'guide', 'video', ''],
+    [5, 'Content Creation with AI Guidelines', '', 'guide', 'direct', ''],
+    [6, 'Premium Styles for NotebookLM', '', 'kit', 'info', ''],
+    [7, 'Gepetto', '', 'gpt', 'direct', 'https://chatgpt.com/g/g-69ef75e51bfc8191bc1c9937604f7e47-gepetto'],
+    [8, 'Vision Prompt – Replicate AI', '', 'gem', 'photo', 'https://gemini.google.com/share/b032e974397a'],
+    [9, 'Vision Prompt – Video to JSON', '', 'gem', 'video', 'https://gemini.google.com/share/87980194b125'],
+    [10, 'Food Lover Poster Generator', '', 'gem', 'posters', 'https://gemini.google.com/gem/f60919ccc579'],
+    [11, 'V.2 Pro Infographic Generator', 'Pakguruh', 'gem', 'info', 'https://gemini.google.com/gem/1jrYOJ6sujPN_pKfpkYQCFN-aYReToQ1m'],
+    [12, 'WMP', 'irtfacelessdigii', 'kit', 'photo', ''],
+    [13, 'Infographics Prompt Builder', 'solusidigitalmu', 'gem', 'info', 'https://gemini.google.com/share/052dc1cbc19c'],
+    [14, 'Carousel Prompt Generator', 'solusidigitalmu', 'gem', 'info', 'https://gemini.google.com/share/c179e150f075'],
+    [15, 'LakuIN', 'Saprilpobud', 'gem', 'posters', 'https://gemini.google.com/gem/0142eef6cc3c'],
+    [16, 'VFX AI Studio', '', 'app', 'video', 'https://aistudio.google.com/apps/drive/19jaFNb7AWJg8bv6xdWwHs9wyRxAP4T7Z?fullscreenApplet=true&showPreview=true&showAssistant=true'],
+    [17, 'Universal Reparation Guidance', 'solusidigitalmu', 'gem', 'direct', 'https://gemini.google.com/gem/cb896a1ab700'],
+    [18, 'Universal SOP 3D Simulator', 'solusidigitalmu', 'gem', 'story', 'https://gemini.google.com/gem/d7cb7509874a'],
+    [19, 'Infograf Builder', '', 'gem', 'info', 'https://gemini.google.com/gem/259c4f038dfe'],
+    [20, 'Komik Builder', '', 'gem', 'story', 'https://gemini.google.com/gem/ccfeefc2064a'],
+    [21, 'Hype POST-IT', 'Hype', 'kit', 'posters', ''],
+    [22, 'Hype ADS-MAKER', 'Hype', 'app', 'posters', 'https://aistudio.google.com/apps/drive/1DbMmpWGLBxpPPzO_HvdpmqFyAF-pb-Wa?fullscreenApplet=true&showPreview=true&showAssistant=true'],
+    [23, 'Hype Carousel Maker', 'Hype', 'app', 'info', 'https://aistudio.google.com/apps/drive/1NN_Z10Jnu3Bap_UpXss51ZssSfpW6z-y?fullscreenApplet=true&showPreview=true&showAssistant=true'],
+    [24, 'Prompt AI Generator V2', '', 'gem', 'photo', 'https://gemini.google.com/share/ef6ea45e07b3'],
+    [25, 'KOMIKILAT Nano Banana 3', '', 'gem', 'story', 'https://gemini.google.com/share/ef6ea45e07b3'],
+    [26, 'Ima Geru Grunge Poster', '', 'gem', 'posters', 'https://gemini.google.com/gem/17OUC9OgS7iT_uq2qKlx2wzAItL_YFzHH'],
+    [27, 'Veo 3 Visual Prompt Assistant', 'Kusuma', 'gpt', 'video', 'https://chatgpt.com/g/g-6833bd5c438081918e53d0aa5d57e85e-kusuma-veo-3-visual-prompt-assistant'],
+    [28, 'Data Infographic Style', 'Kusuma', 'gem', 'info', 'https://gemini.google.com/gem/1latRvDxL_MQFSElCGqozY1myhkq6gJEI'],
+    [29, '3D Clean Infographic', 'Kusuma', 'gem', 'info', 'https://gemini.google.com/gem/6398923edcc2'],
+    [30, 'Education & Editorial', 'Kusuma', 'gem', 'info', 'https://gemini.google.com/gem/5098bcb70d53/2cd0c544ace4cadb'],
+    [31, 'Carousel Infograf', 'Kusuma', 'gem', 'info', 'https://gemini.google.com/gem/259c4f038dfe'],
+    [32, 'AiVA ZYRA Creative Director', '', 'gpt', 'direct', 'https://chatgpt.com/g/g-6845d5d0a23c81919b1716b3f8a6b822-aiva-zyra'],
+    [33, 'Veo 3 Prompt Engineer Assistant', '', 'gpt', 'video', ''],
+    [34, 'Video Prompt Generator (Veo 3, Sora)', '', 'web', 'video', 'https://videopromptgen.netlify.app/'],
+    [35, 'Veo 3 Prompt Generator', 'DigiMarket', 'kit', 'video', ''],
+    [36, 'Pro Thumbnail Generator', '', 'gem', 'posters', 'https://gemini.google.com/share/9c97e2e516b0'],
+    [37, 'Poster Prompter', 'irtfacelessdigii', 'gpt', 'posters', 'https://chatgpt.com/g/g-6923b96fa1108191b2d5842983f96b21-poster-prompter'],
+    [38, 'RMP (Resepi Media Prompt)', 'irtfacelessdigii', 'gem', 'posters', 'https://gemini.google.com/gem/bfa9a88c1230'],
+    [39, 'INFOGEN FORGE V2', '', 'gem', 'info', 'https://gemini.google.com/gem/de60295c5dfc'],
+    [40, 'INFOGEN FORGE Enterprise 8K', '', 'gem', 'info', 'https://gemini.google.com/gem/7211f633cfaf'],
+    [41, "INFOGEN FORGE Kid's Edition", '', 'gem', 'info', 'https://gemini.google.com/gem/c81290133b66'],
+    [42, 'AlterShot 1.3', 'ForgeZard Labs', 'gem', 'photo', 'https://gemini.google.com/gem/3da890d27aa1'],
+    [43, 'MiniVerse Storyboard', '', 'kit', 'story', ''],
+    [44, 'Master Prompt COPY-X', '', 'kit', 'direct', '']
+  ];
+  var grid = document.getElementById('kgrid'), bar = document.getElementById('kfilter');
+  if (!grid) return;
+  var esc = function (t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+  var kp = { gpt: 'gpt', gem: 'gem', app: 'app', web: 'app' };
+  grid.innerHTML = T.map(function (t) {
+    var link = SHOW_LINKS && t[5];
+    var tag = link ? 'a' : 'div';
+    var attrs = link ? ' href="' + esc(t[5]) + '" target="_blank" rel="noopener"' : '';
+    var n = ('0' + t[0]).slice(-2);
+    return '<' + tag + ' class="ktile" data-c="' + t[4] + '"' + attrs + '>' +
+      '<img src="/assets/toolkit/t' + n + '.webp" loading="lazy" alt="' + esc(t[1]) + ' cover">' +
+      '<div class="kb"><b>' + esc(t[1]) + '</b><div class="km"><span>' + (t[2] ? 'by ' + esc(t[2]) : '&nbsp;') + '</span>' +
+      '<span class="kp ' + (kp[t[3]] || '') + '">' + P[t[3]] + '</span></div>' +
+      (link ? '<div class="km"><span></span><span class="go">Open ↗</span></div>' : '') + '</div></' + tag + '>';
+  }).join('');
+  var counts = { all: T.length };
+  T.forEach(function (t) { counts[t[4]] = (counts[t[4]] || 0) + 1; });
+  var keys = ['all'].concat(Object.keys(CATS));
+  bar.innerHTML = keys.map(function (k, i) {
+    return '<button type="button" role="tab" data-k="' + k + '" aria-selected="' + (i === 0) + '">' + (k === 'all' ? 'All' : CATS[k]) + '<span>' + counts[k] + '</span></button>';
+  }).join('');
+  bar.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    bar.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-selected', x === b); });
+    var k = b.getAttribute('data-k');
+    grid.querySelectorAll('.ktile').forEach(function (el) { el.hidden = !(k === 'all' || el.getAttribute('data-c') === k); });
+  });
+  if (SHOW_LINKS) document.getElementById('kfine').textContent = "Covers and names belong to each tool's creator, credited where known. Links open the tool for licensed users.";
 })();
 </script>
 </body>
