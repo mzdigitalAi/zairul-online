@@ -61,7 +61,7 @@
   @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
 
   /* ---------- viewer ---------- */
-  .viewer { width: min(1320px, 96vw); height: min(860px, 92vh); max-width: none; max-height: none; padding: 0; border: 1px solid rgba(242,182,50,.35); border-radius: 8px; background: #0d0d0f; color: var(--text); overflow: hidden; }
+  .viewer { position: fixed; inset: 0; margin: auto; width: min(1320px, 96vw); height: min(860px, 92vh); max-width: none; max-height: none; padding: 0; border: 1px solid rgba(242,182,50,.35); border-radius: 8px; background: #0d0d0f; color: var(--text); overflow: hidden; }
   .viewer::backdrop { background: rgba(0,0,0,.82); backdrop-filter: blur(4px); }
   .viewer .in { display: grid; grid-template-columns: minmax(0, 1fr) 330px; height: 100%; }
   .viewer .canvas { position: relative; background: radial-gradient(ellipse 65% 60% at 50% 52%, #26262b, #0d0d0f 75%); }
