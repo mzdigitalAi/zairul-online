@@ -100,7 +100,7 @@
       <a class="btn red" href="#cast">Explore the models</a>
     </div>
     <div class="stage">
-      <model-viewer id="heroMv" src="/assets/3d/zairul-bust.glb?v=2" poster="/assets/3d/posters/zairul-bust.webp?v=2" alt="3D portrait bust of Zairul, spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-15deg 82deg auto" loading="eager"></model-viewer>
+      <model-viewer id="heroMv" src="/assets/3d/zairul-bust.glb?v=2" poster="/assets/3d/posters/zairul-bust.webp?v=2" alt="3D portrait bust of Zairul [AI Model], spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-15deg 82deg auto" loading="eager"></model-viewer>
       <span class="hint">Drag to rotate</span>
     </div>
   </div>
@@ -131,7 +131,7 @@
         <li><b>AI sculpt &amp; texture</b><span>Meshy 7.1 builds the Ultra 4K mesh and paints 8K PBR textures: colour, roughness, metal and surface detail.</span></li>
         <li><b>Built for the web</b><span>I compress each model (Draco geometry, 4K WebP textures) so it loads fast in any browser, from 2 to 13 MB.</span></li>
       </ol>
-      <p class="note">Jane, Lina and John are AI-generated characters, not real people. Lina and my own portrait bust are modelled straight from close-up portraits for an exact likeness. All models are my own work and are shown for portfolio purposes only.</p>
+      <p class="note">Jane, Lina and John are AI-generated characters, not real people. Jane, Lina and my own portrait bust are modelled straight from close-up portraits for an exact likeness. All models are my own work and are shown for portfolio purposes only.</p>
     </div>
   </section>
 </main>
@@ -181,9 +181,8 @@
 
   // slug, name, subtitle, description, triangles, MB, camera orbit, AI character?
   var CAST = [
-    ['zairul-bust', 'Zairul', 'The director · portrait bust', 'Me as a portrait bust, built straight from my studio portrait so every detail of my face carries into 3D: hair, brows, stubble and all.', '1,633,846', '5.7', '-15deg 82deg auto'],
-    ['zairul', 'Zairul', 'Full figure', 'Me, sculpted from my own character sheet: tan leather jacket, cream turtleneck, brown trousers and leather shoes.', '436,548', '2.2', '0deg 85deg auto'],
-    ['jane', 'Jane', 'AI character', 'Jane in a blue embroidered kurta with gold jhumka earrings, modelled head to toe.', '755,046', '4.3', '0deg 85deg auto', true],
+    ['zairul-bust', 'Zairul [AI Model]', 'The director · portrait bust', 'Me as a portrait bust, built straight from my studio portrait so every detail of my face carries into 3D: hair, brows, stubble and all.', '1,633,846', '5.7', '-15deg 82deg auto'],
+    ['jane', 'Jane', 'AI character · bust', 'Jane as a portrait bust in her blue embroidered kurta and gold jhumka earrings, built from her character portrait.', '1,754,856', '9.6', '-10deg 82deg auto', true],
     ['lina', 'Lina', 'AI character · bust', 'Lina as a portrait bust, built from her original character portrait to keep her face exact.', '2,312,512', '8.6', '0deg 85deg auto', true],
     ['john', 'John', 'AI character', 'John in an olive polo and dark trousers, the everyman of my films.', '274,608', '1.9', '0deg 85deg auto', true]
   ];
