@@ -100,7 +100,7 @@
       <a class="btn red" href="#cast">Explore the models</a>
     </div>
     <div class="stage">
-      <model-viewer id="heroMv" src="/assets/3d/zairul.glb" poster="/assets/3d/posters/zairul.webp" alt="3D model of Zairul, spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="0deg 85deg auto" loading="eager"></model-viewer>
+      <model-viewer id="heroMv" src="/assets/3d/zairul.glb?v=2" poster="/assets/3d/posters/zairul.webp?v=2" alt="3D model of Zairul, spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="0deg 85deg auto" loading="eager"></model-viewer>
       <span class="hint">Drag to rotate</span>
     </div>
   </div>
@@ -181,7 +181,7 @@
 
   // slug, name, subtitle, description, triangles, MB, camera orbit, AI character?
   var CAST = [
-    ['zairul', 'Zairul', 'The director, in 3D', 'Me, sculpted from a directed full-body reference: tweed blazer, black shirt and leather shoes.', '352,958', '2.7', '0deg 85deg auto'],
+    ['zairul', 'Zairul', 'The director, in 3D', 'Me, sculpted from my own character sheet: tan leather jacket, cream turtleneck, brown trousers and leather shoes.', '436,548', '2.2', '0deg 85deg auto'],
     ['jane', 'Jane', 'AI character', 'Jane in a blue embroidered kurta with gold jhumka earrings, modelled head to toe.', '755,046', '4.3', '0deg 85deg auto', true],
     ['lina', 'Lina', 'AI character · bust', 'Lina as a portrait bust, built from her original character portrait to keep her face exact.', '2,312,512', '8.6', '0deg 85deg auto', true],
     ['john', 'John', 'AI character', 'John in an olive polo and dark trousers, the everyman of my films.', '274,608', '1.9', '0deg 85deg auto', true]
@@ -218,9 +218,9 @@
     document.getElementById('vSize').textContent = m[5] + ' MB';
     document.getElementById('vLoad').hidden = false;
     mv.setAttribute('camera-orbit', m[6]);
-    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp');
+    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp?v=2');
     mv.setAttribute('alt', '3D model of ' + m[1]);
-    mv.src = '/assets/3d/' + m[0] + '.glb';
+    mv.src = '/assets/3d/' + m[0] + '.glb?v=2';
   }
   mv.addEventListener('load', function () { document.getElementById('vLoad').hidden = true; });
   mv.addEventListener('progress', function (e) { var p = Math.round((e.detail.totalProgress || 0) * 100); document.getElementById('vLoad').textContent = p < 100 ? 'Loading model… ' + p + '%' : ''; });
