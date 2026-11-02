@@ -14,7 +14,7 @@
     { key: 'resume',   label: 'Resume',   href: '/resume/' },
     { key: 'contact',  label: 'Contact',  href: '/contact/' }
   ];
-  var MUSIC = '/assets/theme.mp3';
+  var MUSIC = '/assets/theme.mp3?v=2';
   var VOLUME = 0.4;
 
   var path = location.pathname.replace(/index\.html$/, '');
