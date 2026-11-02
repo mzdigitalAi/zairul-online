@@ -9,6 +9,7 @@
     { key: 'videos',   label: 'AI Video', href: '/videos/' },
     { key: 'images',   label: 'AI Images', href: '/images/' },
     { key: 'audio',    label: 'AI Audio', href: '/audio/' },
+    { key: 'cast',     label: 'Cast',     href: '/cast/' },
     { key: 'magazine', label: 'Magazine', href: '/magazine/' },
     { key: 'resume',   label: 'Resume',   href: '/resume/' },
     { key: 'contact',  label: 'Contact',  href: '/contact/' }
