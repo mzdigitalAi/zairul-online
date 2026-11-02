@@ -445,7 +445,7 @@
     root.style.setProperty('--n', N);
 
     var portrait = matchMedia('(max-aspect-ratio: 1/1)').matches;
-    var src = portrait ? '/assets/hero-phone.mp4?v=3' : '/assets/hero-desktop.mp4?v=3';
+    var src = portrait ? '/assets/hero-phone.mp4?v=4' : '/assets/hero-desktop.mp4?v=4';
     var INTRO = 7.4;     // seconds of video that belong to the opening section
     var dur = 12.4, target = 0, cur = 0, active = -1, live = false, animId = 0;
     var vt = function (p) { return p < 1 / N ? p * N * INTRO : INTRO + (p - 1 / N) / (1 - 1 / N) * (dur - INTRO - 0.05); };
