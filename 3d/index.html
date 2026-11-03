@@ -9,7 +9,7 @@
 <meta property="og:description" content="Photoreal 3D models generated with AI from directed reference images. Spin and zoom them in your browser.">
 <meta property="og:image" content="https://zairul.online/assets/og.jpg">
 <link rel="icon" href="/assets/logo.png">
-<link rel="stylesheet" href="/assets/site.css?v=30261103">
+<link rel="stylesheet" href="/assets/site.css?v=40261103">
 <script type="module" src="/assets/vendor/model-viewer-3.5.0.min.js"></script>
 <style>
   model-viewer { --poster-color: transparent; --progress-bar-color: var(--gold); --progress-bar-height: 3px; background: transparent; }
@@ -88,7 +88,7 @@
 </style>
 </head>
 <body>
-<script src="/assets/menu.js?v=30261103"></script>
+<script src="/assets/menu.js?v=40261103"></script>
 
 <header class="d3-hero" aria-labelledby="d3Title">
   <div class="wrap">
@@ -100,7 +100,7 @@
       <a class="btn red" href="#cast">Explore the models</a>
     </div>
     <div class="stage">
-      <model-viewer id="heroMv" src="/assets/3d/zairul-bust.glb?v=3" poster="/assets/3d/posters/zairul-bust.webp?v=3" alt="3D portrait bust of Zairul [AI Model], spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-15deg 82deg auto" loading="eager"></model-viewer>
+      <model-viewer id="heroMv" src="/assets/3d/zairul-bust.glb?v=4" poster="/assets/3d/posters/zairul-bust.webp?v=4" alt="3D portrait bust of Zairul [AI Model], spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-10deg 84deg auto" loading="eager"></model-viewer>
       <span class="hint">Drag to rotate</span>
     </div>
   </div>
@@ -181,7 +181,7 @@
 
   // slug, name, subtitle, description, triangles, MB, camera orbit, AI character?
   var CAST = [
-    ['zairul-bust', 'Zairul [AI Model]', 'The director · portrait bust', 'Me as a portrait bust, built straight from my studio portrait so every detail of my face carries into 3D: hair, brows, stubble and all.', '1,633,846', '5.7', '-15deg 82deg auto'],
+    ['zairul-bust', 'Zairul [AI Model]', 'The director · portrait bust', 'Me as a portrait bust, built straight from my studio portrait so every detail of my face carries into 3D: hair, brows, stubble and all.', '1,736,738', '5.7', '-10deg 84deg auto'],
     ['jane', 'Jane', 'AI character · bust', 'Jane as a portrait bust in her blue embroidered kurta and gold jhumka earrings, built from her character portrait.', '1,754,856', '9.6', '-10deg 82deg auto', true],
     ['lina', 'Lina', 'AI character · bust', 'Lina as a portrait bust, built from her original character portrait to keep her face exact.', '2,312,512', '8.6', '0deg 85deg auto', true],
     ['john', 'John', 'AI character', 'John in an olive polo and dark trousers, the everyman of my films.', '274,608', '1.9', '0deg 85deg auto', true]
@@ -200,7 +200,7 @@
   function card(m, group) {
     var i = list.length; list.push({ m: m, group: group });
     return '<li class="rv"><button class="model" type="button" data-i="' + i + '" aria-label="Open the 3D model of ' + m[1] + '">' +
-      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp?v=3" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
+      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp?v=4" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
       (m[7] ? '<span class="ai">AI character</span>' : '') + '<span class="spin">⟲ 3D</span></span>' +
       '<span class="meta"><b>' + m[1] + '</b><span class="sub">' + m[2] + '</span></span></button></li>';
   }
@@ -218,9 +218,9 @@
     document.getElementById('vSize').textContent = m[5] + ' MB';
     document.getElementById('vLoad').hidden = false;
     mv.setAttribute('camera-orbit', m[6]);
-    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp?v=3');
+    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp?v=4');
     mv.setAttribute('alt', '3D model of ' + m[1]);
-    mv.src = '/assets/3d/' + m[0] + '.glb?v=3';
+    mv.src = '/assets/3d/' + m[0] + '.glb?v=4';
   }
   mv.addEventListener('load', function () { document.getElementById('vLoad').hidden = true; });
   mv.addEventListener('progress', function (e) { var p = Math.round((e.detail.totalProgress || 0) * 100); document.getElementById('vLoad').textContent = p < 100 ? 'Loading model… ' + p + '%' : ''; });
