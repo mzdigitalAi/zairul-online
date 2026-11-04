@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Workflow · Zairul MD TY</title>
-<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process and four case studies.">
+<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process, four case studies and a behind-the-scenes breakdown.">
 <meta property="og:title" content="Workflow · Zairul MD TY">
 <meta property="og:image" content="https://zairul.online/assets/og.jpg">
 <link rel="icon" href="/assets/logo.png">
@@ -160,6 +160,42 @@
   .ktile .kp.app { background: var(--red); color: #fff; }
   .ktile .go { color: var(--gold); font-weight: 700; white-space: nowrap; }
   @media (max-width: 600px) { .kgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .ktile .kb { padding: 9px; } .ktile b { font-size: 13px; } }
+
+  /* ---------- Behind the scenes ---------- */
+  .bts-h { font: 400 clamp(26px, 3vw, 36px)/1.05 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em; margin: 64px 0 12px; }
+  .bts-film { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 22px; margin-top: 34px; align-items: stretch; }
+  .bts-embed { position: relative; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .bts-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .bts-facts { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; padding: 0; }
+  .bts-facts li { padding: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; border-top: 3px solid var(--red); }
+  .bts-facts b { display: block; font: 400 34px/1 'Anton', sans-serif; color: var(--gold); margin-bottom: 8px; }
+  .bts-facts span { color: var(--muted); font-size: 14px; }
+  .bts-steps { list-style: none; counter-reset: b; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 26px 0 0; padding: 0; }
+  .bts-steps li { counter-increment: b; padding: 22px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+  .bts-steps li::before { content: "0" counter(b); display: block; font: 400 30px/1 'Anton', sans-serif; color: var(--gold); margin-bottom: 12px; }
+  .bts-steps b { display: block; font: 400 20px/1.1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 8px; }
+  .bts-steps span { color: var(--muted); font-size: 15px; }
+  .bts-sheets { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  .bts-sheets figure, .bts-compare figure { margin: 0; }
+  .bts-sheets img { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); transition: transform .3s; }
+  .bts-sheets a:hover img { transform: translateY(-3px); }
+  .bts-sheets figcaption, .bts-compare figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; }
+  .bts-sheets figcaption b { display: block; color: #fff; font: 400 20px/1.1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 4px; }
+  .bts-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  .bts-compare figure { position: relative; }
+  .bts-compare img { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+  .bts-compare img.src { position: absolute; top: 10px; left: 10px; width: 30%; border: 2px solid rgba(255,255,255,.85); border-radius: 4px; box-shadow: 0 6px 20px rgba(0,0,0,.5); }
+  .bts-compare figure::after { content: "Source motion"; position: absolute; top: 14px; left: calc(10px + 30% + 8px); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #fff; background: rgba(0,0,0,.6); padding: 4px 7px; border-radius: 3px; }
+  .bts-why { margin-top: 18px; }
+  .bts-timeline { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; margin: 10px 0 22px; padding: 0; max-width: 900px; }
+  .bts-timeline li { position: relative; padding: 14px 12px; background: linear-gradient(180deg, rgba(227,38,43,.18), rgba(227,38,43,.06)); border: 1px solid var(--line); }
+  .bts-timeline li:first-child { border-radius: 6px 0 0 6px; }
+  .bts-timeline li:last-child { border-radius: 0 6px 6px 0; }
+  .bts-timeline li + li::before { content: ""; position: absolute; left: -4px; top: -6px; bottom: -6px; width: 4px; background: repeating-linear-gradient(180deg, var(--gold) 0 4px, transparent 4px 8px); }
+  .bts-timeline b { display: block; font: 400 18px/1 'Anton', sans-serif; text-transform: uppercase; }
+  .bts-timeline span { color: var(--muted); font-size: 13px; }
+  @media (max-width: 960px) { .bts-film { grid-template-columns: 1fr; } .bts-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .bts-sheets, .bts-compare { grid-template-columns: 1fr; } .bts-steps { grid-template-columns: 1fr; } .bts-timeline b { font-size: 15px; } .bts-timeline li { padding: 10px 6px; } }
 </style>
 </head>
 <body>
@@ -429,6 +465,65 @@
           </div>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section class="section" id="behind-the-scenes">
+    <div class="wrap">
+      <p class="label">06 / Behind the scenes</p>
+      <h2>Sanjini: a Bollywood scene, recast with Higgsfield Genjutsu</h2>
+      <p>Sanjini restages a busy Mumbai street-market scene from the Bollywood film <i>Ghajini</i> (2008). I kept the original blocking, camera moves and timing, then recast the two leads: my friend Hassan plays the CEO, and the female lead is an imaginary actress I designed from scratch.</p>
+
+      <div class="bts-film">
+        <div class="bts-embed"><iframe src="https://www.youtube-nocookie.com/embed/ODjGEPlyu0g?rel=0&amp;playsinline=1" title="Sanjini, made with Higgsfield Genjutsu" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <ul class="bts-facts">
+          <li><b>2:27</b><span>Final runtime, English subtitles</span></li>
+          <li><b>5 × 30s</b><span>Separate Genjutsu generations, cut together in CapCut</span></li>
+          <li><b>2</b><span>Leads recast: Hassan and an original AI actress</span></li>
+          <li><b>0</b><span>Cameras, crews or locations. Every frame is generated.</span></li>
+        </ul>
+      </div>
+
+      <h3 class="bts-h">How Genjutsu works</h3>
+      <p>Genjutsu is Higgsfield's video-to-video tool. Most AI video tools invent a shot from a prompt. Genjutsu starts from a clip that already exists, reads how it moves, and rebuilds it with new people, wardrobe or places, while the performance underneath stays the same.</p>
+      <ol class="bts-steps">
+        <li><b>Reference video</b><span>Upload one source clip of 4 to 30 seconds. Genjutsu analyses its motion, camera movement, framing and pacing.</span></li>
+        <li><b>Reference images</b><span>Add up to 30 images that define who and what should appear: faces, outfits, products, locations or a style.</span></li>
+        <li><b>Pick a mode</b><span><i>Motion Transfer</i> keeps the movement, camera and timing and rebuilds the cast and the world around it. <i>Object Swap</i> changes one element and leaves the rest of the shot untouched.</span></li>
+        <li><b>Direct and render</b><span>Add a short prompt or a style preset if needed, choose 480p, 720p or 1080p, and generate.</span></li>
+      </ol>
+      <div class="callout">
+        <b>What's under the hood?</b>
+        <p>Higgsfield hasn't said which video model powers Genjutsu. It describes it as its own pipeline: it maps the motion and structure of the source clip, regenerates only the parts you target and locks everything else. Reviewers have compared its output to Seedance 2.5. For Sanjini I used <b style="display:inline;font:inherit;text-transform:none;margin:0">Motion Transfer</b>, so the original performance drives every shot and the faces, clothes and street are rebuilt from my references.</p>
+      </div>
+
+      <h3 class="bts-h">Casting the leads</h3>
+      <p>Before generating anything, I built a character sheet for each lead. A sheet locks the face, wardrobe and personality, so the model has one consistent reference to follow.</p>
+      <div class="bts-sheets">
+        <figure><a href="/assets/img/bts/sanjini-sheet-sanjay.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/sanjini-sheet-sanjay.webp" alt="Character sheet for the CEO lead, played by Hassan: dark suit, profile, personality, habits and skills" loading="lazy" width="1600" height="1200"></a><figcaption><b>The CEO</b>Played by my friend Hassan. A sharp black suit, a goatee and a disciplined, guarded personality.</figcaption></figure>
+        <figure><a href="/assets/img/bts/sanjini-sheet-girl.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/sanjini-sheet-girl.webp" alt="Character sheet for the female lead, an original AI actress: white shirt, beige trousers, profile, likes and lifestyle" loading="lazy" width="1600" height="1200"></a><figcaption><b>The CEO girlfriend</b>An imaginary actress I designed: wavy light-brown hair, a white oversized shirt and beige trousers.</figcaption></figure>
+      </div>
+
+      <h3 class="bts-h">Source motion vs. Genjutsu output</h3>
+      <p>Each frame below is from my final film. The small blurred inset is the matching moment from the source scene, shown only as a motion reference. The walk, the gestures and the camera match it; the people, clothes and street are new.</p>
+      <div class="bts-compare">
+        <figure><img src="/assets/img/bts/sanjini-ai-1.webp" alt="Genjutsu output: the CEO in a black suit and the actress in a white shirt walking through a Mumbai market" loading="lazy" width="1440" height="804"><img class="src" src="/assets/img/bts/sanjini-src-1.webp" alt="" loading="lazy" width="720" height="300"><figcaption>The walk-and-talk</figcaption></figure>
+        <figure><img src="/assets/img/bts/sanjini-ai-2.webp" alt="Genjutsu output: the actress framing a billboard idea with her hands as the CEO looks on" loading="lazy" width="1440" height="802"><img class="src" src="/assets/img/bts/sanjini-src-2.webp" alt="" loading="lazy" width="720" height="300"><figcaption>"Giant banners of you!"</figcaption></figure>
+        <figure><img src="/assets/img/bts/sanjini-ai-3.webp" alt="Genjutsu output: both leads striking the same playful pose at a fruit stall" loading="lazy" width="1440" height="803"><img class="src" src="/assets/img/bts/sanjini-src-3.webp" alt="" loading="lazy" width="720" height="299"><figcaption>The pose, matched beat for beat</figcaption></figure>
+        <figure><img src="/assets/img/bts/sanjini-ai-4.webp" alt="Genjutsu output: a street vendor talking to the two leads among flower stalls" loading="lazy" width="1440" height="802"><img class="src" src="/assets/img/bts/sanjini-src-4.webp" alt="" loading="lazy" width="720" height="300"><figcaption>Supporting cast, rebuilt too</figcaption></figure>
+      </div>
+      <p class="fine">Insets: source motion from <i>Ghajini</i> (2008), blurred and credited to its rights holders. They're shown for comparison only.</p>
+
+      <h3 class="bts-h">Why the scene shifts every 30 seconds</h3>
+      <div class="bts-why">
+        <ol class="bts-timeline" aria-label="Five 30-second generations">
+          <li><b>Gen 1</b><span>0:00</span></li><li><b>Gen 2</b><span>0:30</span></li><li><b>Gen 3</b><span>1:00</span></li><li><b>Gen 4</b><span>1:30</span></li><li><b>Gen 5</b><span>2:00</span></li>
+        </ol>
+        <p>Genjutsu accepts up to 30 seconds of source video per generation, so I split the scene into five 30-second parts and generated each one separately. If you watch closely, faces, lighting and street details shift a little at every 30-second mark.</p>
+        <p>That's because I didn't use the <b style="display:inline;font:inherit;color:var(--gold)">last frame → first frame</b> continuity method. In that method, the final frame of one generation becomes the starting image of the next, so each block picks up exactly where the last one ended. I skipped it on purpose. Sanjini was an experiment to see how far Genjutsu could go on its own from character sheets alone, and it held up well. In a client version I'd chain the five blocks so the seams disappear.</p>
+      </div>
+
+      <p style="margin-top:34px"><a class="btn red" href="/videos/">Watch it in the AI Video gallery</a></p>
     </div>
   </section>
 </main>
