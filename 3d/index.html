@@ -100,7 +100,7 @@
       <a class="btn red" href="#cast">Explore the models</a>
     </div>
     <div class="stage">
-      <model-viewer id="heroMv" src="/assets/3d/zairul-bust.glb?v=6" poster="/assets/3d/posters/zairul-bust.webp?v=6" alt="3D portrait bust of Zairul [AI Model], spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-10deg 84deg auto" loading="eager"></model-viewer>
+      <model-viewer id="heroMv" src="/assets/3d/zairul-bust.glb?v=7" poster="/assets/3d/posters/zairul-bust.webp?v=7" alt="3D portrait bust of Zairul [AI Model], spinning slowly" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" disable-zoom disable-pan interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-10deg 84deg auto" loading="eager"></model-viewer>
       <span class="hint">Drag to rotate</span>
     </div>
   </div>
@@ -116,7 +116,7 @@
 
   <section class="section" id="malaysia">
     <div class="wrap">
-      <div class="billing rv"><p class="label">Made in Malaysia</p><h2>Icons in 3D</h2><p>Three pieces of Malay heritage: a kampung house on stilts, the moon kite of Kelantan and the keris.</p></div>
+      <div class="billing rv"><p class="label">Icons &amp; collectibles</p><h2>Icons in 3D</h2><p>Malaysian icons and collectibles: the moon kite of Kelantan, the keris, Putra Mosque and a Proton e.MAS 7, plus a mansion, two figurines and a challenge coin.</p></div>
       <ul class="models" id="iconGrid"></ul>
     </div>
   </section>
@@ -188,20 +188,25 @@
     ['pro-suit', 'The Professional', 'Full body · business suit', 'A sharp green blazer, white shirt and tan brogues, modelled full body in 3D.', '345,822', '1.8', '0deg 85deg auto']
   ];
   var ICONS = [
-    ['rumah-kampung', 'Rumah Kampung', 'Traditional Malay house', 'A weathered timber house on stilts with carved panels, a zinc roof and front stairs.', '1,058,370', '7.3', '-30deg 72deg auto'],
     ['wau-bulan', 'Wau Bulan', 'Moon kite', 'The traditional moon kite of Kelantan, with intricate floral patterns and tassels.', '234,010', '4.7', '0deg 85deg auto'],
-    ['keris', 'Keris', 'Malay heritage blade', 'A keris with a wavy blade and carved wooden hilt, beside its sheath.', '130,804', '3.7', '0deg 70deg auto']
+    ['keris', 'Keris', 'Malay heritage blade', 'A keris with a wavy blade and carved wooden hilt, beside its sheath.', '130,804', '3.7', '0deg 70deg auto'],
+    ['putra-mosque', 'Putra Mosque', 'Putrajaya landmark', 'The pink-domed Putra Mosque with its tall minaret, smaller rose domes and lakeside courtyard, built from multi-view reference images.', '1,177,006', '6.0', '-30deg 72deg auto'],
+    ['proton-emas7', 'Proton e.MAS 7', 'Malaysian EV · livery wrap', 'The Proton e.MAS 7 SUV in a bold blue, red and white "Dual Powered EV" livery wrap, down to the alloy wheels and light bars.', '1,126,314', '6.2', '-40deg 75deg auto'],
+    ['mansion', 'The Mansion', 'Architectural model', 'A white neoclassical mansion with a grey slate roof, chimneys, balconies and a columned entrance, set on a manicured lawn.', '811,874', '5.0', '-30deg 72deg auto'],
+    ['ultraman', 'Ultraman Figure', 'Collectible figure', 'A collectible action figure in red, blue and silver armour with a gold-trimmed chest, standing in a ready pose.', '558,744', '3.8', '0deg 85deg auto'],
+    ['challenge-coin', 'Clan Challenge Coin', 'Struck-metal coin', 'A silver challenge coin with a portrait struck in high relief and a beaded rim, finished like antique minted metal.', '753,840', '7.5', '0deg 85deg auto'],
+    ['chibi-host', 'Chibi Host', 'Bobblehead figurine', 'A chibi-style host figurine in a black Mandarin-collar outfit, holding a red bowl of rice, on a round display base.', '1,358,328', '5.2', '-10deg 85deg auto']
   ];
   var list = [];
   function card(m, group) {
     var i = list.length; list.push({ m: m, group: group });
     return '<li class="rv"><button class="model" type="button" data-i="' + i + '" aria-label="Open the 3D model of ' + m[1] + '">' +
-      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp?v=6" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
+      '<span class="ph"><img src="/assets/3d/posters/' + m[0] + '.webp?v=7" alt="' + m[1] + ', 3D model render" loading="lazy" width="800" height="1000">' +
       (m[7] ? '<span class="ai">AI character</span>' : '') + '<span class="spin">⟲ 3D</span></span>' +
       '<span class="meta"><b>' + m[1] + '</b><span class="sub">' + m[2] + '</span></span></button></li>';
   }
   document.getElementById('castGrid').innerHTML = CAST.map(function (m) { return card(m, 'The cast'); }).join('');
-  document.getElementById('iconGrid').innerHTML = ICONS.map(function (m) { return card(m, 'Made in Malaysia'); }).join('');
+  document.getElementById('iconGrid').innerHTML = ICONS.map(function (m) { return card(m, 'Icons & collectibles'); }).join('');
 
   var dlg = document.getElementById('viewer'), mv = document.getElementById('mv'), cur = 0;
   function show(i) {
@@ -214,9 +219,9 @@
     document.getElementById('vSize').textContent = m[5] + ' MB';
     document.getElementById('vLoad').hidden = false;
     mv.setAttribute('camera-orbit', m[6]);
-    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp?v=6');
+    mv.setAttribute('poster', '/assets/3d/posters/' + m[0] + '.webp?v=7');
     mv.setAttribute('alt', '3D model of ' + m[1]);
-    mv.src = '/assets/3d/' + m[0] + '.glb?v=6';
+    mv.src = '/assets/3d/' + m[0] + '.glb?v=7';
   }
   mv.addEventListener('load', function () { document.getElementById('vLoad').hidden = true; });
   mv.addEventListener('progress', function (e) { var p = Math.round((e.detail.totalProgress || 0) * 100); document.getElementById('vLoad').textContent = p < 100 ? 'Loading model… ' + p + '%' : ''; });
