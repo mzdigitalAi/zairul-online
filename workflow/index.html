@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Workflow · Zairul MD TY</title>
-<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process, four case studies and a behind-the-scenes breakdown.">
+<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process, four case studies and two behind-the-scenes breakdowns.">
 <meta property="og:title" content="Workflow · Zairul MD TY">
 <meta property="og:image" content="https://zairul.online/assets/og.jpg">
 <link rel="icon" href="/assets/logo.png">
@@ -196,6 +196,25 @@
   .bts-timeline span { color: var(--muted); font-size: 13px; }
   @media (max-width: 960px) { .bts-film { grid-template-columns: 1fr; } .bts-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) { .bts-sheets, .bts-compare { grid-template-columns: 1fr; } .bts-steps { grid-template-columns: 1fr; } .bts-timeline b { font-size: 15px; } .bts-timeline li { padding: 10px 6px; } }
+  .bts-index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 30px; max-width: 1100px; }
+  .bts-index a { display: flex; align-items: center; gap: 16px; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+  .bts-index a:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .bts-index img { flex: none; width: clamp(96px, 26vw, 160px); height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 6px; }
+  .bts-index span { color: var(--muted); font-size: 14px; }
+  .bts-index b { display: block; color: #fff; font: 400 22px/1.05 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 6px; }
+  .bts-case { margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+  .bts-title { font: 400 clamp(32px, 4.4vw, 58px)/1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .01em; margin: 10px 0 16px; max-width: 1100px; }
+  .bts-steps.bts-steps-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bts-sheets.bts-sheets-3 { grid-template-columns: 1fr; max-width: 1200px; }
+  .bts-streets { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  .bts-streets figure, .bts-wide { margin: 0; }
+  .bts-streets img, .bts-wide img { display: block; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); }
+  .bts-streets figcaption, .bts-wide figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; }
+  .bts-wide { margin-top: 18px; max-width: 1200px; }
+  .bts-wide figcaption b { color: #fff; margin-right: 8px; }
+  .bts-timeline.bts-timeline-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; }
+  @media (max-width: 960px) { .bts-steps.bts-steps-3 { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .bts-index, .bts-streets { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -471,7 +490,16 @@
   <section class="section" id="behind-the-scenes">
     <div class="wrap">
       <p class="label">06 / Behind the scenes</p>
-      <h2>Sanjini: a Bollywood scene, recast with Higgsfield Genjutsu</h2>
+      <h2>Behind the scenes</h2>
+      <p>How two of my AI shorts were actually made: the tools, the references and the decisions behind each shot.</p>
+      <div class="bts-index">
+        <a href="#bts-sanjini"><img src="/assets/img/bts/sanjini-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Sanjini</b>A Bollywood scene recast with Higgsfield Genjutsu</span></a>
+        <a href="#bts-kisah-mc"><img src="/assets/img/bts/mc-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Kisah Nak Beli MC</b>A 1996 Malaysian comedy built on real streets with Seedance 2.5</span></a>
+      </div>
+
+      <article class="bts-case" id="bts-sanjini">
+      <p class="label">Case 01 · Higgsfield Genjutsu</p>
+      <h3 class="bts-title">Sanjini: a Bollywood scene, recast with Higgsfield Genjutsu</h3>
       <p>Sanjini restages a busy Mumbai street-market scene from the Bollywood film <i>Ghajini</i> (2008). I kept the original blocking, camera moves and timing, then recast the two leads: my friend Hassan plays the CEO, and the female lead is an imaginary actress I designed from scratch.</p>
 
       <div class="bts-film">
@@ -523,7 +551,59 @@
         <p>That's because I didn't use the <b style="display:inline;font:inherit;color:var(--gold)">last frame → first frame</b> continuity method. In that method, the final frame of one generation becomes the starting image of the next, so each block picks up exactly where the last one ended. I skipped it on purpose. Sanjini was an experiment to see how far Genjutsu could go on its own from character sheets alone, and it held up well. In a client version I'd chain the five blocks so the seams disappear.</p>
       </div>
 
-      <p style="margin-top:34px"><a class="btn red" href="/videos/">Watch it in the AI Video gallery</a></p>
+      </article>
+
+      <article class="bts-case" id="bts-kisah-mc">
+      <p class="label">Case 02 · Seedance 2.5</p>
+      <h3 class="bts-title">Kisah Nak Beli MC: a 1996 comedy, shot on real streets</h3>
+      <p>It's 1996. Sam tries to buy a fake MC (medical certificate) for his sister at the neighbourhood clinic, and the doctor answers with a rotan. Sam is played by a younger version of my friend Hassan, his buddy on the roadside is a younger Firdaus, and the doctor is an imaginary character. The streets are real: I rebuilt them from Google Street View.</p>
+
+      <div class="bts-film">
+        <div class="bts-embed"><iframe src="https://www.youtube-nocookie.com/embed/loh4F-w1RoM?rel=0&amp;playsinline=1" title="Kisah Nak Beli MC, made with Seedance 2.5" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <ul class="bts-facts">
+          <li><b>1996</b><span>Period setting, for a nostalgic, everyday-Malaysia feel</span></li>
+          <li><b>3 × 30s</b><span>Seedance 2.5 generations, cut to 1:11 in CapCut</span></li>
+          <li><b>3</b><span>Characters, each locked with a consistency sheet</span></li>
+          <li><b>4</b><span>Real Street View shots used as location references</span></li>
+        </ul>
+      </div>
+
+      <h3 class="bts-h">Character consistency sheets</h3>
+      <p>The biggest risk in AI drama is face drift: the actor slowly turns into someone else between takes. So before generating anything, I built one consistency sheet per character and attached it to every generation. Each sheet has three panels, and each panel does a specific job.</p>
+      <ol class="bts-steps bts-steps-3">
+        <li><b>Front, no head</b><span>The full outfit seen from the front, with the head left out on purpose. The model reads the wardrobe without a second face competing with the close-up.</span></li>
+        <li><b>Back view</b><span>The same outfit from behind, for shots where the camera follows a character, such as Sam walking down the lane.</span></li>
+        <li><b>Face close-up</b><span>One sharp, evenly lit portrait: the single identity anchor the model matches in every frame.</span></li>
+      </ol>
+      <p style="margin-top:18px">All three panels share the same plain grey backdrop and flat studio light, so no location or lighting gets baked into the character. The scene supplies those. Hassan and Firdaus were also aged down to look the way they would have in 1996. Because the same sheets went into all three 30-second generations, the faces hold steady from the first shot to the last.</p>
+      <div class="bts-sheets bts-sheets-3">
+        <figure><a href="/assets/img/bts/mc-sheet-sam.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/mc-sheet-sam.webp" alt="Consistency sheet for Sam: headless front view in a white striped tee and dark trousers, back view, and a smiling face close-up" loading="lazy" width="1600" height="688"></a><figcaption><b>Sam</b>A younger Hassan: white tee with diagonal pinstripes, dark trousers, dark sneakers.</figcaption></figure>
+        <figure><a href="/assets/img/bts/mc-sheet-firdaus.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/mc-sheet-firdaus.webp" alt="Consistency sheet for Firdaus: headless front view in a red retro football jersey and red shorts holding a plastic bag, back view with FIRDAUS 7, and a face close-up" loading="lazy" width="1600" height="686"></a><figcaption><b>Firdaus</b>A younger Firdaus: a retro red football jersey with "FIRDAUS 7" on the back, shorts, slides and a bag of groceries.</figcaption></figure>
+        <figure><a href="/assets/img/bts/mc-sheet-doctor.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/mc-sheet-doctor.webp" alt="Consistency sheet for the doctor: headless front view in a black short-sleeve shirt with green piping, back view, and a stern face close-up" loading="lazy" width="1600" height="688"></a><figcaption><b>The doctor</b>An imaginary character: grey hair, grey goatee and a black clinic shirt with green piping.</figcaption></figure>
+      </div>
+
+      <h3 class="bts-h">Real locations from Google Street View</h3>
+      <p>For realism, I didn't let the model invent a generic Malaysian street. I took four Street View captures of the real roads around the clinic and used them as location references: terrace houses with zinc and clay-tile roofs, a pink corner house, a roadside warung and an old zinc shack. Seedance rebuilt those streets, and the prompts pushed every frame back to 1996.</p>
+      <div class="bts-streets">
+        <figure><img src="/assets/img/bts/mc-street-1.webp" alt="Google Street View: a corner of terrace houses on Jalan 4, with parked cars and satellite dishes" loading="lazy" width="1200" height="728"><figcaption>Jalan 4: the terrace-house corner</figcaption></figure>
+        <figure><img src="/assets/img/bts/mc-street-2.webp" alt="Google Street View: a quiet lane beside a pink double-storey house with clay-tile roofs and trees" loading="lazy" width="1200" height="728"><figcaption>The lane Sam walks down</figcaption></figure>
+        <figure><img src="/assets/img/bts/mc-street-3.webp" alt="Google Street View: a junction by the main road with a roadside warung and parked motorcycles" loading="lazy" width="1200" height="728"><figcaption>The junction and the warung</figcaption></figure>
+        <figure><img src="/assets/img/bts/mc-street-4.webp" alt="Google Street View: an old zinc shack and parked cars along Jalan 4" loading="lazy" width="1200" height="728"><figcaption>The zinc shack on Jalan 4</figcaption></figure>
+      </div>
+      <figure class="bts-wide"><img src="/assets/img/bts/mc-clinic.webp" alt="Klinik Maamor reference: a single-storey clinic with a green and white signboard, balustraded porch, tiled steps and two motorcycles parked outside" loading="lazy" width="1400" height="788"><figcaption><b>Klinik Maamor</b>The clinic front reference: green-and-white signboard, balustraded porch and tiled steps.</figcaption></figure>
+      <p class="fine">Street View imagery © Google, shown with its original attribution as location reference.</p>
+
+      <h3 class="bts-h">From three generations to one film</h3>
+      <div class="bts-why">
+        <ol class="bts-timeline bts-timeline-3" aria-label="Three 30-second generations">
+          <li><b>Gen 1</b><span>30s</span></li><li><b>Gen 2</b><span>30s</span></li><li><b>Gen 3</b><span>30s</span></li>
+        </ol>
+        <p>I generated the drama in three Seedance 2.5 passes of 30 seconds each, using the same three character sheets and the location references every time. In CapCut I cut the 90 seconds down to a tight 1:11 and timed the comedy beats. I added the yellow subtitles, the game-style "Boss Weapon Unlocked: The Rotan of Justice" caption and the sound design.</p>
+        <p>Compare this with Sanjini above: there, each 30-second block morphs slightly because nothing tied the generations together. Here, the consistency sheets act as that anchor, so Sam, Firdaus and the doctor stay recognisably the same people across all three generations.</p>
+      </div>
+      </article>
+
+      <p style="margin-top:44px"><a class="btn red" href="/videos/">Watch both in the AI Video gallery</a></p>
     </div>
   </section>
 </main>
