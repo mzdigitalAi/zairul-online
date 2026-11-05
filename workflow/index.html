@@ -221,6 +221,9 @@
   .bts-points li { position: relative; padding: 18px 20px 18px 54px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 15px; }
   .bts-points li::before { content: "✓"; position: absolute; left: 18px; top: 17px; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--red); color: #fff; font-size: 13px; font-weight: 700; }
   .bts-points b { display: block; color: #fff; font: 400 19px/1.15 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 6px; }
+  .bts-index.bts-index-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 1600px; }
+  @media (max-width: 1300px) { .bts-index.bts-index-4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .bts-index.bts-index-4 { grid-template-columns: 1fr; } }
   .bts-index.bts-index-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1500px; }
   @media (max-width: 1100px) { .bts-index.bts-index-3 { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 960px) { .bts-points { grid-template-columns: 1fr; } .bts-sheets.bts-sheets-4 { grid-template-columns: 1fr 1fr; } .bts-sheets.bts-sheets-4 figure:first-child { grid-column: 1 / -1; } }
@@ -501,11 +504,12 @@
     <div class="wrap">
       <p class="label">06 / Behind the scenes</p>
       <h2>Behind the scenes</h2>
-      <p>How three of my AI shorts were actually made: the tools, the references and the decisions behind each shot.</p>
-      <div class="bts-index bts-index-3">
+      <p>How four of my AI shorts were actually made: the tools, the references and the decisions behind each shot.</p>
+      <div class="bts-index bts-index-4">
         <a href="#bts-sanjini"><img src="/assets/img/bts/sanjini-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Sanjini</b>A Bollywood scene recast with Higgsfield Genjutsu</span></a>
         <a href="#bts-kisah-mc"><img src="/assets/img/bts/mc-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Kisah Nak Beli MC</b>A 1996 Malaysian comedy built on real streets with Seedance 2.5</span></a>
         <a href="#bts-cinema-reel"><img src="/assets/img/bts/reel-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Cinema Reel With A Twist</b>Four cities from prompts alone, and a choreographed fight</span></a>
+        <a href="#bts-kaiju-blockout"><img src="/assets/img/bts/kaiju-bts-thumb.webp" alt="" width="960" height="540" loading="lazy"><span><b>Putrajaya Kaiju Showdown</b>A 3D blockout in Blender turned into an AI film</span></a>
       </div>
 
       <article class="bts-case" id="bts-sanjini">
@@ -664,6 +668,80 @@
         <li><b>Make the outfit a constant.</b>The white-suit sheet keeps her look identical through every cut of the fight, which is the hardest place to keep continuity.</li>
         <li><b>Shoot coverage, then cut.</b>Generate more than one take of each beat and keep the cleanest in the edit. The bracketed comedy captions and the hit sounds then land every blow.</li>
       </ul>
+      </article>
+
+      <article class="bts-case" id="bts-kaiju-blockout">
+      <p class="label">Case 04 · Blender + ChatGPT + Seedance 2.0</p>
+      <h3 class="bts-title">Putrajaya Kaiju Showdown: why AI video should start with a 3D blockout</h3>
+      <p>A 60-second fight between my original Malaysian superhero and a colossal rock-armoured kaiju at the Putra Mosque in Putrajaya. The monster isn't the point of this project, though. The point is the method: the whole film was directed first as a simple 3D blockout in Blender, and only then handed to AI to make it look real. That one step is what keeps the characters, the location, the scale and the action consistent from shot to shot.</p>
+
+      <div class="bts-film">
+        <div class="bts-embed"><iframe src="https://www.youtube-nocookie.com/embed/2nFJt5FlHbg?rel=0&amp;playsinline=1" title="Putrajaya Kaiju Showdown, 3D blockout to AI film" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <ul class="bts-facts">
+          <li><b>1:01</b><span>Final runtime, built from four 15-second clips</span></li>
+          <li><b>6</b><span>Camera shots directed in Blender before any AI was used</span></li>
+          <li><b>1,440</b><span>Blockout frames, rendered in about 7 minutes at zero credit cost</span></li>
+          <li><b>3&times;</b><span>The kaiju's height over the hero, locked in the blockout</span></li>
+        </ul>
+      </div>
+
+      <h3 class="bts-h">Why the 3D blockout matters</h3>
+      <p>A blockout is a rough version of the film made from simple shapes: grey mannequins, a proxy monster, the real mosque model, cameras and timing. It looks nothing like the final, and that's the point. It answers every directing question before a single paid generation runs.</p>
+      <ul class="bts-points">
+        <li><b>Consistency is designed, not hoped for.</b>Where each character stands, which way they face, how big they are and where the mosque sits are fixed in 3D. The AI copies a layout instead of inventing a new one every clip.</li>
+        <li><b>Every shot is directed first.</b>The aerial reveal, the low angle, the orbit around the landing and the handheld fight coverage were all chosen in Blender, where changing a lens or a camera move is free.</li>
+        <li><b>Mistakes cost nothing to fix.</b>The kaiju was too small and the mosque looked like an island. Both were fixed in minutes in Blender (see below) instead of burning credits on re-generations.</li>
+        <li><b>It saves real money.</b>An AI generation is the expensive step. With the shots, poses and timing already decided, each clip only has to be generated once or twice instead of being re-rolled until something usable appears.</li>
+        <li><b>The AI gets one clear job.</b>Not "invent a fight", but "make this exact shot look real". That is the task current video models are best at.</li>
+        <li><b>Clips that cut together.</b>Because all four clips come from one continuous blockout, the geography and the action flow across the cuts.</li>
+      </ul>
+
+      <h3 class="bts-h">The pipeline</h3>
+      <ol class="bts-steps">
+        <li><b>Block out in Blender</b><span>Jointed mannequins, a proxy kaiju, the Putra Mosque model and its bridge, six cameras and the full 60-second action, rendered as a grey preview film.</span></li>
+        <li><b>Real start frames</b><span>For each 15-second clip, the first blockout frame is turned into a photoreal image with ChatGPT, keeping the exact camera angle and layout.</span></li>
+        <li><b>Generate with Seedance 2.0</b><span>Each clip gets that start frame, a storyboard strip of the blockout poses, hero and kaiju references and a second-by-second prompt.</span></li>
+        <li><b>Edit and compare</b><span>The four clips are stitched with matched transitions and a white impact flash, then synced side by side against the blockout.</span></li>
+      </ol>
+
+      <h3 class="bts-h">Building the blockout</h3>
+      <p>My first attempt used my detailed Malaysian Super Hero 3D model as the stand-in. It looked finished, but it was one solid statue: no joints, so the arms never moved, and the AI faithfully copied that stiffness. The fix was to go simpler. The hero became a jointed mannequin in his colours, with a cape panel, and the kaiju a jointed proxy with a moving jaw, arms and a five-part tail. Simple shapes that can bend beat a beautiful model that can't.</p>
+      <figure class="bts-wide"><img src="/assets/img/bts/kaiju-fix-rig.webp" alt="Left: the detailed static hero model standing stiffly beside a clay kaiju. Right: a jointed red mannequin throwing a punch at a jointed kaiju proxy" loading="lazy" width="1920" height="540"><figcaption><b>Statue vs mannequin</b>A static model can only slide around; a jointed mannequin can land, slide, punch and kick.</figcaption></figure>
+      <p style="margin-top:18px">The action was then choreographed like a stunt sequence: anticipation before every strike, follow-through after it, a slow and heavy kaiju against a fast hero, and camera shake keyed to every impact. The whole 60 seconds renders in about seven minutes.</p>
+      <figure class="bts-wide"><img src="/assets/img/bts/kaiju-blockout-sheet.webp" alt="Sixteen frames from the grey Blender blockout: the kaiju rising from the lake, walking ashore, the hero landing, the tail swing, the punches, the flying kick and the fall" loading="lazy" width="1920" height="1080"><figcaption><b>The 60-second blockout</b>One frame every 3.75 seconds, across all six shots.</figcaption></figure>
+
+      <h3 class="bts-h">Fixing the film in Blender, not in credits</h3>
+      <p>Two problems showed up after the first full render, and both were fixed in the blockout before generating again. First, the kaiju and the hero were almost the same height, so the fight read like two wrestlers. Scaling the kaiju to three times the hero changed the choreography too: he now has to slide under its tail and fly up to reach its chest and jaw. Second, the mosque looked like an island in the lake. The real Putra Mosque is joined to the land, so I added a stone causeway bridge with lamp posts.</p>
+      <div class="bts-streets">
+        <figure><img src="/assets/img/bts/kaiju-fix-scale.webp" alt="Side by side blockout frames: on the left the kaiju is barely taller than the hero, on the right it towers three times higher" loading="lazy" width="1920" height="540"><figcaption>Scale: same size vs three times the hero</figcaption></figure>
+        <figure><img src="/assets/img/bts/kaiju-fix-bridge.webp" alt="Side by side aerial frames: on the left the mosque sits alone in the lake, on the right it is connected to the plaza by a long stone bridge" loading="lazy" width="1920" height="540"><figcaption>Location: island vs bridge to the land</figcaption></figure>
+      </div>
+
+      <h3 class="bts-h">From blockout frame to photoreal start frame</h3>
+      <p>Each clip starts from a single photoreal frame. I gave ChatGPT the grey blockout frame together with my hero and kaiju references and asked it to keep the exact camera angle, layout and size ratio while turning everything real. Because the blockout already fixed the composition, every start frame lines up with the shot it came from.</p>
+      <div class="bts-sheets" style="grid-template-columns:1fr">
+        <figure><img src="/assets/img/bts/kaiju-pair-1.webp" alt="Blockout aerial of the lake and mosque next to its photoreal version at golden hour, with the lake starting to churn" loading="lazy" width="1920" height="540"><figcaption><b>Clip 1</b>The aerial reveal, with the lake starting to churn.</figcaption></figure>
+        <figure><img src="/assets/img/bts/kaiju-pair-2.webp" alt="Blockout of the kaiju facing the small hero next to the photoreal version" loading="lazy" width="1920" height="540"><figcaption><b>Clip 3</b>The stand-off, with the kaiju three times the hero's height.</figcaption></figure>
+        <figure><img src="/assets/img/bts/kaiju-pair-3.webp" alt="Blockout of the flying kick hitting the kaiju's jaw next to the photoreal explosive impact" loading="lazy" width="1920" height="540"><figcaption><b>The final kick</b>An explosive impact frame that starts the finale.</figcaption></figure>
+      </div>
+
+      <h3 class="bts-h">Generating the clips</h3>
+      <p>Each 15-second clip was generated with four references: the photoreal start frame, a storyboard strip of six blockout poses from that clip, the hero, and the kaiju. The prompt then lists the action second by second, states the 3-to-1 scale and the bridge, and names exactly one creature and one hero.</p>
+      <figure class="bts-wide"><img src="/assets/img/bts/kaiju-storyboard.webp" alt="A storyboard strip of six grey blockout frames numbered 1 to 6 with timestamps, showing the fight clip" loading="lazy" width="1440" height="810"><figcaption><b>Storyboard strip</b>Six numbered blockout poses that tell Seedance what happens, in order.</figcaption></figure>
+      <ul class="bts-points">
+        <li><b>Start with everyone in frame.</b>When a clip began with the hero alone in the sky, the model invented the kaiju itself and twice produced two of them. Starting the finale on a frame that already shows one kaiju fixed it.</li>
+        <li><b>State the scale in every prompt.</b>"A colossal 150-metre giant, three times taller than the hero" keeps the size consistent from clip to clip.</li>
+        <li><b>Use the right tool for the job.</b>A motion-control model built for one dancing person turned the whole fight into a shirtless man copying the moves. Image-plus-prompt generation guided by the blockout worked far better.</li>
+        <li><b>Direct the impact.</b>The final kick was written as a slow-motion beat: an energy burst at the boot, a ring shockwave through the clouds, the jaw shattering and glowing cracks spreading across the kaiju.</li>
+      </ul>
+      <div class="callout">
+        <b>Why Seedance 2.0?</b>
+        <p>Budget. Seedance 2.0 on DipzStudio generates a 15-second 1080p clip for a fraction of the cost of the newest models, which made a full 60-second film affordable. The trade-off is quality: it is not the highest standard of AI video, and some shots drift from the blockout. This project is for educational purposes only. What it demonstrates is the 3D blockout workflow, which works the same way with any video model, including the most expensive ones.</p>
+      </div>
+
+      <h3 class="bts-h">Blockout vs final, in sync</h3>
+      <p>Seedance kept the blockout's story but chose its own timing, for example stretching the kick into a three-second slow-motion moment. I re-timed the blockout beat by beat so both sides hit the rise, the landing, the slide, the punches, the headbutt, the kick and the crash at the same moment.</p>
+      <video controls playsinline preload="none" poster="/assets/img/bts/kaiju-thumb.jpg" style="display:block;width:100%;max-width:1400px;margin-top:22px;border:1px solid var(--line);border-radius:8px;background:#000"><source src="/assets/video/bts/kaiju-blockout-vs-final.mp4" type="video/mp4">Your browser cannot play this video.</video>
       </article>
 
       <p style="margin-top:44px"><a class="btn red" href="/videos/">Watch them all in the AI Video gallery</a></p>
