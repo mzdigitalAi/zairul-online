@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Workflow · Zairul MD TY</title>
-<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process, four case studies and two behind-the-scenes breakdowns.">
+<meta name="description" content="How Zairul MD TY directs AI-assisted production: a human-first creative workflow, an eight-step image process, four case studies and three behind-the-scenes breakdowns.">
 <meta property="og:title" content="Workflow · Zairul MD TY">
 <meta property="og:image" content="https://zairul.online/assets/og.jpg">
 <link rel="icon" href="/assets/logo.png">
@@ -215,6 +215,16 @@
   .bts-timeline.bts-timeline-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; }
   @media (max-width: 960px) { .bts-steps.bts-steps-3 { grid-template-columns: 1fr; } }
   @media (max-width: 640px) { .bts-index, .bts-streets { grid-template-columns: 1fr; } }
+  .bts-sheets.bts-sheets-4 { grid-template-columns: 1.5fr 1fr 1fr; align-items: start; }
+  .bts-sheets.bts-sheets-4 figure:last-child { grid-column: 1 / -1; max-width: 1100px; }
+  .bts-points { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 1400px; }
+  .bts-points li { position: relative; padding: 18px 20px 18px 54px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: 15px; }
+  .bts-points li::before { content: "✓"; position: absolute; left: 18px; top: 17px; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--red); color: #fff; font-size: 13px; font-weight: 700; }
+  .bts-points b { display: block; color: #fff; font: 400 19px/1.15 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 6px; }
+  .bts-index.bts-index-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1500px; }
+  @media (max-width: 1100px) { .bts-index.bts-index-3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 960px) { .bts-points { grid-template-columns: 1fr; } .bts-sheets.bts-sheets-4 { grid-template-columns: 1fr 1fr; } .bts-sheets.bts-sheets-4 figure:first-child { grid-column: 1 / -1; } }
+  @media (max-width: 640px) { .bts-index.bts-index-3, .bts-sheets.bts-sheets-4 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -491,10 +501,11 @@
     <div class="wrap">
       <p class="label">06 / Behind the scenes</p>
       <h2>Behind the scenes</h2>
-      <p>How two of my AI shorts were actually made: the tools, the references and the decisions behind each shot.</p>
-      <div class="bts-index">
+      <p>How three of my AI shorts were actually made: the tools, the references and the decisions behind each shot.</p>
+      <div class="bts-index bts-index-3">
         <a href="#bts-sanjini"><img src="/assets/img/bts/sanjini-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Sanjini</b>A Bollywood scene recast with Higgsfield Genjutsu</span></a>
         <a href="#bts-kisah-mc"><img src="/assets/img/bts/mc-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Kisah Nak Beli MC</b>A 1996 Malaysian comedy built on real streets with Seedance 2.5</span></a>
+        <a href="#bts-cinema-reel"><img src="/assets/img/bts/reel-bts-thumb.webp" alt="" width="640" height="400" loading="lazy"><span><b>Cinema Reel With A Twist</b>Four cities from prompts alone, and a choreographed fight</span></a>
       </div>
 
       <article class="bts-case" id="bts-sanjini">
@@ -603,7 +614,59 @@
       </div>
       </article>
 
-      <p style="margin-top:44px"><a class="btn red" href="/videos/">Watch both in the AI Video gallery</a></p>
+
+      <article class="bts-case" id="bts-cinema-reel">
+      <p class="label">Case 03 · Seedance 2.5, prompt only</p>
+      <h3 class="bts-title">Cinema Reel With A Twist: four cities, zero location photos</h3>
+      <p>A travel-vlog love letter that runs from Mumbai to Santorini to a morning run, then turns into a kung-fu fight in a Seoul street-food tent. Every shot comes from Seedance 2.5, and I edited it with Claude. The only images I gave the model were character sheets for the lead. Not a single location reference: every street, sea view and food tent was built from words alone.</p>
+
+      <div class="bts-film">
+        <div class="bts-embed"><iframe src="https://www.youtube-nocookie.com/embed/RjKc9xNrlp4?rel=0&amp;playsinline=1" title="Cinema Reel With A Twist, made with Seedance 2.5" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <ul class="bts-facts">
+          <li><b>2:58</b><span>A travel reel that ends in a fight</span></li>
+          <li><b>4</b><span>Settings: Mumbai, Santorini, a park run and Seoul</span></li>
+          <li><b>0</b><span>Location reference images. Every place comes from the prompt.</span></li>
+          <li><b>4</b><span>Character sheets keeping one lead consistent across her outfit changes</span></li>
+        </ul>
+      </div>
+
+      <h3 class="bts-h">Locking the lead first</h3>
+      <p>The actress had to survive a whole trip: office wear in Mumbai, a sundress in Santorini, athleisure for the run and a white suit for the fight. I made one sheet for her face and hair from every angle, then one turnaround sheet per outfit. With her identity locked by images, every word of the prompt could go into the world around her.</p>
+      <div class="bts-sheets bts-sheets-4">
+        <figure><a href="/assets/img/bts/reel-sheet-head.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/reel-sheet-head.webp" alt="Head turnaround sheet: front, both profiles, back and close-ups of curly black hair, gold aviator glasses and hoop earrings" loading="lazy" width="1536" height="1024"></a><figcaption><b>Face &amp; hair</b>Front, profiles and back: the curls, aviator glasses and hoops.</figcaption></figure>
+        <figure><a href="/assets/img/bts/reel-sheet-waistcoat.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/reel-sheet-waistcoat.webp" alt="Turnaround sheet in a navy waistcoat, white shirt and navy trousers, with labelled front, 3/4, side and back views" loading="lazy" width="1024" height="1536"></a><figcaption><b>Mumbai look</b>Navy waistcoat and trousers, white shirt.</figcaption></figure>
+        <figure><a href="/assets/img/bts/reel-sheet-dress.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/reel-sheet-dress.webp" alt="Turnaround sheet in a pale-blue chiffon floral maxi dress and straw sun hat, labelled front, 3/4, side and back" loading="lazy" width="1086" height="1448"></a><figcaption><b>Santorini look</b>Pale-blue floral chiffon maxi and a straw hat.</figcaption></figure>
+        <figure><a href="/assets/img/bts/reel-sheet-suit.webp" target="_blank" rel="noopener"><img src="/assets/img/bts/reel-sheet-suit.webp" alt="Three-panel sheet: headless front and back of a white trouser suit with white heels, and a face close-up" loading="lazy" width="1600" height="686"></a><figcaption><b>Fight look</b>A white trouser suit, for the twist ending.</figcaption></figure>
+      </div>
+
+      <h3 class="bts-h">Realism from words alone: the location playbook</h3>
+      <p>Without a reference photo, the model has to imagine the place. These are the habits that make it imagine a real place instead of a stock-footage version of one.</p>
+      <ul class="bts-points">
+        <li><b>Name the real place, not a vibe.</b>"Marine Drive, Mumbai at sunrise" or "a cliff-top lane in Oia, Santorini" pulls from what the model already knows about those streets. "A seaside city" gives you a generic one.</li>
+        <li><b>Set the time, weather and light like a cinematographer.</b>Low golden sun from the left, hazy humid morning, blue hour with warm practical bulbs. Light is what makes a frame feel photographed instead of rendered.</li>
+        <li><b>Plant local, lived-in details.</b>A black-and-yellow Padmini taxi, chai in small glasses, scooters on Santorini steps, plastic stools and steel bowls under a Seoul tent. Three or four true details sell the whole location.</li>
+        <li><b>Give the background a life.</b>Commuters crossing, a vendor wiping his counter, tourists on a terrace. Extras with a purpose stop the world from looking staged.</li>
+        <li><b>Speak camera.</b>Handheld phone vlog for the travel parts, then a 35mm anamorphic look with shallow depth of field and natural motion blur for the cinematic beats. Lens language pins down the texture of the footage.</li>
+        <li><b>Ask for imperfection.</b>Wind in the hair, a slightly blown-out sky, film grain, a little sensor noise at night. Real footage is never perfectly clean.</li>
+        <li><b>Say what to avoid.</b>No CGI sheen, no plastic skin, no warped signage, no crowd duplication. Negative cues remove the AI look before it appears.</li>
+        <li><b>Keep the identity out of the prompt.</b>The character sheets carry her face and outfit, so the prompt never spends words on describing her. Every word goes into the place.</li>
+      </ul>
+
+      <h3 class="bts-h">Choreographing the fight</h3>
+      <p>The twist: she's just trying to eat noodles in peace when a gang of thugs makes a big mistake. An AI fight falls apart fast if you only write "she fights the thugs". Write it the way a stunt coordinator would.</p>
+      <ul class="bts-points">
+        <li><b>A beat sheet, not a sentence.</b>The fight is broken into short timed beats, with one clear action in each: they approach, she puts the chopsticks down, the first strike, the counter, the kick, the reaction, the final pose.</li>
+        <li><b>Map the space first.</b>Who stands where, which side of the table, which way everyone faces, and how far apart. Fixed screen direction stops fighters from swapping sides between cuts.</li>
+        <li><b>Use the set as props.</b>The plastic stools, the noodle bowl, the tent pole and the counter give her moves something physical to react to, which makes the hits feel grounded.</li>
+        <li><b>One attacker at a time.</b>Each thug engages in turn. Two bodies tangling in one frame is where AI creates extra limbs and merged faces.</li>
+        <li><b>Write the body mechanics.</b>The weight shift before the kick, the pivot on the back foot, the attacker stumbling two steps back and dropping. Cause and effect make the impact read as real.</li>
+        <li><b>Direct the camera per beat.</b>A wide shot to set up the geography, a handheld follow through the exchange, a speed-ramped slow-motion on the hero kick and quick inserts for impact.</li>
+        <li><b>Make the outfit a constant.</b>The white-suit sheet keeps her look identical through every cut of the fight, which is the hardest place to keep continuity.</li>
+        <li><b>Shoot coverage, then cut.</b>Generate more than one take of each beat and keep the cleanest in the edit. The bracketed comedy captions and the hit sounds then land every blow.</li>
+      </ul>
+      </article>
+
+      <p style="margin-top:44px"><a class="btn red" href="/videos/">Watch them all in the AI Video gallery</a></p>
     </div>
   </section>
 </main>
