@@ -228,6 +228,7 @@
   @media (max-width: 1100px) { .bts-index.bts-index-3 { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 960px) { .bts-points { grid-template-columns: 1fr; } .bts-sheets.bts-sheets-4 { grid-template-columns: 1fr 1fr; } .bts-sheets.bts-sheets-4 figure:first-child { grid-column: 1 / -1; } }
   @media (max-width: 640px) { .bts-index.bts-index-3, .bts-sheets.bts-sheets-4 { grid-template-columns: 1fr; } }
+  .hot-prompt { margin: 14px 0 0; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; color: #e8e2d8; font: 13px/1.6 ui-monospace, Consolas, monospace; white-space: pre-wrap; overflow-x: auto; max-width: 1100px; }
 </style>
 </head>
 <body>
@@ -239,7 +240,7 @@
       <p class="kicker">Workflow · Behind the work</p>
       <h1>Human first. Tool second.</h1>
       <p class="lead">The brief leads. The tools follow. This is how I take a project from idea to delivery, where AI speeds up the work, and human judgment decides what's good enough to ship.</p>
-      <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#library">Prompt library</a><a class="btn" href="#case-studies">Case studies</a></div>
+      <div class="btns"><a class="btn red" href="#process">The image process</a><a class="btn" href="#library">Prompt library</a><a class="btn" href="#case-studies">Case studies</a><a class="btn" href="#hot-topic">Hot topic</a></div>
     </div>
     <div class="tools" aria-labelledby="toolsTitle">
       <div class="tools-label"><b id="toolsTitle">My production toolkit</b><span id="toolsCount"></span></div>
@@ -750,6 +751,95 @@
       </article>
 
       <p style="margin-top:44px"><a class="btn red" href="/videos/">Watch them all in the AI Video gallery</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="hot-topic">
+    <div class="wrap">
+      <p class="label">07 / Hot topic</p>
+      <h2>The video-turnaround trick: one prompt, a free 360&deg; character sheet</h2>
+      <p>The classic character sheet is three or four separate stills: front, back and a face close-up. Each one is a fresh generation, so each one can drift a little. The video-turnaround trick flips this around. You ask a video model for a single slow 360&deg; spin of your character on a plain studio backdrop, then pull every angle you need straight out of the clip. One generation gives you hundreds of frames of the same person, in the same outfit, under the same light. It is one of the cheapest and most useful consistency tricks in AI filmmaking right now.</p>
+
+      <div class="bts-film">
+        <div class="bts-embed"><video autoplay muted loop playsinline preload="metadata" poster="/assets/img/hot/turnaround-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><source src="/assets/video/hot/turnaround-360.mp4" type="video/mp4"></video></div>
+        <ul class="bts-facts">
+          <li><b>1</b><span>Master image to start from: the front view of your character</span></li>
+          <li><b>2</b><span>Turntable passes: one full body, one head and shoulders</span></li>
+          <li><b>480</b><span>Frames in this 20-second example, every one a usable angle</span></li>
+          <li><b>8+</b><span>Clean reference angles harvested, at 45&deg; steps or finer</span></li>
+        </ul>
+      </div>
+
+      <h3 class="bts-h">Classic sheet vs video turnaround</h3>
+      <p>Both start from the same character. The classic sheet below gives you a headless front view for the outfit, a back view and two face close-ups. The turnaround clip above gives you everything in between: three-quarter views, both profiles and the back of the head, which are exactly the angles AI video struggles to invent consistently on its own.</p>
+      <figure class="bts-wide"><img src="/assets/img/hot/turnaround-classic-sheet.webp" alt="Classic character sheet on a grey backdrop: a headless front view in a tan leather jacket, cream turtleneck and brown trousers, a back view, and two face close-ups, neutral and smiling" loading="lazy" width="1672" height="941"><figcaption><b>The classic sheet</b>Separate stills: front, back and two face close-ups.</figcaption></figure>
+      <figure class="bts-wide"><img src="/assets/img/hot/turnaround-body-angles.webp" alt="Eight full-body frames pulled from the turntable clip at 45-degree steps, from front through both profiles and the back" loading="lazy" width="1440" height="1080"><figcaption><b>Full-body pass</b>Eight angles pulled from one clip, at 45&deg; steps.</figcaption></figure>
+      <figure class="bts-wide"><img src="/assets/img/hot/turnaround-head-angles.webp" alt="Eight head-and-shoulders frames from the head turntable pass at 45-degree steps, including both profiles and the back of the head" loading="lazy" width="1536" height="864"><figcaption><b>Head pass</b>A separate, closer clip, so the face stays sharp at every angle.</figcaption></figure>
+
+      <h3 class="bts-h">The recipe</h3>
+      <ol class="bts-steps">
+        <li><b>Make the master still</b><span>Generate one clean front view: full body, neutral standing pose with the arms slightly away from the body, plain mid-grey backdrop, soft even light. This image decides everything that follows.</span></li>
+        <li><b>Body turntable</b><span>Image-to-video from the master still, 8 to 10 seconds, locked-off camera. The character rotates on the spot through a full 360&deg; and ends facing the camera again.</span></li>
+        <li><b>Head turntable</b><span>Repeat from a head-and-shoulders close-up. At full-body scale the face is only a few dozen pixels wide, so a separate close pass keeps the features sharp at every angle.</span></li>
+        <li><b>Harvest the frames</b><span>Scrub the clip, pick the sharpest frame at each angle, upscale it, label it by degree and check it against the master still.</span></li>
+      </ol>
+      <p style="margin-top:22px">Prompt templates I use. Keep them boring on purpose: the less happens in the clip, the cleaner the turnaround.</p>
+      <pre class="hot-prompt">BODY PASS (image-to-video, 8&ndash;10 s, 16:9)
+Locked-off camera, no camera movement. The person in the image stands still
+in a relaxed neutral pose and rotates slowly on the spot, as if on a turntable,
+through one full 360-degree turn at a constant speed, ending facing the camera.
+No walking, no arm or hand movement, no change of expression, no change of
+clothing. Plain mid-grey seamless studio backdrop, soft even studio lighting,
+full body in frame from head to shoes.
+
+HEAD PASS (image-to-video from a head-and-shoulders close-up)
+Locked-off camera. The person keeps a neutral expression and rotates slowly
+on the spot through one full 360-degree turn at a constant speed, showing the
+face, both profiles and the back of the head, ending facing the camera.
+Plain mid-grey backdrop, soft even light, head and shoulders in frame.</pre>
+      <p style="margin-top:16px">Pulling the frames takes one command with the free tool FFmpeg. This exports one frame every half second, which at a 10-second turn is roughly every 18&deg;:</p>
+      <pre class="hot-prompt">ffmpeg -i turnaround.mp4 -vf fps=2 angle_%02d.png</pre>
+
+      <h3 class="bts-h">How it plugs into different platforms</h3>
+      <p>Each tool takes references differently, but almost all of them get better the moment you give them more than one angle. The turnaround is the cheapest way to get those angles.</p>
+      <ul class="bts-points">
+        <li><b>Kling 3.0</b>Elements accept up to four reference images, and Kling itself recommends front, side, back and a detail shot. Take them from the turnaround. Kling also accepts a 3 to 8 second single-character video as a reference, and a short turntable clip fits that description exactly.</li>
+        <li><b>Seedance 2.0 / 2.5</b>Reference slots are limited: four images on some hosts, and only one image alongside a video reference on others. Spend them wisely: the start frame, plus the turnaround angles closest to the camera angles in that shot.</li>
+        <li><b>Higgsfield Soul ID</b>Soul ID training asks for at least 20 photos of the same person from varied angles and lighting. Turnaround frames cover the angles; add a few shots with different lighting so the identity doesn't learn the studio light. Only train on people you have permission to use.</li>
+        <li><b>Hailuo / MiniMax</b>Subject reference works from a single front image, but Hailuo's own guide says three to five views give noticeably better results, and to use a profile reference for side-on shots instead of letting the model guess.</li>
+        <li><b>Google Flow, Veo and image models</b>When you build start frames with ChatGPT image or Nano Banana, attach the turnaround angle that matches the pose you want. It beats describing the back of a jacket in words.</li>
+        <li><b>Open-source (Wan, Flux and LoRAs)</b>Fifteen to thirty turnaround frames make a fast starter dataset for a character LoRA. Caption each one with its angle, and mix in other lighting and expressions so the model doesn't overfit to one grey room.</li>
+        <li><b>3D and blockouts</b>A clean turntable is also good input for image-to-3D tools and photogrammetry. That turns your character into a 3D proxy for a Blender blockout, the method in my <a href="#bts-kaiju-blockout" style="color:var(--gold)">Putrajaya Kaiju Showdown case</a>.</li>
+        <li><b>Your own character sheets</b>Composite your favourite angles into a clean sheet, or keep them as separate labelled files. Some models copy the layout of a multi-panel sheet into the shot, so single-view files are safer.</li>
+      </ul>
+
+      <h3 class="bts-h">Why it's worth doing</h3>
+      <ul class="bts-points">
+        <li><b>One generation, every angle.</b>Every frame comes from the same generation, so the face, the outfit, the proportions and the light can't drift between views the way separate stills do.</li>
+        <li><b>The model commits to the unseen.</b>The back of the hair, the back of the jacket and the side seams are decided once, in the turnaround. Later shots copy them instead of inventing new ones.</li>
+        <li><b>Cheap.</b>One or two short clips replace six to eight separate image generations and the re-rolls needed to make them match.</li>
+        <li><b>Match references to shots.</b>Filming a three-quarter-back shot? Attach the 135&deg; frame. Giving the model the angle it is about to draw is the single biggest consistency gain.</li>
+        <li><b>A free motion test.</b>You see how the costume, cape or hair behaves when the body turns before you spend credits on real scenes.</li>
+        <li><b>Approve the design early.</b>A client can sign off the character from every side before production starts, not after the first expensive shot.</li>
+      </ul>
+
+      <h3 class="bts-h">The disadvantages, and how to handle them</h3>
+      <ul class="bts-points">
+        <li><b>Softer than a still.</b>Video frames have lower resolution, compression and some motion blur. Pick the sharpest frame near each angle and upscale it before using it as a reference.</li>
+        <li><b>Uneven spin.</b>In this example the head turns fast through the first half and slower through the second. Don't calculate angles from timestamps; choose them by eye.</li>
+        <li><b>Invented backs.</b>The model has never seen the back, so it guesses. Logos, tattoos, prints and hairstyles can appear or vanish. Check every view against the master and fix mistakes with inpainting.</li>
+        <li><b>Asymmetry flips.</b>A scar, a side parting or a chest logo can jump to the wrong side mid-spin. Write asymmetric details into the prompt and check both profiles.</li>
+        <li><b>The character won't stay still.</b>Some models make the person walk, wave or turn only their head. If that happens, generate two halves with start and end frames: front to back, then back to front.</li>
+        <li><b>Hands, text and fine detail.</b>Fingers, small accessories and lettering are the first things to warp. Keep hands relaxed and visible, and don't rely on the turnaround for readable text.</li>
+        <li><b>Video credits cost more than images.</b>A 10-second clip usually costs more than one image, but less than the stack of images and re-rolls it replaces.</li>
+        <li><b>Likeness and consent.</b>Use this on original characters or on people who have agreed to it. A full 360&deg; of a real person's likeness is exactly what identity tools need, which is a good reason to treat it with care.</li>
+      </ul>
+
+      <div class="callout">
+        <b>Where it fits in a production</b>
+        <p>Master still &rarr; video turnaround &rarr; labelled angle set &rarr; character sheet &rarr; start frames &rarr; blockout-guided video. The turnaround locks what the character looks like from every side; the blockout locks where they stand and how they move. Together, they remove most of the guesswork that makes AI films look inconsistent.</p>
+      </div>
+      <p class="fine">Sources: <a href="https://kling.ai/blog/kling-3-subject-binding-character-consistency" target="_blank" rel="noopener">Kling 3.0 subject binding</a> · <a href="https://higgsfield.ai/blog/consistent-characters-locations" target="_blank" rel="noopener">Higgsfield consistency guide</a> · <a href="https://www.frankx.ai/guides/higgsfield-soul-id-character-consistency" target="_blank" rel="noopener">Soul ID workflow</a> · <a href="https://hailuoai.video/pages/blog/ai-video-character-consistency-guide" target="_blank" rel="noopener">Hailuo consistency guide</a> · <a href="https://flick.art/blog/character-turnaround-sheets" target="_blank" rel="noopener">Character turnaround sheets in AI films</a>. Platform limits change often, so check each tool's current documentation.</p>
     </div>
   </section>
 </main>
