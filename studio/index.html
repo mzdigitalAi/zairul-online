@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Director's Studio · Zairul MD TY</title>
+<meta name="description" content="MZ Director's Studio: the production command centre Zairul MD TY designed and built with Claude to run AI video and design work, from brief to delivery to a one-page report for management.">
+<meta property="og:title" content="MZ Director's Studio · Zairul MD TY">
+<meta property="og:description" content="A production command centre for AI creative work: projects, shots, prompts, costs and monthly reports in one place.">
+<meta property="og:image" content="https://zairul.online/studio/og.jpg">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/assets/site.css?v=20261103">
+<style>
+  /* Hero */
+  .st-hero { padding-bottom: 0; border-bottom: 0; }
+  .st-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 46px; }
+  .st-hero h1 { max-width: 13ch; }
+  .st-hero h1 em { font-style: normal; color: var(--gold); }
+  .st-stage { position: relative; margin-top: 10px; padding-bottom: 70px; perspective: 1600px; }
+  .st-screen { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); background: #111;
+    box-shadow: 0 40px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(0,0,0,.6), 0 0 80px rgba(227,38,43,.12);
+    transform: rotateX(9deg) scale(.96); transform-origin: 50% 0; transition: transform 1.1s cubic-bezier(.2,.7,.2,1); }
+  .st-stage.in .st-screen { transform: none; }
+  .st-bar { display: flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px; background: #1a1a1a; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .st-bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3a3a; }
+  .st-bar i:nth-child(1) { background: #e3262b; } .st-bar i:nth-child(2) { background: #f2b632; }
+  .st-bar span { margin-left: 14px; font: 600 11px/1 'Barlow', sans-serif; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
+  .st-screen img { width: 100%; }
+  .st-phone { position: absolute; right: clamp(8px, 4vw, 70px); bottom: 0; width: clamp(92px, 17vw, 250px); border-radius: 30px; overflow: hidden;
+    border: 6px solid #1c1c1c; box-shadow: 0 30px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.12); background: #000;
+    transform: translateY(40px); opacity: 0; transition: transform 1s .35s cubic-bezier(.2,.7,.2,1), opacity .8s .35s; }
+  .st-stage.in .st-phone { transform: none; opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .st-screen, .st-phone { transform: none !important; opacity: 1 !important; transition: none; } }
+
+  /* Numbers */
+  .st-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .st-stats div { padding: 30px 22px; border-right: 1px solid var(--line); }
+  .st-stats div:last-child { border-right: 0; }
+  .st-stats b { display: block; font: 400 clamp(40px, 4.6vw, 68px)/1 'Anton', sans-serif; color: var(--text); }
+  .st-stats b small { font-size: .45em; color: var(--gold); margin-left: 4px; }
+  .st-stats span { display: block; margin-top: 8px; color: var(--muted); font-size: 14.5px; }
+  @media (max-width: 900px) { .st-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .st-stats div { border-bottom: 1px solid var(--line); } .st-stats div:nth-child(2n) { border-right: 0; } .st-stats div:last-child { grid-column: 1 / -1; border-bottom: 0; } }
+
+  /* Problem cards */
+  .pains { margin-top: 34px; }
+  .pains .card b { display: block; font: 400 22px/1.1 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em; }
+  .pains .card .n { font: 400 40px/1 'Anton', sans-serif; color: var(--red); margin-bottom: 12px; display: block; }
+
+  /* Tour */
+  .tour { margin-top: 20px; }
+  .feat { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; padding: 56px 0; border-top: 1px solid var(--line); }
+  .feat:first-child { border-top: 0; }
+  .feat.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr); }
+  .feat.flip .shot { order: 2; }
+  .feat .shot { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 24px 70px rgba(0,0,0,.55); cursor: zoom-in; background: #111;
+    opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .feat.in .shot { opacity: 1; transform: none; }
+  .feat .shot img { width: 100%; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+  .feat .shot:hover img { transform: scale(1.025); }
+  .feat .shot .zoom { position: absolute; right: 12px; bottom: 12px; padding: 7px 11px; border-radius: 999px; background: rgba(0,0,0,.65); font: 700 10.5px/1 'Barlow', sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #fff; opacity: 0; transition: opacity .2s; }
+  .feat .shot:hover .zoom, .feat .shot:focus-visible .zoom { opacity: 1; }
+  .feat .num { font: 400 64px/0.9 'Anton', sans-serif; color: #262626; -webkit-text-stroke: 1px rgba(242,182,50,.55); }
+  .feat h3 { font-size: clamp(30px, 3vw, 42px) !important; margin: 10px 0 14px; }
+  .feat p { font-size: 17px; }
+  .feat ul { margin: 18px 0 0; padding: 0; list-style: none; }
+  .feat li { position: relative; padding: 9px 0 9px 26px; border-top: 1px solid var(--line); color: #cfc9c0; font-size: 15.5px; }
+  .feat li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 10px; height: 10px; border-radius: 2px; background: var(--red); transform: rotate(45deg); }
+  .feat .pair { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  @media (max-width: 900px) { .feat, .feat.flip { grid-template-columns: minmax(0, 1fr); padding: 40px 0; } .feat.flip .shot { order: 0; } }
+  @media (prefers-reduced-motion: reduce) { .feat .shot { opacity: 1; transform: none; } }
+
+  /* Phones */
+  .phones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 28px); margin-top: 40px; align-items: start; }
+  .phones figure { margin: 0; }
+  .phones .ph { border-radius: 28px; overflow: hidden; border: 5px solid #1d1d1d; box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.1); background: #000; cursor: zoom-in; }
+  .phones figure:nth-child(2n) { margin-top: 48px; }
+  .phones figcaption { margin-top: 14px; font: 700 11px/1.3 'Barlow', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  @media (max-width: 760px) { .phones { grid-template-columns: repeat(2, minmax(0, 1fr)); } .phones figure:nth-child(2n) { margin-top: 28px; } }
+
+  /* Light / dark compare */
+  .compare { position: relative; margin-top: 36px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 24px 70px rgba(0,0,0,.55); user-select: none; --p: 50%; touch-action: pan-y; }
+  .compare img { width: 100%; }
+  .compare .top { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--p)); }
+  .compare .handle { position: absolute; top: 0; bottom: 0; left: var(--p); width: 2px; margin-left: -1px; background: var(--gold); box-shadow: 0 0 20px rgba(242,182,50,.6); pointer-events: none; }
+  .compare .handle::after { content: "◀ ▶"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 10px 12px; border-radius: 999px; background: var(--gold); color: #140d00; font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .1em; white-space: nowrap; }
+  .compare input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+  .compare .tag { position: absolute; top: 14px; padding: 6px 10px; border-radius: 3px; background: rgba(0,0,0,.6); font: 700 10.5px/1 'Barlow', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #fff; pointer-events: none; }
+  .compare .tag.l { left: 14px; } .compare .tag.r { right: 14px; }
+
+  /* Build */
+  .split2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); margin-top: 34px; }
+  .roles { border-top: 1px solid var(--line); }
+  .roles div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .roles b { font: 700 11px/1.5 'Barlow', sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+  .roles span { color: #cfc9c0; font-size: 15.5px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .stack span { padding: 10px 16px; border: 1px solid rgba(242,182,50,.45); border-radius: 999px; font: 700 12px/1 'Barlow', sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+  .private { margin-top: 28px; padding: 22px 24px; border-left: 4px solid var(--gold); background: linear-gradient(90deg, rgba(242,182,50,.08), transparent); border-radius: 0 6px 6px 0; }
+  .private b { display: block; font: 400 22px/1.1 'Anton', sans-serif; text-transform: uppercase; margin-bottom: 8px; }
+  .private p { color: #cfc9c0; }
+  @media (max-width: 900px) { .split2 { grid-template-columns: minmax(0, 1fr); } .roles div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+  /* Lightbox */
+  .lb { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(5,5,5,.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); cursor: zoom-out; }
+  .lb.open { display: flex; animation: lbIn .25s ease both; }
+  .lb img { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 30px 90px rgba(0,0,0,.7); }
+  .lb button { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #222; color: #fff; font-size: 20px; cursor: pointer; }
+  @keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</head>
+<body>
+<script src="/assets/menu.js?v=20261106"></script>
+
+<header class="page-hero st-hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Case study · Product design + AI build</p>
+      <h1>MZ Director's <em>Studio</em></h1>
+      <p class="lead">My own production command centre for AI creative work. Every project, every generated shot, every prompt and every ringgit spent on tools in one place, with a one-page report ready for management at the end of the month.</p>
+      <div class="btns"><a class="btn red" href="#tour">Take the tour</a><a class="btn" href="/contact/">Ask for a live walkthrough</a></div>
+    </div>
+    <div class="st-stage" id="stage">
+      <div class="st-screen"><div class="st-bar" aria-hidden="true"><i></i><i></i><i></i><span>MZ Director's Studio · Today</span></div>
+        <img src="today.webp" width="2000" height="1250" alt="The Today screen: a greeting, five headline numbers, a strip of the latest generated frames, the production pipeline and the items that need a decision." fetchpriority="high"></div>
+      <img class="st-phone" src="phone-today.webp" width="700" height="1515" alt="The same Today screen on a phone, with a glass dock at the bottom." loading="lazy">
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="st-stats" aria-label="What the studio tracks today">
+      <div><b data-n="8">8</b><span>Screens, from Today to Reports</span></div>
+      <div><b data-n="13">13</b><span>Generated shots logged with prompt, tool and credits</span></div>
+      <div><b data-n="66">66</b><span>Tested prompts, searchable</span></div>
+      <div><b data-n="23">23</b><span>AI tools costed in ringgit</span></div>
+      <div><b>1<small>page</small></b><span>PDF report for management</span></div>
+    </div>
+  </div>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <p class="label">Why I built it</p>
+      <h2>AI makes more.<br>Someone has to run it.</h2>
+      <p>AI tools let one person produce what used to take a crew. The catch is the paperwork nobody sees: dozens of clips per project, credits spread across several accounts, prompts that worked once and got lost, and a manager who just wants to know what is done and what it cost. I wanted a system that answers those questions in seconds, and that looks like it belongs in a production office.</p>
+      <div class="grid c3 pains">
+        <div class="card"><span class="n">01</span><b>Where is everything?</b><p>A board from brief to delivery, deadlines for the next three weeks, and a list of what needs my decision today.</p></div>
+        <div class="card"><span class="n">02</span><b>What did it cost?</b><p>Each tool's monthly price in ringgit, credits per shot, credits lost to redos, and cost per finished minute of video.</p></div>
+        <div class="card"><span class="n">03</span><b>Can we repeat it?</b><p>Every shot keeps its exact prompt and version. Characters and brand rules are locked in a vault so the next project matches.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tour">
+    <div class="wrap">
+      <p class="label">The tour</p>
+      <h2>From brief<br>to boardroom.</h2>
+      <p>Shown with real work: the MILO spec ad, the Hassan animated shorts and the MECA newsletter release.</p>
+      <div class="tour">
+        <article class="feat">
+          <button class="shot" type="button" data-full="board.webp" aria-label="Enlarge the Board screen"><img src="board.webp" width="2000" height="1125" alt="The Board: seven stage columns from Brief to Delivered, each project shown as a card with a cover frame, code, priority, due date and shot progress." loading="lazy"><span class="zoom">Enlarge</span></button>
+          <div><div class="num">01</div><h3>Board</h3><p>Every project moves through seven stages, from brief to delivered. Each card carries a key frame, a project code, priority and how many shots are approved.</p>
+            <ul><li>Drag a card to move it, or tap Next stage</li><li>Delivery date is stamped automatically</li><li>Shot progress bar shows kept against redone clips</li></ul></div>
+        </article>
+        <article class="feat flip">
+          <button class="shot" type="button" data-full="shots.webp" aria-label="Enlarge the Shots screen"><img src="shots.webp" width="1600" height="1000" alt="The Shots log: each generated clip with a thumbnail, scene, tool and account, version, length, credits, status and the issue to fix." loading="lazy"><span class="zoom">Enlarge</span></button>
+          <div><div class="num">02</div><h3>Shot log</h3><p>Every AI clip is logged like a camera report: the scene, the model and account it ran on, the credits it used, its version and whether it is a Keep or a Redo.</p>
+            <ul><li>The exact prompt stays with the shot, so a good result can be repeated</li><li>Issues are written down, e.g. "duplicate character at 00:09"</li><li>Filter by project or status in one tap</li></ul></div>
+        </article>
+        <article class="feat">
+          <button class="shot" type="button" data-full="prompts.webp" aria-label="Enlarge the Prompts screen"><img src="prompts.webp" width="1600" height="1000" alt="The Prompt library: cards with video thumbnails, aspect ratio, models and the start of each prompt." loading="lazy"><span class="zoom">Enlarge</span></button>
+          <div><div class="num">03</div><h3>Prompt library</h3><p>66 tested video and image prompts, each with its example result, aspect ratio and the models it was made for. Search by brand or subject and send any prompt straight into a new shot.</p>
+            <ul><li>Search: "skincare", "wrestling", "Royal Enfield"</li><li>Filter by Seedance, Omni, Kling, HeyGen and more</li><li>Add your own and they appear for the whole team</li></ul></div>
+        </article>
+        <article class="feat flip">
+          <button class="shot" type="button" data-full="vault.webp" aria-label="Enlarge the Vault screen"><img src="vault.webp" width="1600" height="1000" alt="The Vault: character and brand entries with reference images and their locked details." loading="lazy"><span class="zoom">Enlarge</span></button>
+          <div><div class="num">04</div><h3>Character vault</h3><p>Consistency is the hardest part of AI video. The vault keeps each character's face, build, outfit and voice, and each brand's logo rules, with reference images, ready to paste into a prompt.</p>
+            <ul><li>Characters, brands, voices, locations and styles</li><li>One tap copies the locked details for a prompt</li><li>Reference images live with the entry</li></ul></div>
+        </article>
+        <article class="feat">
+          <button class="shot" type="button" data-full="costs.webp" aria-label="Enlarge the Costs screen"><img src="costs.webp" width="1600" height="1000" alt="The Costs screen: monthly spend against budget, cost per delivery, credits used and the full tool stack with prices in US dollars and ringgit." loading="lazy"><span class="zoom">Enlarge</span></button>
+          <div><div class="num">05</div><h3>Costs</h3><p>The tool stack, priced in ringgit, against a monthly budget. It turns credits into numbers a finance team understands: cost per delivery and cost per finished minute.</p>
+            <ul><li>Switch tools on or off as subscriptions change</li><li>Credits by tool and by account</li><li>Shows how much went on redos</li></ul></div>
+        </article>
+        <article class="feat flip">
+          <div class="shot" style="cursor:default;background:none;border:0;box-shadow:none;overflow:visible"><div class="pair">
+            <button class="shot" type="button" data-full="reports.webp" aria-label="Enlarge the Reports screen" style="opacity:1;transform:none"><img src="reports.webp" width="1600" height="1000" alt="The Reports screen: a written summary, eight headline numbers, an output trend chart and highlights for management." loading="lazy"><span class="zoom">Enlarge</span></button>
+            <button class="shot" type="button" data-full="pdf.webp" aria-label="Enlarge the PDF report" style="opacity:1;transform:none"><img src="pdf.webp" width="900" height="1272" alt="The one-page PDF report, with headline numbers, highlights and a table of delivered projects with thumbnails." loading="lazy"><span class="zoom">Enlarge</span></button>
+          </div></div>
+          <div><div class="num">06</div><h3>Reports</h3><p>The screen I would hand to a manager or the C-suite. It writes a plain-English summary of the month, shows the headline numbers, and downloads as a one-page PDF with my name on it.</p>
+            <ul><li>Projects delivered, finished minutes, on-time rate</li><li>Usable-first-time rate for AI shots</li><li>Optional benchmark against an outside agency rate</li></ul></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mobile">
+    <div class="wrap">
+      <p class="label">On the go</p>
+      <h2>Built for the phone too.</h2>
+      <p>On set or between meetings, the same studio works on a phone, with a glass dock for the main screens. Add it to the home screen and it opens like an app.</p>
+      <div class="phones">
+        <figure><div class="ph" data-full="phone-today.webp" tabindex="0" role="button" aria-label="Enlarge Today on phone"><img src="phone-today.webp" width="700" height="1515" alt="Today on a phone" loading="lazy"></div><figcaption>Today</figcaption></figure>
+        <figure><div class="ph" data-full="phone-shots.webp" tabindex="0" role="button" aria-label="Enlarge Shots on phone"><img src="phone-shots.webp" width="700" height="1515" alt="Shot cards on a phone" loading="lazy"></div><figcaption>Shots</figcaption></figure>
+        <figure><div class="ph" data-full="phone-board.webp" tabindex="0" role="button" aria-label="Enlarge Board on phone"><img src="phone-board.webp" width="700" height="1515" alt="The board in dark mode on a phone" loading="lazy"></div><figcaption>Board · dark mode</figcaption></figure>
+        <figure><div class="ph" data-full="phone-prompts.webp" tabindex="0" role="button" aria-label="Enlarge Prompts on phone"><img src="phone-prompts.webp" width="700" height="1515" alt="The prompt library on a phone" loading="lazy"></div><figcaption>Prompts</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="design">
+    <div class="wrap">
+      <p class="label">Look and feel</p>
+      <h2>Liquid glass, day and night.</h2>
+      <p>I art-directed the interface after Apple's liquid glass: frosted panels floating over a warm studio photo, a light that follows the cursor, and soft motion as screens change. It follows the device's light or dark setting. Drag the handle to compare.</p>
+      <div class="compare" id="compare">
+        <img src="today.webp" width="2000" height="1250" alt="Today screen in light mode" loading="lazy">
+        <div class="top"><img src="today-dark.webp" width="2000" height="1250" alt="Today screen in dark mode" loading="lazy"></div>
+        <span class="tag l">Light</span><span class="tag r">Dark</span>
+        <div class="handle" aria-hidden="true"></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Compare light and dark mode">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="build">
+    <div class="wrap">
+      <p class="label">How it was made</p>
+      <h2>Directed by me.<br>Built with Claude.</h2>
+      <div class="split2">
+        <div>
+          <p>I treated the app like any production: I wrote the brief, decided what a creative lead actually needs to track, chose the numbers management would care about, and art-directed the look. Claude wrote the code to that brief, and I reviewed every screen until it worked the way I wanted.</p>
+          <p>It runs as a private web app with a shared database, image storage and PDF export. The data on these screens is my real production log, not a mock-up.</p>
+          <div class="stack" aria-label="Built with"><span>Claude</span><span>HTML · CSS · JS</span><span>Live database</span><span>Image storage</span><span>PDF export</span></div>
+          <div class="private"><b>The live app is private</b><p>It holds real production data, so it isn't public. I'm happy to walk you through it live in an interview.</p></div>
+        </div>
+        <div class="roles">
+          <div><b>My role</b><span>Product idea, workflow design, data model, metrics, interface direction, review and testing</span></div>
+          <div><b>Claude</b><span>Code, database wiring, PDF report, responsive layout</span></div>
+          <div><b>Built in</b><span>One day, in November 2026, with the real projects loaded on day one</span></div>
+          <div><b>Works on</b><span>Desktop and phone, light and dark mode</span></div>
+          <div><b>Shows</b><span>That I can run AI production like a business: on time, on budget and repeatable</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Enlarged screenshot"><button type="button" aria-label="Close">✕</button><img alt=""></div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="cta"><h2>Want this level<br>of control on your team?</h2><div class="btns"><a class="btn red" href="/contact/">Get in touch</a><a class="btn" href="/resume/">View resume</a></div></div>
+    <div class="small"><span>© <span class="yr">2026</span> Zairul MD TY</span><span>Human-directed. AI-assisted.</span><a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.yr').forEach(function (e) { e.textContent = new Date().getFullYear(); });
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* reveal on scroll */
+  var els = [document.getElementById('stage')].concat([].slice.call(document.querySelectorAll('.feat')));
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    els.forEach(function (el) { io.observe(el); });
+  } else els.forEach(function (el) { el.classList.add('in'); });
+  /* count up the numbers */
+  var nums = document.querySelectorAll('.st-stats b[data-n]');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; io2.unobserve(e.target);
+      var el = e.target, end = +el.dataset.n, t0 = performance.now();
+      (function step(t) { var k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); })(t0); }); }, { threshold: 0.6 });
+    nums.forEach(function (n) { n.textContent = '0'; io2.observe(n); });
+  }
+  /* light / dark compare */
+  var cmp = document.getElementById('compare'), rng = cmp.querySelector('input');
+  rng.addEventListener('input', function () { cmp.style.setProperty('--p', rng.value + '%'); });
+  /* lightbox */
+  var lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), last = null;
+  function open(src, alt, from) { last = from; lbImg.src = src; lbImg.alt = alt || ''; lb.classList.add('open'); lb.querySelector('button').focus(); }
+  function close() { lb.classList.remove('open'); lbImg.src = ''; if (last) last.focus(); }
+  document.querySelectorAll('[data-full]').forEach(function (b) {
+    b.addEventListener('click', function () { var im = b.querySelector('img'); open(b.dataset.full, im && im.alt, b); });
+    if (b.tagName !== 'BUTTON') b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.click(); } });
+  });
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
+})();
+</script>
+</body>
+</html>
