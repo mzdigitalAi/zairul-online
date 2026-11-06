@@ -6,6 +6,7 @@
 
   var MENU = [
     { key: 'workflow', label: 'Workflow', href: '/workflow/' },
+    { key: 'studio',   label: 'Studio',   href: '/studio/' },
     { key: 'videos',   label: 'AI Video', href: '/videos/' },
     { key: 'images',   label: 'AI Images', href: '/images/' },
     { key: 'audio',    label: 'AI Audio', href: '/audio/' },
