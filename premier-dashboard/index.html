@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PREMIER Database · Postpaid customer dashboard</title>
+<meta name="description" content="Interactive glassmorphism dashboard of the Premier postpaid customer base (October 2013): map of Malaysia, regions, bill plans, relationship managers and ARPU. Aggregated data only.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="celcom.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+<div class="viewport" id="viewport">
+<main class="stage" id="stage">
+
+  <header class="head">
+    <div class="brand">
+      <div class="logo"><img src="celcom.png" alt="Celcom"></div>
+      <div class="titles">
+        <h1><span class="t1">PREMIER</span> <span class="t2">Database</span></h1>
+        <p>Postpaid VIP customer base · October 2013 · <em id="scopeLabel">All Malaysia</em></p>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="chips" id="chips" aria-live="polite"></div>
+      <div class="seg" role="group" aria-label="Map metric">
+        <button type="button" data-m="cust" class="on">Customers</button>
+        <button type="button" data-m="arpu">Avg ARPU</button>
+        <i class="knob" aria-hidden="true"></i>
+      </div>
+      <button type="button" class="reset" id="reset">Reset</button>
+    </div>
+  </header>
+
+  <section class="col left">
+    <article class="glass panel" style="--i:1"><h2>Customers by region</h2><div id="pRegion" class="donutwrap"></div></article>
+    <article class="glass panel" style="--i:2"><h2>Bill plan families</h2><div id="pPlans" class="rank"></div></article>
+  </section>
+
+  <section class="center">
+    <div class="kpis">
+      <article class="glass kpi" style="--i:3"><span>Customers</span><b id="kCust">0</b><small id="kCustSub"></small></article>
+      <article class="glass kpi" style="--i:4"><span>Average ARPU</span><b id="kArpu">0</b><small id="kArpuSub"></small></article>
+      <article class="glass kpi" style="--i:5"><span>Monthly ARPU revenue</span><b id="kRev">0</b><small id="kRevSub"></small></article>
+      <article class="glass kpi" style="--i:6"><span>High-value lines</span><b id="kHigh">0</b><small>ARPU of RM 1,000 or more</small></article>
+    </div>
+    <div class="mapzone" id="mapzone">
+      <div class="mapframe" id="mapframe">
+        <svg id="map" viewBox="0 0 1000 429" role="img" aria-label="Map of Malaysia coloured by state"></svg>
+        <svg id="leaders" viewBox="0 0 1000 429" aria-hidden="true"></svg>
+        <div id="callouts"></div>
+      </div>
+      <div class="ring" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="legend"><span id="lgMin"></span><i></i><span id="lgMax"></span><em id="lgTitle"></em></div>
+      <div class="spot" id="spot" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="col right">
+    <article class="glass panel" style="--i:7"><h2>Relationship managers</h2><div id="pRM" class="rank"></div></article>
+    <article class="glass panel half" style="--i:8"><h2>ARPU bands</h2><div id="pBands" class="cols"></div></article>
+  </section>
+
+  <section class="bottom">
+    <article class="glass panel" style="--i:9"><h2>Top cities</h2><div id="pCities" class="rank small"></div></article>
+    <article class="glass panel wide" style="--i:10"><h2>Monthly billing <small>Apr to Sep 2013, RM per month and per line</small></h2><div id="pMonthly" class="cols"></div></article>
+    <article class="glass panel" style="--i:11"><h2>Customer tenure</h2><div id="pTenure" class="cols"></div></article>
+  </section>
+
+  <footer class="foot">Unofficial analysis of an anonymised extract. No names, phone numbers or addresses are shown. ARPU is the per-line figure supplied in the source. Celcom logo shown for identification only.</footer>
+</main>
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+<script src="data.js"></script>
+<script src="map.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
