@@ -10,6 +10,8 @@
     { key: 'videos',   label: 'AI Video', href: '/videos/' },
     { key: 'images',   label: 'AI Images', href: '/images/' },
     { key: 'audio',    label: 'AI Audio', href: '/audio/' },
+    { key: 'ui-ux',    label: 'UI-UX',    href: '/ui-ux/' },
+    { key: 'shotboard', label: 'Shotboard', href: '/shotboard/' },
     { key: '3d',       label: 'AI 3D',    href: '/3d/' },
     { key: 'cast',     label: 'Cast',     href: '/cast/' },
     { key: 'magazine', label: 'Magazine', href: '/magazine/' },
