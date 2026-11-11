@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shotboard · Prompt Library &amp; Shot Planner for AI video</title>
+<meta name="description" content="Plan every shot before you generate. A prompt library and shot planner for AI video directors, with prompt formats for Seedance, Higgsfield and Flow / Veo.">
+<meta name="theme-color" content="#07060d">
+<meta property="og:title" content="Shotboard · Direct the AI. Plan every shot.">
+<meta property="og:image" content="assets/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%237c5cff%27/%3E%3Cstop offset=%271%27 stop-color=%27%23c6ff3d%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2764%27 height=%2764%27 rx=%2718%27 fill=%27url(%23g)%27/%3E%3C/svg%3E"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="Shotboard home"><i></i>SHOTBOARD</a>
+  <nav aria-label="Main"><a href="#features">Why</a><a href="#planner">Planner</a><a href="#realism">Realism</a><a href="#library">Library</a><a href="#boards">Boards</a></nav>
+  <a class="btn hot" href="#planner">Plan a shot</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="mesh" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
+    <div class="hero-copy">
+      <p class="kicker"><span class="dot"></span>Prompt library · Shot planner · 2027</p>
+      <h1><span class="w">Direct</span> <span class="w">the</span> <span class="w grad">AI.</span><br><span class="w">Plan</span> <span class="w">every</span> <span class="w grad2">shot.</span></h1>
+      <p class="lead">Turn one idea into a full shot list with camera moves, lenses, lighting and ready-to-paste prompts for Seedance, Higgsfield and Flow. Human first, tool second.</p>
+      <div class="btns"><a class="btn hot big" href="#planner">Start planning</a><a class="btn big" href="#library">Browse the library</a></div>
+      <ul class="stats"><li><b>60+</b><span>prompt snippets</span></li><li><b>6</b><span>story arcs</span></li><li><b>4</b><span>model formats</span></li></ul>
+    </div>
+    <div class="hero-art tilt">
+      <div class="art-frame">
+        <img onerror="this.style.display='none'" data-slot src="assets/hero.jpg" alt="Cinematic AI-directed scene" loading="eager">
+        <video data-slot autoplay muted loop playsinline poster="assets/hero.jpg"><source src="assets/hero.mp4" type="video/mp4" onerror="this.parentNode.style.display='none'"></video>
+        <div class="art-fallback" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="viewfinder" aria-hidden="true"><span>REC</span><em>00:05:00 · 9:16 · 24fps</em></div>
+      </div>
+      <aside class="float p1"><small id="heroTag">Seedance</small><p id="heroPrompt"></p></aside>
+      <aside class="float p2"><small>Camera</small><b>Crane up reveal</b></aside>
+      <aside class="float p3"><small>Lens</small><b>Anamorphic 40mm</b></aside>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div id="marq"></div></div>
+
+  <section class="section" id="features">
+    <div class="head reveal"><p class="kicker">Why it exists</p><h2>Stop prompting blind.</h2><p>Random clips are cheap. A story is a sequence of decisions. Shotboard makes those decisions visible before you spend a single credit.</p></div>
+    <div class="bento">
+      <article class="tile t1 tilt reveal"><img onerror="this.style.display='none'" data-slot src="assets/tile1.jpg" alt=""><div><span>01</span><h3>Idea to shot list</h3><p>Pick a story arc and mood. Get 1 to 8 shots with camera, lens, motion and transitions that actually cut together.</p></div></article>
+      <article class="tile t2 tilt reveal"><img onerror="this.style.display='none'" data-slot src="assets/tile2.jpg" alt=""><div><span>02</span><h3>Look and light, locked</h3><p>One look and one light across the whole board, so shot 6 matches shot 1.</p></div></article>
+      <article class="tile t3 tilt reveal"><img onerror="this.style.display='none'" data-slot src="assets/tile3.jpg" alt=""><div><span>03</span><h3>Speaks every model</h3><p>Seedance, Higgsfield, Flow / Veo or generic. Same board, native prompt style.</p></div></article>
+      <article class="tile t4 tilt reveal"><img onerror="this.style.display='none'" data-slot src="assets/tile4.jpg" alt=""><div><span>04</span><h3>Library you can steer</h3><p>Search 60+ tested snippets, swap one into any shot, or re-roll a single field.</p></div></article>
+      <article class="tile t5 tilt reveal"><img onerror="this.style.display='none'" data-slot src="assets/tile5.jpg" alt=""><div><span>05</span><h3>Take it anywhere</h3><p>Copy all prompts, download Markdown, print a storyboard, or save boards in your browser.</p></div></article>
+    </div>
+  </section>
+
+  <section class="section" id="planner">
+    <div class="head reveal"><p class="kicker">The planner</p><h2>Describe it. Plan it. Copy it.</h2></div>
+    <div class="planner">
+      <div class="panel form reveal">
+        <label class="lab" for="brief">Scene idea</label>
+        <textarea id="brief" rows="4" placeholder="A lone astronaut finds a glowing garden inside an abandoned ship"></textarea>
+        <div id="slopHint" class="slop"></div><div class="row"><button class="btn mini" id="sample" type="button">Surprise me</button></div>
+        <label class="lab">Story arc</label><div class="chips" id="genreChips"></div>
+        <label class="lab">Mood</label><div class="chips" id="moodChips"></div>
+        <label class="lab">Target model</label><div class="chips" id="modelChips"></div>
+        <label class="lab">Aspect ratio</label><div class="chips" id="ratioChips"></div>
+        <label class="lab">Realism mode</label><div class="chips" id="realChips"></div><p class="hint">On: strips slop words and adds real light, skin, wear and framing to every prompt.</p><label class="lab" for="count">Shots <output id="countOut">6</output></label><input type="range" id="count" min="1" max="8" value="6">
+        <label class="lab" for="dur">Seconds per shot <output id="durOut">5s</output></label><input type="range" id="dur" min="3" max="15" value="5">
+        <button class="btn hot big full" id="plan" type="button">Plan my shots</button>
+        <p class="hint">Changing arc or mood? Press Plan to rebuild. Model, ratio and length update the prompts instantly.</p>
+      </div>
+      <div class="out">
+        <div class="bar reveal"><div id="summary" class="summary"></div><div class="actions"><button class="btn mini" id="reroll" type="button">Re-roll unlocked</button><button class="btn mini" id="copyAll" type="button">Copy all</button><button class="btn mini" id="dlTxt" type="button">Download .md</button><button class="btn mini" id="print" type="button">Print</button><button class="btn mini hot" id="saveBoard" type="button">Save board</button></div></div>
+        <div class="strip" id="strip" aria-label="Storyboard strip"></div>
+        <div id="shots" class="shots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="realism">
+    <div class="head reveal"><p class="kicker">Realism · no AI slop</p><h2>Real is a set of decisions.</h2><p>"Ultra realistic, 8k, masterpiece" does not make a photo look real. Camera, light, flaws and restraint do. Same idea, two prompts, drag the handle to compare.</p></div>
+    <div class="cmpgrid" id="cmpGrid"></div>
+    <div class="reveal"><h3 class="sub">Eight rules that remove the slop</h3><div class="rules" id="rules"></div></div>
+    <div class="reveal fix"><h3 class="sub">Swap the slop words</h3><div class="fixgrid" id="fixGrid"></div>
+      <div class="btns"><button class="btn hot big" id="turnReal" type="button">Turn realism on in the planner</button></div></div>
+  </section>
+  <section class="section" id="library">
+    <div class="head reveal"><p class="kicker">The library</p><h2>Prompt snippets that work.</h2><p>Click Copy, or add one straight into a shot. <span id="libCount"></span></p></div>
+    <div class="libbar reveal"><input id="libQ" type="search" placeholder="Search: dolly, neon, anamorphic, rain…" aria-label="Search the library"><div class="chips" id="libCats"></div></div>
+    <div class="libgrid" id="libGrid"></div>
+  </section>
+
+  <section class="section" id="boards">
+    <div class="head reveal"><p class="kicker">Your boards</p><h2>Saved in your browser.</h2><p>No account needed. Export to move them between devices.</p></div>
+    <div class="row reveal"><button class="btn mini" id="exportAll" type="button">Export all</button><label class="btn mini" for="importFile">Import</label><input id="importFile" type="file" accept="application/json" hidden></div>
+    <div id="boardList" class="blist"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div><b>SHOTBOARD</b><span>A prompt library and shot planner by <a href="https://zairul.online" target="_blank" rel="noopener">Zairul MD TY</a>. Human-directed. AI-assisted.</span></div>
+  <a class="btn" href="https://zairul.online/ui-ux/" target="_blank" rel="noopener">See the case study</a>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
