@@ -98,6 +98,9 @@
   .private { margin-top: 28px; padding: 22px 24px; border-left: 4px solid var(--gold); background: linear-gradient(90deg, rgba(242,182,50,.08), transparent); border-radius: 0 6px 6px 0; }
   .private b { display: block; font: 400 22px/1.1 'Anton', sans-serif; text-transform: uppercase; margin-bottom: 8px; }
   .private p { color: #cfc9c0; }
+  .sb-vid { max-width: 400px; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 24px 70px rgba(0,0,0,.55); background: #111; }
+  .sb-vid video { width: 100%; height: auto; display: block; }
+  .split2.mid { align-items: center; }
   @media (max-width: 900px) { .split2 { grid-template-columns: minmax(0, 1fr); } .roles div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
 
   /* Lightbox */
@@ -109,7 +112,7 @@
 </style>
 </head>
 <body>
-<script src="/assets/menu.js?v=20261106"></script>
+<script src="/assets/menu.js?v=20261112"></script>
 
 <header class="page-hero st-hero">
   <div class="wrap">
@@ -117,7 +120,7 @@
       <p class="kicker">Case study · Product design + AI build</p>
       <h1>MZ Director's <em>Studio</em></h1>
       <p class="lead">My own production command centre for AI creative work. Every project, every generated shot, every prompt and every ringgit spent on tools in one place, with a one-page report ready for management at the end of the month.</p>
-      <div class="btns"><a class="btn red" href="#tour">Take the tour</a><a class="btn" href="/contact/">Ask for a live walkthrough</a></div>
+      <div class="btns"><a class="btn red" href="#tour">Take the tour</a><a class="btn" href="#shotboard">Shotboard</a><a class="btn" href="/contact/">Ask for a live walkthrough</a></div>
     </div>
     <div class="st-stage" id="stage">
       <div class="st-screen"><div class="st-bar" aria-hidden="true"><i></i><i></i><i></i><span>MZ Director's Studio · Today</span></div>
@@ -241,6 +244,20 @@
           <div><b>Works on</b><span>Desktop and phone, light and dark mode</span></div>
           <div><b>Shows</b><span>That I can run AI production like a business: on time, on budget and repeatable</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="shotboard">
+    <div class="wrap">
+      <p class="label">Also in the studio</p>
+      <h2>Shotboard:<br>plan every AI shot.</h2>
+      <div class="split2 mid">
+        <div>
+          <p>A prompt library and shot planner for AI video directors. Describe a scene, pick a story arc and mood, and get a full shot list with camera, lens, lighting and ready-to-paste prompts for Seedance, Higgsfield and Flow / Veo. It reuses the workflow behind my AI Video page, turned into a tool.</p>
+          <div class="stack" aria-label="Features"><span>63 prompt snippets</span><span>6 story arcs</span><span>4 model formats</span><span>Realism mode</span><span>Saves in the browser</span></div>
+          <div class="btns" style="margin-top:28px"><a class="btn red" href="/shotboard/">Open Shotboard</a></div>
+        </div>
+        <div class="sb-vid"><video controls playsinline preload="metadata" poster="/ui-ux/img/shotboard-hero.jpg"><source src="/ui-ux/video/shotboard-ad.mp4" type="video/mp4"></video></div>
       </div>
     </div>
   </section>
