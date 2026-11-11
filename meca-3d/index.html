@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MECA – Industrial Relations &amp; Employment Law Consultants, Malaysia (3D concept)</title>
+<meta name="description" content="Interactive 3D motion concept for MECA Employers Consulting Agency: Industrial Relations and Employment Law consultancy, training, team and insights in Malaysia.">
+<meta name="theme-color" content="#141414">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<header class="top" id="top">
+  <a class="brand" href="#hero" aria-label="MECA – back to top"><img src="assets/logo.png" alt="MECA Employers Consulting Agency" width="120" height="51"></a>
+  <nav id="nav" aria-label="Main">
+    <a href="#services">Services</a>
+    <a href="#courses">Courses</a>
+    <a href="#clients">Clients</a>
+    <a href="#team">Team</a>
+    <a href="#insights">Insights</a>
+    <a href="http://convention.meca.com.my/meca" target="_blank" rel="noopener">Convention<span class="sr"> (opens MECA convention site)</span> ↗</a>
+    <a class="btn btn-sm nav-cta" href="#contact">Book a consultation</a>
+  </nav>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="hero" aria-labelledby="h-hero">
+  <div class="hero-logo"><img src="assets/logo.png" alt="MECA – Employers Consulting Agency" width="1024" height="434">
+    <canvas id="logoScales" class="logo-scales" aria-hidden="true"></canvas>
+    <svg class="logo-scales-svg" viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14v66M32 84h36M18 26h64"/><path d="M18 26l-12 28h24zM82 26l-12 28h24z"/><path d="M6 54a12 6 0 0 0 24 0M70 54a12 6 0 0 0 24 0" /><circle cx="50" cy="12" r="4" stroke="#fd474a" fill="#fd474a"/></svg></div>
+  <p class="eyebrow reveal">Supporting Employers. Strengthening Workplace Relations.</p>
+  <h1 id="h-hero" class="kin">Leading the Future of <em>Industrial Relations</em> and Employment Solutions in Malaysia</h1>
+  <p class="lead reveal">We simplify Industrial Relations and Employment Law solutions for businesses and corporations in Malaysia.</p>
+  <div class="cta-row reveal">
+    <a class="btn" href="#contact">Book a consultation</a>
+    <a class="btn btn-ghost" href="#courses">Find a course</a>
+    <a class="btn btn-ghost" href="https://wa.me/601169499497" target="_blank" rel="noopener">WhatsApp us</a>
+  </div>
+  <p class="badge reveal"><span class="dot"></span> Your Award Winning IR Consulting Firm</p>
+  <div class="hint" aria-hidden="true"><span>Scroll to fly through</span><i></i></div>
+</section>
+
+<!-- PROOF NUMBERS -->
+<section class="stats" aria-label="MECA in numbers">
+  <ul class="glass">
+    <li><b data-to="30">30</b><span>Years of HR experience</span></li>
+    <li><b data-to="18">18</b><span>Conventions hosted</span></li>
+    <li><b data-to="100">100</b><span>Years of combined experience</span></li>
+    <li><b data-to="8000">8,000</b><span>Employment engagement per year</span></li>
+    <li><b data-to="2000">2,000</b><span>Training hours</span></li>
+    <li><b data-to="1500">1,500</b><span>Clients trusting our brand</span></li>
+  </ul>
+  <p class="small reveal">With over 100 years of combined industrial experience and knowledge, we have successfully impacted more than 1000 corporations in Malaysia. <span class="src">Figures as published on meca.com.my.</span></p>
+</section>
+
+<div class="beat" aria-hidden="true"><p>Simplifying Complexities</p></div>
+
+<!-- SERVICES -->
+<section class="sec" id="services" aria-labelledby="h-services">
+  <header class="sec-head reveal">
+    <p class="eyebrow">What we do</p>
+    <h2 id="h-services">Empower your workforce with knowledge</h2>
+    <p>Equip your team with the skills and insights via expert-led consultancy and training.</p>
+  </header>
+  <div class="bento">
+    <article class="card tilt big red reveal">
+      <h3>Consultancy</h3>
+      <p>We are a team of experts who will advice your business on best practices to navigate IR and Employment challenges, ensuring compliance and strategic alignment for efficient operations.</p>
+      <a class="link" href="https://meca.com.my/consultancy/">Learn more<span class="sr"> about Consultancy</span> →</a>
+    </article>
+    <article class="card tilt big reveal">
+      <h3>Learning &amp; Development</h3>
+      <p>Our experience consultants provide continuous learning and development modules for your stakeholders – educating and empowering for greater IR and Employment compliance.</p>
+      <a class="link" href="#courses">See courses<span class="sr"> in Learning &amp; Development</span> →</a>
+    </article>
+    <article class="card tilt reveal"><span class="num">01</span><h3>Expert Consulting</h3><p>Key service areas include Workplace Issue Solutions, Employment Terms and Conditions, Workplace Investigations, Performance and Misconduct Management, and many others.</p></article>
+    <article class="card tilt reveal"><span class="num">02</span><h3>Employment Contracts &amp; HR Policies</h3><p>We draft, review and customise contracts and policies to suit your organisational structure and functions. This includes Contracts of Employment, Contracts of Services and Workplace Policies.</p></article>
+    <article class="card tilt reveal"><span class="num">03</span><h3>Membership Program</h3><p>Our members access our robust platform of content alongside the expert services provided to assist your organisational function. This also includes ongoing support and priority consulting.</p></article>
+    <article class="card tilt reveal"><span class="num">04</span><h3>Strategic Partnerships</h3><p>As partners of MECA, your organisation will benefit from industry network and connections which could be leveraged for your operational benefits. This includes Conflict Resolution and Mediation.</p></article>
+    <article class="card tilt reveal"><span class="num">05</span><h3>Dispute Resolution</h3><p>We provide employers with strategic advisory and support services in navigating workplace disputes, disciplinary actions, and industrial relations matters.</p></article>
+    <article class="card tilt wide reveal">
+      <h3>The MECA Membership &amp; The MECA Retainer</h3>
+      <p>Bespoke IR and Employment Solutions. Stay ahead of complex Employment and Industrial Relations (IR) challenges. Our expert consultants provide on-demand consultation for businesses of all sizes, ensuring your organisation navigates Malaysia’s ever-changing regulatory landscape with ease.</p>
+      <a class="link" href="#contact">Ask about membership<span class="sr"> and retainer</span> →</a>
+    </article>
+  </div>
+
+  <header class="sec-head reveal sub">
+    <p class="eyebrow">How we help</p>
+    <h2>More than 1000 corporations, one collaborative workplace at a time</h2>
+    <p>MECA has assisted more than 1000 corporations in Malaysia to establish a collaborative and efficient workplace, yielding greater business success. Here is how:</p>
+  </header>
+  <ol class="steps">
+    <li class="glass tilt reveal"><b>01</b><h3>Simplifying Complexities</h3><p>Navigating the tricky world of employment laws can be overwhelming. We cut through the confusion to provide you with clear, actionable advice.</p></li>
+    <li class="glass tilt reveal"><b>02</b><h3>Building Strong Foundations</h3><p>A strong foundation is crucial for long-term success. We help you build a robust HR framework that supports your business goals.</p></li>
+    <li class="glass tilt reveal"><b>03</b><h3>Mitigating Risks</h3><p>Protect your business from potential legal challenges. Our proactive approach helps you identify and address risks before they escalate.</p></li>
+    <li class="glass tilt reveal"><b>04</b><h3>Empowering Your Workforce</h3><p>A happy and engaged workforce is a productive one; we empower your team with the knowledge and tools they need to thrive.</p></li>
+  </ol>
+</section>
+
+<div class="beat" aria-hidden="true"><p>Targeted Training, Expertly Curated</p></div>
+
+<!-- COURSES -->
+<section class="sec" id="courses" aria-labelledby="h-courses">
+  <header class="sec-head reveal">
+    <p class="eyebrow">Training &amp; Development</p>
+    <h2 id="h-courses">Upcoming public courses</h2>
+    <p>A glimpse into our public training courses, covering diverse Industrial Relations and Employment matters for professionals from all industries.</p>
+  </header>
+
+  <div class="ring-wrap reveal">
+    <button class="rbtn" id="prev" aria-label="Previous course">←</button>
+    <div class="ring" id="ring" role="region" aria-roledescription="carousel" aria-label="Upcoming public courses">
+      <div class="ring-in" id="ringIn">
+        <article class="course" aria-label="Course 1 of 5">
+          <h3>Beyond Employment Law: Mastering Employment Disputes Before They Escalate</h3>
+          <p>A practical two-day public course for HR, IR practitioners, managers, and business leaders on managing workplace conflict, preventing employment disputes, and reducing escalation, litigation, and reputational risk.</p>
+          <p class="ph">Date · venue · fee: <i>placeholder, not listed on the course index; confirm on the course page</i></p>
+          <a class="btn btn-sm" href="https://meca.com.my/courses/beyond-emploment-law-mastering-employment-disputes-before-they-escalate/" target="_blank" rel="noopener">Register now<span class="sr"> for Beyond Employment Law</span></a>
+        </article>
+        <article class="course" aria-label="Course 2 of 5">
+          <h3>Handling Misconduct &amp; Domestic Inquiry</h3>
+          <p>This course equips employers with a clear, structured, and defensible approach to managing workplace misconduct and conducting domestic inquiries. Participants will learn not just what to do at each stage of the disciplinary process, but how to ensure actions are fair, consistent, properly documented, and aligned with legal expectations to avoid costly challenges.</p>
+          <p class="ph">Date · venue · fee: <i>placeholder, not listed on the course index; confirm on the course page</i></p>
+          <a class="btn btn-sm" href="https://meca.com.my/courses/handling-misconduct-and-domestic-inquiry/" target="_blank" rel="noopener">Register now<span class="sr"> for Handling Misconduct and Domestic Inquiry</span></a>
+        </article>
+        <article class="course" aria-label="Course 3 of 5">
+          <h3>Employment Act 1955: The Essentials</h3>
+          <p>This comprehensive course is designed to demystify the EA by breaking down all 11 modules of the Act into practical, real-world applications. Participants will learn not just what the law says, but how to implement it, what to do if existing practices are non-compliant, and what to do when things escalate.</p>
+          <p class="ph">Date · venue · fee: <i>placeholder, not listed on the course index; confirm on the course page</i></p>
+          <a class="btn btn-sm" href="https://meca.com.my/courses/employment-act-1955-the-essentials/" target="_blank" rel="noopener">Register now<span class="sr"> for Employment Act 1955: The Essentials</span></a>
+        </article>
+        <article class="course" aria-label="Course 4 of 5">
+          <h3>Union Representation is Set to Increase: Trust, Unions, and the New Employer Playbook</h3>
+          <p>To provide HR and IR practitioners, business leaders, and line managers with a practical and strategic understanding of evolving union representation trends – equipping them to build workplace trust, navigate union dynamics confidently, and manage unionised environments lawfully and effectively.</p>
+          <p class="ph">Date · venue · fee: <i>placeholder, not listed on the course index; confirm on the course page</i></p>
+          <a class="btn btn-sm" href="https://meca.com.my/courses/union-representation-is-set-to-increase/" target="_blank" rel="noopener">Register now<span class="sr"> for Union Representation is Set to Increase</span></a>
+        </article>
+        <article class="course" aria-label="Course 5 of 5">
+          <h3>Foundations of Malaysian Employment Law &amp; Industrial Relations</h3>
+          <p>To provide HR and IR practitioners with a comprehensive and practical foundation in Malaysian employment law and industrial relations principles – empowering them to apply legal knowledge confidently in their daily work and manage workplace issues within legal boundaries.</p>
+          <p class="ph">Date · venue · fee: <i>placeholder, not listed on the course index; confirm on the course page</i></p>
+          <a class="btn btn-sm" href="https://meca.com.my/courses/foundations-of-malaysian-employment-law-and-industrial-relations/" target="_blank" rel="noopener">Register now<span class="sr"> for Foundations of Malaysian Employment Law and Industrial Relations</span></a>
+        </article>
+      </div>
+    </div>
+    <button class="rbtn" id="next" aria-label="Next course">→</button>
+  </div>
+  <p class="small center" id="ringHint">Drag, swipe or use the arrows to turn the ring.</p>
+
+  <div class="inhouse glass reveal">
+    <div>
+      <p class="eyebrow">In-house training</p>
+      <h3>Targeted training, expertly curated</h3>
+      <p>One size does not fit all. We customise training solutions based on your corporation’s needs. Each programme runs 1–2 days.</p>
+      <div class="cta-row"><a class="btn btn-sm" href="https://meca.com.my/learning-development/in-house-public-course-training-inquiry-form/" target="_blank" rel="noopener">Register your interest</a>
+      <a class="btn btn-sm btn-ghost" href="https://meca.com.my/learning-development/in-house-training/" target="_blank" rel="noopener">See in-house programmes</a></div>
+    </div>
+    <ul class="chips">
+      <li>Employment Act 1955 Mastery</li>
+      <li>Managing Absenteeism and Performance</li>
+      <li>Managing Misconduct &amp; Domestic Inquiry</li>
+      <li>Termination of Employment Essentials</li>
+      <li>Roles at a Domestic Inquiry</li>
+      <li>Effective Drafting Skills for HR Practitioners</li>
+      <li>Payroll Management for HR &amp; Finance</li>
+      <li>Harassment &amp; Bullying Prevention</li>
+      <li>Reducing Manpower Cost</li>
+      <li>Comprehensive Trade Union Management (IR Act 1967)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CLIENTS / PROOF -->
+<section class="sec" id="clients" aria-labelledby="h-clients">
+  <header class="sec-head reveal">
+    <p class="eyebrow">Client success stories</p>
+    <h2 id="h-clients">We’re passionate about helping our clients achieve success</h2>
+    <p>See what they have to say about our expertise.</p>
+  </header>
+  <div class="quotes">
+    <figure class="glass tilt reveal"><blockquote>“Our experience with MECA has been consistently positive. They provide expert, timely advice on Industrial Relations matters tailored to our needs. Their deep understanding of the legal landscape and organizational dynamics helps us make informed decisions and manage risks. We highly value their professional guidance.”</blockquote><figcaption><b>Jaspreet</b>Head of Human Resources, International Schools Partnership</figcaption></figure>
+    <figure class="glass tilt reveal"><blockquote>“Our experience with MECA has been exceptional. Their team consistently impresses us with fast responses, in-depth knowledge, and practical advice. Special thanks to Pritika, Jerry, and Sara for their prompt and helpful support. We truly appreciate their dedication and expertise in every interaction.”</blockquote><figcaption><b>Hoo Chew Lian</b>Senior Manager – Human Resources, AIA Shared Service Sdn Bhd</figcaption></figure>
+    <figure class="glass tilt reveal"><blockquote>“MECA has been more than just consultants; they work alongside us, consistently going beyond normal hours to act in the best interests of both employer and employee. Over the years, we’ve developed a strong, trusting bond, allowing their feedback to be even more relevant, thoughtful, and impactful. Thank you!”</blockquote><figcaption><b>Adeline Law</b>General Manager, Young Living Malaysia</figcaption></figure>
+  </div>
+  <p class="small center reveal"><a class="link" href="https://meca.com.my/#content">Read all client stories on meca.com.my →</a></p>
+
+  <div class="marquee reveal" aria-label="Clients quoted on meca.com.my">
+    <div class="track">
+      <ul>
+        <li>International Schools Partnership</li><li>Berjaya Starbucks Coffee Company</li><li>Fosroc</li><li>Hitachi Construction Machinery (Malaysia)</li><li>Taylor’s Education Group</li><li>Tune Talk</li><li>EPOMS</li><li>Young Living Malaysia</li><li>Steelcase</li><li>AIA Shared Service</li><li>Berjaya Corporation Berhad</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>International Schools Partnership</li><li>Berjaya Starbucks Coffee Company</li><li>Fosroc</li><li>Hitachi Construction Machinery (Malaysia)</li><li>Taylor’s Education Group</li><li>Tune Talk</li><li>EPOMS</li><li>Young Living Malaysia</li><li>Steelcase</li><li>AIA Shared Service</li><li>Berjaya Corporation Berhad</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="vm">
+    <article class="glass tilt reveal"><p class="eyebrow">Our vision</p><p>To be the unwavering ally of organisations, guiding them to build workplaces that are compliant and thriving. Through swift action, personalised service and expertise, MECA leads businesses towards enduring success, fostering unity, and strength in the workforce.</p></article>
+    <article class="glass tilt reveal"><p class="eyebrow">Our mission</p><p>We provide counsel that is both sharp and swift — to offer expert advice, delivered promptly and tailored to the unique needs of each organisation. With unwavering dedication and deep knowledge, we help businesses rise above challenges, ensuring their workforce remains strong, united, and poised for the future.</p></article>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec" id="team" aria-labelledby="h-team">
+  <header class="sec-head reveal">
+    <p class="eyebrow">Meet our consultants</p>
+    <h2 id="h-team">Your partner(s) in workplace excellence</h2>
+  </header>
+  <article class="ceo glass reveal">
+    <div class="ph-img"><img src="assets/dharmen.webp" alt="Illustrative AI-generated portrait for Dharmen Sivalingam, CEO of MECA" width="520" height="780" loading="lazy"></div>
+    <div>
+      <p class="eyebrow">CEO</p>
+      <h3>Dharmen Sivalingam</h3>
+      <p class="creds">LLB (Hons), CLP</p>
+      <p>Dharmen, an Industrial Relations practitioner with more than 20 years’ experience, has supported numerous employers on every aspect of Industrial Relations. He has experience in the end-to-end management of what can be a delicate relationship between an employer and an employee. He represents only employers and has acted as Counsel for many employers in litigious matters before the Malaysian Courts. He has written numerous articles on Industrial Relations issues at various platforms.</p>
+      <p>Dharmen read law at the University of Wolverhampton and was called to the Malaysian Bar in 2001.</p>
+    </div>
+  </article>
+  <p class="eyebrow center reveal" style="margin-top:2.5rem">Always striving for the best</p>
+  <ul class="people">
+    <li class="tilt reveal"><a href="https://meca.com.my/team-profiles/anna-balasubramaniam/" target="_blank" rel="noopener"><span class="pic"><img src="assets/anna.webp" alt="" width="520" height="590" loading="lazy"></span><b>Anna Balasubramaniam</b><span>Lead Consultant</span><em>View profile<span class="sr"> of Anna Balasubramaniam</span> →</em></a></li>
+    <li class="tilt reveal"><a href="https://meca.com.my/team-profiles/astiqamah-abdullah/" target="_blank" rel="noopener"><span class="pic"><img src="assets/asti.webp" alt="" width="520" height="590" loading="lazy"></span><b>Astiqamah Abdullah</b><span>Senior Consultant</span><em>View profile<span class="sr"> of Astiqamah Abdullah</span> →</em></a></li>
+    <li class="tilt reveal"><a href="https://meca.com.my/team-profiles/manjeev-singh/" target="_blank" rel="noopener"><span class="pic"><img src="assets/manjeev.webp" alt="" width="520" height="590" loading="lazy"></span><b>Manjeev Singh</b><span>Consultant</span><em>View profile<span class="sr"> of Manjeev Singh</span> →</em></a></li>
+    <li class="tilt reveal"><a href="https://meca.com.my/team-profiles/sarmeithaa-apparao/" target="_blank" rel="noopener"><span class="pic"><img src="assets/sarmeithaa.webp" alt="" width="520" height="590" loading="lazy"></span><b>Sarmeithaa Apparao</b><span>Consultant</span><em>View profile<span class="sr"> of Sarmeithaa Apparao</span> →</em></a></li>
+    <li class="tilt reveal"><a href="https://meca.com.my/team-profiles/pritika-menon/" target="_blank" rel="noopener"><span class="pic"><img src="assets/pritika.webp" alt="" width="520" height="590" loading="lazy"></span><b>Pritika Menon</b><span>Consultant</span><em>View profile<span class="sr"> of Pritika Menon</span> →</em></a></li>
+  </ul>
+  <p class="disc center reveal" style="margin-top:1.5rem">Portraits on this concept page are AI-generated illustrations, not photographs of the MECA team.</p>
+</section>
+
+<div class="beat" aria-hidden="true"><p>Gain Expert Insights on Current Industry Trends and Issues</p></div>
+
+<!-- INSIGHTS -->
+<section class="sec" id="insights" aria-labelledby="h-insights">
+  <header class="sec-head reveal">
+    <p class="eyebrow">The Paper Trail · by Dharmen</p>
+    <h2 id="h-insights">Latest insights &amp; articles</h2>
+    <p>Explore expert perspectives, practical guidance and important developments in industrial relations and employment law to help your organisation make informed workplace decisions.</p>
+  </header>
+  <div class="articles">
+    <a class="glass tilt reveal" href="https://meca.com.my/article/"><time datetime="2026-11-04">4 Nov 2026</time><h3>Frustration of Contract Part 2</h3><p>Why Frustration of Contract Is One of the Most Dangerous Doctrines to Rely On</p><span>Read more →</span></a>
+    <a class="glass tilt reveal" href="https://meca.com.my/article/"><time datetime="2026-10-27">27 Oct 2026</time><h3>Frustration of Contract Part 1</h3><p>The Employment Contract That Ends Itself</p><span>Read more →</span></a>
+    <a class="glass tilt reveal" href="https://meca.com.my/article/"><time datetime="2026-10-20">20 Oct 2026</time><h3>Medical Termination Part 2</h3><p>Light Duties, Long Absences, and the Explanation That Decides Medical Termination Cases</p><span>Read more →</span></a>
+    <a class="glass tilt reveal" href="https://meca.com.my/article/"><time datetime="2026-10-13">13 Oct 2026</time><h3>Medical Termination Part 1</h3><p>Medical Termination Is Not About Illness. It Is About Capacity.</p><span>Read more →</span></a>
+  </div>
+  <div class="hub glass reveal">
+    <div><p class="eyebrow">MECA Hub</p><h3>Tune in to engaging discussion &amp; expert insights</h3><p>Webinars, news &amp; updates, articles and media, plus the monthly MECA Newsletter (latest listed: August 2026).</p></div>
+    <div class="cta-row"><a class="btn btn-sm" href="https://meca.com.my/mecahub/" target="_blank" rel="noopener">Visit MECA Hub</a><a class="btn btn-sm btn-ghost" href="https://meca.com.my/article/" target="_blank" rel="noopener">All articles</a></div>
+  </div>
+</section>
+
+<div class="beat" aria-hidden="true"><p>Counsel that is both sharp and swift</p></div>
+
+<!-- CONTACT -->
+<section class="sec contact" id="contact" aria-labelledby="h-contact">
+  <div class="glass big-cta reveal">
+    <p class="eyebrow">Contact us</p>
+    <h2 id="h-contact">Simplify your Industrial Relations and Employment Law operations</h2>
+    <p>Fill this form and our experts will reach out to you. For any Industrial Relations and Employment Law inquiries, please contact us through the following channels.</p>
+    <div class="cta-row"><a class="btn" href="https://meca.com.my/general-enquiry-form/" target="_blank" rel="noopener">Contact our expert<span class="sr"> (opens MECA enquiry form)</span></a>
+    <a class="btn btn-ghost" href="https://wa.me/601169499497" target="_blank" rel="noopener">WhatsApp +60 11 6949 9497</a></div>
+    <ul class="channels">
+      <li><span>Office number</span><a href="tel:+60327794227">+6 03 2779 4227</a></li>
+      <li><span>Email address</span><a href="mailto:admin@meca.com.my">admin@meca.com.my</a></li>
+      <li><span>Headquarters</span><address>Level 13A-05, PJX-HM Shah Tower, No 16A, Persiaran Barat, PJS 52, 46050, Petaling Jaya, Selangor, Malaysia.</address></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <img src="assets/logo.png" alt="MECA" width="90" height="38">
+  <p>Copyright 2026 © MECA Employers Consulting Agency Sdn Bhd</p>
+  <p class="social"><a href="https://www.facebook.com/mecaconsultants" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/mecaconsultants/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/mecaconsultants" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.youtube.com/@mecaconsultants" target="_blank" rel="noopener">YouTube</a></p>
+  <p class="disc">Design concept by Zairul (zairul.online), not an official MECA website. Copy, logo and photos are from meca.com.my. Items marked “placeholder” need confirmation from MECA.</p>
+</footer>
+
+<nav class="mbar" aria-label="Quick contact">
+  <a href="tel:+60327794227">Call</a>
+  <a href="https://wa.me/601169499497" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="hot" href="#contact">Enquire</a>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
