@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI-UX · Zairul MD TY</title>
+<meta name="description" content="The making of PL Fitness: a mobile fitness app built from a Figma template with human-directed AI, from design to a live working app.">
+<meta property="og:title" content="UI-UX · The Making of PL Fitness">
+<meta property="og:image" content="https://zairul.online/ui-ux/img/s05-home.png">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/assets/site.css?v=20261103">
+<style>
+  .stage { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,4vw,64px); align-items:center; }
+  .stage.flip > :first-child { order:2; }
+  @media (max-width:860px){ .stage { grid-template-columns:1fr; } .stage.flip > :first-child { order:0; } }
+  .shot { border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--panel); }
+  .shot img, .shot video { width:100%; height:auto; display:block; }
+  figure figcaption { margin-top:10px; font-size:14px; color:var(--dim); }
+  .num { font:400 clamp(60px,8vw,120px)/.85 'Anton',Impact,sans-serif; color:var(--red); margin-bottom:10px; }
+  .phones { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:14px; margin-top:34px; }
+  .phones figure img { border-radius:14px; border:1px solid var(--line); background:#050505; }
+  @media (max-width:1100px){ .phones { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media (max-width:560px){ .phones { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  .pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:28px; }
+  .trio { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:28px; }
+  @media (max-width:720px){ .pair,.trio { grid-template-columns:1fr; } }
+  .vids { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:28px; }
+  @media (max-width:860px){ .vids { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  .ad { max-width:420px; margin:0 auto; }
+  .facts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:34px; list-style:none; }
+  .facts li { padding:20px 18px; background:var(--panel); border:1px solid var(--line); border-top:3px solid var(--red); border-radius:6px; }
+  .facts b { display:block; font:400 34px/1 'Anton',sans-serif; color:var(--gold); margin-bottom:8px; }
+  .facts span { color:var(--muted); font-size:15px; }
+  @media (max-width:860px){ .facts { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  .tools { display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .tools span { padding:8px 14px; border:1px solid var(--line); border-radius:999px; background:var(--panel); font-size:14px; color:#d9d3ca; }
+  .days { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .days i { font-style:normal; font:700 14px/1 'Barlow',sans-serif; letter-spacing:.12em; padding:14px 16px; border-radius:12px; border:1.5px solid currentColor; }
+</style>
+</head>
+<body>
+<script src="/assets/menu.js?v=20261107"></script>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="kicker">UI-UX · Case study</p>
+    <h1>The making of PL Fitness</h1>
+    <p class="lead">From a Figma template to a real, working mobile app with accounts, saved data and a public link. Designed, directed and shipped with human-directed AI, step by step.</p>
+    <div class="btns">
+      <a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Open the live app</a>
+      <a class="btn" href="#ad">Watch the 15-second ad</a>
+      <a class="btn" href="#story">Read the making of</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="ad">
+    <div class="wrap">
+      <p class="label">The result</p>
+      <h2>Fifteen seconds, start to finish</h2>
+      <p>A motion-graphics ad built in code: the logo is drawn, becomes the app icon, and hands over to a phone that walks through the product. Every shot transforms into the next.</p>
+      <div class="ad shot" style="margin-top:30px">
+        <video controls playsinline preload="metadata" poster="img/s05-home.png"><source src="video/pl-fitness-ad.mp4" type="video/mp4"></video>
+      </div>
+      <ul class="facts">
+        <li><b>9:16</b><span>Vertical, made for Reels, Shorts and TikTok</span></li>
+        <li><b>15 s</b><span>Eight shots, no cross-dissolves</span></li>
+        <li><b>6</b><span>AI tutorial videos inside the app</span></li>
+        <li><b>7</b><span>Day colours, one for each day of the week</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="story">
+    <div class="wrap">
+      <p class="label">01 · Starting point</p>
+      <div class="stage">
+        <div>
+          <h2>A Figma kit, a brief, one portrait</h2>
+          <p>The project began with a purchased fitness-app template in Figma: dozens of screens, flat and static. The brief was simple. Name it <strong>PL Fitness</strong>, make it a real app, and give me a link I can open on my phone.</p>
+          <p>I read the design file directly, pulled out colours, type, spacing and the exercise cut-outs, then rebuilt each screen as working code instead of pictures.</p>
+        </div>
+        <figure class="shot"><img src="img/figma-overview.png" alt="Overview of the Figma fitness app template" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="label">02 · The build</p>
+      <div class="stage flip">
+        <div>
+          <h2>Every screen, working</h2>
+          <p>Splash, onboarding, sign-in, a setup questionnaire, home, workout discovery, a weekly plan, exercise lists, a video player, activity charts, a profile and premium plans. One small web app, no framework, installable to a phone's home screen.</p>
+          <div class="tools"><span>HTML · CSS · JavaScript</span><span>Supabase accounts &amp; database</span><span>Netlify hosting</span><span>Claude</span></div>
+        </div>
+        <figure class="shot"><img src="img/figma-photos.png" alt="Figma template exercise photography" loading="lazy"></figure>
+      </div>
+      <div class="phones">
+        <figure class="shot"><img src="img/s01-splash.png" alt="Splash screen" loading="lazy"><figcaption>Splash</figcaption></figure>
+        <figure class="shot"><img src="img/s02-onboarding.png" alt="Onboarding" loading="lazy"><figcaption>Onboarding</figcaption></figure>
+        <figure class="shot"><img src="img/s03-login.png" alt="Login" loading="lazy"><figcaption>Sign in</figcaption></figure>
+        <figure class="shot"><img src="img/s05-home.png" alt="Home" loading="lazy"><figcaption>Home</figcaption></figure>
+        <figure class="shot"><img src="img/s06-discover.png" alt="Workout discovery" loading="lazy"><figcaption>Discover</figcaption></figure>
+        <figure class="shot"><img src="img/s07-weekly-plan.png" alt="Weekly plan" loading="lazy"><figcaption>Weekly plan</figcaption></figure>
+        <figure class="shot"><img src="img/s08-exercise-list.png" alt="Exercise list" loading="lazy"><figcaption>Exercise list</figcaption></figure>
+        <figure class="shot"><img src="img/s09-exercise-player.png" alt="Exercise player" loading="lazy"><figcaption>Player</figcaption></figure>
+        <figure class="shot"><img src="img/s10-activities.png" alt="Activities" loading="lazy"><figcaption>Activities</figcaption></figure>
+        <figure class="shot"><img src="img/s11-profile.png" alt="Profile" loading="lazy"><figcaption>Profile</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="label">03 · Accounts &amp; hosting</p>
+      <h2>A real app, not a mock-up</h2>
+      <p>Sign-up and sign-in use real email accounts. Each person's progress, plan and profile is stored in a database behind row-level security, so a user can only ever read and write their own data. The app is published at a public link and works on any phone.</p>
+      <div class="btns" style="margin-top:26px"><a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Try it yourself</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="label">04 · Look and feel</p>
+      <div class="stage">
+        <div>
+          <h2>Glass, colour and a real logo</h2>
+          <p>The first build was flat and dark. I rebuilt the surfaces as Apple-style glass: translucent, blurred, with soft light from a drifting colour field behind. Each weekday got its own colour so the plan reads at a glance.</p>
+          <div class="days">
+            <i style="color:#ff6b5e">MON</i><i style="color:#ffa94d">TUE</i><i style="color:#ffd84d">WED</i><i style="color:#c6ff3d">THU</i><i style="color:#4dabff">FRI</i><i style="color:#b18cff">SAT</i><i style="color:#ff6fae">SUN</i>
+          </div>
+        </div>
+        <figure class="shot"><img src="img/new-logo.png" alt="The PL Fitness kettlebell logo" loading="lazy"><figcaption style="padding:0 14px 12px">The kettlebell mark that replaced the first placeholder logo.</figcaption></figure>
+      </div>
+      <div class="pair">
+        <figure><div class="shot"><img src="img/home-before.png" alt="Home screen before glass styling" loading="lazy"></div><figcaption>Before: flat cards</figcaption></figure>
+        <figure><div class="shot"><img src="img/s05-home.png" alt="Home screen after glass styling" loading="lazy"></div><figcaption>After: glass, colour and a personal greeting</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="label">05 · AI-made media</p>
+      <h2>Thumbnails, tutorials and intro photos</h2>
+      <p>The exercise list started with plain icons. Using Google Flow, I generated a thumbnail for every exercise and a short tutorial video for each one. The three intro screens use realistic images of me training, directed from a reference portrait. Human first, tool second: I wrote the shots, chose the takes and kept only what looked right.</p>
+      <div class="trio">
+        <figure><div class="shot"><img src="img/intro-shoulder-press.jpg" alt="Intro image: shoulder press" loading="lazy"></div><figcaption>Intro 1 · shoulder press</figcaption></figure>
+        <figure><div class="shot"><img src="img/intro-squat.jpg" alt="Intro image: squat" loading="lazy"></div><figcaption>Intro 2 · squat</figcaption></figure>
+        <figure><div class="shot"><img src="img/intro-bench-press.jpg" alt="Intro image: bench press" loading="lazy"></div><figcaption>Intro 3 · bench press</figcaption></figure>
+      </div>
+      <div class="pair">
+        <figure><div class="shot"><img src="img/flow-thumbnails.png" alt="Generated exercise thumbnails" loading="lazy"></div><figcaption>The thumbnail sheet from Flow</figcaption></figure>
+        <figure><div class="shot"><img src="img/flow-squat.jpg" alt="Generated squat still" loading="lazy"></div><figcaption>A squat still before it became a video</figcaption></figure>
+      </div>
+      <h3 style="margin-top:46px">Tutorial clips inside the app</h3>
+      <div class="vids">
+        <div class="shot"><video controls muted loop playsinline preload="none"><source src="video/tutorial-e1.mp4" type="video/mp4"></video></div>
+        <div class="shot"><video controls muted loop playsinline preload="none"><source src="video/tutorial-e2.mp4" type="video/mp4"></video></div>
+        <div class="shot"><video controls muted loop playsinline preload="none"><source src="video/tutorial-e3.mp4" type="video/mp4"></video></div>
+        <div class="shot"><video controls muted loop playsinline preload="none"><source src="video/tutorial-e4.mp4" type="video/mp4"></video></div>
+        <div class="shot"><video controls muted loop playsinline preload="none"><source src="video/tutorial-e5.mp4" type="video/mp4"></video></div>
+        <div class="shot"><video controls muted loop playsinline preload="none"><source src="video/tutorial-e6.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="shotboard">
+    <div class="wrap">
+      <p class="label">06 · Second build</p>
+      <div class="stage">
+        <div>
+          <h2>Shotboard: plan every AI shot</h2>
+          <p>A prompt library and shot planner for AI video directors. Describe a scene, pick a story arc and mood, and get a full shot list with camera, lens, lighting and ready-to-paste prompts for Seedance, Higgsfield and Flow / Veo. It reuses the workflow behind my AI Video page, turned into a tool.</p>
+          <div class="tools"><span>63 prompt snippets</span><span>6 story arcs</span><span>4 model formats</span><span>Realism mode: no AI slop</span><span>Saves in the browser</span></div>
+          <div class="btns" style="margin-top:26px"><a class="btn red" href="/shotboard/">Open Shotboard</a></div>
+        </div>
+        <div class="shot ad"><video controls playsinline preload="metadata" poster="img/shotboard-hero.jpg"><source src="video/shotboard-ad.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <p class="label">07 · Motion</p>
+      <h2>Then I made it move</h2>
+      <p>The ad above is written as code with Remotion, so each shot, caption and timing is editable. Sound effects are generated in sync with the picture: a hit as the logo lands, a rising tick for each day, a swoosh at every transition.</p>
+    </div>
+  </section>
+  <section class="section" id="meca-3d">
+    <div class="wrap">
+      <p class="label">08 · Third build</p>
+      <h2>MECA 3D: an interactive concept for an employers' consultancy</h2>
+      <p>I studied meca.com.my page by page, wrote down what already works and what slows a buyer down, then rebuilt the experience as a scroll-driven 3D story. It keeps MECA's real content and adds fast routes to a consultation and to courses, animated proof numbers, and a 3D scene that changes with each section.</p>
+      <div class="pair">
+        <figure><div class="shot"><img src="img/meca-hero.jpg" alt="MECA 3D concept: hero with large white logo, small rotating scales of justice and the headline" loading="lazy"></div><figcaption>Hero: big white logo, a small scales of justice turning slowly above it, management figures drifting behind.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca-services.jpg" alt="MECA 3D concept: services section with legal document mockups and glass figures" loading="lazy"></div><figcaption>Consultancy: legal document mockups above a line-up of faceless glass figures.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca-courses.jpg" alt="MECA 3D concept: 3D course carousel in front of an audience of glass figures" loading="lazy"></div><figcaption>Courses: a 3D carousel you can drag, with a clear Register button on every course.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca-team.jpg" alt="MECA 3D concept: CEO profile and consultant portraits" loading="lazy"></div><figcaption>Team: portraits matched for head size and eye line.</figcaption></figure>
+      </div>
+      <ul class="tells" style="margin-top:28px;max-width:860px">
+        <li><b>What I found:</b> courses sit two clicks deep, two different phone numbers appear on the home page, a pop-up covers the hero on mobile, and there is no motion at all.</li>
+        <li><b>What I changed:</b> one hero with two fast routes, the six proof numbers right under it, a 3D course carousel, and legal and HR objects (documents, handbook, org chart) instead of abstract shapes. The people are faceless glass figures, and management is shown by colour, not by a different body.</li>
+        <li><b>How it is built:</b> plain HTML, CSS and JavaScript with raw WebGL and no framework. It respects reduced motion and shows a static background where WebGL is unavailable.</li>
+      </ul>
+      <div class="btns" style="margin-top:26px"><a class="btn red" href="/meca-3d/">Open the MECA 3D concept</a></div>
+      <p style="margin-top:18px;font-size:14px;color:var(--dim)">A design concept, not the official MECA website. Content, logo and the original layout belong to MECA. The team portraits in the concept are AI-generated illustrations. Course dates, venues and fees are marked placeholders.</p>
+    </div>
+  </section>
+  <section class="section" id="premier-dashboard">
+    <div class="wrap">
+      <p class="label">09 · Fourth build</p>
+      <h2>PREMIER Database: a data dashboard that behaves like a big screen</h2>
+      <p>An interactive dashboard for a postpaid VIP customer base, built from an anonymised extract of about 8,900 lines. A map of Malaysia sits at the centre, with Peninsular Malaysia and Sabah and Sarawak drawn close together to save space, and the other panels arranged around it: regions, bill plans, relationship managers, ARPU bands, cities, monthly billing and tenure. Everything cross-filters: click a state, a plan or a manager and every number, bar and ranking re-sorts.</p>
+      <div class="pair">
+        <figure><div class="shot"><img src="img/premier-dashboard-1.jpg" alt="PREMIER Database dashboard in glassmorphism style: Malaysia map in the centre, KPI cards, region donut, bill plan, manager and ARPU panels" loading="lazy"></div><figcaption>The full dashboard: customers per state, KPIs and ranked panels. Staff names are masked in this preview.</figcaption></figure>
+        <figure><div class="shot"><img src="img/premier-dashboard-2.jpg" alt="PREMIER Database dashboard filtered to one state and switched to average ARPU" loading="lazy"></div><figcaption>Filtered to one state and switched to average ARPU: every panel recalculates and the map changes colour scale.</figcaption></figure>
+      </div>
+      <ul class="tells" style="margin-top:28px;max-width:860px">
+        <li><b>The brief:</b> a Power BI-style analysis of a customer base (map by state, region then city, bill plans, which managers hold the most customers, average ARPU) in the layout of a big-screen operations dashboard.</li>
+        <li><b>The data work:</b> 28 spellings of state names cleaned to 16 states, 135 raw plan names grouped into 9 families, and the headline numbers checked against independent calculations on the source file.</li>
+        <li><b>The design:</b> glassmorphism panels, a 3D-tilted map that follows the pointer, numbers that count up, bars and rankings that spring into place, and an idle spotlight that cycles through the biggest states. Reduced-motion settings switch the motion off.</li>
+        <li><b>How it is built:</b> plain HTML, CSS and JavaScript with SVG, no chart library. The same analysis was also built as a Power BI project.</li>
+      </ul>
+      <p style="margin-top:18px;font-size:14px;color:var(--dim)">The interactive version is not published because it comes from customer data. This page shows screenshots only, with staff names masked. An unofficial analysis; the Celcom name and logo belong to Celcom.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="cta"><h2>Have a brief?<br>Let's direct it.</h2><div class="btns"><a class="btn red" href="/contact/">Get in touch</a><a class="btn" href="/resume/">View resume</a></div></div>
+    <div class="small"><span>© <span class="yr">2026</span> Zairul MD TY</span><span>Human-directed. AI-assisted.</span><a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a></div>
+  </div>
+</footer>
+<script>document.querySelectorAll('.yr').forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+</body>
+</html>
