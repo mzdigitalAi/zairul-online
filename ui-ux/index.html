@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UI-UX · Zairul MD TY</title>
-<meta name="description" content="The making of PL Fitness: a mobile fitness app built from a Figma template with human-directed AI, from design to a live working app.">
-<meta property="og:title" content="UI-UX · The Making of PL Fitness">
+<meta name="description" content="Apps and websites by Zairul: PL Fitness, MECA 3D and the PREMIER Database dashboard, each with a live link and the story of how it was made.">
+<meta property="og:title" content="UI-UX · Apps and websites by Zairul">
 <meta property="og:image" content="https://zairul.online/ui-ux/img/s05-home.png">
 <link rel="icon" href="/assets/logo.png">
 <link rel="stylesheet" href="/assets/site.css?v=20261103">
@@ -36,25 +36,106 @@
   .tools span { padding:8px 14px; border:1px solid var(--line); border-radius:999px; background:var(--panel); font-size:14px; color:#d9d3ca; }
   .days { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
   .days i { font-style:normal; font:700 14px/1 'Barlow',sans-serif; letter-spacing:.12em; padding:14px 16px; border-radius:12px; border:1.5px solid currentColor; }
+  .apps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:34px; }
+  @media (max-width:980px){ .apps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:640px){ .apps { grid-template-columns:1fr; } }
+  .app { display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; transition:transform .25s, border-color .25s, box-shadow .25s; }
+  .app:hover { transform:translateY(-4px); border-color:rgba(242,182,50,.55); box-shadow:0 22px 50px -18px rgba(0,0,0,.8); }
+  .app-thumb { position:relative; display:block; aspect-ratio:16/10; overflow:hidden; background:#0b0b0b; }
+  .app-thumb > img { width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+  .app:hover .app-thumb > img, .app:hover .app-phones img { transform:scale(1.04); }
+  .app-phones { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; gap:4%; padding:6% 6% 0; background:radial-gradient(70% 90% at 50% 100%, rgba(227,38,43,.35), transparent 70%), linear-gradient(160deg,#1d1d1d,#090909); }
+  .app-phones img { width:27%; height:auto; border-radius:10px 10px 0 0; border:1px solid rgba(255,255,255,.18); border-bottom:0; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+  .app-phones img:nth-child(2) { width:31%; }
+  .app-num { position:absolute; left:12px; top:12px; padding:5px 10px; border-radius:999px; background:rgba(0,0,0,.7); font:700 11px/1 'Barlow',sans-serif; letter-spacing:.16em; color:var(--gold); }
+  .app-live { position:absolute; right:12px; top:12px; display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; background:rgba(0,0,0,.7); font:700 11px/1 'Barlow',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#fff; }
+  .app-live::before { content:""; width:7px; height:7px; border-radius:50%; background:#3ddc84; box-shadow:0 0 0 3px rgba(61,220,132,.25); }
+  .app-body { display:flex; flex-direction:column; flex:1; padding:20px 20px 22px; }
+  .app-type { font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--red); }
+  .app h3 { font:400 30px/1 'Anton',Impact,sans-serif; text-transform:uppercase; margin-top:8px; }
+  .app p { color:var(--muted); font-size:15px; margin-top:10px; flex:1; }
+  .app-links { display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:18px; }
+  .app-links .btn { min-height:42px; padding:0 18px; font-size:12px; }
+  .app-making { font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(242,182,50,.4); padding-bottom:2px; }
+  .app-making:hover { color:#fff; border-color:#fff; }
+  .making-head { padding:80px 0 10px; }
+  .making-head h2 { font:400 clamp(48px,7vw,110px)/.9 'Anton',Impact,sans-serif; text-transform:uppercase; max-width:14ch; }
+  .making-head .lead { max-width:640px; margin-top:20px; color:#d2cdc5; font-size:19px; }
+  .making-head .btns { margin-top:28px; }
+  .page-hero.compact { padding:64px 0 44px; }
+  .page-hero.compact h1 { font-size:clamp(44px,6vw,92px); max-width:16ch; }
+  .case-tag { display:inline-block; margin-bottom:12px; font-size:12px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--red); }
 </style>
 </head>
 <body>
 <script src="/assets/menu.js?v=20261112"></script>
 
-<header class="page-hero">
+<header class="page-hero compact">
   <div class="wrap">
-    <p class="kicker">UI-UX · Case study</p>
-    <h1>The making of PL Fitness</h1>
-    <p class="lead">From a Figma template to a real, working mobile app with accounts, saved data and a public link. Designed, directed and shipped with human-directed AI, step by step.</p>
-    <div class="btns">
-      <a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Open the live app</a>
-      <a class="btn" href="#ad">Watch the 15-second ad</a>
-      <a class="btn" href="#story">Read the making of</a>
-    </div>
+    <p class="kicker">UI-UX · Apps &amp; websites</p>
+    <h1>Built, live, ready to test</h1>
+    <p class="lead">Three working products I designed and directed with AI. Open any of them and try it yourself, then read how each one was made.</p>
   </div>
 </header>
 
 <main>
+  <section class="section" id="apps" style="padding-top:56px">
+    <div class="wrap">
+      <p class="label">The apps</p>
+      <div class="apps">
+        <article class="app">
+          <a class="app-thumb" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener" aria-label="Open PL Fitness (opens in a new tab)">
+            <div class="app-phones"><img src="img/s07-weekly-plan.png" alt="" loading="lazy"><img src="img/s05-home.png" alt="" loading="lazy"><img src="img/s09-exercise-player.png" alt="" loading="lazy"></div>
+            <span class="app-num">01</span><span class="app-live">Live</span>
+          </a>
+          <div class="app-body">
+            <span class="app-type">Mobile web app</span>
+            <h3>PL Fitness</h3>
+            <p>A fitness app with accounts, weekly plans, exercise videos and saved progress. Best opened on a phone.</p>
+            <div class="app-links"><a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Test it live ↗</a><a class="app-making" href="#making-pl-fitness">The making of →</a></div>
+          </div>
+        </article>
+        <article class="app">
+          <a class="app-thumb" href="/meca-3d/" aria-label="Open the MECA 3D concept site">
+            <img src="img/meca-hero.jpg" alt="" loading="lazy">
+            <span class="app-num">02</span><span class="app-live">Live</span>
+          </a>
+          <div class="app-body">
+            <span class="app-type">Website concept</span>
+            <h3>MECA 3D</h3>
+            <p>A scroll-driven 3D redesign of an employers' consultancy website, with faster routes to a consultation and to courses.</p>
+            <div class="app-links"><a class="btn red" href="/meca-3d/">Test it live ↗</a><a class="app-making" href="#meca-3d">The making of →</a></div>
+          </div>
+        </article>
+        <article class="app">
+          <a class="app-thumb" href="/premier-dashboard/" aria-label="Open the PREMIER Database dashboard">
+            <img src="img/premier-dashboard-1.jpg" alt="" loading="lazy" style="object-position:center">
+            <span class="app-num">03</span><span class="app-live">Live</span>
+          </a>
+          <div class="app-body">
+            <span class="app-type">Data dashboard</span>
+            <h3>PREMIER Database</h3>
+            <p>An interactive big-screen dashboard of a customer base: a map of Malaysia and panels that all cross-filter. Best on a desktop.</p>
+            <div class="app-links"><a class="btn red" href="/premier-dashboard/">Test it live ↗</a><a class="app-making" href="#premier-dashboard">The making of →</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="making-head" id="making-pl-fitness">
+    <div class="wrap">
+      <span class="case-tag">Case study 01</span>
+      <h2>The making of PL Fitness</h2>
+      <p class="lead">From a Figma template to a real, working mobile app with accounts, saved data and a public link. Designed, directed and shipped with human-directed AI, step by step.</p>
+      <div class="btns">
+        <a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Open the live app</a>
+        <a class="btn" href="#ad">Watch the 15-second ad</a>
+        <a class="btn" href="#story">Read the making of</a>
+      </div>
+    </div>
+  </div>
+
   <section class="section" id="ad">
     <div class="wrap">
       <p class="label">The result</p>
@@ -176,7 +257,8 @@
   </section>
   <section class="section" id="meca-3d">
     <div class="wrap">
-      <p class="label">07 · Second build</p>
+      <span class="case-tag">Case study 02</span>
+      <p class="label">The making of MECA 3D</p>
       <h2>MECA 3D: an interactive concept for an employers' consultancy</h2>
       <p>I studied meca.com.my page by page, wrote down what already works and what slows a buyer down, then rebuilt the experience as a scroll-driven 3D story. It keeps MECA's real content and adds fast routes to a consultation and to courses, animated proof numbers, and a 3D scene that changes with each section.</p>
       <div class="pair">
@@ -196,7 +278,8 @@
   </section>
   <section class="section" id="premier-dashboard">
     <div class="wrap">
-      <p class="label">08 · Third build</p>
+      <span class="case-tag">Case study 03</span>
+      <p class="label">The making of PREMIER Database</p>
       <h2>PREMIER Database: a data dashboard that behaves like a big screen</h2>
       <p>An interactive dashboard for a postpaid VIP customer base, built from an anonymised extract of about 8,900 lines. A map of Malaysia sits at the centre, with Peninsular Malaysia and Sabah and Sarawak drawn close together to save space, and the other panels arranged around it: regions, bill plans, relationship managers, ARPU bands, cities, monthly billing and tenure. Everything cross-filters: click a state, a plan or a manager and every number, bar and ranking re-sorts.</p>
       <div class="pair">
