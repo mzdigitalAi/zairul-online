@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bebee Honey, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept poster ads for Bebee Honey by Nibou, made from the real product photo, by Zairul MD TY.">
+<link rel="icon" href="../../assets/brands/bebee-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/page.css">
+<style>:root{--bg:#4A2308;--ink:#4A2308;--y:#FFC83A;--hf:"Playfair Display";--bf:"Nunito"}header h1,figcaption b,.btn,.fmt h2{font-style:italic;font-weight:800}</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body>
+<div class="nb-back"><a href="../../index.html#top">&larr; Nibou concept homepage</a><span>Unofficial concept</span></div>
+<header>
+  <div><img src="../../assets/brands/bebee-sticker.svg" alt="Bebee"></div>
+  <div><h1>Bebee Honey poster ads · set 1</h1><p>Feed 4:5, Story 9:16 and A3 print, made from the real Bebee Honey product photo (Original, Lemongrass and Lemon, 375ml) from nibou.com. Click a button to download the full-size PNG.</p></div>
+  <div class="btns"><button class="btn" id="all" type="button">Download all feed and story</button><button class="btn" id="allprint" type="button">Download all A3 prints</button></div>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Bebee and Nibou names, logos, packaging and product photo belong to Nibou Food &amp; Beverage and are used here as stand-ins for a design concept; the Bebee logo shown is a traced vector stand-in. All three posters are crops of one 1000 px photo, the only Bebee product photo on nibou.com, so the close-up and the A3 prints are enlarged. AEON, Mydin, Shopee and Lazada logos belong to their owners. Headlines and layouts are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="../../fruits.js"></script>
+<script src="../../brands.js"></script>
+<script src="../shared/vposters.js"></script>
+<script>
+var PH = 'assets/photos/bebee-honey.jpg';
+VPosters.run({ key: 'bebee', name: 'Bebee', head: { font: 'italic 800 %spx "Playfair Display"', lead: 1.0 }, sub: { font: '800 %spx "Nunito"', family: '"Nunito"' }, ink: '#4A2308', footBg: '#8A4A12', sparkle: '#FFC83A', pill: 'rgba(74,35,8,.84)', logoPos: 'br', logoW1: 300, logoW3: 640,
+  fonts: ['italic 800 100px "Playfair Display"', '800 28px "Nunito"', '900 24px "Nunito"'],
+  posters: [
+    { key: 'trio', name: 'Three Honeys', photo: { src: PH, crop: [40, 140, 920, 770], fadeTop: 30 }, head: ['SQUEEZE THE', 'SWEET LIFE'], fill: ['#8A4A12', '#5A2D0C'], stroke: '#FFC83A', sub: 'Bebee Honey: Original, Lemongrass and Lemon' },
+    { key: 'labels', name: 'Pick Your Honey', photo: { src: PH, crop: [270, 440, 540, 450], fadeTop: 60 }, head: ['PICK YOUR', 'HONEY'], fill: ['#FFFFFF', '#FFF1CC'], stroke: '#6B3A1A', sub: 'Madu Asli, Madu Serai, Madu Limau, 375ml' },
+    { key: 'breakfast', name: 'Breakfast Drizzle', photo: { src: PH, crop: [0, 150, 760, 640], fadeTop: 30 }, head: ['BUZZ INTO', 'BREAKFAST'], fill: ['#8A4A12', '#5A2D0C'], stroke: '#FFC83A', sub: 'Bebee Honey in an easy squeeze bottle' }
+  ] });
+</script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>

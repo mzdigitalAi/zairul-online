@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dadih, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept poster ads for Dadih soya puddings by Nibou, by Zairul MD TY.">
+<link rel="icon" href="assets/dadih-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@500;600&family=Anton&family=Caveat+Brush&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3b0d12;--y:#FFE020}
+*{box-sizing:border-box}body{margin:0;background:#2a0b10;color:#fff;font-family:"Fredoka",system-ui,sans-serif;font-weight:500;-webkit-font-smoothing:antialiased}
+header{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:22px clamp(16px,4vw,48px)}
+header img{height:56px;width:auto}header h1{font:400 clamp(22px,3vw,36px)/1.05 "Lilita One",system-ui;margin:0}
+header p{margin:4px 0 0;opacity:.85;font-size:15px;max-width:60ch}
+.btn{font:400 16px "Lilita One",system-ui;background:var(--y);color:var(--ink);border:3px solid #fff;border-radius:99px;padding:11px 24px;cursor:pointer;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}.btn:hover{transform:translateY(-3px) rotate(-1.5deg)}
+main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,30px);padding:10px clamp(16px,4vw,48px) 50px}
+figure{margin:0;display:grid;gap:12px}
+canvas{width:100%;height:auto;display:block;border-radius:20px;box-shadow:0 30px 60px -30px #000;background:#411}
+figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px}figcaption b{font:400 20px "Lilita One",system-ui}
+.btn.sm{font-size:13px;padding:7px 16px}
+footer{padding:0 clamp(16px,4vw,48px) 40px;font-size:12.5px;opacity:.75;max-width:110ch}
+#msg{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;color:var(--ink);padding:10px 20px;border-radius:99px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none}#msg.on{opacity:1}
+@media(max-width:1000px){main{grid-template-columns:1fr 1fr}}@media(max-width:560px){main{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body><div class="nb-back" style="position:relative;z-index:60;padding:10px clamp(16px,4vw,48px);font:700 14px/1.2 system-ui,Segoe UI,sans-serif;background:rgba(0,0,0,.35);color:#fff"><a href="../../index.html#top" style="color:inherit;text-decoration:none">&larr; Nibou concept homepage</a><span style="float:right;opacity:.75;font-weight:600">Unofficial concept</span></div>
+<header>
+  <div><img src="assets/dadih-logo.svg" alt="Dadih"></div>
+  <div><h1>Dadih poster ads · set 1</h1><p>Feed 4:5 (1080 × 1350 px), Story 9:16 (1080 × 1920 px) and A3 print, made from the brand's own product photos. Click a button to download the full-size PNG.</p></div>
+  <button class="btn" id="all" type="button">Download all 7</button>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Dadih and Nibou names, logos, packaging and photos belong to Nibou Food &amp; Beverage; AEON, Mydin, Shopee and Lazada logos belong to their owners. Fruit photos come from the Drinme campaign images. All are used here as stand-ins for a design concept. Layouts and headlines are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="posters.js"></script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>
