@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yourgurt Fruity Pudding, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept poster ads for Yourgurt Fruity Pudding by Nibou, made from the real product photos, by Zairul MD TY.">
+<link rel="icon" href="../../assets/brands/yourgurt-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/page.css">
+<style>:root{--bg:#2E6B1B;--ink:#4B1458;--y:#FFE14A;--hf:"Fredoka";--bf:"Nunito"}</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body>
+<div class="nb-back"><a href="../../index.html#top">&larr; Nibou concept homepage</a><span>Unofficial concept</span></div>
+<header>
+  <div><img src="../../assets/brands/yourgurt-sticker.svg" alt="Yourgurt"></div>
+  <div><h1>Yourgurt Fruity Pudding poster ads · set 1</h1><p>Feed 4:5, Story 9:16 and A3 print, made from the real Yourgurt Fruity Pudding product photos (35gm x 15's pack, 80gm x 6's tray and the cups) from nibou.com. Click a button to download the full-size PNG.</p></div>
+  <div class="btns"><button class="btn" id="all" type="button">Download all feed and story</button><button class="btn" id="allprint" type="button">Download all A3 prints</button></div>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Yourgurt and Nibou names, logos, packaging and product photos belong to Nibou Food &amp; Beverage and are used here as stand-ins for a design concept; the Yourgurt logo shown is a traced vector stand-in. The photos are 1000 to 1200 px, so the A3 prints are enlarged. AEON, Mydin, Shopee and Lazada logos belong to their owners. Headlines and layouts are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="../../fruits.js"></script>
+<script src="../../brands.js"></script>
+<script src="../shared/vposters.js"></script>
+<script>
+var P_ = 'assets/photos/', K_ = 'assets/products/';
+VPosters.run({ key: 'yourgurt', name: 'Yourgurt', head: { font: '700 %spx "Fredoka"', lead: .96 }, sub: { font: '700 %spx "Nunito"', family: '"Nunito"' }, ink: '#4B1458', footBg: '#8E2A94', sparkle: '#FFE14A', pill: 'rgba(75,20,88,.8)', logoW1: 150, logoW3: 300,
+  fonts: ['700 100px "Fredoka"', '800 28px "Nunito"', '900 24px "Nunito"'],
+  posters: [
+    { key: 'cups', name: 'Your Turn', photo: { src: P_ + 'yourgurt-cups.jpg', crop: [0, 70, 1000, 820] }, head: ['YOUR TURN', 'TO YUM!'], fill: ['#FFFFFF', '#FFF3C4'], stroke: '#8E2A94', sub: 'Yourgurt Fruity Pudding with nata de coco' },
+    { key: 'stack', name: 'Stack the Yum', photo: { src: P_ + 'yourgurt-stack.jpg', crop: [0, 220, 1024, 804] }, head: ['STACK', 'THE YUM!'], fill: ['#FFF7A8', '#FFE14A'], stroke: '#8E2A94', sub: 'Fruity pudding cups, 35gm each' },
+    { key: 'peel', name: 'Peel and Enjoy', photo: { src: P_ + 'yourgurt-peel.jpg', crop: [0, 0, 1024, 765] }, head: ['PEEL.', 'ENJOY!'], fill: ['#FFFFFF', '#FFF3C4'], stroke: '#8E2A94', sub: 'A fruity break, wherever you are' },
+    { key: 'pack15', name: 'Free 3 Cups', layout: 1, img: K_ + 'yourgurt-15pack.png', pw: 640, bg: ['#C6EE7E', '#5DAA2B'], ray: 'rgba(255,255,255,.22)', rot: -3, head: ['FRUIT. NATA.', 'YOGURT.'], fill: ['#FFFFFF', '#FFF3C4'], stroke: '#8E2A94', sub: 'Assorted, 35gm x 15, with 3 free cups', dots: ['#ffffff', '#FF7DB8', '#FFE14A'], decor: ['cube:#FFFFFF', 'heart:#FF7DB8', 'cube:#FFF3C4', 'star:#FFE14A', 'heart:#ffffff'] },
+    { key: 'desk', name: 'Desk Snack', photo: { src: P_ + 'yourgurt-desk.jpg', crop: [0, 215, 1024, 809] }, head: ['SNACK', 'BREAK!'], fill: ['#FFF7A8', '#FFE14A'], stroke: '#8E2A94', sub: 'Yourgurt Fruity Pudding' },
+    { key: 'tray6', name: 'Six to Share', layout: 2, img: K_ + 'yourgurt-6tray.png', bg: ['#FF9CCB', '#D8479A'], ray: 'rgba(255,255,255,.2)', rot: 3, head: ['SIX TO', 'SHARE!'], fill: ['#FFF7A8', '#FFE14A'], stroke: '#8E2A94', sub: 'With nata de coco, 80gm x 6', dots: ['#ffffff', '#FFE14A', '#C6EE7E'], decor: ['cube:#FFFFFF', 'heart:#FFE14A', 'star:#ffffff', 'cube:#FFF3C4', 'heart:#ffffff'] }
+  ] });
+</script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>

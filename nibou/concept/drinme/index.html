@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drinme, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept static poster ads for Drinme jelly drink, by Zairul MD TY.">
+<link rel="icon" href="assets/drinme-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Caveat+Brush&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1B1033;--pink:#F0186F;--yel:#FFEE4A}
+*{box-sizing:border-box}body{margin:0;background:#14082b;color:#fff;font-family:"Nunito",system-ui,sans-serif;font-weight:700;-webkit-font-smoothing:antialiased}
+header{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:22px clamp(16px,4vw,48px)}
+header img{height:34px;width:auto}header h1{font:400 clamp(20px,3vw,32px)/1.1 "Bowlby One",system-ui;margin:0}
+header p{margin:0;opacity:.8;font-size:14px;max-width:56ch}
+.btn{font:400 15px "Bowlby One",system-ui;background:var(--yel);color:var(--ink);border:3px solid #fff;border-radius:99px;padding:12px 26px;cursor:pointer;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}.btn:hover{transform:translateY(-3px) rotate(-1.5deg)}
+main{padding:10px clamp(16px,4vw,48px) 60px;display:grid;gap:40px}.fmt .fh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 16px}.fmt h2{font:400 clamp(18px,2.4vw,26px) "Bowlby One",system-ui;margin:0}.fmt h2 small{font:700 13px Nunito,system-ui;opacity:.7;margin-left:8px}.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,32px)}.row.story figure{max-width:360px;justify-self:center;width:100%}
+figure{margin:0;display:grid;gap:12px}
+canvas{width:100%;height:auto;display:block;border-radius:20px;box-shadow:0 30px 60px -30px #000,0 0 0 3px #fff;background:#222}
+figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px}figcaption b{font:400 18px "Bowlby One",system-ui}
+.btn.sm{font-size:12px;padding:8px 16px}
+footer{padding:0 clamp(16px,4vw,48px) 40px;font-size:12.5px;opacity:.75;max-width:110ch}
+#msg{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;color:var(--ink);padding:10px 20px;border-radius:99px;font-weight:900;opacity:0;transition:opacity .3s;pointer-events:none}#msg.on{opacity:1}
+@media(max-width:900px){.row{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body><div class="nb-back" style="position:relative;z-index:60;padding:10px clamp(16px,4vw,48px);font:700 14px/1.2 system-ui,Segoe UI,sans-serif;background:rgba(0,0,0,.35);color:#fff"><a href="../../index.html#top" style="color:inherit;text-decoration:none">&larr; Nibou concept homepage</a> <span style="opacity:.5">·</span> <a href="../drinme-board/" style="color:inherit">Drinme brand board</a><span style="float:right;opacity:.75;font-weight:600">Unofficial concept</span></div>
+<header>
+  <div><img src="assets/drinme-logo-white.svg" alt="Drinme"></div>
+  <div><h1>Poster ads · set 1</h1><p>Feed 4:5 and Story 9:16, made with the real packaging and real fruit photos. Click a button to download the full-size PNG.</p></div>
+  <button class="btn" id="all" type="button">Download all 6</button>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Drinme and Nibou names, logos and packaging belong to Nibou Food &amp; Beverage; AEON, Mydin, Shopee and Lazada logos belong to their owners. All are used here as stand-ins for a design concept. Poster layouts, headlines and decoration are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="posters.js"></script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>

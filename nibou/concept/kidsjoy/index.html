@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kid's Joy Drinking Jelly, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept poster ads for Kid's Joy Drinking Jelly by Nibou, made from the real product photos, by Zairul MD TY.">
+<link rel="icon" href="../../assets/brands/kidsjoy-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/page.css">
+<style>:root{--bg:#3A1A80;--ink:#2B1060;--y:#FFE14A;--hf:"Lilita One";--bf:"Nunito"}</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body>
+<div class="nb-back"><a href="../../index.html#top">&larr; Nibou concept homepage</a><span>Unofficial concept</span></div>
+<header>
+  <div><img src="../../assets/brands/kidsjoy-sticker.svg" alt="Kid's Joy"></div>
+  <div><h1>Kid's Joy Drinking Jelly poster ads · set 1</h1><p>Feed 4:5, Story 9:16 and A3 print, made from the real Kid's Joy Drinking Jelly product photos (75gm cups, 12's and 6's) from nibou.com. Click a button to download the full-size PNG.</p></div>
+  <div class="btns"><button class="btn" id="all" type="button">Download all feed and story</button><button class="btn" id="allprint" type="button">Download all A3 prints</button></div>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Kid's Joy and Nibou names, logos, packaging and product photos belong to Nibou Food &amp; Beverage and are used here as stand-ins for a design concept; the Kid's Joy logo shown is a traced vector stand-in. The photos are 1024 px, so the A3 prints are enlarged. AEON, Mydin, Shopee and Lazada logos belong to their owners. Headlines and layouts are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="../../fruits.js"></script>
+<script src="../../brands.js"></script>
+<script src="../shared/vposters.js"></script>
+<script>
+var P_ = 'assets/photos/', K_ = 'assets/products/';
+VPosters.run({ key: 'kidsjoy', name: "Kid's Joy", head: { font: '400 %spx "Lilita One"', lead: .98 }, sub: { font: '700 %spx "Nunito"', family: '"Nunito"' }, ink: '#2B1060', footBg: '#6A35C8', sparkle: '#FFE14A', logoW1: 250, logoW3: 600,
+  fonts: ['400 100px "Lilita One"', '800 28px "Nunito"', '900 24px "Nunito"'],
+  posters: [
+    { key: 'slurp', name: 'Slurp the Joy', photo: { src: P_ + 'kidsjoy-slurp.jpg', crop: [0, 105, 1024, 745] }, head: ['SLURP', 'THE JOY!'], fill: ['#FFF27A', '#FFD21F'], stroke: '#E8192C', sub: 'Kid’s Joy Drinking Jelly, Fruity Series' },
+    { key: 'pour', name: 'Pour a Little Joy', photo: { src: P_ + 'kidsjoy-pour.jpg', crop: [0, 105, 1024, 745] }, head: ['A LITTLE', 'JELLY JOY!'], fill: ['#FFFFFF', '#FFE9F2'], stroke: '#E8192C', sub: 'Drinking jelly, 75gm cups' },
+    { key: 'berry', name: 'Berry Happy', photo: { src: P_ + 'kidsjoy-berry.jpg', crop: [0, 0, 1024, 850] }, head: ['BERRY', 'HAPPY!'], fill: ['#FFF27A', '#FFD21F'], stroke: '#E8192C', sub: 'Kid’s Joy Drinking Jelly, 75gm x 12' },
+    { key: 'pack12', name: '12 Cups, 12 Smiles', layout: 1, img: K_ + 'kidsjoy-12pack.png', bg: ['#B58BFF', '#5B2BB8'], ray: 'rgba(255,255,255,.18)', rot: -2, head: ['12 CUPS.', '12 SMILES!'], fill: ['#FFF27A', '#FFD21F'], stroke: '#E8192C', sub: 'Drinking jelly, 75gm x 12', dots: ['#FFE14A', '#ffffff', '#7FE0FF'], decor: ['heart:#FF4D6D', 'star:#FFE14A', 'heart:#FF8FB8', 'star:#7FE0FF', 'heart:#ffffff'] },
+    { key: 'apple', name: 'Go Green, Go Joy', photo: { src: P_ + 'kidsjoy-apple.jpg', crop: [0, 0, 1024, 850] }, head: ['GO GREEN,', 'GO JOY!'], fill: ['#FFFFFF', '#FFF3C4'], stroke: '#E8192C', sub: 'Kid’s Joy Drinking Jelly' },
+    { key: 'pack6', name: '6 to Share', layout: 2, img: K_ + 'kidsjoy-6pack.png', bg: ['#6FD0FF', '#1B86DC'], ray: 'rgba(255,255,255,.2)', rot: 3, head: ['6 TO', 'SHARE!'], fill: ['#FFFFFF', '#FFE9F2'], stroke: '#E8192C', sub: 'Drinking jelly, 75gm x 6', tape: '#FFE14A', dots: ['#ffffff', '#FFE14A', '#FF8FB8'], decor: ['star:#FFE14A', 'heart:#FF4D6D', 'heart:#FF8FB8', 'star:#ffffff', 'heart:#ffffff'] }
+  ] });
+</script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>

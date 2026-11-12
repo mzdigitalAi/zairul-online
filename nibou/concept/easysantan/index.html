@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Easy Santan Coconut Powder, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept poster ads for Nibou (NBI) EASY Santan Coconut Powder, 50gm x 4's, made from the real product photo, by Zairul MD TY.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/page.css">
+<style>:root{--bg:#14532D;--ink:#12331F;--y:#FFD21F;--hf:"Lilita One";--bf:"Nunito"}header img{height:96px}.cat{display:inline-block;margin:0 0 8px;padding:5px 14px;border-radius:99px;background:rgba(255,255,255,.16);font:800 12px/1.2 "Nunito",system-ui;letter-spacing:.14em;text-transform:uppercase}</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body>
+<div class="nb-back"><a href="../../index.html#range">&larr; Nibou concept homepage</a><span>Unofficial concept</span></div>
+<header>
+  <div><img src="assets/products/easysantan-pack.png" alt="Easy Santan Coconut Powder pack"></div>
+  <div><span class="cat">Cooking Essentials</span><h1>Easy Santan Coconut Powder poster ads · set 1</h1><p>Nibou (NBI) EASY Santan Coconut Powder (50gm x 4's). Feed 4:5, Story 9:16 and A3 print, made from the real product photo on nibou.com. Click a button to download the full-size PNG.</p></div>
+  <div class="btns"><button class="btn" id="all" type="button">Download all feed and story</button><button class="btn" id="allprint" type="button">Download all A3 prints</button></div>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Easy Santan and Nibou names, logos, packaging and product photo belong to Nibou Food &amp; Beverage and are used here as stand-ins for a design concept. All three posters use one cutout of the single 1024 px product photo on nibou.com, so the A3 prints are enlarged. AEON, Mydin, Shopee and Lazada logos belong to their owners. Headlines and layouts are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="../../fruits.js"></script>
+<script src="../../brands.js"></script>
+<script src="../shared/vposters.js"></script>
+<script>
+var PK = 'assets/products/easysantan-pack.png';
+VPosters.run({ key: 'easysantan', name: 'Easy Santan', noLogo: true, head: { font: '400 %spx "Lilita One"', lead: .98 }, sub: { font: '700 %spx "Nunito"', family: '"Nunito"' }, ink: '#12331F', footBg: '#1F7A3A', sparkle: '#FFD21F',
+  fonts: ['400 100px "Lilita One"', '800 28px "Nunito"', '900 24px "Nunito"'],
+  posters: [
+    { key: 'easy', name: 'Santan, Made Easy', layout: 1, img: PK, pw: 640, rot: -4, bg: ['#9BDD5E', '#2F8E2C'], ray: 'rgba(255,255,255,.2)', head: ['SANTAN,', 'MADE EASY!'], fill: ['#FFF27A', '#FFD21F'], stroke: '#C8102E', sub: 'Easy Santan Coconut Milk Powder, 50gm x 4', dots: ['#ffffff', '#FFD21F', '#DFF7C2'], decor: ['leaf', 'cube:#FFFFFF', 'drop:#FFFFFF', 'leaf', 'spark'] },
+    { key: 'creamy', name: 'Rich and Creamy', layout: 2, img: PK, pw: 600, rot: 4, bg: ['#FFF6DF', '#EBCB8C'], ray: 'rgba(47,142,44,.1)', disc: 'rgba(255,255,255,.6)', head: ['RICH. CREAMY.', 'READY.'], fill: ['#3FA53A', '#1C5E1A'], stroke: '#FFD21F', sub: 'Serbuk santan kelapa, 50gm x 4', tape: '#1F7A3A', tapeInk: '#ffffff', dots: ['#2F8E2C', '#FFD21F', '#8A5A2B'], decor: ['leaf', 'cube:#FFFFFF', 'leaf', 'drop:#FFFFFF', 'spark'] },
+    { key: 'kitchen', name: 'Kitchen Shortcut', layout: 1, img: PK, pw: 640, rot: 3, bg: ['#43CDBB', '#0B6E66'], ray: 'rgba(255,255,255,.18)', head: ['YOUR KITCHEN', 'SHORTCUT'], fill: ['#FFFFFF', '#FFF3C4'], stroke: '#C8102E', sub: 'Coconut milk powder, 4 packets of 50gm', dots: ['#ffffff', '#FFD21F', '#BFF3EA'], decor: ['cube:#FFFFFF', 'leaf', 'drop:#FFFFFF', 'spark', 'leaf'] }
+  ] });
+</script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>

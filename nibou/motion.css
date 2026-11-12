@@ -1,0 +1,139 @@
+/* Motion layer v2 for the Nibou concept homepage. Loaded after style.css; motion.js adds the class "mo" to <html>.
+   Every "hidden until animated" state is scoped to .mo, so the page is complete without JavaScript, and the
+   prefers-reduced-motion rule in style.css (plus the one at the end of this file) switches all of it off. */
+
+/* ---------- page scroll progress ---------- */
+.sprog{position:fixed;left:0;top:0;z-index:90;width:100%;height:3px;transform-origin:0 50%;transform:scaleX(var(--sp,0));background:linear-gradient(90deg,#0BB4AA,#FFE14A 45%,#FF7CC0 75%,#fff);pointer-events:none;box-shadow:0 0 12px rgba(255,124,192,.7)}
+
+/* ---------- nav ---------- */
+.nav nav a{position:relative}
+.nav nav a::after{content:'';position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;background:#fff;transform:scaleX(0);transform-origin:100% 50%;transition:transform .35s var(--ease)}
+.nav nav a:hover::after,.nav nav a.cur::after{transform:scaleX(1);transform-origin:0 50%}
+.nav nav a.cur{opacity:1}
+.btn.cta{position:relative;overflow:hidden}
+
+/* ---------- buttons: sheen and press ---------- */
+.btn{will-change:transform}
+.btn.hot{position:relative;overflow:hidden}
+.btn.hot::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,color-mix(in srgb,var(--jc) 38%,transparent) 50%,transparent 62%);transform:translateX(-130%);animation:sheen 4.8s ease-in-out infinite;pointer-events:none}
+@keyframes sheen{0%,58%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.btn:active{transform:scale(.95)!important;transition-duration:.08s}
+.btn .tk{display:inline-block}
+.btn.tick .tk,#bNum.tick{animation:tick .5s var(--ease)}
+@keyframes tick{0%{opacity:0;transform:translateY(.7em)}100%{opacity:1;transform:none}}
+
+/* ---------- hero: colour iris, sunburst, pointer glow, shock rings, twinkles ---------- */
+.hero{--px:70%;--py:54%}
+@media (max-aspect-ratio:19/20){.hero{--px:50%;--py:70%}}
+.hwipe{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:radial-gradient(70% 80% at 72% 48%,var(--w2,#FF5C93) 0%,var(--w1,#D81B60) 45%,var(--w0,#7A0A35) 100%);clip-path:circle(0% at var(--px) var(--py))}
+.hwipe.go{animation:iris 1.05s cubic-bezier(.65,0,.2,1) forwards}
+@keyframes iris{0%{opacity:1;clip-path:circle(0% at var(--px) var(--py))}100%{opacity:1;clip-path:circle(150% at var(--px) var(--py))}}
+.hburst{position:absolute;z-index:1;left:var(--px);top:var(--py);width:max(150vh,150vw);aspect-ratio:1;margin:calc(max(150vh,150vw)/-2) 0 0 calc(max(150vh,150vw)/-2);pointer-events:none;background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.11) 0 7.5deg,transparent 7.5deg 15deg);-webkit-mask:radial-gradient(closest-side,#000 0,rgba(0,0,0,.55) 30%,transparent 68%);mask:radial-gradient(closest-side,#000 0,rgba(0,0,0,.55) 30%,transparent 68%);animation:burst 90s linear infinite;transition:left 1s var(--ease),top 1s var(--ease),opacity .6s}
+@keyframes burst{to{transform:rotate(360deg)}}
+.hero.fin .hburst{left:50%;top:46%}
+.hspot{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(520px circle at var(--mx,70%) var(--my,40%),rgba(255,255,255,.16),transparent 62%);transition:opacity .6s}
+.hring{position:absolute;z-index:1;left:var(--px);top:var(--py);width:min(46vh,40vw);aspect-ratio:1;margin:calc(min(46vh,40vw)/-2) 0 0 calc(min(46vh,40vw)/-2);border-radius:50%;border:3px solid rgba(255,255,255,.85);opacity:0;pointer-events:none}
+.hring.go{animation:ring 1s cubic-bezier(.2,.7,.2,1) forwards}.hring.b.go{animation-delay:.16s;animation-duration:1.2s}
+@keyframes ring{0%{opacity:.9;transform:scale(.25)}100%{opacity:0;transform:scale(2.6);border-width:1px}}
+.tw{position:absolute;z-index:1;width:var(--s,14px);height:var(--s,14px);left:var(--x);top:var(--y);pointer-events:none;background:#fff;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);animation:twinkle var(--d,3.4s) ease-in-out var(--dl,0s) infinite;opacity:0}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(90deg)}}
+
+/* big outline word: letters rise in one by one, the word drifts sideways with the scroll */
+.outline{transform:translate(calc(-50% + var(--ox,0px)),-52%)}
+.outline.swap{transform:translate(calc(-50% + var(--ox,0px)),-46%)}
+.outline .ol{display:inline-block;animation:olin .8s var(--ease) both;animation-delay:calc(var(--i)*48ms)}
+@keyframes olin{0%{opacity:0;transform:translateY(.4em) rotate(10deg) scale(.86)}100%{opacity:1;transform:none}}
+
+/* brand panel: floating sticker logo, words rising in */
+.blogos{animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -9px;rotate:-1.2deg}}
+.hcopy .sub .wd{display:inline-block;animation:wdin .75s cubic-bezier(.2,1.25,.4,1) both;animation-delay:calc(var(--i)*55ms)}
+@keyframes wdin{0%{opacity:0;transform:translateY(.8em) rotate(7deg) scale(.88);filter:blur(7px)}55%{filter:blur(0)}100%{opacity:1;transform:none;filter:blur(0)}}
+/* important words: no underline. They are set in metallic gold (or premium black on the light backgrounds), pop in a beat after the line lands, and a slow shine keeps running through them */
+.hcopy .sub .hl{display:inline-block;font-weight:900;white-space:nowrap;text-shadow:none;background-size:240% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;transform-origin:50% 80%;animation:hlpop .8s cubic-bezier(.2,1.5,.4,1) both,hlshine 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*55ms + .28s),calc(var(--i)*55ms + 1.1s)}
+.hero .hl,.hero[data-hl="gold"] .hl{background-image:linear-gradient(100deg,#E2A61F 0%,#F6C945 20%,#F0BA32 42%,#FFFBE6 50%,#F0BA32 58%,#F6C945 80%,#E2A61F 100%);filter:drop-shadow(0 2px 3px rgba(50,15,0,.5))}
+.hero[data-hl="black"] .hl{background-image:linear-gradient(100deg,#050505 0%,#141414 42%,#8a8a8a 50%,#141414 58%,#050505 100%);filter:drop-shadow(0 1px 0 rgba(255,255,255,.4))}
+@keyframes hlpop{0%{transform:scale(.55) rotate(-5deg)}55%{transform:scale(1.2) rotate(1.5deg)}100%{transform:none}}
+@keyframes hlshine{0%,35%{background-position:100% 0}75%,100%{background-position:0% 0}}
+/* dots: a ring that fills as you scroll through each brand */
+.dot.on::after{content:'';position:absolute;inset:-11px;border-radius:50%;background:conic-gradient(#fff calc(var(--dp,0)*360deg),rgba(255,255,255,.28) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.5px),#000 calc(100% - 3.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.5px),#000 calc(100% - 3.5px))}
+
+/* logo reveal card: floats, catches the light, underline draws in */
+.fcard{position:relative;overflow:hidden}
+.fcard::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,170,215,.42) 50%,transparent 60%);transform:translateX(-130%);pointer-events:none}
+.hero.fin .fcard{animation:cardfloat 7s ease-in-out 1.6s infinite}
+.hero.fin .fcard::after{animation:sheen2 6.5s ease-in-out 2.3s infinite}
+@keyframes cardfloat{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-10px) rotateX(1.6deg)}}
+@keyframes sheen2{0%{transform:translateX(-130%)}22%,100%{transform:translateX(130%)}}
+.ftag em{background-repeat:no-repeat;background-size:0% 100%;transition:background-size .9s var(--ease) 2.1s}
+.hero.fin .ftag em{background-size:100% 100%}
+
+/* ---------- brand-name marquee ---------- */
+.mq{position:relative;z-index:2;overflow:hidden;width:104vw;margin:calc(clamp(70px,9vw,130px)*-1 + 6px) 0 clamp(46px,6vw,84px) -2vw;padding:clamp(10px,1.4vw,18px) 0;background:var(--berry);transform:rotate(-1.6deg);box-shadow:0 18px 40px -22px rgba(111,23,69,.7)}
+.mqt{display:flex;align-items:center;gap:clamp(18px,2.6vw,40px);width:max-content;white-space:nowrap;font:900 clamp(26px,4.4vw,62px)/1 var(--f);letter-spacing:-.02em;text-transform:uppercase;color:#fff;will-change:transform}
+.mqt .o{color:var(--berry);-webkit-text-stroke:4px rgba(255,255,255,.9);paint-order:stroke fill}
+.mqt svg{flex:none;width:.5em;height:.5em;fill:#FFE14A;animation:spin 6s linear infinite}
+
+/* ---------- headings: words rise out of a mask ---------- */
+.mo .split{opacity:1!important;transform:none!important}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .16em;margin:0 -.04em -.16em}
+.mo .split .wi{display:inline-block;transform:translateY(112%) rotate(7deg);transform-origin:0 100%;transition:transform 1s var(--ease);transition-delay:calc(var(--i)*70ms)}
+.mo .split.in .wi{transform:none}
+
+/* ---------- cards: tilt up into place, then hand over to the pointer tilt ---------- */
+.mo .bcard.reveal,.mo .nums>div.reveal:not(.feat){opacity:0;transform:perspective(900px) translateY(70px) rotateX(16deg) scale(.94);transform-origin:50% 100%;transition:opacity .8s var(--ease),transform 1.1s var(--ease),box-shadow .3s;transition-delay:var(--rd,0s)}
+.mo .bcard.reveal.in,.mo .nums>div.reveal.in:not(.feat){opacity:1;transform:none}
+.mo .reveal.done{transition:transform .25s,box-shadow .3s,opacity .3s;transition-delay:0s}
+.mo .nums>div.reveal.in:not(.feat):hover{transform:translateY(-6px)}
+.bcard::after{content:'View concept \2192';position:absolute;right:16px;bottom:16px;z-index:3;padding:9px 16px;border-radius:999px;background:var(--berry);color:#fff;font:700 13px var(--f);opacity:0;transform:translateY(14px) translateZ(40px);transition:opacity .3s,transform .45s cubic-bezier(.3,1.5,.5,1);pointer-events:none}
+.bcard:hover::after,.bcard:focus-visible::after{opacity:1;transform:translateY(0) translateZ(40px)}
+.bimg{position:relative}
+.bimg::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);pointer-events:none}
+.bcard:hover .bimg::after{transform:translateX(130%);transition:transform .9s ease}
+.bcard:hover .blogo img{animation:wig .7s var(--ease)}
+@keyframes wig{0%,100%{transform:rotate(0) scale(1)}30%{transform:rotate(-4deg) scale(1.08)}65%{transform:rotate(3deg) scale(1.04)}}
+
+/* category chips and store logos pop in one after another */
+.mo .cats.reveal span,.mo .stores.reveal .store{opacity:0;transform:scale(.55) translateY(16px)}
+.mo .cats.reveal.in span,.mo .stores.reveal.in .store{opacity:1;transform:none;transition:opacity .5s,transform .7s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
+.mo .cats.in span:nth-child(1),.mo .stores.in .store:nth-child(1){transition-delay:.15s}.mo .cats.in span:nth-child(2),.mo .stores.in .store:nth-child(2){transition-delay:.25s}.mo .cats.in span:nth-child(3),.mo .stores.in .store:nth-child(3){transition-delay:.35s}.mo .cats.in span:nth-child(4),.mo .stores.in .store:nth-child(4){transition-delay:.45s}
+.mo .stores.done .store,.mo .cats.done span{transition-delay:0s}
+.cats span{transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .3s}.cats span:hover,.mo .cats.reveal.in span:hover{transform:translateY(-4px) rotate(-2deg);background:rgba(255,255,255,.3)}
+.cats .lk:hover,.mo .cats.reveal.in .lk:hover{background:#fff}
+.mo .stores.reveal.in .store:hover{transform:translateY(-6px) scale(1.03)}
+.store:hover img{animation:wig .7s var(--ease)}
+
+/* product rail: tiles slide in from the right, then the rail can be dragged */
+.mo .rail .tile{opacity:0;transform:translateX(110px) rotate(5deg)}
+.mo .rail.in .tile{opacity:1;transform:none;transition:opacity .8s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--i)*90ms)}
+.mo .rail.done .tile{transition:transform .25s;transition-delay:0s}
+.rail{cursor:grab}.rail.drag{cursor:grabbing;scroll-snap-type:none;user-select:none}.rail.drag .tile{pointer-events:none}
+.tile img{transition:transform .7s var(--ease)}.tile:hover img{transform:translateZ(16px) scale(1.04)}
+
+/* concept gallery: images wipe up into view and settle */
+.mo .vfig.reveal{opacity:1;clip-path:inset(100% 0 0 0 round 28px);transform:translateY(46px);transition:clip-path 1.1s var(--ease),transform 1.1s var(--ease),box-shadow .3s;transition-delay:var(--rd,0s)}
+.mo .vfig.reveal.in{clip-path:inset(0 0 0 0 round 28px);transform:none}
+.mo .vfig.reveal img{transform:scale(1.28)}
+.mo .vfig.reveal.in img{transform:scale(1);transition:transform 1.7s var(--ease)}
+.mo .vfig.reveal.in:hover img{transform:scale(1.07);transition:transform .9s var(--ease)}
+.mo .vfig.reveal figcaption{opacity:0;transform:translateY(16px);transition:opacity .5s .55s,transform .6s .55s var(--ease)}
+.mo .vfig.reveal.in figcaption{opacity:1;transform:none}
+
+/* trust bar catches the light once when it arrives */
+.trust{position:relative;overflow:hidden}
+.trust::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.3) 50%,transparent 62%);transform:translateX(-130%);pointer-events:none}
+.trust.in::after{animation:shine 1.5s .7s ease-out forwards}
+
+/* joy band: drifting confetti behind the mascots */
+.joy{isolation:isolate}
+.conf{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.conf i{position:absolute;left:var(--x);bottom:-60px;width:var(--s);height:var(--s);border-radius:var(--r,50%);background:var(--c);opacity:.55;animation:rise var(--d) linear var(--dl) infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(calc(-100vh - 400px)) rotate(540deg)}}
+.joy .wave.top{z-index:1}
+
+@media(prefers-reduced-motion:reduce){
+ .sprog,.hburst,.hring,.tw,.hwipe,.conf{display:none}
+ .outline .ol,.hcopy .sub .wd,.blogos,.mqt svg{animation:none!important}
+ .hcopy .sub .hl{animation:none!important;background-position:50% 0}
+ .ftag em{background-size:100% 100%}
+}

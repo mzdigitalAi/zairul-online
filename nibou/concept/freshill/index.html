@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Freshill, poster ads (concept)</title>
+<meta name="description" content="Unofficial concept poster ads for Freshill fruit drink concentrate by Nibou, by Zairul MD TY.">
+<link rel="icon" href="assets/freshill-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@1,700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#10222b;--g:#0E6B50;--y:#FFE14A}
+*{box-sizing:border-box}body{margin:0;background:#0b1e1a;color:#fff;font-family:"Nunito",system-ui,sans-serif;font-weight:700;-webkit-font-smoothing:antialiased}
+header{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:22px clamp(16px,4vw,48px)}
+header img{height:46px;width:auto}header h1{font:400 clamp(24px,3.4vw,40px)/1.05 "Anton",system-ui;letter-spacing:.02em;margin:0;text-transform:uppercase}
+header p{margin:4px 0 0;opacity:.8;font-size:14px;max-width:60ch}
+.btn{font:400 16px "Anton",system-ui;letter-spacing:.06em;text-transform:uppercase;background:var(--y);color:var(--ink);border:0;border-radius:99px;padding:12px 26px;cursor:pointer;transition:transform .3s}.btn:hover{transform:translateY(-3px)}
+main{display:grid;gap:44px;padding:10px clamp(16px,4vw,48px) 50px}.fmt .fh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 16px}.fmt h2{font:400 clamp(20px,2.6vw,30px) "Anton",system-ui;letter-spacing:.04em;text-transform:uppercase;margin:0}.fmt h2 small{font:700 13px Nunito,system-ui;letter-spacing:0;text-transform:none;opacity:.7;margin-left:8px}.row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,30px)}.row.story{grid-template-columns:repeat(3,minmax(0,1fr))}.row.story canvas{max-width:100%}
+figure{margin:0;display:grid;gap:12px}
+canvas{width:100%;height:auto;display:block;border-radius:18px;box-shadow:0 30px 60px -30px #000;background:#123}
+figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px}figcaption b{font:400 20px "Anton",system-ui;letter-spacing:.04em;text-transform:uppercase}
+.btn.sm{font-size:13px;padding:8px 16px}
+footer{padding:0 clamp(16px,4vw,48px) 40px;font-size:12.5px;opacity:.75;max-width:110ch}
+#msg{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;color:var(--ink);padding:10px 20px;border-radius:99px;font-weight:900;opacity:0;transition:opacity .3s;pointer-events:none}#msg.on{opacity:1}
+@media(max-width:1000px){.row,.row.story{grid-template-columns:1fr 1fr}}@media(max-width:560px){.row,.row.story{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="../shared/motion.css">
+</head>
+<body><div class="nb-back" style="position:relative;z-index:60;padding:10px clamp(16px,4vw,48px);font:700 14px/1.2 system-ui,Segoe UI,sans-serif;background:rgba(0,0,0,.35);color:#fff"><a href="../../index.html#top" style="color:inherit;text-decoration:none">&larr; Nibou concept homepage</a><span style="float:right;opacity:.75;font-weight:600">Unofficial concept</span></div>
+<header>
+  <div><img src="assets/freshill-logo.svg" alt="Freshill"></div>
+  <div><h1>Freshill poster ads · set 1</h1><p>Feed 4:5, Story 9:16 and A3 print. Built on the brand's own pool-side product photos. Click a button to download the full-size PNG.</p></div>
+  <button class="btn" id="all" type="button">Download all 15</button>
+</header>
+<main id="grid"></main>
+<footer>Unofficial concept by Zairul MD TY. Freshill and Nibou names, logos and product photos belong to Nibou Food &amp; Beverage; AEON, Mydin, Shopee and Lazada logos belong to their owners. All are used here as stand-ins for a design concept. Poster layouts and headlines are original concept work.</footer>
+<div id="msg" role="status"></div>
+<script src="posters.js"></script>
+<script src="../shared/motion.js"></script>
+</body>
+</html>
