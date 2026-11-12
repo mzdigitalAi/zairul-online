@@ -212,3 +212,18 @@ of up to four line icons with short labels at the bottom. The prompt uses only t
 certification seals, test badges, percentages and awards. Example: an invented shampoo brand (MELUR), made with Google Gemini.
 Let AI Choose picks it for shampoo, soap, hand wash, lotion, serum, sunscreen, toothpaste, supplement and similar words.
 New Product look "Ingredient world": the same scene idea for Product photo mode, without text.
+
+--- LATEST: Cinematic re-render style, photo-to-render buttons and Game cinematic look (13 Nov 2026) ---
+New poster style "Cinematic re-render" (32 styles now), studied from six carousel covers. Two layers:
+RENDER: halfway between a photograph and a big-budget game cinematic. True proportions, pores, stubble and fabric weave sharper
+than a camera gives, a long portrait lens with very shallow focus, a soft key light plus a strong rim-light halo from behind,
+dust and debris floating at several depths in a light haze, a muted grey background with one saturated colour on the subject.
+OVERLAY: headline bottom left in heavy wide italic white capitals with one word in thin italic highlighter yellow, the call to
+action in a yellow outlined pill, and your brand as a small white script signature in a top corner. Nothing else.
+The live preview shows this style with an italic capital headline and an outlined pill.
+Two buttons under the style: "Copy the photo-to-render prompt" (attach your own photo, pet, product or drawing and get it back in
+this look) and "Copy the before-and-after version" (adds the original as a small inset with a hand-drawn arrow).
+Only use photos of people who agree and characters that are yours: do not re-render celebrities or other companies' characters.
+Example: an invented footballer for an invented club (RFC), made with Google Gemini. No real club, league or sponsor marks.
+Let AI Choose picks it for football, futsal, athlete, e-sports, gaming, signing, match day, carousel and re-render words.
+New Portrait look "Game cinematic": the same render look for Portrait / fashion photo mode, without text.
