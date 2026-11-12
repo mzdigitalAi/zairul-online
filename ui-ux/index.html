@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UI-UX · Zairul MD TY</title>
-<meta name="description" content="Apps and websites by Zairul: PL Fitness, MECA 3D and the PREMIER Database dashboard, each with a live link and the story of how it was made.">
+<meta name="description" content="Apps and websites by Zairul: PL Fitness, MECA 3D, the PREMIER Database dashboard and the Nibou F&amp;B homepage concept, each with a live link and the story of how it was made.">
 <meta property="og:title" content="UI-UX · Apps and websites by Zairul">
 <meta property="og:image" content="https://zairul.online/ui-ux/img/s05-home.png">
 <link rel="icon" href="/assets/logo.png">
@@ -36,9 +36,8 @@
   .tools span { padding:8px 14px; border:1px solid var(--line); border-radius:999px; background:var(--panel); font-size:14px; color:#d9d3ca; }
   .days { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
   .days i { font-style:normal; font:700 14px/1 'Barlow',sans-serif; letter-spacing:.12em; padding:14px 16px; border-radius:12px; border:1.5px solid currentColor; }
-  .apps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:34px; }
-  @media (max-width:980px){ .apps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-  @media (max-width:640px){ .apps { grid-template-columns:1fr; } }
+  .apps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:34px; }
+    @media (max-width:640px){ .apps { grid-template-columns:1fr; } }
   .app { display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; transition:transform .25s, border-color .25s, box-shadow .25s; }
   .app:hover { transform:translateY(-4px); border-color:rgba(242,182,50,.55); box-shadow:0 22px 50px -18px rgba(0,0,0,.8); }
   .app-thumb { position:relative; display:block; aspect-ratio:16/10; overflow:hidden; background:#0b0b0b; }
@@ -64,6 +63,18 @@
   .making-head .btns { margin-top:28px; }
   .page-hero.compact { padding:64px 0 44px; }
   .page-hero.compact h1 { font-size:clamp(44px,6vw,92px); max-width:16ch; }
+  .cmp { width:100%; border-collapse:collapse; margin-top:28px; font-size:15px; }
+  .cmp th, .cmp td { text-align:left; vertical-align:top; padding:14px 16px; border-bottom:1px solid var(--line); }
+  .cmp th { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:700; }
+  .cmp td:first-child { color:var(--text); font-weight:600; width:34%; }
+  .cmp td { color:var(--muted); }
+  @media (max-width:720px){ .cmp, .cmp tbody, .cmp tr, .cmp td { display:block; width:auto !important; } .cmp thead { display:none; } .cmp tr { padding:12px 0; border-bottom:1px solid var(--line); } .cmp td { border:0; padding:4px 0; } }
+  .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .chips a { padding:9px 15px; border:1px solid var(--line); border-radius:999px; background:var(--panel); font-size:14px; color:#e9e4dc; text-decoration:none; transition:border-color .2s, color .2s; }
+  .chips a:hover { border-color:var(--gold); color:var(--gold); }
+  .tells { list-style:none; display:grid; gap:12px; padding:0; }
+  .tells li { padding:14px 18px; background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:6px; color:var(--muted); font-size:15.5px; }
+  .tells li b { color:var(--text); }
   .case-tag { display:inline-block; margin-bottom:12px; font-size:12px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--red); }
 </style>
 </head>
@@ -74,7 +85,7 @@
   <div class="wrap">
     <p class="kicker">UI-UX · Apps &amp; websites</p>
     <h1>Built, live, ready to test</h1>
-    <p class="lead">Three working products I designed and directed with AI. Open any of them and try it yourself, then read how each one was made.</p>
+    <p class="lead">Four working products and concepts I designed and directed with AI. Open any of them and try it yourself, then read how each one was made.</p>
   </div>
 </header>
 
@@ -84,20 +95,20 @@
       <p class="label">The apps</p>
       <div class="apps">
         <article class="app">
-          <a class="app-thumb" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener" aria-label="Open PL Fitness (opens in a new tab)">
-            <div class="app-phones"><img src="img/s07-weekly-plan.png" alt="" loading="lazy"><img src="img/s05-home.png" alt="" loading="lazy"><img src="img/s09-exercise-player.png" alt="" loading="lazy"></div>
+          <a class="app-thumb" href="/pl-fitness/" aria-label="Open PL Fitness">
+            <div class="app-phones"><img src="img/pl-v2-onboarding.jpg" alt="" loading="lazy"><img src="img/pl-v2-home.jpg" alt="" loading="lazy"><img src="img/pl-v2-discover.jpg" alt="" loading="lazy"></div>
             <span class="app-num">01</span><span class="app-live">Live</span>
           </a>
           <div class="app-body">
             <span class="app-type">Mobile web app</span>
             <h3>PL Fitness</h3>
             <p>A fitness app with accounts, weekly plans, exercise videos and saved progress. Best opened on a phone.</p>
-            <div class="app-links"><a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Test it live ↗</a><a class="app-making" href="#making-pl-fitness">The making of →</a></div>
+            <div class="app-links"><a class="btn red" href="/pl-fitness/">Test it live ↗</a><a class="app-making" href="#making-pl-fitness">The making of →</a></div>
           </div>
         </article>
         <article class="app">
           <a class="app-thumb" href="/meca-3d/" aria-label="Open the MECA 3D concept site">
-            <img src="img/meca-hero.jpg" alt="" loading="lazy">
+            <img src="img/meca2-hero.jpg" alt="" loading="lazy">
             <span class="app-num">02</span><span class="app-live">Live</span>
           </a>
           <div class="app-body">
@@ -119,6 +130,18 @@
             <div class="app-links"><a class="btn red" href="/premier-dashboard/">Test it live ↗</a><a class="app-making" href="#premier-dashboard">The making of →</a></div>
           </div>
         </article>
+        <article class="app">
+          <a class="app-thumb" href="/nibou/" aria-label="Open the Nibou F&amp;B homepage concept">
+            <img src="img/nibou-hero.jpg" alt="" loading="lazy" style="object-position:center">
+            <span class="app-num">04</span><span class="app-live">Live</span>
+          </a>
+          <div class="app-body">
+            <span class="app-type">Website upgrade concept</span>
+            <h3>Nibou F&amp;B</h3>
+            <p>A suggested upgrade for nibou.com/fnb: one scroll story through all six brands, real product cards, brand poster pages and a clear where-to-buy.</p>
+            <div class="app-links"><a class="btn red" href="/nibou/">Test it live ↗</a><a class="app-making" href="#nibou">The making of →</a></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -129,7 +152,7 @@
       <h2>The making of PL Fitness</h2>
       <p class="lead">From a Figma template to a real, working mobile app with accounts, saved data and a public link. Designed, directed and shipped with human-directed AI, step by step.</p>
       <div class="btns">
-        <a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Open the live app</a>
+        <a class="btn red" href="/pl-fitness/">Open the live app</a>
         <a class="btn" href="#ad">Watch the 15-second ad</a>
         <a class="btn" href="#story">Read the making of</a>
       </div>
@@ -198,7 +221,7 @@
       <p class="label">03 · Accounts &amp; hosting</p>
       <h2>A real app, not a mock-up</h2>
       <p>Sign-up and sign-in use real email accounts. Each person's progress, plan and profile is stored in a database behind row-level security, so a user can only ever read and write their own data. The app is published at a public link and works on any phone.</p>
-      <div class="btns" style="margin-top:26px"><a class="btn red" href="https://zippy-pastelito-e5dc76.netlify.app" target="_blank" rel="noopener">Try it yourself</a></div>
+      <div class="btns" style="margin-top:26px"><a class="btn red" href="/pl-fitness/">Try it yourself</a></div>
     </div>
   </section>
 
@@ -255,25 +278,71 @@
       <p>The ad above is written as code with Remotion, so each shot, caption and timing is editable. Sound effects are generated in sync with the picture: a hit as the logo lands, a rising tick for each day, a swoosh at every transition.</p>
     </div>
   </section>
+  <section class="section" id="pl-v2">
+    <div class="wrap">
+      <p class="label">07 · Version 2</p>
+      <h2>Real trainers, painted art and a motion layer</h2>
+      <p>The second round made the app feel personal and alive. Every change came from using it myself on a phone and asking what a member would want to see next.</p>
+      <div class="phones">
+        <figure><img src="img/pl-v2-onboarding.jpg" alt="Onboarding screen with a painted athlete portrait" loading="lazy"><figcaption>Onboarding</figcaption></figure>
+        <figure><img src="img/pl-v2-home.jpg" alt="Home screen with a trainer close-up in the Workout Today banner" loading="lazy"><figcaption>Home</figcaption></figure>
+        <figure><img src="img/pl-v2-discover.jpg" alt="Discover screen with the Workouts for Women banner" loading="lazy"><figcaption>Discover</figcaption></figure>
+        <figure><img src="img/pl-v2-custom.jpg" alt="Custom workout screen with a motivation card" loading="lazy"><figcaption>Custom workout</figcaption></figure>
+        <figure><img src="img/pl-v2-activities.jpg" alt="Activities screen with charts" loading="lazy"><figcaption>Activities</figcaption></figure>
+        <figure><img src="img/pl-v2-profile.jpg" alt="Profile screen" loading="lazy"><figcaption>Profile</figcaption></figure>
+      </div>
+      <table class="cmp">
+        <thead><tr><th>What changed</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Trainer close-ups in the banners</td><td>The Workout Today banner now rotates through real trainers with a name tag, and Workouts for Women shows the women trainers. A face and a name make a plan feel coached, not generic.</td></tr>
+          <tr><td>Painted athlete portraits</td><td>Five pop-art portraits, each paired with a short line such as "Push one more rep", are picked at random on every visit. The app looks different each time you open it, which keeps it from feeling like a template.</td></tr>
+          <tr><td>A motion layer on every screen</td><td>Screens slide in the direction you are moving, cards arrive in a stagger, numbers count up, the tab indicator glides and taps ripple. All of it uses one easing curve so it feels like one product.</td></tr>
+          <tr><td>Finishing details</td><td>Glass edges catch the light, numbers use even-width digits so they don't jump while counting, and reduced-motion settings switch the animation off.</td></tr>
+          <tr><td>Hosted on zairul.online</td><td>The latest version now lives on this site, so the link above always opens the newest build.</td></tr>
+        </tbody>
+      </table>
+      <div class="btns" style="margin-top:26px"><a class="btn red" href="/pl-fitness/">Open PL Fitness</a></div>
+    </div>
+  </section>
+
   <section class="section" id="meca-3d">
     <div class="wrap">
       <span class="case-tag">Case study 02</span>
       <p class="label">The making of MECA 3D</p>
-      <h2>MECA 3D: an interactive concept for an employers' consultancy</h2>
-      <p>I studied meca.com.my page by page, wrote down what already works and what slows a buyer down, then rebuilt the experience as a scroll-driven 3D story. It keeps MECA's real content and adds fast routes to a consultation and to courses, animated proof numbers, and a 3D scene that changes with each section.</p>
+      <h2>MECA 3D: a website proposal for an employers' consultancy</h2>
+      <p>I reviewed meca.com.my page by page (home, Consultancy, The Team, Training, The Paper Trail, MECA Hub and Contact), wrote down what already works and what slows a buyer down, then rebuilt the experience as one scroll-driven 3D story. MECA's real content stays; the order, the routes and the feel change.</p>
       <div class="pair">
-        <figure><div class="shot"><img src="img/meca-hero.jpg" alt="MECA 3D concept: hero with large white logo, small rotating scales of justice and the headline" loading="lazy"></div><figcaption>Hero: big white logo, a small scales of justice turning slowly above it, management figures drifting behind.</figcaption></figure>
-        <figure><div class="shot"><img src="img/meca-services.jpg" alt="MECA 3D concept: services section with legal document mockups and glass figures" loading="lazy"></div><figcaption>Consultancy: legal document mockups above a line-up of faceless glass figures.</figcaption></figure>
-        <figure><div class="shot"><img src="img/meca-courses.jpg" alt="MECA 3D concept: 3D course carousel in front of an audience of glass figures" loading="lazy"></div><figcaption>Courses: a 3D carousel you can drag, with a clear Register button on every course.</figcaption></figure>
-        <figure><div class="shot"><img src="img/meca-team.jpg" alt="MECA 3D concept: CEO profile and consultant portraits" loading="lazy"></div><figcaption>Team: portraits matched for head size and eye line.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca2-hero.jpg" alt="MECA 3D: hero with the white logo, a small turning scales of justice, the headline and three buttons" loading="lazy"></div><figcaption>Hero: the promise in one screen, with Book a consultation, Find a course and WhatsApp.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca2-services.jpg" alt="MECA 3D: services bento grid over legal document mockups and lined-up glass figures" loading="lazy"></div><figcaption>Services: a bento grid, with the glass figures lined up behind it.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca2-courses.jpg" alt="MECA 3D: 3D course carousel in front of rows of glass figures facing a stage" loading="lazy"></div><figcaption>Courses: a 3D carousel with a Register link on every course, in front of an audience.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca2-clients.jpg" alt="MECA 3D: three client testimonials" loading="lazy"></div><figcaption>Proof: three testimonials instead of a wall of fourteen.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca2-insights.jpg" alt="MECA 3D: latest articles from The Paper Trail and the MECA Hub" loading="lazy"></div><figcaption>Insights: the latest Paper Trail articles and the MECA Hub in one place.</figcaption></figure>
+        <figure><div class="shot"><img src="img/meca2-contact.jpg" alt="MECA 3D: contact panel with one phone number, email and address" loading="lazy"></div><figcaption>Contact: one phone number, WhatsApp, email and address, with a manager and HR handshake behind.</figcaption></figure>
       </div>
-      <ul class="tells" style="margin-top:28px;max-width:860px">
-        <li><b>What I found:</b> courses sit two clicks deep, two different phone numbers appear on the home page, a pop-up covers the hero on mobile, and there is no motion at all.</li>
-        <li><b>What I changed:</b> one hero with two fast routes, the six proof numbers right under it, a 3D course carousel, and legal and HR objects (documents, handbook, org chart) instead of abstract shapes. The people are faceless glass figures, and management is shown by colour, not by a different body.</li>
-        <li><b>How it is built:</b> plain HTML, CSS and JavaScript with raw WebGL and no framework. It respects reduced motion and shows a static background where WebGL is unavailable.</li>
+      <h3 style="margin-top:46px">What I found on the current site</h3>
+      <ul class="tells" style="margin-top:16px;max-width:900px">
+        <li><b>Good:</b> a clear employer-side promise, strong proof (six headline numbers, named client testimonials, a named CEO), a steady stream of articles and a public course calendar, and an accessible body typeface.</li>
+        <li><b>Hierarchy:</b> a long testimonial wall (the first two repeat at the end) comes before the mission and the contact form, and courses, the most ready-to-buy content, sit two clicks deep.</li>
+        <li><b>Contact friction:</b> two different phone numbers on the home page, and WhatsApp only on the Contact page.</li>
+        <li><b>Inconsistencies:</b> "39 years" in the pop-up against 30 years on the counter, identical copy on two Consultancy blocks, "1995" against "1955" for the Employment Act, a course listed twice, and empty Podcast and Insights sections on the Hub.</li>
+        <li><b>First impression:</b> a pop-up covers the hero on phones, course cards carry no date, venue or fee, and nothing on the page moves.</li>
       </ul>
-      <div class="btns" style="margin-top:26px"><a class="btn red" href="/meca-3d/">Open the MECA 3D concept</a></div>
-      <p style="margin-top:18px;font-size:14px;color:var(--dim)">A design concept, not the official MECA website. Content, logo and the original layout belong to MECA. The team portraits in the concept are AI-generated illustrations. Course dates, venues and fees are marked placeholders.</p>
+      <table class="cmp">
+        <thead><tr><th>What I changed</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>One-screen promise with two fast routes</td><td>Book a consultation and Find a course sit in the hero, with call and WhatsApp in a sticky bar on phones. A buyer can act without scrolling.</td></tr>
+          <tr><td>Proof moved up and trimmed</td><td>The six numbers come right under the hero, then three testimonials with a link to the rest. Credibility lands before attention runs out.</td></tr>
+          <tr><td>Courses as a 3D carousel</td><td>Every course has a clear Register link. Dates, venues and fees are marked as placeholders to show MECA where the listing needs them.</td></tr>
+          <tr><td>A 3D scene that tells the story</td><td>The camera flies through legal and HR objects (contracts, a gavel, a handbook, an org chart) while faceless glass figures change formation per section: loose, lined up, an audience, pairs across a table, a handshake. Management is shown by a red body and crown ring.</td></tr>
+          <tr><td>One motion language</td><td>Headings rise word by word, cards follow the pointer with a spotlight, buttons are magnetic, the header hides while you read and returns when you scroll up, and nothing bounces. It should feel sharp and calm, like the counsel MECA sells.</td></tr>
+          <tr><td>One phone number, no pop-up</td><td>The concept uses the line MECA's own FAQ names as current, and nothing blocks the first screen.</td></tr>
+        </tbody>
+      </table>
+      <ul class="tells" style="margin-top:22px;max-width:900px">
+        <li><b>How it is built:</b> plain HTML, CSS and JavaScript with hand-written WebGL (no libraries, no model files). Text is always in the page, reduced motion gives a still frame, and browsers without WebGL get a static background.</li>
+      </ul>
+      <div class="btns" style="margin-top:26px"><a class="btn red" href="/meca-3d/">Open the MECA 3D proposal</a></div>
+      <p style="margin-top:18px;font-size:14px;color:var(--dim)">A design concept, not the official MECA website. Content, logo and the original layout belong to MECA. Course dates, venues and fees are marked placeholders, and document mockups use sample wording only.</p>
     </div>
   </section>
   <section class="section" id="premier-dashboard">
@@ -294,6 +363,57 @@
         <li><b>How it is built:</b> plain HTML, CSS and JavaScript with SVG, no chart library. The same analysis was also built as a Power BI project.</li>
       </ul>
       <p style="margin-top:18px;font-size:14px;color:var(--dim)">Published with the data owner’s agreement. The data is an anonymised extract with no customer names, phone numbers, addresses or account numbers. An unofficial analysis; the Celcom name and logo belong to Celcom.</p>
+    </div>
+  </section>
+
+  <section class="section" id="nibou">
+    <div class="wrap">
+      <span class="case-tag">Case study 04</span>
+      <p class="label">The making of Nibou F&amp;B</p>
+      <h2>Nibou F&amp;B: a suggested upgrade for nibou.com/fnb</h2>
+      <p>Nibou makes six food and drink brands: Dadih, Yourgurt, Freshill, Drinme, Kid's Joy and Bebee. Its F&amp;B homepage sells one of them in the hero and lists the rest as short paragraphs. I studied the page, listed what holds it back, and built a working concept of what it could be: a bright, playful homepage where every brand gets its moment, plus a poster-ad page for each brand.</p>
+      <div class="pair">
+        <figure><div class="shot"><img src="img/nibou-hero.jpg" alt="Nibou concept: the NBI Nibou Food and Beverage logo on magenta with fruit floating around it" loading="lazy"></div><figcaption>Opening: the Nibou logo draws itself in while fruit orbits around it.</figcaption></figure>
+        <figure><div class="shot"><img src="img/nibou-s0.jpg" alt="Nibou concept: Dadih scene with pudding cups and a strawberry on pink" loading="lazy"></div><figcaption>Scroll on and the hero walks through the six brands, each in its own colour. Dadih is brand 1 of 6.</figcaption></figure>
+        <figure><div class="shot"><img src="img/nibou-s2.jpg" alt="Nibou concept: Freshill scene with concentrate bottles on teal" loading="lazy"></div><figcaption>Freshill: the product flips in, floats and tilts with the pointer. The dots below jump to any brand.</figcaption></figure>
+        <figure><div class="shot"><img src="img/nibou-brands.jpg" alt="Nibou concept: six brand cards with real packshots" loading="lazy"></div><figcaption>Six brand cards with real packshots, each opening that brand's own page.</figcaption></figure>
+        <figure><div class="shot"><img src="img/nibou-range.jpg" alt="Nibou concept: product range rail filtered by snacks, baking, cooking and drinks" loading="lazy"></div><figcaption>The range, grouped by what people shop for: snacks, baking, cooking and drinks.</figcaption></figure>
+        <figure><div class="shot"><img src="img/nibou-buy.jpg" alt="Nibou concept: where to buy with AEON, MYDIN, Shopee and Lazada, and contact details" loading="lazy"></div><figcaption>Where to buy and contact: supermarkets and online stores, then phone, hours and address together.</figcaption></figure>
+      </div>
+      <h3 style="margin-top:46px">What I found on the current page</h3>
+      <ul class="tells" style="margin-top:16px;max-width:900px">
+        <li><b>One brand up front:</b> the hero promotes Drinme's new packaging, so a first-time visitor doesn't see the other five brands.</li>
+        <li><b>Thin product information:</b> each brand gets a short paragraph, with no product pages, flavours, sizes or a "buy" button per product.</li>
+        <li><b>Repetition and filler:</b> the menu, the stats and the product list are repeated in the page, the About blurb is placeholder Latin, and the Instagram block shows only "…".</li>
+        <li><b>Where to buy is hidden:</b> nationwide distribution is claimed, but only Shopee and Lazada are linked, behind a menu.</li>
+        <li><b>Housekeeping:</b> typos in the headline stats, 2017 market visits shown as recent posts, two different copyright years, and file names used as image descriptions.</li>
+      </ul>
+      <table class="cmp">
+        <thead><tr><th>What I changed</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>A hero that tours all six brands</td><td>The logo reveal opens, then scrolling flips through Dadih, Yourgurt, Freshill, Drinme, Kid's Joy and Bebee, each with its own colour, logo, product and one-line promise. The whole family is seen in the first few seconds, and the dots let a visitor jump straight to a brand.</td></tr>
+          <tr><td>Brand cards and brand pages</td><td>Every brand gets a card with a real packshot and its own page, so there is somewhere to go after "I like that one".</td></tr>
+          <tr><td>The range grouped by need</td><td>Snacks, Baking Needs, Cooking Essentials and Beverages, in a rail you can drag. Shoppers think in needs, not in brand names.</td></tr>
+          <tr><td>Proof said once, with weight</td><td>The yearly unit sales, three countries and six distributors count up once, alongside the halal, HACCP and ISO marks, instead of repeating as text.</td></tr>
+          <tr><td>Where to buy, in the open</td><td>AEON, MYDIN, Shopee and Lazada logos on the page, and a Find us button in the menu. Supermarket shelves are where most people meet Nibou.</td></tr>
+          <tr><td>Campaign ideas in the brand look</td><td>Six AI-made mood images (with blank, unbranded packs) and the two mascots show how social and print campaigns could look.</td></tr>
+          <tr><td>Ready-to-post poster ads per brand</td><td>Each brand page draws its own posters in feed 4:5, story 9:16 and A3 print with bleed, downloadable as PNG. Marketing gets usable assets, not just a nicer homepage.</td></tr>
+          <tr><td>Clean, fast, accessible</td><td>No repeated blocks or placeholder text, real image descriptions, a lighter scene on phones, a fallback when 3D isn't available, and no motion for visitors who ask for less.</td></tr>
+        </tbody>
+      </table>
+      <div class="pair">
+        <figure><div class="shot"><img src="img/nibou-kidsjoy.jpg" alt="Nibou concept: Kid's Joy poster ad page with three feed posters" loading="lazy"></div><figcaption>A brand page: Kid's Joy poster ads made from the real product photos, ready to download.</figcaption></figure>
+        <figure><div class="shot"><img src="img/nibou-visuals.jpg" alt="Nibou concept: six AI-made campaign mood images" loading="lazy"></div><figcaption>Campaign ideas: AI-made mood images with unbranded packs, in Nibou's colours.</figcaption></figure>
+      </div>
+      <h3 style="margin-top:40px">Open the brand pages</h3>
+      <div class="chips">
+        <a href="/nibou/concept/dadih/">Dadih</a><a href="/nibou/concept/yourgurt/">Yourgurt</a><a href="/nibou/concept/freshill/">Freshill</a><a href="/nibou/concept/drinme/">Drinme</a><a href="/nibou/concept/drinme-board/">Drinme brand board</a><a href="/nibou/concept/kidsjoy/">Kid's Joy</a><a href="/nibou/concept/bebee/">Bebee</a><a href="/nibou/concept/easysantan/">Easy Santan</a>
+      </div>
+      <ul class="tells" style="margin-top:28px;max-width:900px">
+        <li><b>How it is built:</b> plain HTML, CSS and JavaScript with no libraries. The fruit and the hero brand scenes are drawn in code as vectors, so they stay sharp at any size; the brand logos are vector traces.</li>
+      </ul>
+      <div class="btns" style="margin-top:26px"><a class="btn red" href="/nibou/">Open the Nibou concept</a></div>
+      <p style="margin-top:18px;font-size:14px;color:var(--dim)">An unofficial design concept, not Nibou's website. Logos, mascots, product photos and the words come from nibou.com and belong to Nibou; the vector logos are approximations of them. The campaign mood images are AI-generated and show no real packaging.</p>
     </div>
   </section>
 </main>

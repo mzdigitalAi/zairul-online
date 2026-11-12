@@ -1,4 +1,4 @@
-﻿/* MECA-3D: dependency-free. Raw WebGL scene driven by scroll + progressive enhancement UI. */
+/* MECA-3D: dependency-free. Raw WebGL scene driven by scroll + progressive enhancement UI. */
 (function () {
   'use strict';
   var doc = document, root = doc.documentElement;
@@ -17,8 +17,7 @@
   }
 
   /* ---------- hero kinetic type ---------- */
-  var h1 = $('.kin');
-  if (h1 && !reduce) {
+  function splitWords(root_) { // wraps each word in a mask + inner span; keeps nested markup (e.g. <em>)
     var i = 0;
     (function split(node) {
       Array.prototype.slice.call(node.childNodes).forEach(function (n) {
@@ -34,16 +33,27 @@
           node.replaceChild(frag, n);
         } else if (n.nodeType === 1) split(n);
       });
-    })(h1);
+    })(root_);
+    return i;
   }
+  var h1 = $('.kin');
+  if (h1 && !reduce) splitWords(h1);
+  // section headings: same word-mask rise, triggered when the heading block scrolls in
+  if (!reduce) $$('.sec-head h2, .big-cta h2').forEach(function (h) { splitWords(h); h.classList.add('split'); });
 
-  /* ---------- reveal on scroll ---------- */
+  /* ---------- reveal on scroll: staggered by sibling order, hero choreographed ---------- */
   var revs = $$('.reveal');
+  var HERO_DELAY = { eyebrow: 380, lead: 1000, 'cta-row': 1150, badge: 1300 };
+  function revealDelay(el) {
+    if (el.closest('.hero')) { for (var k in HERO_DELAY) if (el.classList.contains(k)) return HERO_DELAY[k]; }
+    var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.classList.contains('reveal'); });
+    return Math.min(5, sibs.indexOf(el)) * 90;
+  }
   if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    revs.forEach(function (el, k) { el.style.setProperty('--d', (k % 4) * 70 + 'ms'); io.observe(el); });
+    revs.forEach(function (el) { el.style.setProperty('--d', revealDelay(el) + 'ms'); io.observe(el); });
   } else revs.forEach(function (el) { el.classList.add('in'); });
 
   /* ---------- counters ---------- */
@@ -66,17 +76,78 @@
   }
 
   /* ---------- 3D tilt on hover (fine pointers only) ---------- */
-  if (!reduce && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  var finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if (!reduce && finePointer) {
     $$('.tilt').forEach(function (el) {
-      el.addEventListener('pointermove', function (e) {
-        var r = el.getBoundingClientRect();
-        var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        el.style.setProperty('--ry', (x * 10).toFixed(2) + 'deg');
-        el.style.setProperty('--rx', (-y * 10).toFixed(2) + 'deg');
+      var pend = null, ex = 0, ey = 0;
+      el.addEventListener('pointermove', function (e) { // one style write per frame; also feeds the cursor spotlight
+        ex = e.clientX; ey = e.clientY;
+        if (pend) return;
+        pend = requestAnimationFrame(function () {
+          pend = null; var r = el.getBoundingClientRect();
+          var x = (ex - r.left) / r.width - 0.5, y = (ey - r.top) / r.height - 0.5;
+          el.style.setProperty('--ry', (x * 9).toFixed(2) + 'deg');
+          el.style.setProperty('--rx', (-y * 9).toFixed(2) + 'deg');
+          el.style.setProperty('--mx', (ex - r.left).toFixed(0) + 'px');
+          el.style.setProperty('--my', (ey - r.top).toFixed(0) + 'px');
+        });
       });
       el.addEventListener('pointerleave', function () { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
     });
+    // magnetic buttons: the button leans toward the pointer
+    $$('.btn').forEach(function (b) {
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.setProperty('--tx', ((e.clientX - r.left - r.width / 2) * .16).toFixed(1) + 'px');
+        b.style.setProperty('--ty', ((e.clientY - r.top - r.height / 2) * .28).toFixed(1) + 'px');
+      });
+      b.addEventListener('pointerleave', function () { b.style.setProperty('--tx', '0px'); b.style.setProperty('--ty', '0px'); });
+    });
   }
+
+  /* ---------- header: hides while reading, returns on scroll up; active-section underline ---------- */
+  (function () {
+    var top = $('#top'), lastY = scrollY, ticking = false;
+    addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false; var y = scrollY, d = y - lastY;
+        if (Math.abs(d) > 6) {
+          var hide = d > 0 && y > 260 && !nav.classList.contains('open');
+          top.classList.toggle('hide', hide); lastY = y;
+        }
+        top.classList.toggle('solid', y > 40);
+      });
+    }, { passive: true });
+    if ('IntersectionObserver' in window) {
+      var links = {}; $$('#nav a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+      var so = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          Object.keys(links).forEach(function (k) { if (k === e.target.id) links[k].setAttribute('aria-current', 'true'); else links[k].removeAttribute('aria-current'); });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      Object.keys(links).forEach(function (k) { var s = doc.getElementById(k); if (s) so.observe(s); });
+    }
+  })();
+
+  /* ---------- scroll-linked polish: hero parallax fade, marquee speeds up with scroll velocity ---------- */
+  (function () {
+    if (reduce) return;
+    var vel = 0, lastY = scrollY, run = 0, track = $('.track'), anim = null;
+    function hp() { root.style.setProperty('--hp', Math.min(1, Math.max(0, scrollY / Math.max(1, innerHeight * .8))).toFixed(3)); }
+    function tick() {
+      run = 0; vel *= .92;
+      if (!anim && track && track.getAnimations) anim = track.getAnimations()[0] || null;
+      if (anim) anim.playbackRate = 1 + Math.min(7, Math.abs(vel) * .12);
+      if (Math.abs(vel) > .05) run = requestAnimationFrame(tick); else if (anim) anim.playbackRate = 1;
+    }
+    addEventListener('scroll', function () {
+      hp(); var d = scrollY - lastY; lastY = scrollY; vel = vel * .6 + d * .4;
+      if (!run) run = requestAnimationFrame(tick);
+    }, { passive: true });
+    hp();
+  })();
 
   /* ---------- nav ---------- */
   var burger = $('#burger'), nav = $('#nav');
@@ -111,7 +182,7 @@
     var act = ((idx % n) + n) % n;
     cards.forEach(function (c, k) {
       var rel = ((k - act) % n + n) % n; if (rel > n / 2) rel -= n;
-      var a = Math.abs(rel * step);
+      var a = Math.abs(rel * step); c.classList.toggle('active', a < 1);
       c.style.opacity = a < 1 ? 1 : a < 100 ? 0.55 : 0.12;
       if (a > 100) c.setAttribute('inert', ''); else c.removeAttribute('inert');
     });
@@ -267,19 +338,19 @@
 
   /* ---------- glass people: instanced faceless figures ---------- */
   var FVS = 'attribute vec3 aPos;attribute vec3 aNor;attribute vec4 aI0;attribute vec4 aI1;uniform mat4 uProj,uView;uniform float uRing;' +
-    'varying vec3 vN;varying vec3 vV;varying float vD;varying float vK;varying float vA;' +
-    'void main(){vA=aI1.z;float c=cos(aI1.x),s=sin(aI1.x),lc=cos(aI1.w),ls=sin(aI1.w);float k=aI1.y;bool cull=false;' +
+    'varying vec3 vN;varying vec3 vV;varying float vD;varying float vK;varying float vA;varying float vH;' +
+    'void main(){vH=aPos.y;vA=aI1.z;float c=cos(aI1.x),s=sin(aI1.x),lc=cos(aI1.w),ls=sin(aI1.w);float k=aI1.y;bool cull=false;' +
     'if(uRing>.5){if(k<.5)cull=true;k=2.;}' +
     'vec3 p=aPos*aI0.w;vec3 n=aNor;' +
     'p=vec3(p.x,p.y*lc-p.z*ls,p.y*ls+p.z*lc);n=vec3(n.x,n.y*lc-n.z*ls,n.y*ls+n.z*lc);' +
     'p=vec3(c*p.x+s*p.z,p.y,-s*p.x+c*p.z);n=vec3(c*n.x+s*n.z,n.y,-s*n.x+c*n.z);' +
     'vec4 v=uView*vec4(p+aI0.xyz,1.);vN=n;vV=-v.xyz;vD=-v.z;vK=k;gl_Position=cull?vec4(2.,2.,2.,1.):uProj*v;}';
-  var FFS = 'precision mediump float;uniform vec3 uFog;uniform float uA;varying vec3 vN;varying vec3 vV;varying float vD;varying float vK;varying float vA;' +
+  var FFS = 'precision mediump float;uniform vec3 uFog;uniform float uA;varying vec3 vN;varying vec3 vV;varying float vD;varying float vK;varying float vA;varying float vH;' +
     'void main(){float fog=smoothstep(10.,58.,vD);float near=smoothstep(2.,9.,vD);' +
     'if(vK>1.5){gl_FragColor=vec4(mix(vec3(1.,.3,.33),uFog,fog),.95*(1.-fog)*near);return;}' +
     'vec3 n=normalize(vN),v=normalize(vV);float rim=pow(1.-abs(dot(n,v)),2.);' +
     'float d=.4+.6*max(dot(n,normalize(vec3(.4,.8,.5))),0.);' +
-    'vec3 base=vK>.5?vec3(.9,.16,.2):vec3(.82,.85,.9);vec3 c=base*d+rim*vec3(1.,.2,.25)*(vK>.5?.9:.7);' +
+    'vec3 base=vK>.5?vec3(.9,.16,.2):vec3(.82,.85,.9);base*=mix(.68,1.,smoothstep(.82,.95,vH));vec3 c=base*d+rim*vec3(1.,.2,.25)*(vK>.5?.9:.7);' +
     'c=mix(c,uFog,fog);gl_FragColor=vec4(c,(.3+rim*.5)*(1.-fog*.8)*near*uA*vA);}';
 
   function pushTri(P, N, a, b, c, ox, oy, oz) {
@@ -298,17 +369,45 @@
       pushTri(P, N, a, b, c, 0, cy, 0); pushTri(P, N, a, c, d, 0, cy, 0);
     }
   }
-  function figureGeo() {
-    var P = [], N = [], R = .22, prof = [], k, a;
-    for (k = 0; k <= 3; k++) { a = (-90 + k * 30) * Math.PI / 180; prof.push([R * Math.cos(a), .25 + R * Math.sin(a)]); }
-    prof.push([R * .92, .95]);
-    for (k = 1; k <= 3; k++) { a = k * 30 * Math.PI / 180; prof.push([R * .92 * Math.cos(a), .95 + R * .92 * Math.sin(a)]); }
-    lathe(prof, 8, .6, P, N);
-    var hp = []; for (k = 0; k <= 6; k++) { a = (-90 + k * 30) * Math.PI / 180; hp.push([.26 * Math.cos(a), 1.55 + .26 * Math.sin(a)]); }
-    lathe(hp, 8, 1.55, P, N);
-    return { p: new Float32Array(P), n: new Float32Array(N), c: P.length / 3 };
+  // Smooth-shaded lathe (solid of revolution about Y) with optional scale / Z-rotation / translation; appends non-indexed triangles.
+  function latheS(prof, seg, P, N, o) {
+    var s = o.s || [1, 1, 1], rz = o.rz || 0, t = o.t || [0, 0, 0], cz = Math.cos(rz), sz = Math.sin(rz), n = prof.length, i, j, nr = [];
+    for (i = 0; i < n; i++) { // outward normal in the (r,y) plane from neighbouring profile points
+      var a = prof[Math.max(0, i - 1)], b = prof[Math.min(n - 1, i + 1)], dr = b[0] - a[0], dy = b[1] - a[1], l = Math.sqrt(dr * dr + dy * dy) || 1;
+      nr.push([dy / l, -dr / l]);
+    }
+    function vtx(i, j) {
+      var an = j / seg * 6.2831853, c = Math.cos(an), sn = Math.sin(an), r = prof[i][0], y = prof[i][1];
+      var px = r * c * s[0], py = y * s[1], pz = r * sn * s[2];
+      var qx = nr[i][0] * c / s[0], qy = nr[i][1] / s[1], qz = nr[i][0] * sn / s[2], ql = Math.sqrt(qx * qx + qy * qy + qz * qz) || 1; qx /= ql; qy /= ql; qz /= ql;
+      return [cz * px - sz * py + t[0], sz * px + cz * py + t[1], pz + t[2], cz * qx - sz * qy, sz * qx + cz * qy, qz];
+    }
+    for (i = 0; i < n - 1; i++) for (j = 0; j < seg; j++) {
+      var A = vtx(i, j), B = vtx(i, j + 1), C = vtx(i + 1, j + 1), D = vtx(i + 1, j);
+      [A, B, C, A, C, D].forEach(function (v) { P.push(v[0], v[1], v[2]); N.push(v[3], v[4], v[5]); });
+    }
   }
-  function ringGeo() {
+  function limbProf(rb, rt, len, cap) { // rounded tapered limb from y=0 to y=len
+    var p = [], k, a;
+    for (k = 0; k <= cap; k++) { a = (-90 + k * 90 / cap) * Math.PI / 180; p.push([rb * Math.cos(a), rb + rb * Math.sin(a)]); }
+    p.push([(rb + rt) / 2 * 1.02, len * .5]);
+    for (k = 1; k <= cap; k++) { a = (k * 90 / cap) * Math.PI / 180; p.push([rt * Math.cos(a), len - rt + rt * Math.sin(a)]); }
+    return p;
+  }
+  function ballProf(r, rings) { var p = [], k, a; for (k = 0; k <= rings; k++) { a = (-90 + k * 180 / rings) * Math.PI / 180; p.push([r * Math.cos(a), r * Math.sin(a)]); } return p; }
+  // A faceless but properly proportioned person (about 1.85 tall, feet on y=0): head, neck, shoulders, torso, arms, legs, feet.
+  function figureGeo() {
+    var P = [], N = [], SEG = 10, side;
+    latheS([[0, .85], [.13, .87], [.165, .97], [.15, 1.1], [.168, 1.28], [.19, 1.4], [.15, 1.49], [.07, 1.54], [0, 1.55]], SEG, P, N, { s: [1.15, 1, .72] });  // torso + shoulders
+    latheS(limbProf(.046, .05, .2, 2), SEG, P, N, { t: [0, 1.46, 0] });                                                                                // neck
+    latheS(ballProf(.105, 6), SEG, P, N, { s: [1, 1.22, 1.06], t: [0, 1.69, .005] });                                                                 // head
+    for (side = -1; side <= 1; side += 2) {
+      latheS(limbProf(.05, .095, .98, 3), SEG, P, N, { t: [side * .095, .03, 0] });                                                                     // leg
+      latheS(ballProf(.06, 4), SEG, P, N, { s: [1, .55, 1.9], t: [side * .095, .04, .05] });                                                           // foot
+      latheS(limbProf(.036, .055, .68, 3), SEG, P, N, { t: [side * .285, .8, 0], rz: side * .05 });                                                    // arm + hand
+    }
+    return { p: new Float32Array(P), n: new Float32Array(N), c: P.length / 3 };
+  }  function ringGeo() {
     var P = [], N = [], R = .2, r = .035, y = 2.03, U = 12, V = 5, u, v;
     function pt(uu, vv) { var A = uu / U * 6.2831853, B = vv / V * 6.2831853; return [(R + r * Math.cos(B)) * Math.cos(A), y + r * Math.sin(B), (R + r * Math.cos(B)) * Math.sin(A)]; }
     for (u = 0; u < U; u++) for (v = 0; v < V; v++) {
@@ -376,7 +475,7 @@
     // 4 handshake in front, everyone else settled behind
     var cc = narrow ? 6 : 12;
     for (i = 2; i < NF; i++) { var c4 = (i - 2) % cc; r = Math.floor((i - 2) / cc); set(4, i, (c4 - (cc - 1) / 2) * (narrow ? 1.3 : 1.5), FLOOR, -9 - r * 1.6, 0, 1); }
-    set(4, 0, -1.1, FLOOR, 2.5, Math.PI / 2, 1.7); set(4, 1, 1.1, FLOOR, 2.5, -Math.PI / 2, 1.7);
+    set(4, 0, -.85, FLOOR, 2.5, Math.PI / 2, 1.25); set(4, 1, .85, FLOOR, 2.5, -Math.PI / 2, 1.25);
     F.orb.x = F.A[4].x; F.orb.y = FLOOR + 2.4; F.orb.z = F.A[4].z + 2.5;
   }
   function sm(x) { x = x < 0 ? 0 : x > 1 ? 1 : x; return x * x * (3 - 2 * x); }
@@ -762,10 +861,13 @@
   }
 
   var running = false, raf = 0;
+  var lastT = 0;
   function frame(t) {
     raf = 0;
     if (reduce) { cur = 0; } else {
-      cur += (prog - cur) * .07; cmx += (mx - cmx) * .05; cmy += (my - cmy) * .05;
+      // frame-rate independent critically-damped-style follow (no overshoot) so 60/120 Hz screens feel identical
+      var dt = Math.min(.05, lastT ? (t - lastT) / 1000 : .016); lastT = t;
+      cur += (prog - cur) * (1 - Math.exp(-dt * 4.2)); cmx += (mx - cmx) * (1 - Math.exp(-dt * 3)); cmy += (my - cmy) * (1 - Math.exp(-dt * 3));
     }
     draw(t);
     if (!reduce && !doc.hidden) raf = requestAnimationFrame(frame);
