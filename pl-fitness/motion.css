@@ -1,0 +1,158 @@
+/* PL Fitness motion + finish layer. Loaded after glass.css. One easing family (expo-out) so everything feels related. */
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+:root{--ease:cubic-bezier(.16,1,.3,1);--ease-io:cubic-bezier(.65,0,.35,1)}
+
+/* ---------- finish: typography, glass edge light, tabular numbers ---------- */
+h1{letter-spacing:-.025em}
+h2,h3{letter-spacing:-.012em}
+.stat b,.timer b,.big,.price b{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.big{background:linear-gradient(180deg,#fff 30%,#c6ff3d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big #v{display:inline-block}
+.card,.stat,.list-item,.menu,.price,.opt{position:relative}
+.card::before,.stat::before,.list-item::before,.menu::before,.price::before,.opt::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(255,255,255,.04) 38%,rgba(255,255,255,.04) 62%,rgba(198,255,61,.35));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.btn,.chip,.opt,.menu,.price,.icon-btn,.list-item,.seg button{overflow:hidden}
+.btn,.chip,.opt,.menu,.price,.icon-btn,.list-item,.seg button,.stepper button{transition:transform .45s var(--ease),background .4s var(--ease),color .3s,border-color .4s,box-shadow .45s var(--ease),filter .3s}
+.btn:active,.list-item:active,.menu:active,.opt:active,.price:active,.icon-btn:active,.chip:active{transform:scale(.97)}
+.list-item:active,.menu:active{background:var(--glass-hi)}
+.list-item>span.green,.list-item>span[style*="color"]{transition:transform .5s var(--ease)}
+.list-item:hover>span.green,.list-item:hover>span[style*="color"]{transform:translateX(4px)}
+.field input,.search{transition:border-color .4s,box-shadow .5s var(--ease)}
+
+/* ---------- press ripple (added by motion.js) ---------- */
+.ripple{position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,255,255,.38);transform:scale(0);animation:ripple .75s var(--ease) forwards;z-index:0}
+@keyframes ripple{to{transform:scale(1);opacity:0}}
+
+/* ---------- screens: direction-aware slide + staggered rise ---------- */
+.screen{animation:none}
+.screen.go-fwd{animation:scrFwd .6s var(--ease) backwards}
+.screen.go-back{animation:scrBack .6s var(--ease) backwards}
+@keyframes scrFwd{from{opacity:0;transform:translateX(28px) scale(.99)}}
+@keyframes scrBack{from{opacity:0;transform:translateX(-28px) scale(.99)}}
+.screen:not(.static)>*,.screen:not(.static) :is(.list-item,.menu,.price,.opt,.card){animation:rise .8s var(--ease) backwards;animation-delay:calc(var(--i,0)*55ms + 60ms)}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}}
+.screen:not(.static) .grid2>*{animation:rise .8s var(--ease) backwards;animation-delay:calc(var(--j,0)*70ms + 280ms)}
+.grid2>*:nth-child(1){--j:0}.grid2>*:nth-child(2){--j:1}.grid2>*:nth-child(3){--j:2}.grid2>*:nth-child(4){--j:3}
+.screen:not(.static) .chips .chip{animation:rise .7s var(--ease) backwards;animation-delay:calc(var(--c,0)*45ms + 200ms)}
+.chip:nth-child(1){--c:0}.chip:nth-child(2){--c:1}.chip:nth-child(3){--c:2}.chip:nth-child(4){--c:3}.chip:nth-child(5){--c:4}
+.screen[style*="opacity"]>*{animation:none}
+
+/* ---------- hero art, banners ---------- */
+.hero.art img,.feed-img.art img,.hero.photo img{animation:kenburns 16s ease-in-out infinite alternate;transform-origin:50% 40%}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08) translate3d(-1%,-1%,0)}}
+.screen:not(.static) .hero.photo,.screen:not(.static) .hero.art{animation:heroIn 1.1s var(--ease) backwards;animation-delay:calc(var(--i,0)*55ms + 60ms)}
+@keyframes heroIn{from{opacity:0;clip-path:inset(0 0 100% 0 round 28px);transform:scale(1.03)}to{clip-path:inset(0 0 0 0 round 28px)}}
+.banner{background-size:200% 200%;animation:bannerShift 10s ease-in-out infinite alternate}
+@keyframes bannerShift{from{background-position:0% 50%}to{background-position:100% 50%}}
+.banner::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(112deg,transparent 36%,rgba(255,255,255,.5) 50%,transparent 64%);transform:translateX(-130%);animation:sheen 6s var(--ease-io) 1.5s infinite}
+@keyframes sheen{0%{transform:translateX(-130%)}35%,100%{transform:translateX(130%)}}
+.banner img{animation:floaty 8s ease-in-out infinite alternate}
+@keyframes floaty{from{transform:translateY(0) rotate(0)}to{transform:translateY(-7px) rotate(-1.5deg)}}
+
+/* ---------- buttons ---------- */
+.btn:not(.sm):not(.ghost):not(.red){position:relative;isolation:isolate}
+.btn:not(.sm):not(.ghost):not(.red)::after{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);animation:sheen 6.5s var(--ease-io) 2.2s infinite}
+.btn:hover{filter:brightness(1.06)}
+
+/* ---------- stats: ring fills, bars grow, line draws ---------- */
+.ring{animation:ringIn 1.6s var(--ease) .35s backwards}
+@keyframes ringIn{from{--p:0}}
+.timer{transition:--p 1s linear}
+.timer.running{animation:timerGlow 2.4s ease-in-out infinite}
+@keyframes timerGlow{0%,100%{box-shadow:0 0 30px rgba(198,255,61,.12)}50%{box-shadow:0 0 70px rgba(198,255,61,.4)}}
+.bars div{transform-origin:50% 100%;animation:grow 1.1s var(--ease) backwards}
+@keyframes grow{from{transform:scaleY(0);opacity:0}}
+.bars div:nth-child(1){animation-delay:.35s}.bars div:nth-child(2){animation-delay:.43s}.bars div:nth-child(3){animation-delay:.51s}.bars div:nth-child(4){animation-delay:.59s}.bars div:nth-child(5){animation-delay:.67s}.bars div:nth-child(6){animation-delay:.75s}.bars div:nth-child(7){animation-delay:.83s}
+.hr polyline{stroke-dasharray:760;stroke-dashoffset:0;animation:draw 2s var(--ease) .4s backwards;filter:drop-shadow(0 0 6px rgba(198,255,61,.7))}
+@keyframes draw{from{stroke-dashoffset:760}}
+.card div[style*="background:var(--green)"]{animation:fillIn 1.4s var(--ease) .45s backwards;box-shadow:0 0 14px rgba(198,255,61,.6)}
+@keyframes fillIn{from{width:0}}
+.steps i{transition:background .5s var(--ease)}
+.steps i.on{animation:stepIn .7s var(--ease) backwards}
+@keyframes stepIn{from{transform:scaleX(0);transform-origin:left}}
+.dots i{transition:width .6s var(--ease),background .4s}
+.dots i.on{animation:dotIn .7s var(--ease) backwards}
+@keyframes dotIn{from{width:8px}}
+.big #v.tick{animation:tick .3s var(--ease)}
+@keyframes tick{from{transform:scale(.93);opacity:.65}}
+.opt.on span{animation:checkIn .5s var(--ease)}
+@keyframes checkIn{from{transform:scale(.3);opacity:0}}
+
+/* ---------- bottom navigation: shared sliding indicator ---------- */
+.nav{position:relative;padding-left:8px;padding-right:8px}
+.nav button{flex:1;position:relative;z-index:1}
+.nav button.on{background:none;box-shadow:none}
+.nav .ind{position:absolute;left:8px;top:8px;bottom:calc(10px + env(safe-area-inset-bottom));width:calc((100% - 16px)/4);border-radius:16px;z-index:0;
+  background:linear-gradient(180deg,rgba(198,255,61,.2),rgba(198,255,61,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 8px 24px rgba(198,255,61,.18);
+  transform:translateX(calc(var(--idx,0)*100%));transition:transform .65s var(--ease)}
+.nav button.on svg{animation:navPop .6s var(--ease)}
+@keyframes navPop{from{transform:translateY(3px) scale(.82)}}
+.nav button{transition:color .4s}
+
+/* ---------- sheets, toast ---------- */
+.scrim{animation:fade .35s ease}
+.drawer{animation:drawerUp .65s var(--ease)}
+@keyframes drawerUp{from{transform:translateY(100%)}}
+.toast{animation:toastIn .55s var(--ease),toastOut .4s ease 1.4s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(26px) scale(.95)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(12px)}}
+.price.on{animation:priceGlow 3s ease-in-out infinite}
+@keyframes priceGlow{0%,100%{box-shadow:var(--glass-shine),0 0 0 rgba(198,255,61,0)}50%{box-shadow:var(--glass-shine),0 0 34px rgba(198,255,61,.28)}}
+.price .tag{position:absolute;overflow:hidden}
+
+/* ---------- splash ---------- */
+.center .logo.xl{animation:logoIn 1.2s var(--ease) backwards,logoGlow 3.2s ease-in-out 1.2s infinite alternate;position:relative;z-index:1}
+@keyframes logoIn{from{opacity:0;transform:scale(.7) translateY(14px);filter:blur(10px)}}
+@keyframes logoGlow{from{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(255,255,255,.5),0 14px 44px rgba(198,255,61,.25)}to{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(255,255,255,.5),0 14px 90px rgba(198,255,61,.55)}}
+.center.splash{position:relative}
+.halo{position:absolute;left:50%;top:calc(50% - 28px);width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:44px;border:1.5px solid rgba(198,255,61,.55);pointer-events:none;animation:halo 3.4s var(--ease) infinite}
+.halo.b{animation-delay:1.1s}.halo.c{animation-delay:2.2s}
+@keyframes halo{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+.load{width:120px;height:3px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden;margin-top:10px}
+.load i{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,#9be600,#dcff74);transform-origin:left;animation:load 1.6s var(--ease-io) forwards}
+@keyframes load{from{transform:scaleX(0)}}
+.center.splash>p{animation:rise 1s var(--ease) .5s backwards}
+
+/* ---------- reduced motion: everything static ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .ripple{display:none}
+}
+
+/* program thumbnails: the cut-out photos must fill the tile, not render at natural size inside the grid */
+.thumb:not(.art):not(.ic):not(.daytile) img:not(.tn){position:absolute;inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);object-fit:contain;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.list-item:hover .thumb img{transform:scale(1.06)}
+.thumb img{transition:transform .6s var(--ease)}
+
+/* Workout Today banner: a real gym photo that dissolves into the lime glass */
+.banner img.bimg{right:0;bottom:auto;top:0;height:100%;width:64%;object-fit:cover;object-position:58% 32%;animation:bimgZoom 14s ease-in-out infinite alternate;transform-origin:70% 40%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 28%,#000 58%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 28%,#000 58%);filter:saturate(1.12) contrast(1.05)}
+@keyframes bimgZoom{from{transform:scale(1)}to{transform:scale(1.07)}}
+/* trainer face close-ups: slow cross-fade, one at a time */
+.banner .faces{position:absolute;right:0;top:0;height:100%;width:64%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 26%,#000 52%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 26%,#000 52%)}
+.banner .faces img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:0;transform:scale(1.08);animation:none;
+  transition:opacity 1.1s var(--ease),transform 5.5s linear;filter:saturate(1.08) contrast(1.04)}
+.banner .faces img.on{opacity:1;transform:scale(1)}
+.banner .ftag{position:absolute;right:10px;bottom:9px;font:600 11px/1 inherit;padding:5px 9px;border-radius:99px;color:#fff;background:rgba(0,0,0,.38);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transition:opacity .6s var(--ease)}
+.banner .faces.tagged .ftag{opacity:1}
+.banner:has(.faces) h2{max-width:50%}.banner:has(.faces) p{max-width:44%}
+@media (prefers-reduced-motion:reduce){.banner .faces img{transition:none}}
+.banner:has(.bimg)::after{background:linear-gradient(180deg,rgba(255,255,255,.22),transparent 40%),linear-gradient(0deg,rgba(0,0,0,.18),transparent 45%)}
+.banner:has(.bimg) h2{max-width:54%}.banner:has(.bimg) p{max-width:46%}
+
+/* ---------- photo cropper ---------- */
+.crop{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,8,12,.74);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);animation:fade .3s ease}
+.crop-card{width:100%;display:grid;gap:14px;justify-items:center;animation:rise .7s var(--ease) backwards}
+.crop-card>.row.between{width:100%}
+.crop-card h3{font-size:17px}
+.crop-stage{position:relative;overflow:hidden;border-radius:26px;background:#000;touch-action:none;cursor:grab;box-shadow:0 0 0 1px rgba(255,255,255,.18),0 24px 60px rgba(0,0,0,.55)}
+.crop-stage.drag{cursor:grabbing}
+.crop-stage img{position:absolute;left:0;top:0;max-width:none;user-select:none;-webkit-user-drag:none;will-change:transform}
+.crop-stage::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(circle closest-side at 50% 50%,transparent calc(100% - 2px),#fff calc(100% - 2px),#fff 100%,rgba(0,0,0,.58) 100%)}
+.crop-hint{font-size:13px;text-align:center}
+.crop-zoomrow{width:100%;gap:12px;color:var(--t2);font-size:20px}
+.crop-zoomrow input{flex:1;margin:6px 0}

@@ -1,0 +1,133 @@
+/* Apple-style glass layer: translucent, blurred surfaces over a soft colour field. Loaded after styles.css. */
+:root{
+  --glass:rgba(255,255,255,.075);
+  --glass-hi:rgba(255,255,255,.13);
+  --glass-line:rgba(255,255,255,.17);
+  --glass-shine:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.04);
+  --glass-drop:0 10px 30px rgba(0,0,0,.28);
+  --blur:blur(22px) saturate(170%);
+}
+
+/* colour field that the glass sits on */
+#app{background:#090b10}
+#app::before{content:"";position:absolute;inset:-20%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(55% 38% at 12% 10%,rgba(198,255,61,.5),transparent 72%),
+    radial-gradient(52% 40% at 95% 30%,rgba(77,171,255,.5),transparent 72%),
+    radial-gradient(55% 42% at 8% 70%,rgba(177,140,255,.48),transparent 72%),
+    radial-gradient(52% 38% at 92% 95%,rgba(255,111,174,.42),transparent 72%);
+  animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.06)}}
+@media (prefers-reduced-motion:reduce){#app::before{animation:none}}
+.screen,.nav,.scrim{position:relative;z-index:1}
+.scrim{position:absolute}
+.screen{background:transparent}
+
+/* shared glass surface */
+.card,.stat,.list-item,.opt,.menu,.price,.search,.field input,.seg,.chip,.icon-btn,.btn.ghost,.stepper button,.thumb,.vidbox,.hero,.pill{
+  background:var(--glass);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--glass-line);
+  box-shadow:var(--glass-shine),var(--glass-drop)}
+.pill,.chip,.icon-btn,.stepper button{box-shadow:var(--glass-shine)}
+.list-item,.menu,.opt,.price{border-radius:22px}
+.thumb{border-radius:18px;box-shadow:var(--glass-shine)}
+.field input:focus,.search:focus-within{border-color:rgba(198,255,61,.7);box-shadow:var(--glass-shine),0 0 0 3px rgba(198,255,61,.18)}
+.menu span:first-child{background:rgba(255,255,255,.1);border:1px solid var(--glass-line)}
+
+/* tinted stat tiles keep their identity but turn into coloured glass */
+.stat.y,.stat.g,.stat.b{color:var(--t1)}
+.stat.y p,.stat.g p,.stat.b p{color:rgba(255,255,255,.78)}
+.stat.y{background:linear-gradient(145deg,rgba(255,216,77,.5),rgba(255,216,77,.14))}
+.stat.g{background:linear-gradient(145deg,rgba(198,255,61,.48),rgba(198,255,61,.12))}
+.stat.b{background:linear-gradient(145deg,rgba(77,171,255,.5),rgba(77,171,255,.14))}
+.ring{background:conic-gradient(var(--yellow) calc(var(--p)*1%),rgba(255,255,255,.18) 0)}
+.ring::after{background:rgba(20,20,26,.55);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+
+/* hero banner: glossy lime glass */
+.banner{background:linear-gradient(125deg,rgba(214,255,98,.92),rgba(150,226,10,.78));
+  border:1px solid rgba(255,255,255,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 40px rgba(198,255,61,.22)}
+.banner::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.28),transparent 45%)}
+.banner>*{position:relative;z-index:1}
+.banner img{z-index:0}
+.banner .btn{background:rgba(10,12,16,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--green);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+
+/* buttons, chips, segmented control */
+.btn{background:linear-gradient(180deg,#dcff74,#b6ee1c);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(0,0,0,.08),0 10px 28px rgba(198,255,61,.3)}
+.btn.ghost{color:var(--t1);background:var(--glass-hi)}
+.btn.red{background:linear-gradient(180deg,#ff8a7e,#ff5a4a);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 10px 28px rgba(255,107,94,.3)}
+.chip{color:var(--t2)}
+.chip.on,.seg button.on{background:linear-gradient(180deg,#dcff74,#b6ee1c);color:#111;border-color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 6px 18px rgba(198,255,61,.25)}
+.seg{padding:4px}
+.seg button{border-radius:13px}
+.opt.on,.price.on{background:rgba(198,255,61,.16);border-color:rgba(198,255,61,.7)}
+.price .tag{box-shadow:var(--glass-shine)}
+.tag{background:rgba(198,255,61,.16);border:1px solid rgba(198,255,61,.3)}
+.vtag{background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.thumb .play{background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+
+/* bottom navigation: frosted bar */
+.nav{background:rgba(18,20,28,.5);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);
+  border-top:1px solid var(--glass-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.nav button.on{background:rgba(198,255,61,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+
+/* sheets and notices */
+.scrim{background:rgba(0,0,0,.38);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.drawer{background:rgba(30,32,42,.58);-webkit-backdrop-filter:blur(40px) saturate(180%);backdrop-filter:blur(40px) saturate(180%);
+  border-top:1px solid var(--glass-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 -20px 60px rgba(0,0,0,.4)}
+.grab{background:rgba(255,255,255,.35)}
+.toast{background:rgba(214,255,98,.88);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 12px 34px rgba(0,0,0,.35)}
+
+/* sliders and timer */
+input[type=range]{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 2px rgba(0,0,0,.3)}
+.timer{background:conic-gradient(var(--green) calc(var(--p)*1%),rgba(255,255,255,.14) 0);box-shadow:0 0 40px rgba(198,255,61,.12)}
+.timer div{background:rgba(14,16,22,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+
+/* day-of-week colours: MON TUE WED THU FRI SAT SUN each get their own colour via --dc */
+.thumb.daytile{color:var(--dc);font-weight:800;letter-spacing:.06em;font-size:15px;
+  background:color-mix(in srgb,var(--dc) 20%,transparent);
+  border-color:color-mix(in srgb,var(--dc) 55%,transparent);
+  text-shadow:0 0 14px color-mix(in srgb,var(--dc) 70%,transparent)}
+.bars div{background:linear-gradient(180deg,var(--dc,#fff),color-mix(in srgb,var(--dc,#fff) 40%,transparent));
+  box-shadow:0 0 16px color-mix(in srgb,var(--dc,#fff) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.45)}
+.bars i{color:var(--dc,var(--t2));font-weight:700;font-size:10px;letter-spacing:.04em}
+
+/* hosting badge: Netlify injects this frame on the free plan; hide it, including if it is added after load */
+#nl-badge-frame,iframe[id^="nl-badge"],iframe[src*="netlify-badge"]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;width:0!important;height:0!important}
+
+/* profile photo */
+.avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(198,255,61,.8),0 10px 34px rgba(198,255,61,.22)}
+.avatar.sm{width:48px;height:48px;box-shadow:0 0 0 2px rgba(198,255,61,.8)}
+.avatar.ph{display:grid;place-items:center;font-size:40px;font-weight:800;color:#111;background:linear-gradient(145deg,#dcff74,#9be600)}
+.avatar.ph.sm{font-size:20px}
+.avbtn{display:block;border-radius:50%;flex:none}
+.avwrap{position:relative;display:block;cursor:pointer;border-radius:50%}
+.avwrap .cam{position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(180deg,#dcff74,#b6ee1c);color:#111;font-weight:800;font-size:20px;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.avwrap:focus-within{outline:2px solid var(--green);outline-offset:3px}
+
+/* onboarding portrait */
+.hero.photo{padding:0;border-radius:30px;overflow:hidden}
+.hero.photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,object-position .5s ease}
+
+/* logo: the PL Fitness mark sits on a white glass tile */
+.logo{object-fit:contain;background:rgba(255,255,255,.96);padding:6px;border-radius:30px;
+  box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(255,255,255,.5),0 14px 44px rgba(198,255,61,.28)}
+.logo.sm{padding:2px;border-radius:13px;box-shadow:0 0 0 1px rgba(255,255,255,.5),0 4px 14px rgba(0,0,0,.35)}
+.logo.xl{width:220px;height:220px;border-radius:44px;padding:10px}
+
+/* desktop frame */
+@media(min-width:460px){#app{box-shadow:0 0 0 1px rgba(255,255,255,.12),0 30px 90px rgba(0,0,0,.7)}}
+
+/* painted athlete portraits */
+.hero.art{height:200px;position:relative;display:block;padding:0;overflow:hidden;border-radius:28px}
+.hero.art.sm{height:132px}
+.hero.art img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.hero.art .cap{position:absolute;left:0;right:0;bottom:0;padding:38px 16px 14px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.82));display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.hero.art .cap h3{font-size:18px;line-height:1.15;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.hero.art.sm .cap{padding-top:26px}.hero.art.sm .cap h3{font-size:16px}
+.feed-img.art{display:block;padding:0;overflow:hidden}.feed-img.art img{display:block;width:100%;height:100%;object-fit:cover}
+.thumb.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
