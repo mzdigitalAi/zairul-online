@@ -203,3 +203,12 @@ kind of job it suits best (for example Spec sheet launch = an electric car launc
 gold = a jewellery house, Patriotic = a Merdeka poster). Each tile carries a small tag naming that job. All brands are invented.
 Made with Google Gemini from this studio's own style descriptions. 3D vinyl toy and the hidden crew style keep their examples.
 To change one: replace styles\<id>.jpg (900x1200) and styles\<id>-s.jpg (360x480) and edit its line in STYLE_EX in data.js.
+
+--- LATEST: Beauty key visual style and Ingredient world look (13 Nov 2026) ---
+New poster style "Beauty key visual" (31 styles now), studied from four personal-care shelf posters. One centred stack: brand
+small at the top, a big two-line serif benefit headline coloured from the pack, a small spaced-capitals product line, the pack
+upright on a natural pedestal inside the world of its hero ingredient (fruit, flower, leaf, oil or place), and a frosted strip
+of up to four line icons with short labels at the bottom. The prompt uses only the benefits you type and forbids invented
+certification seals, test badges, percentages and awards. Example: an invented shampoo brand (MELUR), made with Google Gemini.
+Let AI Choose picks it for shampoo, soap, hand wash, lotion, serum, sunscreen, toothpaste, supplement and similar words.
+New Product look "Ingredient world": the same scene idea for Product photo mode, without text.
