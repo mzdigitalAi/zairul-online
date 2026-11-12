@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="en" class="flat">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zairul MD TY · Creative multimedia and AI video</title>
 <meta name="description" content="Zairul MD TY, creative multimedia specialist from Malaysia. Human-directed AI video, AI images, AI audio, editorial design and creative workflows.">
-<meta name="theme-color" content="#0a0a0a">
 <meta property="og:title" content="Zairul MD TY · Creative multimedia and AI video">
 <meta property="og:description" content="Human-directed. AI-assisted. Video, images, audio and editorial design.">
 <meta property="og:image" content="https://zairul.online/assets/og.jpg">
@@ -13,527 +12,276 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://zairul.online/">
+<meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="/assets/logo.png">
 <link rel="preload" as="image" href="/assets/hero-cutout.webp">
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --panel: #141414;
-    --text: #f2efe9;
-    --muted: #a39e96;
-    --red: #e3262b;
-    --gold: #f2b632;
-    --line: rgba(255, 255, 255, 0.10);
-    --nav-h: var(--zm-h, 94px);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); background: var(--bg); }
-  body { background: var(--bg); color: var(--text); font-family: 'Barlow', 'Segoe UI', sans-serif; font-size: 17px; line-height: 1.55; overflow-x: hidden; }
-  a { color: inherit; text-decoration: none; }
-  img { display: block; max-width: 100%; height: auto; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-
-  /* ---------- shared panel typography ---------- */
-  .num { font-size: 12px; font-weight: 700; letter-spacing: .24em; color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
-  h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: clamp(76px, 11vw, 168px); line-height: .88; text-transform: uppercase; }
-  h2 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: clamp(54px, 7vw, 112px); line-height: .9; text-transform: uppercase; margin-bottom: 16px; text-shadow: 0 4px 30px rgba(0,0,0,.5); }
-  .panel p.copy { color: #d2cdc5; max-width: 470px; margin-bottom: 20px; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
-  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
-  .tags { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: #8d877e; text-transform: uppercase; margin: -6px 0 18px; }
-
-  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; border: 1.5px solid rgba(242,239,233,.85); border-radius: 3px; background: rgba(0,0,0,.35); transition: transform .15s, background .2s, border-color .2s, color .2s; }
-  .btn:hover { transform: translateY(-2px); border-color: var(--gold); color: var(--gold); }
-  .btn.red { background: var(--red); border-color: var(--red); color: #fff; }
-  .btn.red:hover { background: #ff3a3f; border-color: #ff3a3f; color: #fff; }
-
-  /* GG-style list rows: thumbs · label · round arrow */
-  .rows { display: grid; gap: 8px; max-width: 560px; margin-bottom: 18px; }
-  .row { display: flex; align-items: center; gap: 14px; min-height: 62px; padding: 9px 10px 9px 10px; background: rgba(14,14,14,.72); border: 1px solid rgba(255,255,255,.09); border-radius: 6px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: border-color .2s, background .2s, transform .2s; }
-  .row:hover { border-color: rgba(242,182,50,.6); background: rgba(24,20,14,.85); transform: translateX(4px); }
-  .thumbs { display: flex; flex: none; }
-  .thumbs i { width: 42px; height: 42px; border-radius: 5px; background: #222 center / cover no-repeat; border: 2px solid #0e0e0e; box-shadow: 0 2px 8px rgba(0,0,0,.5); }
-  .thumbs i + i { margin-left: -14px; }
-  .thumbs i.ico { display: grid; place-items: center; font-style: normal; font: 400 20px/1 'Anton', sans-serif; color: var(--gold); background: #1b1b1b; }
-  .row b { flex: 1; min-width: 0; font: 400 19px/1.1 'Anton', Impact, sans-serif; letter-spacing: .04em; text-transform: uppercase; }
-  .row b small { display: block; margin-top: 4px; font: 600 11px/1.2 'Barlow', sans-serif; letter-spacing: .14em; color: #9a948b; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .row .go { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #2a2a2a; color: #fff; font-size: 15px; transition: background .2s; }
-  .row.primary .go, .row:hover .go { background: var(--red); }
-
-  .steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; max-width: 560px; margin-bottom: 14px; list-style: none; counter-reset: s; }
-  .steps li { counter-increment: s; padding: 10px 10px 11px; background: rgba(14,14,14,.72); border: 1px solid rgba(255,255,255,.09); border-radius: 5px; font: 700 10.5px/1.25 'Barlow', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #cfc9c0; }
-  .steps li::before { content: "0" counter(s); display: block; margin-bottom: 6px; font: 400 18px/1 'Anton', sans-serif; color: var(--gold); letter-spacing: .02em; }
-  blockquote.quote { margin: -4px 0 16px; padding-left: 14px; border-left: 3px solid var(--red); color: #e8e3db; font-size: 18px; font-style: italic; }
-
-  .mini-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; max-width: 560px; margin-bottom: 12px; }
-  .mini-grid a { aspect-ratio: 4 / 5; border-radius: 5px; background: #191919 center / cover no-repeat; border: 1px solid rgba(255,255,255,.08); transition: transform .25s, border-color .2s; }
-  .mini-grid a:hover { transform: translateY(-3px); border-color: var(--gold); }
-  .feature-img { display: block; max-width: 560px; aspect-ratio: 16 / 9; max-height: 30vh; width: 100%; margin-bottom: 12px; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); position: relative; }
-  .feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
-  .feature-img:hover img { transform: scale(1.04); }
-  .feature-img span { position: absolute; left: 10px; bottom: 10px; padding: 5px 9px; background: var(--red); border-radius: 3px; font: 700 10px/1 'Barlow', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
-  .stats { margin-top: 22px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #8f897f; }
-  .stats b { color: var(--gold); font-weight: 700; }
-
-  /* ---------- side dots + hints ---------- */
-  .dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 12px; }
-  .dots a { width: 10px; height: 10px; border: 1.5px solid #8a857e; border-radius: 50%; transition: background .2s, border-color .2s, transform .2s; }
-  .dots a:hover { transform: scale(1.3); border-color: var(--gold); }
-  .dots a.on { background: var(--gold); border-color: var(--gold); }
-  .scroll-hint { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 30; font-size: 11px; font-weight: 700; letter-spacing: .32em; color: var(--gold); text-transform: uppercase; text-align: center; pointer-events: none; transition: opacity .4s; }
-  .scroll-hint::after { content: ""; display: block; width: 8px; height: 8px; margin: 5px auto 0; border-right: 1.5px solid; border-bottom: 1.5px solid; transform: rotate(45deg); animation: bob 1.6s ease-in-out infinite; }
-  @keyframes bob { 50% { transform: translateY(5px) rotate(45deg); } }
-  .at-end .scroll-hint { opacity: 0; }
-
-  /* Featured card (top right, like a "drop" badge) */
-  .drop { position: fixed; right: 54px; top: calc(var(--nav-h) + 40px); z-index: 35; width: 250px; padding: 10px; display: none; background: linear-gradient(160deg, rgba(40,10,10,.92), rgba(12,12,12,.92)); border: 1.5px solid rgba(242,182,50,.7); border-radius: 10px; box-shadow: 0 0 0 1px rgba(227,38,43,.35), 0 18px 50px rgba(0,0,0,.6), 0 0 40px rgba(227,38,43,.25); transform: rotate(-3deg); transition: transform .3s, opacity .5s; }
-  .drop:hover { transform: rotate(0) scale(1.03); }
-  .drop .pic { aspect-ratio: 16 / 9; border-radius: 6px; background: #222 center / cover; position: relative; }
-  .drop .pic::after { content: "▶"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 22px; color: #fff; text-shadow: 0 2px 10px #000; }
-  .drop .lbl { display: flex; justify-content: space-between; margin: 9px 2px 3px; font: 700 10px/1 'Barlow', sans-serif; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; }
-  .drop .lbl em { font-style: normal; color: #fff; background: var(--red); padding: 3px 6px; border-radius: 2px; }
-  .drop h3 { font: 400 18px/1.1 'Anton', sans-serif; text-transform: uppercase; margin: 0 2px 2px; }
-  .drop small { display: block; margin: 0 2px; font-size: 11px; color: #a8a299; letter-spacing: .06em; }
-  .drop .hint { position: absolute; left: 0; right: 0; bottom: -24px; text-align: center; font: 700 10px/1 'Barlow', sans-serif; letter-spacing: .26em; color: var(--gold); text-transform: uppercase; }
-  .drop.ready { display: block; }
-  .drop.hide { opacity: 0; pointer-events: none; }
-
-  /* ---------- FLAT mode (no video yet / reduced motion): plain stacked sections ---------- */
-  .stage, .spacer { display: none; }
-  .flat .panel { position: relative; padding: 110px 40px; border-top: 1px solid var(--line); }
-  .flat .panel > .inner { max-width: 1200px; margin: 0 auto; }
-  .flat .hero { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 30px; padding-top: calc(var(--nav-h) + 30px); border-top: 0; overflow: hidden;
-    background: radial-gradient(ellipse 40% 60% at 85% 55%, rgba(227,38,43,.28), transparent 70%), radial-gradient(ellipse 50% 40% at 50% 110%, rgba(227,38,43,.18), transparent 70%); }
-  .flat .hero > .inner { margin: 0; }
-  .hero-photo { display: none; }
-  .flat .hero-photo { display: block; align-self: end; justify-self: center; width: min(100%, 560px); aspect-ratio: 1611 / 2000; margin-bottom: -110px; background: url('/assets/hero-cutout.webp') center bottom / contain no-repeat; filter: drop-shadow(18px 0 40px rgba(227,38,43,.35)); }
-  .flat .drop, .flat .scroll-hint { display: none; }
-  .flat .contact { text-align: left; background: radial-gradient(ellipse 50% 70% at 50% 100%, rgba(227,38,43,.22), transparent 70%); }
-  footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 24px 40px; border-top: 1px solid var(--line); font-size: 12px; letter-spacing: .18em; color: #77726b; text-transform: uppercase; }
-  footer a:hover { color: var(--gold); }
-
-  /* ---------- STAGE mode: the video scrubs with the scroll, one panel at a time ---------- */
-  html:not(.flat) { scroll-behavior: auto; }
-  html:not(.flat) .stage { display: block; position: fixed; inset: 0; z-index: 0; background: var(--bg); overflow: hidden; }
-  html:not(.flat) .stage video { width: 100%; height: 100%; object-fit: cover; }
-  @media (min-aspect-ratio: 1/1) {
-    html:not(.flat) .stage video { transform: translateX(calc(var(--shift, 0) * 13%)) scale(calc(1 - var(--shift, 0) * .1)); transform-origin: 100% 50%;
-      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%), linear-gradient(transparent 0, #000 6%, #000 94%, transparent 100%); -webkit-mask-composite: source-in;
-      mask-image: linear-gradient(90deg, transparent 0, #000 22%), linear-gradient(transparent 0, #000 6%, #000 94%, transparent 100%); mask-composite: intersect; }
-  }
-  html:not(.flat) .stage .shade { position: absolute; inset: 0; background:
-      linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.5) 36%, rgba(10,10,10,0) 60%),
-      linear-gradient(to top, rgba(10,10,10,.85) 0%, rgba(10,10,10,0) 45%); }
-  html:not(.flat) .spacer { display: block; height: calc(var(--n, 7) * 100vh); }
-  html:not(.flat) .panel { position: fixed; inset: 0; z-index: 2; display: flex; align-items: flex-end; padding: calc(var(--nav-h) + 24px) 40px 64px; opacity: 0; visibility: hidden; transform: translateY(26px); transition: opacity .55s, transform .55s, visibility .55s; }
-  html:not(.flat) .panel.on { opacity: 1; visibility: visible; transform: none; }
-  html:not(.flat) .panel > .inner { width: 100%; max-width: 580px; }
-  html:not(.flat) footer { display: none; }
-
-  /* scroll-reactive light over the video + a light sweep on each new section */
-  html:not(.flat) .stage .light { position: absolute; inset: -20%; pointer-events: none; mix-blend-mode: screen;
-    background:
-      radial-gradient(circle at calc(55% + var(--p, 0) * 30%) calc(35% + var(--p, 0) * 25%), rgba(242,182,50,calc(.10 + var(--vel, 0) * .35)) 0, transparent 22%),
-      radial-gradient(ellipse 30% 45% at calc(85% - var(--p, 0) * 25%) 60%, rgba(227,38,43,calc(.18 + var(--vel, 0) * .4)) 0, transparent 70%);
-    animation: flicker 5s ease-in-out infinite; }
-  @keyframes flicker { 0%, 100% { opacity: .9; } 45% { opacity: 1; } 50% { opacity: .78; } 55% { opacity: 1; } }
-  html:not(.flat) .stage .sweep { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: 0;
-    background: linear-gradient(105deg, transparent 35%, rgba(255,220,160,.22) 47%, rgba(255,255,255,.35) 50%, rgba(255,220,160,.22) 53%, transparent 65%);
-    background-size: 250% 100%; background-position: 120% 0; }
-  html:not(.flat) .stage .sweep.go { animation: sweep 1.1s cubic-bezier(.4, 0, .2, 1); }
-  @keyframes sweep { 0% { opacity: 0; background-position: 120% 0; } 20% { opacity: 1; } 100% { opacity: 0; background-position: -20% 0; } }
-  html:not(.flat) .stage .grain { position: absolute; inset: 0; pointer-events: none; opacity: .07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-
-  /* ---------- spy-film opening: letterbox bars, then "I'm Rul." ... "Zairul." ---------- */
-  .line1 { font-family: 'Big Shoulders Stencil Display', 'Anton', sans-serif; font-weight: 900; font-size: clamp(42px, 5.2vw, 82px); line-height: .9; text-transform: uppercase; letter-spacing: .02em; margin-bottom: 8px;
-    background: linear-gradient(180deg, #f5d98b 0%, #d4a845 45%, #a87a22 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 14px rgba(212,168,69,.25)); }
-  .hero .eyebrow { margin: 20px 0 0; }
-  .hero p.copy { margin: 14px 0 24px; font-size: 18px; }
-  .intro .line1, .intro h1, .intro .eyebrow, .intro .copy, .intro .btns, .intro .stats { opacity: 0; }
-  .go .intro .line1, .go .intro .eyebrow, .go .intro .copy, .go .intro .btns, .go .intro .stats { animation: rise .9s cubic-bezier(.2, .7, .2, 1) forwards; }
-  .go .intro .line1 { animation-delay: 4.3s; }
-  .go .intro h1 { animation: slam 1.1s cubic-bezier(.2, .7, .2, 1) 6s forwards; }
-  .go .intro .eyebrow { animation-delay: 7s; }
-  .go .intro .copy { animation-delay: 7.2s; }
-  .go .intro .btns { animation-delay: 7.4s; }
-  .go .intro .stats { animation-delay: 7.7s; }
-  .go.quick .intro .line1 { animation-delay: .4s; }
-  .go.quick .intro h1 { animation-delay: 1.1s; }
-  .go.quick .intro .eyebrow { animation-delay: 1.9s; }
-  .go.quick .intro .copy { animation-delay: 2.1s; }
-  .go.quick .intro .btns { animation-delay: 2.3s; }
-  .go.quick .intro .stats { animation-delay: 2.5s; }
-  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-  @keyframes slam { from { opacity: 0; letter-spacing: .3em; filter: blur(10px); } to { opacity: 1; letter-spacing: 0; filter: none; } }
-  .bars i { position: fixed; left: 0; right: 0; height: 11vh; background: #000; z-index: 950; pointer-events: none; }
-  .go .bars i { animation: barTop 1s cubic-bezier(.6, 0, .2, 1) 7.6s forwards; }
-  .go.quick .bars i { animation-delay: 2.6s; }
-  .bars i:first-child { top: 0; }
-  .bars i:last-child { bottom: 0; }
-  .go .bars i:last-child { animation-name: barBottom; }
-  .skip .intro .line1, .skip .intro h1, .skip .intro .eyebrow, .skip .intro .copy, .skip .intro .btns, .skip .intro .stats { opacity: 1; animation: none; }
-  .skip .bars { display: none; }
-  @keyframes barTop { to { transform: translateY(-100%); } }
-  @keyframes barBottom { to { transform: translateY(100%); } }
-  /* menu, dots and the featured card wait for the opening titles */
-  .go:not(.skip):not(.flat) .zm-nav, .go:not(.skip):not(.flat) .dots, .go:not(.skip):not(.flat) .drop.ready, .go:not(.skip):not(.flat) .scroll-hint { animation: zmIn .7s 7.7s both; }
-  .go.quick:not(.skip):not(.flat) .zm-nav, .go.quick:not(.skip):not(.flat) .dots, .go.quick:not(.skip):not(.flat) .drop.ready, .go.quick:not(.skip):not(.flat) .scroll-hint { animation-delay: 2.7s; }
-  @keyframes zmIn { from { opacity: 0; } }
-  .skip-intro { position: fixed; right: 20px; bottom: calc(11vh + 14px); z-index: 960; padding: 8px 14px; border: 1px solid rgba(242,182,50,.5); border-radius: 999px; background: rgba(0,0,0,.6); color: var(--gold); font: 700 11px/1 'Barlow', sans-serif; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; display: none; }
-  .go:not(.skip):not(.flat) .skip-intro { display: block; animation: skipOut .3s 7.6s forwards; }
-  .go.quick .skip-intro { animation-delay: 2.6s; }
-  @keyframes skipOut { to { opacity: 0; visibility: hidden; } }
-
-  /* ---------- responsive ---------- */
-  @media (max-width: 1100px) { .drop { display: none !important; } }
-  @media (max-height: 820px) and (min-aspect-ratio: 1/1) {
-    h2 { font-size: clamp(46px, 5.6vw, 84px); margin-bottom: 10px; }
-    .panel p.copy { margin-bottom: 14px; font-size: 16px; }
-    .row { min-height: 54px; padding-top: 6px; padding-bottom: 6px; }
-    .thumbs i { width: 36px; height: 36px; }
-    .mini-grid a { aspect-ratio: 1; }
-    .feature-img { max-width: 420px; }
-    html:not(.flat) .panel { padding-bottom: 50px; }
-    html:not(.flat) .hero h1 { font-size: clamp(70px, 9vw, 140px); }
-  }
-  @media (max-height: 700px) and (min-aspect-ratio: 1/1) { .rows .row:nth-child(n+3), .tags, .steps { display: none; } }
-  @media (max-width: 820px) {
-    .flat .panel { padding: 80px 16px; }
-    .flat .hero { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 16px); }
-    .flat .hero-photo { order: -1; width: 74%; margin-bottom: -20px; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
-    .dots { display: none; }
-    .steps { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
-    .steps li { font-size: 9px; letter-spacing: .06em; padding: 8px 6px; }
-    footer { padding: 22px 16px; }
-  }
-  @media (max-aspect-ratio: 1/1) {
-    html:not(.flat) .stage .shade { background: linear-gradient(to top, rgba(10,10,10,.96) 0%, rgba(10,10,10,.75) 40%, rgba(10,10,10,0) 66%); }
-    html:not(.flat) .panel { padding: calc(var(--nav-h) + 12px) 16px 46px; }
-    html:not(.flat) .hero h1 { font-size: clamp(64px, 19vw, 120px); }
-    html:not(.flat) h2 { font-size: clamp(46px, 13vw, 80px); }
-    html:not(.flat) .panel p.copy { margin-bottom: 14px; font-size: 15.5px; }
-    html:not(.flat) .tags, html:not(.flat) blockquote.quote { display: none; }
-    html:not(.flat) .row { min-height: 52px; padding: 6px 8px; }
-    html:not(.flat) .row b { font-size: 16px; }
-    html:not(.flat) .thumbs i { width: 34px; height: 34px; }
-    html:not(.flat) .btn { min-height: 44px; padding: 0 16px; font-size: 12px; }
-    html:not(.flat) .mini-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    html:not(.flat) .mini-grid a { aspect-ratio: 1; }
-    html:not(.flat) .feature-img { aspect-ratio: 2 / 1; }
-    html:not(.flat) .stats { margin-top: 14px; }
-    .scroll-hint { bottom: 8px; font-size: 10px; }
-    .skip-intro { right: 12px; }
-  }
-  @media (max-aspect-ratio: 1/1) and (max-height: 700px) { html:not(.flat) .rows .row:nth-child(n+2), html:not(.flat) .steps, html:not(.flat) .mini-grid { display: none; } }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .intro .line1, .intro h1, .intro .eyebrow, .intro .copy, .intro .btns, .intro .stats { opacity: 1 !important; animation: none !important; }
-    .bars, .skip-intro { display: none !important; }
-    .scroll-hint::after { animation: none; }
-  }
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/home/style.css?v=20261112">
 </head>
 <body>
 <script src="/assets/menu.js?v=20261102"></script>
 
-<div class="bars" aria-hidden="true"><i></i><i></i></div>
-<button class="skip-intro" id="skipIntro" type="button">Skip intro ›</button>
-<div class="stage" id="stage" aria-hidden="true"><video id="v" muted playsinline preload="none"></video><div class="light"></div><div class="sweep" id="sweep"></div><div class="shade"></div><div class="grain"></div></div>
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Zairul MD TY, back to top"><img src="/assets/logo.png" alt="" width="30" height="30"><span>Zairul <b>MD TY</b></span></a>
+  <nav class="links" aria-label="Main">
+    <div class="work" id="work">
+      <button class="work-btn" id="workBtn" type="button" aria-expanded="false" aria-controls="workMenu">Work<i aria-hidden="true"></i></button>
+      <div class="work-menu" id="workMenu">
+        <a href="#ai-video"><b>01</b>AI Video</a>
+        <a href="#ai-visual"><b>02</b>AI Visual</a>
+        <a href="#ai-audio"><b>03</b>AI Audio</a>
+        <a href="#ui-ux"><b>04</b>UI-UX</a>
+        <a href="#ai-3d"><b>05</b>AI 3D</a>
+        <a href="#editorial"><b>06</b>Editorial</a>
+      </div>
+    </div>
+    <a href="#process">Process</a>
+    <a href="/resume/">Resume</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Play background music" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Sound</button>
+  <a class="hire" href="#contact">Hire me</a>
+  <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sheet"><i></i><i></i></button>
+</header>
 
-<nav class="dots" aria-label="Sections">
-  <a href="#top" aria-label="Top"></a>
-  <a href="#workflow" aria-label="Workflow"></a>
-  <a href="#ai-video" aria-label="AI Video"></a>
-  <a href="#ai-images" aria-label="AI Images"></a>
-  <a href="#ai-audio" aria-label="AI Audio"></a>
-  <a href="#magazine" aria-label="Magazine"></a>
-  <a href="#contact" aria-label="Contact"></a>
-</nav>
+<div class="sheet" id="sheet" hidden>
+  <p class="sheet-h">Work</p>
+  <a href="#ai-video"><b>01</b>AI Video</a>
+  <a href="#ai-visual"><b>02</b>AI Visual</a>
+  <a href="#ai-audio"><b>03</b>AI Audio</a>
+  <a href="#ui-ux"><b>04</b>UI-UX</a>
+  <a href="#ai-3d"><b>05</b>AI 3D</a>
+  <a href="#editorial"><b>06</b>Editorial</a>
+  <p class="sheet-h">More</p>
+  <a href="#process">Process</a>
+  <a href="/studio/">Studio</a>
+  <a href="/cast/">Cast</a>
+  <a href="/resume/">Resume</a>
+  <a href="#contact">Contact</a>
+</div>
 
-<a class="drop" id="drop" href="/videos/" aria-label="Latest AI film">
-  <div class="pic" id="dropPic"></div>
-  <div class="lbl"><span>Latest film</span><em>New</em></div>
-  <h3 id="dropTitle">Human-directed AI video</h3>
-  <small id="dropMeta">Direction · Prompt · Editing</small>
-  <span class="hint">Click to watch</span>
-</a>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<!-- The portrait film: full screen in the hero, then it docks to a corner while the work fills the screen -->
+<div class="stage-wrap" aria-hidden="true">
+  <div class="stage" id="stage">
+    <video id="film" muted playsinline preload="none"></video>
+    <div class="stage-shade"></div>
+    <span class="stage-tag">Directed by Zairul</span>
+  </div>
+</div>
 
 <main>
-  <section class="panel hero" id="top" data-menu="">
-    <div class="inner intro">
-      <p class="line1">Mohd</p>
-      <h1>Zairul</h1>
-      <div class="eyebrow">MD TY · Creative multimedia specialist · Malaysia</div>
-      <p class="copy">I turn complex ideas into clear, cinematic stories. Human-directed AI video, images, audio and editorial design.</p>
-      <div class="btns">
-        <a class="btn red" href="/videos/">Watch my AI films</a>
-        <a class="btn" href="/contact/">Let's work together</a>
+  <section class="hero" id="top">
+    <div class="hero-copy">
+      <p class="eyebrow rv">Creative multimedia specialist · Malaysia</p>
+      <p class="lede rv">I turn complex ideas into clear, cinematic stories. Human-directed AI video, images, audio and editorial design.</p>
+      <div class="btns rv">
+        <a class="btn red" href="#ai-video">See the work</a>
+        <a class="btn" href="#contact">Let's work together</a>
       </div>
-      <p class="stats" id="stats">Human-directed. AI-assisted.</p>
+      <p class="stats rv" id="stats">Human-directed. AI-assisted.</p>
     </div>
-    <div class="hero-photo" role="img" aria-label="Portrait of Zairul"></div>
+    <h1 class="wordmark" id="wordmark" aria-label="Zairul MD TY"><span class="wm-a">Zairul</span><span class="wm-b"> MD TY</span></h1>
+    <div class="scroll-cue" aria-hidden="true">Scroll</div>
   </section>
 
-  <section class="panel" id="workflow" data-menu="workflow">
-    <div class="inner">
-      <div class="num">01 / Workflow</div>
-      <h2>Human first.<br>Tool second.</h2>
-      <blockquote class="quote">The brief leads. The tools follow.</blockquote>
-      <ol class="steps">
-        <li>Understand</li><li>Simplify</li><li>Create</li><li>Refine</li><li>Deliver</li>
-      </ol>
-      <div class="rows">
-        <a class="row primary" href="/workflow/"><span class="thumbs"><i class="ico">↯</i></span><b>See the full workflow<small>How I direct AI, step by step</small></b><span class="go">›</span></a>
-        <a class="row" href="/workflow/#case-studies"><span class="thumbs"><i class="ico">4</i></span><b>Case studies<small>Explainer · Campaign · Automation · AI presenter</small></b><span class="go">›</span></a>
+  <!-- 01 AI VIDEO -->
+  <section class="chapter ch-video" id="ai-video" data-name="AI Video">
+    <div class="pin">
+      <div class="media">
+        <div class="kb" id="vStill" style="background-image:url('/assets/img/thumb-ai-video.webp')"></div>
+        <div class="kb next" id="vStill2"></div>
       </div>
-    </div>
-  </section>
-
-  <section class="panel" id="ai-video" data-menu="videos">
-    <div class="inner">
-      <div class="num">02 / AI Video</div>
-      <h2>Cinematic<br>realism</h2>
-      <p class="copy">Human-directed AI video. Story, shot design, continuity and editing guide the generation, not the other way around.</p>
-      <div class="tags">Creative direction / Kling / Seedance / Editing</div>
-      <div class="rows">
-        <a class="row primary" href="/videos/"><span class="thumbs" id="vThumbs"><i style="background-image:url('/assets/img/thumb-ai-video.webp')"></i></span><b>Watch the films<small id="vCount">The motion prompt library</small></b><span class="go">›</span></a>
-        <a class="row" href="/videos/" id="vLatest"><span class="thumbs"><i class="ico">▶</i></span><b>Latest film<small id="vLatestTitle">Branding, trailers and podcasts</small></b><span class="go">›</span></a>
-        <a class="row" href="/cast/"><span class="thumbs"><i style="background-image:url('/assets/cast/01-zairul.webp')"></i></span><b>Meet the cast<small>The real people in my films, with their consent</small></b><span class="go">›</span></a>
+      <div class="frame" aria-hidden="true"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="num">01 / AI Video</p>
+        <h2><span class="ln"><i>Cinematic</i></span><span class="ln"><i>realism</i></span></h2>
+        <p class="txt">Human-directed AI video. Story, shot design, continuity and editing guide the generation, not the other way around.</p>
+        <a class="cta" href="/videos/"><span><b>Watch the films</b><small id="vCount">Full AI and real footage + AI</small></span><em aria-hidden="true">→</em></a>
+      </div>
+      <button class="play" id="vPlay" type="button" aria-label="Play the selected film"><i aria-hidden="true"></i></button>
+      <div class="side">
+        <div class="now"><small>Now showing</small><b id="vTitle">Latest AI film</b><span id="vMeta">Direction · Prompt · Editing</span></div>
+        <div class="strip" id="vStrip" role="list" aria-label="Latest films"></div>
       </div>
     </div>
   </section>
 
-  <section class="panel" id="ai-images" data-menu="images">
-    <div class="inner">
-      <div class="num">03 / AI Images</div>
-      <h2>Imagination,<br>directed</h2>
-      <p class="copy">Commercial-grade AI photography and ad concepts. Prompts, variations, compositing and the human choices behind each visual.</p>
-      <div class="mini-grid" id="iGrid" aria-label="Latest AI images"></div>
-      <div class="rows">
-        <a class="row primary" href="/images/"><span class="thumbs" id="iThumbs"><i style="background-image:url('/assets/img/thumb-ai-images.webp')"></i></span><b>Open the gallery<small id="iCount">Images and the prompts behind them</small></b><span class="go">›</span></a>
+  <!-- 02 AI VISUAL -->
+  <section class="chapter ch-visual" id="ai-visual" data-name="AI Visual">
+    <div class="pin">
+      <div class="media"><div class="wall" id="wall"></div></div>
+      <div class="frame" aria-hidden="true"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="num">02 / AI Visual</p>
+        <h2><span class="ln"><i>Imagination,</i></span><span class="ln"><i>directed</i></span></h2>
+        <p class="txt">Commercial-grade AI photography and ad concepts. Prompts, variations, compositing and the human choices behind each visual.</p>
+        <a class="cta" href="/images/"><span><b>Open the gallery</b><small id="iCount">Images and the prompts behind them</small></span><em aria-hidden="true">→</em></a>
       </div>
     </div>
   </section>
 
-  <section class="panel" id="ai-audio" data-menu="audio">
-    <div class="inner">
-      <div class="num">04 / AI Audio</div>
-      <h2>Sound that<br>sells the story</h2>
-      <p class="copy">Jingles, brand anthems and covers, engineered in Suno through prompt architecture, vocal phrasing and arrangement.</p>
-      <div class="tags">Music / Voiceover / Sound design</div>
-      <div class="rows">
-        <a class="row primary" href="/audio/"><span class="thumbs" id="aThumbs"><i class="ico">♪</i></span><b>Listen to the tracks<small id="aCount">AI-powered precision. Human-driven sound.</small></b><span class="go">›</span></a>
-        <a class="row" href="/audio/" id="aLatest"><span class="thumbs"><i class="ico">♫</i></span><b>Brand jingles<small id="aNames">KFC · IKEA · Oreo · Szindore</small></b><span class="go">›</span></a>
+  <!-- 03 AI AUDIO -->
+  <section class="chapter ch-audio" id="ai-audio" data-name="AI Audio">
+    <div class="pin">
+      <div class="media"><div class="wave" id="wave"></div></div>
+      <div class="frame" aria-hidden="true"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="num">03 / AI Audio</p>
+        <h2><span class="ln"><i>Sound that</i></span><span class="ln"><i>sells the story</i></span></h2>
+        <p class="txt">Jingles, brand anthems and covers, engineered in Suno through prompt architecture, vocal phrasing and arrangement.</p>
+        <a class="cta" href="/audio/"><span><b>Listen to the tracks</b><small id="aCount">AI-powered precision. Human-driven sound.</small></span><em aria-hidden="true">→</em></a>
+      </div>
+      <div class="side">
+        <div class="tracks" id="tracks" role="list" aria-label="Latest tracks"></div>
+        <p class="hint" id="aHint">Tap a cover to play it.</p>
+      </div>
+      <audio id="player" preload="none"></audio>
+    </div>
+  </section>
+
+  <!-- 04 UI-UX -->
+  <section class="chapter ch-ux" id="ui-ux" data-name="UI-UX">
+    <div class="pin">
+      <div class="media">
+        <div class="devices">
+          <div class="browser" id="uxBrowser">
+            <div class="chrome"><i></i><i></i><i></i><span id="uxUrl">MECA 3D</span></div>
+            <div class="screen">
+              <img id="uxImg" alt="MECA 3D screen" src="/ui-ux/img/meca2-hero.jpg" loading="lazy">
+              <img id="uxImg2" alt="" loading="lazy">
+            </div>
+          </div>
+          <div class="phone"><div class="pscreen"><video id="uxVid" muted loop playsinline preload="none" poster="/ui-ux/img/pl-v2-home.jpg" src="/assets/home/reel-pl-fitness.mp4"></video></div></div>
+        </div>
+      </div>
+      <div class="frame" aria-hidden="true"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="num">04 / UI-UX</p>
+        <h2><span class="ln"><i>Built, live,</i></span><span class="ln"><i>ready to test</i></span></h2>
+        <p class="txt">Four working products and concepts I designed and directed with AI. Open any of them and try it yourself, then read how each one was made.</p>
+        <div class="tabs" id="uxTabs" role="tablist" aria-label="Projects">
+          <button type="button" role="tab" aria-selected="true" data-k="pl">PL Fitness</button>
+          <button type="button" role="tab" aria-selected="false" data-k="meca">MECA 3D</button>
+          <button type="button" role="tab" aria-selected="false" data-k="premier">PREMIER</button>
+          <button type="button" role="tab" aria-selected="false" data-k="nibou">Nibou</button>
+        </div>
+        <a class="cta" href="/ui-ux/"><span><b>See the UI-UX work</b><small>Live links and how each one was made</small></span><em aria-hidden="true">→</em></a>
       </div>
     </div>
   </section>
 
-  <section class="panel" id="magazine" data-menu="magazine">
-    <div class="inner">
-      <div class="num">05 / Magazine</div>
-      <h2>Editorial<br>design</h2>
-      <p class="copy">MECA newsletters, Insights and course brochures that turn employment-law updates into publications people actually read.</p>
-      <a class="feature-img" href="/magazine/"><img src="/assets/img/newsletter-evolution.webp" alt="MECA newsletter redesign, January to February 2026" loading="lazy"><span>Redesign · 2026</span></a>
-      <div class="rows">
-        <a class="row primary" href="/magazine/"><span class="thumbs"><i class="ico">❐</i></span><b>Read the issues<small>Flip through every publication</small></b><span class="go">›</span></a>
+  <!-- 05 AI 3D -->
+  <section class="chapter ch-3d" id="ai-3d" data-name="AI 3D">
+    <div class="pin">
+      <div class="media">
+        <div class="studio">
+          <model-viewer id="mv" poster="/assets/3d/posters/zairul-bust.webp?v=7" alt="3D portrait bust of Zairul, an AI-generated model" camera-controls disable-zoom disable-pan touch-action="pan-y" auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" interaction-prompt="none" environment-image="neutral" exposure="1.05" shadow-intensity="1" shadow-softness="0.8" camera-orbit="-10deg 84deg auto"></model-viewer>
+        </div>
+      </div>
+      <div class="frame" aria-hidden="true"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="num">05 / AI 3D</p>
+        <h2><span class="ln"><i>In three</i></span><span class="ln"><i>dimensions</i></span></h2>
+        <p class="txt">Photoreal 3D models of my cast and of Malaysian icons. I direct a clean studio reference image, then AI sculpts and textures it into a full 3D model.</p>
+        <a class="cta" href="/3d/"><span><b>See the 3D models</b><small>Spin and zoom every model in your browser</small></span><em aria-hidden="true">→</em></a>
+      </div>
+      <div class="side">
+        <div class="glass panel3d">
+          <p class="gl-h">Studio controls</p>
+          <label for="mvExp">Lighting <output id="mvExpV">1.05</output></label>
+          <input id="mvExp" type="range" min="0.5" max="1.8" step="0.05" value="1.05">
+          <div class="gl-row">
+            <button type="button" id="mvSpin" aria-pressed="true">Turntable on</button>
+            <button type="button" id="mvReset">Reset view</button>
+          </div>
+          <p class="gl-n">Drag the model to turn it.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="panel contact" id="contact" data-menu="contact">
-    <div class="inner">
-      <div class="num">06 / Contact</div>
-      <h2>Let's make<br>something</h2>
-      <p class="copy">Open to roles in creative multimedia, visual storytelling, editorial design, video and AI-assisted production. Or bring me a project, and I'll reply with a clear plan.</p>
-      <div class="btns">
-        <a class="btn red" href="mailto:zairulmdty@gmail.com?subject=Potential%20role%20opportunity%20%E2%80%94%20Zairul%20MD%20TY">Discuss a role</a>
-        <a class="btn" href="/contact/">Start a project</a>
-        <a class="btn" href="/resume/">View resume</a>
+  <!-- 06 EDITORIAL -->
+  <section class="chapter ch-edit" id="editorial" data-name="Editorial">
+    <div class="pin">
+      <div class="media">
+        <div class="desk"><div class="sheetp" id="mag"><img src="/assets/img/newsletter-evolution.webp" alt="MECA newsletter redesign, January to February 2026" loading="lazy"><span>Redesign · 2026</span></div></div>
+      </div>
+      <div class="frame" aria-hidden="true"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="num">06 / Editorial</p>
+        <h2><span class="ln"><i>Editorial</i></span><span class="ln"><i>design</i></span></h2>
+        <p class="txt">Newsletters, IR Insights and training-course brochures for MECA, built in Adobe InDesign to turn dense employment-law updates into publications busy HR managers actually read.</p>
+        <a class="cta" href="/magazine/"><span><b>Read the issues</b><small>Flip through every publication</small></span><em aria-hidden="true">→</em></a>
       </div>
     </div>
+  </section>
+
+  <!-- ALL GALLERIES -->
+  <section class="galleries" id="galleries">
+    <div class="wrap">
+      <p class="num">All galleries</p>
+      <h2 class="sm">Six galleries.<br>One director.</h2>
+      <div class="bento">
+        <a class="tile t-video" href="/videos/"><i class="bg" id="tVideo" style="background-image:url('/assets/img/thumb-ai-video.webp')"></i><span class="tn">01</span><b>AI Video</b><small id="tVideoN">Films</small><em aria-hidden="true">→</em></a>
+        <a class="tile t-visual" href="/images/"><i class="bg" id="tVisual" style="background-image:url('/assets/img/thumb-ai-images.webp')"></i><span class="tn">02</span><b>AI Visual</b><small id="tVisualN">Images</small><em aria-hidden="true">→</em></a>
+        <a class="tile t-audio" href="/audio/"><i class="bg" id="tAudio"></i><span class="tn">03</span><b>AI Audio</b><small id="tAudioN">Tracks</small><em aria-hidden="true">→</em></a>
+        <a class="tile t-ux" href="/ui-ux/"><i class="bg" style="background-image:url('/ui-ux/img/premier-dashboard-1.jpg')"></i><span class="tn">04</span><b>UI-UX</b><small>Apps and websites</small><em aria-hidden="true">→</em></a>
+        <a class="tile t-3d" href="/3d/"><i class="bg" style="background-image:url('/assets/3d/posters/zairul-bust.webp?v=7')"></i><span class="tn">05</span><b>AI 3D</b><small>3D models</small><em aria-hidden="true">→</em></a>
+        <a class="tile t-edit" href="/magazine/"><i class="bg" style="background-image:url('/assets/img/newsletter-evolution.webp')"></i><span class="tn">06</span><b>Editorial</b><small>Newsletters and brochures</small><em aria-hidden="true">→</em></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <p class="num">Process</p>
+      <h2 class="sm">Human first.<br>Tool second.</h2>
+      <p class="txt">The brief leads. The tools follow.</p>
+      <ol class="steps"><li>Understand</li><li>Simplify</li><li>Create</li><li>Refine</li><li>Deliver</li></ol>
+      <a class="btn" href="/workflow/">See the full workflow</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="c-copy">
+        <p class="num">Contact</p>
+        <h2>Let's make<br>something</h2>
+        <p class="txt">Open to roles in creative multimedia, visual storytelling, editorial design, video and AI-assisted production. Or bring me a project, and I'll reply with a clear plan.</p>
+        <div class="btns">
+          <a class="btn red" href="mailto:zairulmdty@gmail.com?subject=Potential%20role%20opportunity%20%E2%80%94%20Zairul%20MD%20TY">Discuss a role</a>
+          <a class="btn" href="/contact/">Start a project</a>
+          <a class="btn" href="/resume/">View resume</a>
+        </div>
+      </div>
+      <div class="c-photo" role="img" aria-label="Portrait of Zairul"></div>
+    </div>
+    <footer>
+      <span>© <span id="yr"></span> Zairul MD TY</span>
+      <span>Human-directed. AI-assisted.</span>
+      <span class="f-links"><a href="/studio/">Studio</a><a href="/cast/">Cast</a><a href="/workflow/">Workflow</a></span>
+      <a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a>
+    </footer>
   </section>
 </main>
-<div class="spacer" aria-hidden="true"></div>
-<div class="scroll-hint" aria-hidden="true">Scroll</div>
 
-<footer>
-  <span>© <span id="yr"></span> Zairul MD TY</span>
-  <span>Human-directed. AI-assisted.</span>
-  <a href="mailto:zairulmdty@gmail.com">zairulmdty@gmail.com</a>
-</footer>
+<dialog class="lightbox" id="lb" aria-label="Film player">
+  <button class="lb-x" id="lbX" type="button">Close ✕</button>
+  <div class="lb-frame"><iframe id="lbFrame" title="Film" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+</dialog>
 
-<script>
-  document.getElementById('yr').textContent = new Date().getFullYear();
-
-  // ---------- Live content from the gallery database (same data as /videos/, /images/, /audio/) ----------
-  (function () {
-    var B = 'https://nyqgaipudjvdyhuicqsd.supabase.co', K = 'sb_publishable_fm9R_RaKK0GSPBOOF6eQlA_NF8_8_Bj';
-    var H = { apikey: K, Authorization: 'Bearer ' + K };
-    var $ = function (id) { return document.getElementById(id); };
-    function rest(q, extra) { return fetch(B + '/rest/v1/' + q, { headers: Object.assign({}, H, extra || {}) }); }
-    function rows(q) { return rest(q).then(function (r) { if (!r.ok) throw r.status; return r.json(); }); }
-    function count(t) {
-      return rest(t + '?select=id&published=eq.true', { Prefer: 'count=exact', Range: '0-0' })
-        .then(function (r) { var m = (r.headers.get('content-range') || '').match(/\/(\d+)/); return m ? +m[1] : null; }).catch(function () { return null; });
-    }
-    function sign(bucket, paths) {
-      return fetch(B + '/storage/v1/object/sign/' + bucket, { method: 'POST', headers: Object.assign({ 'content-type': 'application/json' }, H), body: JSON.stringify({ expiresIn: 3600, paths: paths }) })
-        .then(function (r) { if (!r.ok) throw r.status; return r.json(); })
-        .then(function (list) { return list.map(function (x) { return x && x.signedURL ? B + '/storage/v1' + x.signedURL : ''; }); });
-    }
-    function thumbs(el, urls) { if (urls.length) el.innerHTML = urls.slice(0, 3).map(function (u) { return '<i style="background-image:url(\'' + u.replace(/'/g, '%27') + '\')"></i>'; }).join(''); }
-    function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
-
-    Promise.all([count('gallery_videos'), count('gallery_images'), count('gallery_audio')]).then(function (c) {
-      var parts = [];
-      if (c[0]) parts.push('<b>' + c[0] + '</b> AI films');
-      if (c[1]) parts.push('<b>' + c[1] + '</b> AI images');
-      if (c[2]) parts.push('<b>' + c[2] + '</b> tracks');
-      if (parts.length) $('stats').innerHTML = parts.join(' · ');
-      if (c[0]) $('vCount').textContent = c[0] + ' films · Full AI and real footage + AI';
-      if (c[1]) $('iCount').textContent = c[1] + ' images · Prompts included';
-      if (c[2]) $('aCount').textContent = c[2] + ' tracks · Made in Suno';
-    });
-
-    rows('gallery_videos?select=title,category,role,thumbnail_data&published=eq.true&order=featured.desc,created_at.desc&limit=3').then(function (v) {
-      if (!v.length) return;
-      thumbs($('vThumbs'), v.map(function (x) { return x.thumbnail_data; }).filter(Boolean));
-      $('vLatestTitle').textContent = v[0].title;
-      if (v[0].thumbnail_data) $('dropPic').style.backgroundImage = 'url("' + v[0].thumbnail_data + '")';
-      $('dropTitle').textContent = v[0].title;
-      $('dropMeta').textContent = [v[0].category, v[0].role].filter(Boolean).join(' · ');
-      $('drop').classList.add('ready');
-    }).catch(function () {});
-
-    rows('gallery_images?select=title,thumbnail_path&published=eq.true&order=featured.desc,created_at.desc&limit=6').then(function (im) {
-      if (!im.length) return;
-      return sign('gallery', im.map(function (x) { return x.thumbnail_path; })).then(function (urls) {
-        thumbs($('iThumbs'), urls.filter(Boolean));
-        $('iGrid').innerHTML = im.slice(0, 4).map(function (x, i) { return urls[i] ? '<a href="/images/" title="' + esc(x.title) + '" aria-label="' + esc(x.title) + '" style="background-image:url(\'' + urls[i] + '\')"></a>' : ''; }).join('');
-      });
-    }).catch(function () {});
-
-    rows('gallery_audio?select=title,artist,artwork_path&published=eq.true&order=featured.desc,sort_order.asc,created_at.desc&limit=6').then(function (au) {
-      if (!au.length) return;
-      var brands = au.map(function (x) { return (x.artist || '').split('/')[0].trim(); }).filter(Boolean);
-      if (brands.length) $('aNames').textContent = brands.slice(0, 4).join(' · ');
-      return sign('audio-gallery', au.map(function (x) { return x.artwork_path; }).filter(Boolean)).then(function (urls) { thumbs($('aThumbs'), urls.filter(Boolean)); });
-    }).catch(function () {});
-  })();
-
-  // ---------- Scroll-scrubbed video: scroll position = video time, one panel per stop ----------
-  (function () {
-    var root = document.documentElement, v = document.getElementById('v');
-    var panels = [].slice.call(document.querySelectorAll('.panel')), N = panels.length;
-    var dots = [].slice.call(document.querySelectorAll('.dots a'));
-    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var quickStart = function () { if (!root.classList.contains('go')) root.classList.add('go', 'quick'); };
-
-    // flat mode: dots + menu follow the section in view
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting || !root.classList.contains('flat')) return;
-        var i = panels.indexOf(e.target);
-        dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
-        if (window.ZM) ZM.setActive(e.target.getAttribute('data-menu'));
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    panels.forEach(function (p) { spy.observe(p); });
-
-    if (reduce || !v.canPlayType || !v.canPlayType('video/mp4') || !window.fetch) return quickStart();
-    var fallback = setTimeout(quickStart, 6000);   // slow connection: show the page anyway
-    root.style.setProperty('--n', N);
-
-    var portrait = matchMedia('(max-aspect-ratio: 1/1)').matches;
-    var src = portrait ? '/assets/hero-phone.mp4?v=5' : '/assets/hero-desktop.mp4?v=5';
-    var INTRO = 7.4;     // seconds of video that belong to the opening section
-    var dur = 10.0, target = 0, cur = 0, active = -1, live = false, animId = 0;
-    var vt = function (p) { return p < 1 / N ? p * N * INTRO : INTRO + (p - 1 / N) / (1 - 1 / N) * (dur - INTRO - 0.05); };
-    var maxScroll = function () { return Math.max(1, document.documentElement.scrollHeight - innerHeight); };
-    var stopAt = function (i) { return i === 0 ? 0 : i === N - 1 ? 1 : (i + 0.5) / N; };
-
-    function goTo(i, p, fixedMs) {
-      var from = scrollY, to = (p == null ? stopAt(i) : p) * maxScroll(), t0 = performance.now(), id = ++animId;
-      var ms = fixedMs || Math.min(1800, 500 + Math.abs(to - from) / maxScroll() * 1800);
-      (function step(now) {
-        if (id !== animId) return;
-        var k = Math.min(1, (now - t0) / ms), e = fixedMs ? k : k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-        scrollTo(0, from + (to - from) * e);
-        if (k < 1) requestAnimationFrame(step);
-      })(t0);
-    }
-    function skipIntro() { animId++; if (live) root.classList.add('skip'); }
-    ['wheel', 'touchstart', 'keydown'].forEach(function (n) { addEventListener(n, skipIntro, { passive: true }); });
-    document.getElementById('skipIntro').addEventListener('click', function () { skipIntro(); goTo(0, 0.95 / N, 400); });
-
-    function setActive(i) {
-      if (i === active) return;
-      active = i;
-      panels.forEach(function (p, k) { p.classList.toggle('on', k === i); p.inert = k !== i; });
-      var sw = document.getElementById('sweep');
-      sw.classList.remove('go'); void sw.offsetWidth; sw.classList.add('go');
-      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
-      if (window.ZM) ZM.setActive(panels[i].getAttribute('data-menu'));
-      document.getElementById('drop').classList.toggle('hide', i === N - 1);
-      root.classList.toggle('at-end', i === N - 1);
-    }
-    function onScroll() {
-      if (root.classList.contains('flat')) return;
-      var p = Math.min(1, Math.max(0, scrollY / maxScroll()));
-      target = vt(p);
-      root.style.setProperty('--p', p.toFixed(4));
-      root.style.setProperty('--shift', Math.min(1, Math.max(0, (p * N - 0.9) / 0.6)).toFixed(3));
-      setActive(Math.min(N - 1, Math.floor(p * N * 0.9999)));
-    }
-    function tick() {
-      cur += (target - cur) * 0.12;
-      if (Math.abs(cur - target) < 0.004) cur = target;
-      root.style.setProperty('--vel', Math.min(1, Math.abs(target - cur) * 1.5).toFixed(3));
-      if (!v.seeking && Math.abs(v.currentTime - cur) > 0.012) v.currentTime = cur;
-      requestAnimationFrame(tick);
-    }
-
-    // dots and in-page links glide to their stop instead of jumping
-    document.addEventListener('click', function (e) {
-      if (!live) return;
-      var a = e.target.closest && e.target.closest('a[href^="#"]');
-      if (!a) return;
-      var i = panels.indexOf(document.querySelector(a.getAttribute('href')));
-      if (i < 0) return;
-      e.preventDefault(); skipIntro(); goTo(i);
-    });
-
-    // fetch the whole clip once so scrubbing seeks in memory, not over the network
-    fetch(src).then(function (r) { if (!r.ok) throw 0; return r.blob(); }).then(function (b) {
-      v.src = URL.createObjectURL(b);
-      v.addEventListener('loadedmetadata', function () { dur = v.duration || dur; }, { once: true });
-      v.addEventListener('canplay', function () {
-        if (live) return;
-        live = true;
-        root.classList.remove('flat');
-        if (!root.classList.contains('go')) { clearTimeout(fallback); root.classList.add('go'); }
-        else root.classList.add('skip');
-        var deep = panels.indexOf(document.querySelector(location.hash || null));
-        if (deep > 0) {                    // arrived on a section link: go straight there
-          root.classList.add('skip');
-          scrollTo(0, stopAt(deep) * maxScroll());
-          onScroll(); cur = target; v.currentTime = cur; tick();
-        } else if (root.classList.contains('skip')) {
-          scrollTo(0, 0); onScroll(); cur = target; v.currentTime = cur; tick();
-          goTo(0, 0.95 / N, 1600);
-        } else {
-          scrollTo(0, 0);
-          onScroll(); cur = target; v.currentTime = cur; tick();
-          goTo(0, 0.95 / N, 7600);         // the opening shot plays by itself; any wheel or touch takes over
-        }
-      }, { once: true });
-      var prime = function () { var q = v.play(); if (q && q.then) q.then(function () { v.pause(); }).catch(function () {}); removeEventListener('touchstart', prime); };
-      addEventListener('touchstart', prime, { passive: true });   // iOS only decodes after a touch
-    }).catch(quickStart);
-
-    addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', onScroll);
-  })();
-</script>
+<script src="/assets/home/main.js?v=20261112"></script>
 </body>
 </html>
