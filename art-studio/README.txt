@@ -189,3 +189,17 @@ The sample slide shows invented numbers only to demonstrate the look; your real 
 --- Header picture updated ---
 img/banner-21x9.jpg is now an AI-made panoramic picture of Zairul beside an orange supercar (made in ChatGPT from the earlier banner photo). Replace the file with any 21:9 image to change it.
 
+
+--- LATEST: "Golden hour" redesign and best-fit style examples (13 Nov 2026) ---
+LOOK: a new dark, warm "golden hour atelier" theme sits on top of the old stylesheet (luxe.css + luxe.js; styles.css is unchanged,
+so removing those two lines from index.html brings the old look back). New cinematic hero (img\hero-golden.jpg), serif display
+type (Fraunces), glass top bar, gold chips and a stats strip that counts up.
+LIVE PREVIEW: the old grey wireframe is replaced by a real poster drawn from the brief: your headline, sub-line, price badge,
+button, contact, list and when/where, in the chosen colours, lettering and style (frames, tape, grain, neon, glass and so on),
+hung on a spot-lit studio wall. Three layouts (type-led, image-led, framed) plus a wide banner layout. The picture area is a
+stand-in scene, labelled with what the real picture will be. Size, palette and style chips sit under it.
+STYLE EXAMPLES: 28 of the poster styles no longer share one Kopi Pagi coffee brief. Each example now shows the style on the
+kind of job it suits best (for example Spec sheet launch = an electric car launch, Kawaii sticker = a mochi snack, Luxury dark
+gold = a jewellery house, Patriotic = a Merdeka poster). Each tile carries a small tag naming that job. All brands are invented.
+Made with Google Gemini from this studio's own style descriptions. 3D vinyl toy and the hidden crew style keep their examples.
+To change one: replace styles\<id>.jpg (900x1200) and styles\<id>-s.jpg (360x480) and edit its line in STYLE_EX in data.js.

@@ -588,3 +588,39 @@ const DECK_GROUPS = { B: 'Business & executive', M: 'Minimal & modern', C: 'Crea
   DECK_LOOKS.forEach(function (l) { l.id = slug(l.n); });
 })();
 
+/* What each style example shows: [short tag, what the example is]. Only the styles in STYLE_EX_READY have a best-fit example image so far;
+   the others still show the Kopi Pagi poster until their picture is replaced (add the id to the list when it is). */
+const STYLE_EX = {
+  swiss: ["Design talk", "a design conference"],
+  retro: ["Record fair", "a vinyl record fair"],
+  grunge: ["Streetwear drop", "a streetwear drop"],
+  clay: ["Kids snack", "a kids' snack brand"],
+  paper: ["Book fair", "a community book fair"],
+  neon: ["Late-night arcade", "a late-night arcade cafe"],
+  editorial: ["Magazine cover", "a lifestyle magazine cover"],
+  luxury: ["Jewellery launch", "a jewellery launch"],
+  organic: ["Skincare", "a botanical skincare range"],
+  glass: ["Finance app", "a money app"],
+  doodle: ["Workshop", "a weekend art workshop"],
+  letterpress: ["Artisan bakery", "an artisan bakery"],
+  cinema: ["Island travel", "an island travel campaign"],
+  sticker: ["Mochi snack", "a cute mochi snack"],
+  brutal: ["Design week", "a design week"],
+  geometric: ["Raya greeting", "a Hari Raya greeting"],
+  premium3d: ["Sparkling drink", "a sparkling drink launch"],
+  scrapbook: ["Zine market", "a weekend zine market"],
+  isodiorama: ["Smart home", "a smart-home product"],
+  patriotic: ["Merdeka", "a Merdeka campaign"],
+  islamicflat: ["Ramadan", "a Ramadan buffet"],
+  liquid: ["Perfume", "a perfume launch"],
+  embroidery: ["Songket fair", "a heritage craft fair"],
+  woodcarve: ["Heritage restaurant", "a heritage restaurant"],
+  talkstage: ["Keynote talk", "a keynote talk"],
+  promoburst: ["Kedai promo", "a kedai lunch promo"],
+  packcampaign: ["Sambal jar", "a sambal jar launch"],
+  specsheet: ["Electric car", "an electric car launch"],
+  vinyltoy: ['Mascot figurine', ''],
+  crew: ['Crew poster', '']
+};
+const STYLE_EX_READY = ['swiss', 'retro', 'clay', 'grunge', 'paper', 'editorial', 'neon', 'luxury', 'organic', 'glass', 'doodle', 'letterpress', 'cinema', 'sticker', 'specsheet', 'packcampaign', 'promoburst', 'talkstage', 'woodcarve', 'embroidery', 'liquid', 'islamicflat', 'patriotic', 'isodiorama', 'scrapbook', 'premium3d', 'geometric', 'brutal'];
+STYLES.forEach(function (s) { var e = STYLE_EX[s.id]; if (!e) return; if (STYLE_EX_READY.indexOf(s.id) > -1) { s.tag = e[0]; s.ex = e[1]; } else if (!e[1]) s.tag = e[0]; });

@@ -5,18 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zairul AI Art Studio</title>
 <meta name="description" content="Fill in a short brief and get a precise, ready-to-paste poster prompt for Flow, ChatGPT, Seedream and more, with a live layout preview.">
-<meta name="theme-color" content="#dbe9ff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffb02e'/%3E%3Cstop offset='1' stop-color='%23ff2d8a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Crect x='18' y='14' width='28' height='36' rx='4' fill='white' opacity='.95'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0b0806">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffd58a'/%3E%3Cstop offset='1' stop-color='%23e8642a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Crect x='18' y='14' width='28' height='36' rx='4' fill='white' opacity='.95'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Anton&family=Caveat:wght@700&family=Fredoka:wght@700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20261113">
+<link rel="stylesheet" href="luxe.css?v=20261113">
+<link rel="preload" as="image" href="img/hero-golden.jpg">
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
 
 <header class="top">
-  <div class="logo"><i aria-hidden="true"></i><span>ZAIRUL <b>AI ART STUDIO</b></span></div>
-  <div class="banner" aria-hidden="true"><img src="img/banner-21x9.jpg" alt="" width="1400" height="600"></div>
+  <div class="logo"><i aria-hidden="true"></i><span>Zairul <b>AI Art Studio</b></span></div>
   <nav class="actions">
     <button class="btn" id="sample" type="button">Try a sample</button>
     <button class="btn" id="resetAll" type="button">Clear</button>
@@ -25,12 +26,21 @@
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <p class="kicker"><span class="dot"></span>Prompt studio for posters, photos, video and NotebookLM slides</p>
-    <h1>Fill the brief.<br><span class="grad">Get a prompt that works first time.</span></h1>
-    <p class="lead">Describe it once. The studio writes a precise prompt with exact text, layout zones, colours and style, ready for Flow, ChatGPT or Seedream, and shows you the layout before you spend a credit.</p>
-    <div class="quick"><input id="quickIn" type="text" autocomplete="off" placeholder="Start with one line, e.g. Promo Hari Kemerdekaan, or Storyboard ASMR unboxing 10 seconds"><button class="btn hot" id="quickGo" type="button">Start</button></div>
-    <div class="meter"><span id="meterLabel">Brief 0% complete</span><i><b id="meterBar"></b></i></div>
+  <section class="hero lx-hero">
+    <div class="lx-art" aria-hidden="true"><img id="lxArt" src="img/hero-golden.jpg" alt="" width="1916" height="821" fetchpriority="high"></div>
+    <div class="lx-copy">
+      <p class="kicker"><span class="dot"></span>Prompt studio for posters, photos, video and slides</p>
+      <h1>Fill the brief.<br><span class="grad">Get a prompt that works first time.</span></h1>
+      <p class="lead">Describe it once. The studio writes a precise prompt with exact text, layout zones, colours and style, ready for Flow, ChatGPT or Seedream, and shows you the poster before you spend a credit.</p>
+      <div class="quick"><input id="quickIn" type="text" autocomplete="off" placeholder="Start with one line, e.g. Promo Hari Kemerdekaan" aria-label="Describe what you want to make in one line"><button class="btn hot" id="quickGo" type="button">Start</button></div>
+      <div class="meter"><span id="meterLabel">Brief 0% complete</span><i><b id="meterBar"></b></i></div>
+    </div>
+    <ul class="lx-stats" id="lxStats" aria-label="What is inside">
+      <li><b data-k="styles">30</b><span>poster styles, each with a real example</span></li>
+      <li><b data-k="types">20</b><span>things to make, from posters to storyboards</span></li>
+      <li><b data-k="decks">101</b><span>slide looks for NotebookLM</span></li>
+      <li><b>0</b><span>data sent anywhere. It all runs in your browser</span></li>
+    </ul>
   </section>
 
   <div class="grid">
@@ -57,7 +67,7 @@
 
       <section class="card" style="--i:3"><h2><em>3</em>How should it look?</h2>
         <div class="photo-only"><label class="lab"><span id="lookLab">Photo look</span><div class="chips" id="looks"></div></label><p class="note" id="lookNote"></p><div class="styles deckgrid" id="deckGrid" hidden></div><div class="sdet deckdet" id="deckDetail" hidden></div></div>
-        <div class="poster-only"><label class="lab">Style, shown with a real example<div class="styles" id="styles"></div></label><div class="sdet" id="styleDetail"></div></div>
+        <div class="poster-only"><label class="lab">Style, shown on the job it suits best<div class="styles" id="styles"></div></label><div class="sdet" id="styleDetail"></div></div>
         <label class="lab mood-lab">Mood<div class="chips" id="moods"></div></label>
         <label class="lab poster-only">Colours<div class="pals" id="pals"></div></label>
         <label class="lab poster-only">Lettering<div class="chips" id="faces"></div></label>
@@ -84,8 +94,9 @@
 
     <aside class="side">
       <section class="card preview" style="--i:5">
-        <div class="phead"><h2>Layout preview</h2><div class="chips small" id="variants"></div></div>
-        <div class="canvas" id="canvas"></div>
+        <div class="phead"><h2>Live preview</h2><div class="chips small" id="variants"></div></div>
+        <div class="stage" id="stage"><i class="spot" aria-hidden="true"></i><div class="canvas" id="canvas"></div><i class="floor" aria-hidden="true"></i></div>
+        <div class="pvmeta" id="pvMeta"></div>
         <div class="strip" id="setStrip" hidden></div>
         <p class="note" id="layoutNote"></p>
       </section>
@@ -112,8 +123,9 @@
 <footer class="foot">Zairul AI Art Studio · designed and built by Zairul MD TY · your briefs stay in this browser</footer>
 <div id="lightbox" class="lightbox" role="dialog" aria-label="Style example"></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="data.js?v=20261112b"></script>
-<script src="app.js?v=20261112b"></script>
+<script src="data.js?v=20261113"></script>
+<script src="app.js?v=20261113"></script>
+<script src="luxe.js?v=20261113"></script>
 </body>
 </html>
 
