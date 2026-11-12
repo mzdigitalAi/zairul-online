@@ -117,6 +117,11 @@ const PRODUCT_LOOKS = [
   { n: 'B-roll detail', light: 'soft directional light that rakes across the surface', cam: 'a 100mm macro lens with a very shallow focus on one small detail', t: 'close detail shots meant as video cut-aways: texture, a hand using the product, steam or droplets, space left for text' },
   { n: 'In hand', light: 'soft daylight, skin and product evenly lit', cam: 'a 50mm lens, close, hand and product in focus', t: 'a human scale cue, natural hand with correct fingers' }
 ];
+/* brand-campaign looks (added 12 Nov 2026), appended so saved choices keep their place */
+PRODUCT_LOOKS.push(
+  { n: 'Sunlit campaign', light: 'hard direct sunlight from one high side angle, long crisp shadows across the set, light glowing through any glass or liquid', cam: 'a 70mm lens at a three-quarter tabletop angle (or straight down for a flat lay), the pack and its label tack-sharp', t: 'a brand-campaign shot: set, backdrop and props colour-matched to the pack (one main colour, one accent), a few props that show the eating or drinking moment, saturated but believable colour, the label fully readable' },
+  { n: 'Warm bar and cafe', light: 'warm practical lights in the background melted into soft bokeh, a warm key light on the pack and a thin rim light tracing the glass', cam: 'an 85mm lens at a low hero angle, or the pack held toward the camera in a natural hand, shallow depth of field around f/2.8', t: 'a moody, lived-in bar or cafe scene with amber tones and deep shadows, the pack bright and readable against the dark background' }
+);
 Object.assign(SWAPS, {
   product: ['a matte green snack pouch with a window', 'a glass jar of homemade chilli sambal', 'a pair of white running shoes', 'a small bottle of face serum', 'a ceramic coffee mug', 'a boxed batik scarf'],
   surface: ['a pale wooden table', 'a pure white seamless sheet', 'dark slate', 'a sheet of coloured paper in brand colour', 'a marble counter', 'woven rattan matting'],
@@ -163,6 +168,8 @@ STYLES.push({ id: 'embroidery', best: 'Heritage, festive, craft and cultural bra
 STYLES.push({ id: 'woodcarve', best: 'Heritage crafts, restaurants, batik and cultural events', name: 'Wood carving relief', g: ['#8d5a2b', '#e0b57a'], t: 'a hand-carved wooden relief panel: deep carved floral and vine patterns, chisel marks, warm polished teak tones, shallow depth shadows and lettering carved into the wood' });
 STYLES.push({ id: 'talkstage', best: 'Talks, seminars, webinars and speaker announcements', name: 'Talk stage', g: ['#b00020', '#0b0b0b'], t: 'a dramatic conference-talk stage look: a dark stage with a single spotlight, a speaker silhouette, a big red circular stage mark, a bold white sans-serif title and a clean speaker details bar' });
 STYLES.push({ id: 'promoburst', best: 'Food and drink promos, sales and kedai or warung posters', name: 'Promo burst', g: ['#ff4d2e', '#ffd23f'], t: 'a glossy high-energy promo look: a warm gradient backdrop, a huge product hero with splashes, a bold white-and-yellow headline with a brown outline on a wooden plank, a red starburst badge, benefit pills with check marks and a red call-to-action button' });
+
+STYLES.push({ id: 'packcampaign', best: 'Packaged food and drink, sauces, snacks, jams, honey and coffee launches', name: 'Packaging campaign', g: ['#c8643b', '#1f8a8a'], t: 'a hyper-real brand-campaign product photo: the pack is the hero with its bold illustrated label facing the camera, the set, backdrop and props colour-matched to the pack (one main colour, one accent), hard direct sunlight with long crisp shadows and light glowing through the glass, props that show the eating or drinking moment, and a clean bold sans-serif headline in the open space above' });
 
 /* SECRET style: hidden until unlocked (click the logo 5 times, or type "crew" in the one-line box and press Start) */
 STYLES.push({ id: 'crew', secret: true, best: 'Friends, teams, creators and personal brands: a hero poster of real people with attitude', name: 'Hyper-real 3D crew', g: ['#ff8a2b', '#2fe6ff'],
