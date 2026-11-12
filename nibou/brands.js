@@ -95,7 +95,9 @@
   }
   function sceneFreshill() {
     return bottle({ x: 74, y: 76, s: .8, rot: -6, c: ['#E5334E', '#FF6B7F'], n: 'STRAWBERRY' }) + bottle({ x: 326, y: 76, s: .8, rot: 6, c: ['#4D1B73', '#8A4BBB'], n: 'BLACKCURRANT' }) +
-      bottle({ x: 200, y: 22, s: 1.02, c: ['#F5780F', '#FFB52E'], n: 'MANGO' }) + fruit(0, 14, 292, 96, -10) + fruit(1, 296, 296, 98, 14) + fruit(3, 150, 318, 76, 4);
+      bottle({ x: 200, y: 22, s: 1.02, c: ['#F5780F', '#FFB52E'], n: 'MANGO' }) +
+      /* each fruit sits in front of its own bottle: strawberry (left), mango (middle), blackcurrant (right) */
+      fruit(3, 28, 278, 92, -8) + fruit(2, 276, 268, 106, 10) + fruit(0, 148, 300, 104, 6);
   }
 
   /* ---------- 4 DRINME: spout pouches (also used for Bebee) ---------- */
@@ -205,11 +207,24 @@
   var LIST = [
     { key: 'dadih', n: 'Dadih', c1: [0.85, 0.11, 0.38], c2: [1.0, 0.45, 0.62], bg: ['#FF5C93', '#D81B60', '#7A0A35'], hl: 'gold', desc: 'Soya and fruit *puddings*, instant *powders* and iced *sticks*.', scene: sceneDadih, sats: ['fruit:3', 'fruit:0', 'fruit:4', 'heart:#FFE14A', 'leaf', 'drop:#FFD1E3', 'drop:#FFFFFF', 'spark', 'spark'] },
     { key: 'yourgurt', n: 'Yourgurt', c1: [0.43, 0.73, 0.23], c2: [0.8, 0.95, 0.6], bg: ['#B4E66E', '#6DBB3A', '#2E7D2B'], hl: 'black', desc: 'Fruity *puddings* with *nata de coco*.', scene: sceneYourgurt, sats: ['fruit:3', 'fruit:4', 'fruit:0', 'cube:#FFFFFF', 'leaf', 'cube:#FFF3C4', 'cube:#FFFFFF', 'spark', 'spark'] },
-    { key: 'freshill', n: 'Freshill', c1: [0.04, 0.58, 0.59], c2: [0.5, 0.9, 0.85], bg: ['#3FD0C6', '#0A9396', '#05505A'], hl: 'gold', desc: 'Fruit drink *concentrates* in lemon, blackcurrant, mango, strawberry, lychee and soursop.', scene: sceneFreshill, sats: ['fruit:1', 'fruit:5', 'fruit:2', 'leaf', 'leaf', 'drop:#BFE9FF', 'drop:#FFFFFF', 'spark', 'spark'] },
+    { key: 'freshill', n: 'Freshill', c1: [0.04, 0.58, 0.59], c2: [0.5, 0.9, 0.85], bg: ['#3FD0C6', '#0A9396', '#05505A'], hl: 'gold', desc: 'Fruit drink *concentrates* in lemon, blackcurrant, mango, strawberry, lychee and soursop.', scene: sceneFreshill, satR: 0.46, sats: ['fruit:5', 'fruit:1', 'fruit:4', 'rose', 'rose:bud', 'drop:#BFE9FF', 'drop:#FFFFFF', 'spark', 'spark'] },
     { key: 'drinme', n: 'Drinme', c1: [0.17, 0.5, 0.88], c2: [0.55, 0.78, 1.0], bg: ['#5DB4FF', '#2B7FE0', '#12378F'], hl: 'gold', desc: 'Fruit drinks with *jelly* and *Vitamin C*.', scene: sceneDrinme, sats: ['fruit:0', 'fruit:1', 'fruit:2', 'bubble:#FFD25A', 'bubble:#FF7A3C', 'drop:#FFFFFF', 'bubble:#FFE9A0', 'spark', 'spark'] },
     { key: 'kidsjoy', n: "Kid’s Joy", c1: [0.54, 0.31, 0.85], c2: [0.8, 0.65, 1.0], bg: ['#B58BFF', '#8A4FD8', '#41208A'], hl: 'gold', desc: '*Drinking jelly* and *yogurt-flavour* drinks.', scene: sceneKidsJoy, sats: ['heart:#FF4D6D', 'fruit:3', 'star:#FFE14A', 'heart:#FF8FB8', 'fruit:4', 'star:#7FE0FF', 'drop:#FFFFFF', 'spark', 'spark'] },
     { key: 'bebee', n: 'Bebee', c1: [0.96, 0.64, 0.1], c2: [1.0, 0.86, 0.45], bg: ['#FFD25A', '#F5A31A', '#9A4A07'], hl: 'black', desc: '*Honey* in original, lemongrass and lemon.', scene: sceneBebee, sats: ['bee', 'hex:#FFC83A', 'hex:#E58A12', 'bee', 'hex:#FFE08A', 'drop:#FFC83A', 'bee', 'spark', 'spark'] }
   ];
+  /* rose (for Freshill rose syrup): layered petals, drawn as a vector. 'bud' = a smaller, closed rose */
+  function roseSat(v) {
+    var p = nid(), bud = v === 'bud', i, out = '', mid = '', leaves = '';
+    var R = '<defs><radialGradient id="' + p + 'o" cx="50%" cy="70%" r="75%"><stop offset="0" stop-color="#FF9DB4"/><stop offset=".55" stop-color="#F23D6B"/><stop offset="1" stop-color="#B3123F"/></radialGradient>' +
+      '<radialGradient id="' + p + 'm" cx="45%" cy="40%" r="70%"><stop offset="0" stop-color="#FFC2D1"/><stop offset=".6" stop-color="#FF5A82"/><stop offset="1" stop-color="#C8184A"/></radialGradient>' +
+      '<linearGradient id="' + p + 'l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7BD44A"/><stop offset="1" stop-color="#2E8B2A"/></linearGradient></defs>';
+    leaves = '<path d="M50 60 C 30 66 14 82 8 96 C 28 96 44 84 50 60Z" fill="url(#' + p + 'l)"/><path d="M50 60 C 70 66 86 80 94 92 C 72 94 56 82 50 60Z" fill="url(#' + p + 'l)"/>';
+    if (!bud) for (i = 0; i < 6; i++) out += '<ellipse cx="50" cy="31" rx="17" ry="21" transform="rotate(' + (i * 60 + 15) + ' 50 52)" fill="url(#' + p + 'o)" stroke="#9E0F37" stroke-opacity=".25" stroke-width="1"/>';
+    for (i = 0; i < 5; i++) mid += '<ellipse cx="50" cy="' + (bud ? 42 : 39) + '" rx="' + (bud ? 15 : 13) + '" ry="' + (bud ? 17 : 15) + '" transform="rotate(' + (i * 72 + 36) + ' 50 52)" fill="url(#' + p + 'm)" stroke="#9E0F37" stroke-opacity=".3" stroke-width="1"/>';
+    var centre = '<circle cx="50" cy="52" r="' + (bud ? 11 : 10) + '" fill="#E02656"/><path d="M50 45 C 58 45 60 55 52 59 C 44 62 40 53 46 49 C 50 47 54 51 50 54" stroke="#7A0A2A" stroke-width="2.4" fill="none" stroke-linecap="round"/>' +
+      '<ellipse cx="40" cy="40" rx="5" ry="9" transform="rotate(30 40 40)" fill="#fff" opacity=".35"/>';
+    return '<svg viewBox="0 0 100 100" aria-hidden="true">' + R + leaves + out + mid + centre + '</svg>';
+  }
   function sat(kind) {
     var k = kind.split(':'), a = k[1];
     switch (k[0]) {
@@ -222,6 +237,7 @@
       case 'cube': return cube(a);
       case 'hex': return hex(a);
       case 'bee': return beeSat();
+      case 'rose': return roseSat(a);
       default: return J.sparkSVG();
     }
   }

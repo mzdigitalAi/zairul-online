@@ -94,7 +94,7 @@
       ];
       var fi = 0, br = (!mix && window.BrandArt && window.BrandArt.LIST[i]) ? window.BrandArt.LIST[i].sats : null, bi = 0; defs.forEach(function (d, n) {
         if (d.x && !mix) return;
-        if (br) { var kind = br[bi++] || 'spark', kn = kind.split(':')[0], odd = (d.k === 'drop' || d.k === 'spark') && kn !== 'drop' && kn !== 'spark', el0 = document.createElement('div'); el0.className = 'fsat'; el0.innerHTML = window.BrandArt.sat(kind); d = Object.assign({}, d, { k: kn, s: d.s * (odd ? 1.8 : 1) * (kn === 'bee' ? 1.2 : 1) }); satLayer.appendChild(el0); sats.push({ el: el0, d: d, ph: n * 1.7 }); return; }
+        if (br) { var kind = br[bi++] || 'spark', kn = kind.split(':')[0], odd = (d.k === 'drop' || d.k === 'spark') && kn !== 'drop' && kn !== 'spark', el0 = document.createElement('div'); el0.className = 'fsat'; el0.innerHTML = window.BrandArt.sat(kind); var bR = window.BrandArt.LIST[i].satR || 1; d = Object.assign({}, d, { k: kn, R: d.R * bR, s: d.s * (odd ? 1.8 : 1) * (kn === 'bee' ? 1.2 : 1) }); satLayer.appendChild(el0); sats.push({ el: el0, d: d, ph: n * 1.7 }); return; }
         var el = document.createElement('div'); el.className = 'fsat'; var fx = (mix && d.k === 'fruit') ? (fi++ * 5 + 1) % 6 : i; if (mix && d.k === 'fruit') { d = Object.assign({}, d, { s: [.34, .26, .17, .19, .19, .22][fx] }); } el.innerHTML = d.k === 'fruit' ? fruitSVG(fx) : d.k === 'leaf' ? leafSVG() : d.k === 'drop' ? dropSVG(n % 2 ? '#BFE9FF' : '#FFFFFF') : sparkSVG();
         satLayer.appendChild(el); sats.push({ el: el, d: d, ph: n * 1.7 });
       });
