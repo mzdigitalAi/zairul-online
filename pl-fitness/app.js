@@ -474,13 +474,15 @@
       state.user = { name: display, email }; LS.set('user', state.user);
       return go(authMode === 'signup' ? '#questions' : '#home');
     }
-    const btn = e.target.querySelector('button[type=submit]'); btn.disabled = true; err.textContent = ''; err.style.color = '';
+    const btn = e.target.querySelector('button[type=submit]'); if (btn.disabled) return;
+    const label = btn.textContent, busy = on => { btn.disabled = on; btn.classList.toggle('busy', on); btn.setAttribute('aria-busy', on ? 'true' : 'false'); btn.innerHTML = on ? '<i class="spin" aria-hidden="true"></i>' + (authMode === 'signup' ? 'Creating your account…' : 'Signing you in…') : label; };
+    busy(true); err.textContent = ''; err.style.color = '';
     const back = location.origin + location.pathname;   // confirmation links come back to this app, not the project's default URL
     const run = authMode === 'signup'
       ? sb.auth.signUp({ email, password: pw, options: { data: { name: display }, emailRedirectTo: back } })
       : sb.auth.signInWithPassword({ email, password: pw });
     run.then(async r => {
-      btn.disabled = false;
+      busy(false);
       if (r.error) {
         const m = (r.error.message || '').toLowerCase(), st = r.error.status;
         if (st === 429 || /rate limit|too many/.test(m)) {
@@ -500,7 +502,7 @@
       state.user = userFrom(r.data.user); LS.set('user', state.user);
       await pullState();
       go(authMode === 'signup' ? '#questions' : '#home');
-    }).catch(() => { btn.disabled = false; err.textContent = 'Network error. Try again.'; });
+    }).catch(() => { busy(false); err.textContent = 'Network error. Try again.'; });
   });
 
   if (!location.hash) location.hash = '#splash';

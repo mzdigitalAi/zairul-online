@@ -137,3 +137,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .price .tag{position:absolute;right:16px;top:16px;background:var(--green);color:#111}
 .toast{position:absolute;left:20px;right:20px;bottom:90px;background:var(--green);color:#111;padding:14px;border-radius:16px;font-weight:700;text-align:center;z-index:9;animation:in .2s}
 
+
+/* sign up / log in button while waiting for the server */
+.btn.busy,.btn:disabled{cursor:progress;opacity:.82;filter:saturate(.7)}
+.btn .spin{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(17,17,17,.25);border-top-color:#111;animation:plfspin .8s linear infinite;flex:none}
+@keyframes plfspin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.btn .spin{animation-duration:2.4s}}
