@@ -304,6 +304,7 @@
     <label class="field"><span>Display name</span><div class="row"><input id="dn" value="${esc(u.name)}" maxlength="40" autocomplete="name" style="flex:1"><button class="btn sm" data-act="save-name" style="flex:none">Save</button></div></label>
     <div class="grid2 mt16"><div class="stat"><p>Weight</p><b>${p.weight} kg</b></div><div class="stat"><p>Height</p><b>${p.height} cm</b></div></div>
     ${rows.map(r => `<button class="menu" ${r[2] ? `data-go="${r[2]}"` : 'data-act="soon"'}><span>${r[0]}</span><span class="grow" style="background:none;display:block;width:auto">${r[1]}</span><span style="background:none">›</span></button>`).join('')}
+    ${u.guest ? '<button class="menu" data-act="guest-signup" style="color:var(--green)"><span>✚</span><span class="grow" style="background:none;display:block;width:auto">Create your account (keeps your progress)</span><span style="background:none">›</span></button>' : ''}
     <button class="menu" data-act="logout" style="color:var(--red)"><span>↪</span><span class="grow" style="background:none;display:block;width:auto">Log Out</span></button>`);
   };
 
@@ -393,6 +394,7 @@
     switch (act) {
       case 'next-slide': if (slide < SLIDES.length - 1) { slide++; render(); } else { slide = 0; go('#login'); } break;
       case 'toggle-auth': authMode = authMode === 'login' ? 'signup' : 'login'; render(); break;
+      case 'guest': { const g = state.pendingGuest || { name: 'Athlete', email: '' }; state.user = { name: g.name, email: g.email, guest: true }; LS.set('user', state.user); go('#questions'); break; }
       case 'gender': state.profile.gender = v; render(); break;
       case 'q-back': q--; render(); break;
       case 'q-next':
@@ -413,6 +415,7 @@
       case 'soon': toast('Coming soon'); break;
       case 'plan': state.plan = v; LS.set('plan', v); render(); break;
       case 'buy': state.premium = true; LS.set('premium', true); toast(state.plan + ' plan activated (demo)'); render(); break;
+      case 'guest-signup': authMode = 'signup'; state.user = null; LS.set('user', null); go('#login'); break;
       case 'logout':
         if (sb) sb.auth.signOut();
         state.user = null; LS.set('user', null);
@@ -471,14 +474,29 @@
       state.user = { name: display, email }; LS.set('user', state.user);
       return go(authMode === 'signup' ? '#questions' : '#home');
     }
-    const btn = e.target.querySelector('button[type=submit]'); btn.disabled = true; err.textContent = '';
+    const btn = e.target.querySelector('button[type=submit]'); btn.disabled = true; err.textContent = ''; err.style.color = '';
+    const back = location.origin + location.pathname;   // confirmation links come back to this app, not the project's default URL
     const run = authMode === 'signup'
-      ? sb.auth.signUp({ email, password: pw, options: { data: { name: display } } })
+      ? sb.auth.signUp({ email, password: pw, options: { data: { name: display }, emailRedirectTo: back } })
       : sb.auth.signInWithPassword({ email, password: pw });
     run.then(async r => {
       btn.disabled = false;
-      if (r.error) { err.textContent = r.error.message; return; }
-      if (!r.data.session) { err.style.color = 'var(--green)'; err.textContent = 'Check your email to confirm your account, then log in.'; return; }
+      if (r.error) {
+        const m = (r.error.message || '').toLowerCase(), st = r.error.status;
+        if (st === 429 || /rate limit|too many/.test(m)) {
+          err.innerHTML = 'Too many sign-up emails were sent in the last hour, so we could not send your confirmation email. Please try again in an hour.<br><button type="button" class="green" data-act="guest" style="margin-top:8px"><b>Start now without an account</b></button> (your progress stays on this phone and moves to your account when you sign up later)';
+          state.pendingGuest = { name: display, email };
+        } else if (/already registered|already exists/.test(m)) {
+          authMode = 'login'; render(); const e2 = $app.querySelector('#err'); if (e2) e2.textContent = 'This email already has an account. Log in instead.';
+          const em = $app.querySelector('input[name=email]'); if (em) em.value = email;
+        } else if (/email not confirmed/.test(m)) {
+          err.textContent = 'Please confirm your email first: open the link we sent you, then log in.';
+        } else if (/invalid login credentials/.test(m)) {
+          err.textContent = 'Wrong email or password.';
+        } else err.textContent = r.error.message;
+        return;
+      }
+      if (!r.data.session) { err.style.color = 'var(--green)'; err.textContent = 'Almost there: we sent a confirmation link to ' + email + '. Open it on this device and you will be signed in.'; return; }
       state.user = userFrom(r.data.user); LS.set('user', state.user);
       await pullState();
       go(authMode === 'signup' ? '#questions' : '#home');
@@ -486,11 +504,19 @@
   });
 
   if (!location.hash) location.hash = '#splash';
+  const fromLink = /access_token=|type=signup|error_description=/.test(location.hash);
   if (sb) {
+    sb.auth.onAuthStateChange((ev, s) => {
+      if (ev === 'SIGNED_IN' && s && (!state.user || state.user.guest || state.user.id !== s.user.id)) {
+        state.user = userFrom(s.user); LS.set('user', state.user);
+        pullState().then(() => go(fromLink ? '#questions' : '#home'));
+      }
+    });
+    if (/error_description=/.test(location.hash)) { const d = decodeURIComponent((location.hash.match(/error_description=([^&]+)/) || [])[1] || '').replace(/\+/g, ' '); setTimeout(() => { go('#login'); setTimeout(() => { const e3 = $app.querySelector('#err'); if (e3) e3.textContent = d || 'That link has expired. Log in or sign up again.'; }, 50); }, 0); }
     // restore the real session before showing anything that needs a user
     sb.auth.getSession().then(async r => {
       const s = r.data && r.data.session;
-      state.user = s ? userFrom(s.user) : null; LS.set('user', state.user);
+      state.user = s ? userFrom(s.user) : (state.user && state.user.guest ? state.user : null); LS.set('user', state.user);
       if (s) await pullState();
       render();
     }).catch(render);
