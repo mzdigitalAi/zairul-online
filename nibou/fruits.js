@@ -75,6 +75,35 @@
   function sparkSVG() { return '<svg viewBox="0 0 60 60" aria-hidden="true"><path d="M30 0 L36 24 L60 30 L36 36 L30 60 L24 36 L0 30 L24 24Z" fill="#fff" opacity=".9"/></svg>'; }
 
   API.fruitSVG = fruitSVG; API.leafSVG = leafSVG; API.dropSVG = dropSVG; API.sparkSVG = sparkSVG;
+
+  /* ---------- real 3D ----------
+     The fruit icons, the decor pieces and the six product scenes are modelled and rendered in Blender (assets/3d/).
+     Each product scene is a 17-frame turntable (-36 to +36 degrees), so the pointer and the scroll really turn the products.
+     The vector art above is kept as the instant fallback while the renders load, and for the poster pages. */
+  var D3 = 'assets/3d/', NF = 33, SPAN = 36, FR = {};
+  API.use3d = true;
+  function img3(kind) {
+    var k = kind.split(':'), c = (k[1] || '').toUpperCase(), n = null;
+    switch (k[0]) {
+      case 'fruit': n = 'fruit-' + (+k[1]); break;
+      case 'leaf': n = 'decor-leaf'; break;
+      case 'drop': n = 'decor-drop-' + (/FFC83A|FFB52E/.test(c) ? 'honey' : /FFD1E3|FFC2DA/.test(c) ? 'pink' : 'clear'); break;
+      case 'heart': n = 'decor-heart-' + (/FFE14A|FFD21F/.test(c) ? 'yellow' : /FF8FB8/.test(c) ? 'pink' : 'red'); break;
+      case 'star': n = 'decor-star-' + (/7FE0FF|5CCBFF/.test(c) ? 'blue' : 'yellow'); break;
+      case 'cube': n = 'decor-cube'; break;
+      case 'bubble': n = 'decor-bubble-' + (/FF7A3C/.test(c) ? 'orange' : 'yellow'); break;
+      case 'hex': n = 'decor-hex-' + (/E58A12/.test(c) ? 'amber' : 'gold'); break;
+      case 'bee': n = 'decor-bee'; break;
+      case 'rose': n = 'decor-rose'; break;
+    }
+    return n ? '<img class="f3" src="' + D3 + n + '.webp" alt="" draggable="false">' : null;
+  }
+  function frames(key) {
+    if (FR[key]) return FR[key];
+    var o = { imgs: [] }, k;
+    for (k = 0; k < NF; k++) { var im = new Image(); im.decoding = 'async'; im.src = D3 + 'scene-' + key + '-' + (k < 10 ? '0' : '') + k + '.webp'; o.imgs.push(im); }
+    return (FR[key] = o);
+  }
   API.init = function (stage, opts) {
     opts = opts || {}; if (!stage) return false;
     var reduce = !!opts.reduce, W = 1, H = 1, size = 300, cx = 0, cy = 0, portrait = false;
@@ -94,12 +123,19 @@
       ];
       var fi = 0, br = (!mix && window.BrandArt && window.BrandArt.LIST[i]) ? window.BrandArt.LIST[i].sats : null, bi = 0; defs.forEach(function (d, n) {
         if (d.x && !mix) return;
-        if (br) { var kind = br[bi++] || 'spark', kn = kind.split(':')[0], odd = (d.k === 'drop' || d.k === 'spark') && kn !== 'drop' && kn !== 'spark', el0 = document.createElement('div'); el0.className = 'fsat'; el0.innerHTML = window.BrandArt.sat(kind); var bR = window.BrandArt.LIST[i].satR || 1; d = Object.assign({}, d, { k: kn, R: d.R * bR, s: d.s * (odd ? 1.8 : 1) * (kn === 'bee' ? 1.2 : 1) }); satLayer.appendChild(el0); sats.push({ el: el0, d: d, ph: n * 1.7 }); return; }
-        var el = document.createElement('div'); el.className = 'fsat'; var fx = (mix && d.k === 'fruit') ? (fi++ * 5 + 1) % 6 : i; if (mix && d.k === 'fruit') { d = Object.assign({}, d, { s: [.34, .26, .17, .19, .19, .22][fx] }); } el.innerHTML = d.k === 'fruit' ? fruitSVG(fx) : d.k === 'leaf' ? leafSVG() : d.k === 'drop' ? dropSVG(n % 2 ? '#BFE9FF' : '#FFFFFF') : sparkSVG();
+        if (br) { var kind = br[bi++] || 'spark', kn = kind.split(':')[0], odd = (d.k === 'drop' || d.k === 'spark') && kn !== 'drop' && kn !== 'spark', el0 = document.createElement('div'); el0.className = 'fsat'; el0.innerHTML = (API.use3d && img3(kind)) || window.BrandArt.sat(kind); d = Object.assign({}, d, { k: kn, s: d.s * (odd ? 1.8 : 1) * (kn === 'bee' ? 1.2 : 1) }); satLayer.appendChild(el0); sats.push({ el: el0, d: d, ph: n * 1.7 }); return; }
+        var el = document.createElement('div'); el.className = 'fsat'; var fx = (mix && d.k === 'fruit') ? (fi++ * 5 + 1) % 6 : i; if (mix && d.k === 'fruit') { d = Object.assign({}, d, { s: [.34, .26, .17, .19, .19, .22][fx] }); } var k3 = d.k === 'fruit' ? 'fruit:' + fx : d.k === 'leaf' ? 'leaf' : d.k === 'drop' ? 'drop:#FFFFFF' : null;
+        el.innerHTML = (API.use3d && k3 && img3(k3)) || (d.k === 'fruit' ? fruitSVG(fx) : d.k === 'leaf' ? leafSVG() : d.k === 'drop' ? dropSVG(n % 2 ? '#BFE9FF' : '#FFFFFF') : sparkSVG());
         satLayer.appendChild(el); sats.push({ el: el, d: d, ph: n * 1.7 });
       });
     }
-    function showFruit(i) { st.burst = 0; inner.innerHTML = window.BrandArt ? window.BrandArt.scene(i) : fruitSVG(i); buildSats(i, st.mix); st.shown = i; document.documentElement.style.setProperty('--fruit', 'rgb(' + API.FLAVOURS[i].c1.map(function (v) { return Math.round(v * 255); }).join(',') + ')'); }
+    function showFruit(i) {
+      st.burst = 0; var key = API.FLAVOURS[i] && API.FLAVOURS[i].key, c3 = API.use3d && key;
+      inner.classList.remove('has3d');
+      inner.innerHTML = (window.BrandArt ? window.BrandArt.scene(i) : fruitSVG(i)) + (c3 ? '<canvas class="f3c" width="760" height="760"></canvas>' : '');
+      st.cv = c3 ? inner.querySelector('canvas') : null; st.c2 = st.cv ? st.cv.getContext('2d') : null; st.fr = st.cv ? frames(key) : null; st.fri = -1; st.a3 = null; st.av = 0;
+      if (st.fr && API.FLAVOURS[i + 1]) frames(API.FLAVOURS[i + 1].key);   /* warm the next brand */
+      buildSats(i, st.mix); st.shown = i; document.documentElement.style.setProperty('--fruit', 'rgb(' + API.FLAVOURS[i].c1.map(function (v) { return Math.round(v * 255); }).join(',') + ')'); }
     function layout() { var r = stage.getBoundingClientRect(); W = r.width || 1; H = r.height || 1; portrait = W / H < 0.95; size = portrait ? Math.min(W * 0.62, H * 0.34) : Math.min(H * 0.62, W * 0.40); cx = portrait ? W * 0.5 : W * 0.70; cy = portrait ? H * 0.70 : H * 0.54; main.style.width = main.style.height = size + 'px'; shadow.style.width = size * 0.9 + 'px'; shadow.style.height = size * 0.16 + 'px'; }
     layout(); addEventListener('resize', layout); showFruit(0);
 
@@ -116,6 +152,31 @@
       st.fin += (st.finT - st.fin) * (1 - Math.exp(-dt * 4)); if (Math.abs(st.finT - st.fin) < .002) st.fin = st.finT; var fin = st.fin, ccx = cx + (W / 2 - cx) * fin, ccy = cy + (H * .5 - cy) * fin;
       var bob = Math.sin(st.t * 1.5) * size * 0.025, sq = Math.sin(st.t * 2.6) * st.wob * 0.12, pop = 1 + st.pop * 0.1;
       var ry = st.px * 22 + flipAng + Math.sin(st.t * 0.7) * 6 + st.scroll * 40, rx = -st.py * 14, rz = Math.sin(st.t * 1.1) * 3 * (0.6 + st.wob) + st.px * 4;
+      if (st.fr && st.c2) {
+        /* 3D turn, smoothed:
+           1. a target angle from the pointer, a slow two-speed sway and how far you have scrolled through this brand;
+           2. a damped spring eases the shown angle toward it, so it starts softly, glides and settles with no snapping;
+           3. the canvas blends the two nearest turntable frames by the fractional position, so there are no visible steps. */
+        var seg = (st.scroll * (API.FLAVOURS.length + 1)) % 1;
+        var tgt = Math.max(-SPAN + .5, Math.min(SPAN - .5, st.px * 34 + Math.sin(st.t * 0.45) * 9 + Math.sin(st.t * 1.13 + 1) * 2.5 + (seg - .5) * 40));
+        if (st.a3 == null) { st.a3 = tgt; st.av = 0; }
+        st.av += ((tgt - st.a3) * 22 - st.av * 9) * dt; st.a3 += st.av * dt;
+        var ff = Math.max(0, Math.min(NF - 1, (st.a3 + SPAN) / (2 * SPAN) * (NF - 1))), i0 = Math.floor(ff), i1 = Math.min(NF - 1, i0 + 1), w3 = ff - i0;
+        var A3 = st.fr.imgs[i0], B3 = st.fr.imgs[i1], okA = A3.complete && A3.naturalWidth, okB = B3.complete && B3.naturalWidth;
+        if (!okA) { var M3 = st.fr.imgs[(NF - 1) / 2]; if (M3.complete && M3.naturalWidth) { A3 = M3; okA = true; okB = false; } }
+        var k3 = okA ? (okB ? ff.toFixed(3) : 'a' + i0) : null;
+        if (okA && k3 !== st.fri) {
+          var c2 = st.c2; c2.clearRect(0, 0, 760, 760);
+          if (okB && w3 > .003 && w3 < .997) {
+            /* (1 - w) * A + w * B, exact for images with transparency because 'lighter' adds premultiplied colour */
+            c2.globalAlpha = 1 - w3; c2.drawImage(A3, 0, 0, 760, 760);
+            c2.globalCompositeOperation = 'lighter'; c2.globalAlpha = w3; c2.drawImage(B3, 0, 0, 760, 760);
+            c2.globalCompositeOperation = 'source-over'; c2.globalAlpha = 1;
+          } else c2.drawImage(okB && w3 >= .997 ? B3 : A3, 0, 0, 760, 760);
+          st.fri = k3; inner.classList.add('has3d');
+        }
+        if (inner.classList.contains('has3d')) ry = flipAng + st.px * 4 + Math.max(-3, Math.min(3, st.av * .05));   /* the render itself turns; the card leans a touch into the motion */
+      }
       main.style.transform = 'translate3d(' + (cx - size / 2 + st.px * -14) + 'px,' + (cy - size / 2 + bob + st.py * -8) + 'px,0) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) rotateZ(' + rz + 'deg) scale(' + ((1 + sq) * pop * flipScale * (1 - fin)) + ',' + ((1 - sq) * pop * flipScale * (1 - fin)) + ')'; main.style.opacity = 1 - fin;
       shadow.style.transform = 'translate3d(' + (cx - size * 0.45 + st.px * -10) + 'px,' + (cy + size * 0.5 + bob * -0.4) + 'px,0) scale(' + (1 - bob / size * 1.5) + ',1)'; shadow.style.opacity = flipScale * 0.9 * (1 - fin);
       sats.forEach(function (s) {
