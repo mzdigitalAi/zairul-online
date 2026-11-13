@@ -254,3 +254,10 @@ html[data-theme="light"]{--neon:#16b800;--neon-soft:rgba(22,184,0,.1);--neon-glo
 .style.on::after{background:#0b0806;color:var(--neon);box-shadow:inset 0 0 0 1.5px var(--neon),0 4px 12px rgba(0,0,0,.5)}
 .toggle input:checked+.sw{background:var(--neon-soft);box-shadow:inset 0 0 0 1.5px var(--neon)}
 .toggle input:checked+.sw::after{background:var(--neon)}
+
+/* ===== Selected style panel: thumbnail on top, description right below, full panel width ===== */
+.sdet,.deckdet{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+.sdet .sd-img{width:100%;max-width:none;margin:0}
+.sdet .sd-img img{width:100%;height:auto}
+.sdet .sd-txt{width:100%;min-width:0}
+.sdet .sd-txt h3{margin-top:4px}
