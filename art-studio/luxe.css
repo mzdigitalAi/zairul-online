@@ -236,3 +236,8 @@ html[data-theme="light"] .toast{background:rgba(255,255,255,.9);color:var(--ink)
 html[data-theme="light"] .lightbox{background:rgba(238,240,248,.86)}
 html[data-theme="light"] .foot{border-top-color:rgba(120,110,160,.2)}
 #logoutBtn[hidden]{display:none!important}
+
+/* uploader sits in the hero, under the one-line box */
+.lx-copy .refs{max-width:540px;margin-top:16px;background:rgba(10,6,4,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+html[data-theme="light"] .lx-copy .refs{background:rgba(255,255,255,.55)}
+@media(max-width:480px){.ref{grid-template-columns:52px minmax(0,1fr) auto;gap:10px}.ref-img{width:52px;height:52px}.ref-act{flex-direction:column;gap:4px}.ref-act button{width:28px;height:28px;font-size:13px}}

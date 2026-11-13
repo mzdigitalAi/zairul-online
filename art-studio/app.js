@@ -1137,14 +1137,18 @@
     if (!files.length) { toast('Pick an image file'); return; }
     var room = REF_MAX - REFS.length; if (room <= 0) { toast('Up to ' + REF_MAX + ' reference images'); return; }
     if (files.length > room) toast('Only the first ' + room + ' were added (up to ' + REF_MAX + ')');
-    var left = Math.min(room, files.length);
-    files.slice(0, room).forEach(function (f) {
+    var take = files.slice(0, room), got = new Array(take.length), left = take.length;
+    take.forEach(function (f, n) {
       shrinkImage(f, function (url, w, h) {
-        if (url) {
-          var guess = /logo/i.test(f.name) ? 'logo' : REFS.length ? 'style' : (isProduct() || /launch|food|promo/.test(S.type) ? 'product' : (/portrait/.test(S.type) ? 'face' : 'subject'));
-          REFS.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: f.name.slice(0, 60), url: url, w: w, h: h, role: guess });
-        } else toast('Could not read ' + f.name);
-        if (--left === 0) { saveRefs(); renderRefs(); renderOutput(); toast('Reference added. Pick what each image is for'); }
+        got[n] = url ? { f: f, url: url, w: w, h: h } : null;
+        if (!url) toast('Could not read ' + f.name);
+        if (--left) return;
+        got.forEach(function (g) {
+          if (!g) return;
+          var guess = /logo/i.test(g.f.name) ? 'logo' : REFS.length ? 'style' : (isProduct() || /launch|food|promo/.test(S.type) ? 'product' : (/portrait/.test(S.type) ? 'face' : 'subject'));
+          REFS.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: g.f.name.slice(0, 60), url: g.url, w: g.w, h: g.h, role: guess });
+        });
+        saveRefs(); renderRefs(); renderOutput(); toast('Reference added. Pick what each image is for');
       });
     });
   }
