@@ -242,3 +242,5 @@ REFERENCES: "Upload reference images" under the prompt. Up to 6, kept in this br
 list, the first main subject / product / face / background fills the picture area of the live preview, and "Download numbered"
 saves copies named 1-, 2-, ... so they are easy to attach in the same order.
 STATS: the hero numbers no longer shrink behind their labels.
+
+UPDATE (13 Nov 2026): Cinematic re-render now adds a light animated-film caricature (heads and eyes very slightly enlarged, bigger expressions, faces still recognisable) and a background blurred into glowing bokeh lights. The photo-to-render prompts were updated the same way. New example picture.
