@@ -78,9 +78,9 @@
 
   /* ---------- real 3D ----------
      The fruit icons, the decor pieces and the six product scenes are modelled and rendered in Blender (assets/3d/).
-     Each product scene is a 17-frame turntable (-36 to +36 degrees), so the pointer and the scroll really turn the products.
+     Each product scene is a 65-frame turntable (-36 to +36 degrees), so the pointer and the scroll really turn the products.
      The vector art above is kept as the instant fallback while the renders load, and for the poster pages. */
-  var D3 = 'assets/3d/', NF = 33, SPAN = 36, FR = {};
+  var D3 = 'assets/3d/', NF = 65, SPAN = 36, FR = {}, HDQ = (window.devicePixelRatio || 1) * Math.min(innerWidth * .4, innerHeight * .62) * 1.18 > 900;   /* big or high-density screens also get the 1280 px frames */
   API.use3d = true;
   function img3(kind) {
     var k = kind.split(':'), c = (k[1] || '').toUpperCase(), n = null;
@@ -100,8 +100,9 @@
   }
   function frames(key) {
     if (FR[key]) return FR[key];
-    var o = { imgs: [] }, k;
-    for (k = 0; k < NF; k++) { var im = new Image(); im.decoding = 'async'; im.src = D3 + 'scene-' + key + '-' + (k < 10 ? '0' : '') + k + '.webp'; o.imgs.push(im); }
+    var o = { imgs: [], hd: [] }, k, nm;
+    for (k = 0; k < NF; k++) { nm = (k < 10 ? '0' : '') + k; var im = new Image(); im.decoding = 'async'; im.src = D3 + 'scene-' + key + '-sd-' + nm + '.webp'; o.imgs.push(im); }
+    if (HDQ) setTimeout(function () { for (k = 0; k < NF; k++) { var h = new Image(); h.decoding = 'async'; h.src = D3 + 'scene-' + key + '-hd-' + (k < 10 ? '0' : '') + k + '.webp'; o.hd.push(h); } }, 300);   /* sharp set loads after the light one */
     return (FR[key] = o);
   }
   API.init = function (stage, opts) {
@@ -168,7 +169,8 @@
         var A3 = st.fr.imgs[i0], B3 = st.fr.imgs[i1], okA = A3.complete && A3.naturalWidth, okB = B3.complete && B3.naturalWidth;
         if (!okA) { var M3 = st.fr.imgs[(NF - 1) / 2]; if (M3.complete && M3.naturalWidth) { A3 = M3; okA = true; okB = false; } }
         /* show the single nearest turntable frame: blending two angles made a soft double image while it turned */
-        var PICK = (okB && w3 >= .5) ? B3 : A3, k3 = okA ? 'n' + (PICK === B3 ? i1 : i0) + ':' + st.cv.width : null;
+        var PI = (okB && w3 >= .5) ? i1 : i0, PICK = (okB && w3 >= .5) ? B3 : A3, H3 = st.fr.hd[PI], hdOk = H3 && H3.complete && H3.naturalWidth; if (hdOk) PICK = H3;
+        var k3 = okA ? 'n' + PI + (hdOk ? 'h' : '') + ':' + st.cv.width : null;
         if (okA && k3 !== st.fri) {
           var c2 = st.c2, cb = st.cv.width; c2.clearRect(0, 0, cb, cb);
           c2.imageSmoothingEnabled = true; c2.imageSmoothingQuality = 'high';
