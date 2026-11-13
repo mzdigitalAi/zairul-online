@@ -227,3 +227,18 @@ Only use photos of people who agree and characters that are yours: do not re-ren
 Example: an invented footballer for an invented club (RFC), made with Google Gemini. No real club, league or sponsor marks.
 Let AI Choose picks it for football, futsal, athlete, e-sports, gaming, signing, match day, carousel and re-render words.
 New Portrait look "Game cinematic": the same render look for Portrait / fashion photo mode, without text.
+
+--- LATEST: login, light glass theme, reference uploads (13 Nov 2026) ---
+LOGIN: /middleware.js (repo root) is a Vercel Routing Middleware that guards everything under /art-studio/ on the server.
+The username and password are NOT in any file. Set them in Vercel > Project > Settings > Environment Variables:
+  STUDIO_USER (the login name, e.g. an email)   STUDIO_PASS (the password)
+then redeploy. Until both exist the studio stays open; https://zairul.online/art-studio/__auth/ shows {"configured":true} once on.
+Sign-in page: /art-studio/login/ . Log out: the button in the top bar, or /art-studio/logout/ . Changing STUDIO_PASS signs everyone out.
+A session lasts 30 days with "Keep me signed in", otherwise 12 hours.
+THEME: the "Light glass" switch in the top bar swaps to a frosted white glassmorphism theme (remembered in this browser).
+Rules live at the end of luxe.css under html[data-theme="light"].
+REFERENCES: "Upload reference images" under the prompt. Up to 6, kept in this browser (resized to 720 px). Each gets a job
+(main subject, product, face, outfit, pose, style and mood, layout, background, logo). The prompt and JSON brief get a numbered
+list, the first main subject / product / face / background fills the picture area of the live preview, and "Download numbered"
+saves copies named 1-, 2-, ... so they are easy to attach in the same order.
+STATS: the hero numbers no longer shrink behind their labels.

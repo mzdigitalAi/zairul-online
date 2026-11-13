@@ -262,14 +262,14 @@
       : 'Do not render any words or letters. Leave clean, uncluttered areas for the headline, the supporting line' + (t.zones.indexOf('badge') > -1 ? ', a price badge' : '') + (t.zones.indexOf('cta') > -1 ? ', a button' : '') + ' and a contact strip, so the type can be added afterwards.';
     return { intro: 'A ' + a.id + ' ' + t.name.toLowerCase() + ' poster' + (f.brand ? ' for ' + f.brand : '') + '. It must communicate ' + t.focus + '.' + (S.concept ? ' Creative concept: ' + S.concept.name.toLowerCase() + ': ' + S.concept.pitch.charAt(0).toLowerCase() + S.concept.pitch.slice(1) : ''), hero: 'Hero visual: ' + hero + '.', style: 'Style: ' + st.name + ': ' + st.t + '. Mood: ' + mood + '.' + (st.id === 'crew' ? ' ' + crewStyleLine() : ''), layout: layoutText(S.variant), text: textBlock, pal: palText(), real: realismText(), avoid: AVOID, att: attachText(), tl: tl };
   }
-  function composePrompt() {
+  function composePromptBase() {
     if (isPhoto()) return composePhoto();
     var p = bodyParts(), tool = S.tool, a = aspect();
     if (tool === 1) return [p.intro, '', p.hero, p.style, '', 'LAYOUT\n' + p.layout, '', 'TEXT\n' + p.text, '', 'COLOUR AND TYPE\n' + p.pal, p.real, '', 'Size: ' + a.id.replace('1:1.414', 'portrait A-series') + '.', p.att, p.avoid].filter(function (x) { return x !== ''; }).join('\n');
     if (tool === 3) return ['Poster brief', '- Type: ' + type().name, '- Size: ' + a.id, '- ' + p.hero, '- ' + p.style, '- ' + p.layout, '- ' + p.text, '- ' + p.pal, p.real ? '- ' + p.real : '', p.att ? '- ' + p.att.replace(/\n/g, ' ') : '', '- ' + p.avoid].filter(Boolean).join('\n');
     return [p.intro, p.hero, p.style, p.layout, p.text, p.pal, p.real, 'Aspect ratio ' + a.id.replace('1:1.414', '1:1.414 (A-series portrait)') + '.', p.att, p.avoid].filter(Boolean).join('\n\n');
   }
-  function composeJSON() {
+  function composeJSONBase() {
     if (isBook()) return composeBookJSON();
     if (isComic()) return composeComicJSON();
     if (isDeck()) return composeDeckJSON();
@@ -712,8 +712,9 @@
     if (isStory()) return drawStoryPreview();
     var a = aspect(), W = 1000, H = Math.round(1000 * a.h / a.w), c = pal().c, L = lookObj();
     var g = '<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + c[0] + '"/><stop offset="1" stop-color="' + c[1] + '"/></linearGradient><radialGradient id="vg" cx=".5" cy=".4" r=".8"><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient></defs>';
-    g += '<rect width="' + W + '" height="' + H + '" fill="url(#pg)"/><rect width="' + W + '" height="' + H + '" fill="url(#vg)"/>';
-    var hx = W / 3, hy = H / 3; if (isProduct()) { var px = W * .5, pw = W * .26, ph = H * .34, py = H * .58; g += '<ellipse cx="' + px + '" cy="' + (py + ph / 2 + 10) + '" rx="' + (pw * .8) + '" ry="' + (H * .018) + '" fill="#000" fill-opacity=".35"/><rect x="' + (px - pw / 2) + '" y="' + (py - ph / 2) + '" width="' + pw + '" height="' + ph + '" rx="28" fill="#fff" fill-opacity=".92"/><rect x="' + (px - pw / 2 + 18) + '" y="' + (py - ph * .12) + '" width="' + (pw - 36) + '" height="' + (ph * .3) + '" rx="10" fill="' + c[0] + '" fill-opacity=".55"/>'; } else g += '<g fill="#ffffff" fill-opacity=".92"><circle cx="' + (W * .5) + '" cy="' + (H * .36) + '" r="' + (H * .095) + '"/><path d="M' + (W * .16) + ' ' + H + ' C' + (W * .18) + ' ' + (H * .66) + ' ' + (W * .34) + ' ' + (H * .56) + ' ' + (W * .5) + ' ' + (H * .56) + ' C' + (W * .66) + ' ' + (H * .56) + ' ' + (W * .82) + ' ' + (H * .66) + ' ' + (W * .84) + ' ' + H + ' Z"/></g>';
+    var phr = refHero();
+    g += '<rect width="' + W + '" height="' + H + '" fill="url(#pg)"/>' + (phr ? '<image href="' + phr.url + '" width="' + W + '" height="' + H + '" preserveAspectRatio="xMidYMid slice"/>' : '') + '<rect width="' + W + '" height="' + H + '" fill="url(#vg)"/>';
+    var hx = W / 3, hy = H / 3; if (isProduct() && !phr) { var px = W * .5, pw = W * .26, ph = H * .34, py = H * .58; g += '<ellipse cx="' + px + '" cy="' + (py + ph / 2 + 10) + '" rx="' + (pw * .8) + '" ry="' + (H * .018) + '" fill="#000" fill-opacity=".35"/><rect x="' + (px - pw / 2) + '" y="' + (py - ph / 2) + '" width="' + pw + '" height="' + ph + '" rx="28" fill="#fff" fill-opacity=".92"/><rect x="' + (px - pw / 2 + 18) + '" y="' + (py - ph * .12) + '" width="' + (pw - 36) + '" height="' + (ph * .3) + '" rx="10" fill="' + c[0] + '" fill-opacity=".55"/>'; } else g += '<g fill="#ffffff" fill-opacity=".92"><circle cx="' + (W * .5) + '" cy="' + (H * .36) + '" r="' + (H * .095) + '"/><path d="M' + (W * .16) + ' ' + H + ' C' + (W * .18) + ' ' + (H * .66) + ' ' + (W * .34) + ' ' + (H * .56) + ' ' + (W * .5) + ' ' + (H * .56) + ' C' + (W * .66) + ' ' + (H * .56) + ' ' + (W * .82) + ' ' + (H * .66) + ' ' + (W * .84) + ' ' + H + ' Z"/></g>';
     g += '<g stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-dasharray="10 10"><line x1="' + hx + '" y1="0" x2="' + hx + '" y2="' + H + '"/><line x1="' + hx * 2 + '" y1="0" x2="' + hx * 2 + '" y2="' + H + '"/><line x1="0" y1="' + hy + '" x2="' + W + '" y2="' + hy + '"/><line x1="0" y1="' + hy * 2 + '" x2="' + W + '" y2="' + hy * 2 + '"/></g>';
     g += '<circle cx="' + (W * .5) + '" cy="' + (H * .34) + '" r="10" fill="#ffb02e"/><text x="' + (W * .5 + H * .095 + 24) + '" y="' + (H * .34 + 6) + '" font-size="26" fill="#fff" font-family="JetBrains Mono,monospace">' + (isProduct() ? 'hero point' : 'eye line') + '</text>';
     g += '<rect x="30" y="' + (H - 120) + '" width="' + (W - 60) + '" height="90" rx="24" fill="#05050a" fill-opacity=".62"/><text x="58" y="' + (H - 78) + '" font-size="30" fill="#fff" font-family="Bricolage Grotesque,sans-serif" font-weight="800">' + esc(L.n) + '</text><text x="58" y="' + (H - 46) + '" font-size="22" fill="#d9d4f2" font-family="Space Grotesk,sans-serif">' + esc((S.f.camera || L.cam).slice(0, 56)) + '</text>';
@@ -867,7 +868,9 @@
     /* the picture stand-in: a small scene drawn in the palette, different for each family of styles */
     var artG = function (x, y, w, h, r, capTop) {
       var kind = sk[0], s = '<clipPath id="pclip"><rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="' + r.toFixed(1) + '"/></clipPath><g clip-path="url(#pclip)">', cx = x + w / 2, cy = y + h / 2, m = Math.min(w, h), i;
-      if (kind === 'land') {
+      var hr = refHero();
+      if (hr) { s += R(x, y, w, h, '#111') + '<image href="' + hr.url + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" preserveAspectRatio="xMidYMid slice"/>'; kind = 'ref'; }
+      if (kind === 'ref') { } else if (kind === 'land') {
         var s0 = dark ? mix(c0, '#000000', .55) : mix(c1, c2, .45), s1 = dark ? mix(c1, c0, .35) : mix(c2, '#ffffff', .45), hill = function (yy, amp, fill) { return '<path d="M' + x + ' ' + (y + h * yy).toFixed(1) + ' C' + (x + w * .22).toFixed(1) + ' ' + (y + h * (yy - amp)).toFixed(1) + ' ' + (x + w * .4).toFixed(1) + ' ' + (y + h * (yy + amp * .6)).toFixed(1) + ' ' + (x + w * .6).toFixed(1) + ' ' + (y + h * (yy - amp * .5)).toFixed(1) + ' S' + (x + w * .88).toFixed(1) + ' ' + (y + h * (yy - amp)).toFixed(1) + ' ' + (x + w) + ' ' + (y + h * (yy + amp * .2)).toFixed(1) + ' V' + (y + h) + ' H' + x + 'Z" fill="' + fill + '"/>'; };
         s += '<linearGradient id="psky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + s0 + '"/><stop offset=".78" stop-color="' + s1 + '"/></linearGradient>' + R(x, y, w, h, 'url(#psky)');
         s += C(x + w * .68, y + h * .4, m * .3, dark ? c1 : '#ffffff', ' opacity=".2"') + C(x + w * .68, y + h * .4, m * .16, dark ? mix(c1, '#ffffff', .3) : mix(c1, '#ffffff', .12));
@@ -889,7 +892,7 @@
         s += '<radialGradient id="pspot" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="' + mix(c0, '#000000', .2) + '"/><stop offset="1" stop-color="#05050a"/></radialGradient>' + R(x, y, w, h, 'url(#pspot)') + '<path d="M' + (cx - m * .07).toFixed(1) + ' ' + y + ' L' + (cx - m * .44).toFixed(1) + ' ' + (y + h) + ' H' + (cx + m * .44).toFixed(1) + ' L' + (cx + m * .07).toFixed(1) + ' ' + y + 'Z" fill="#ffffff" opacity=".07"/>';
         [.34, .25, .16].forEach(function (q, j) { s += '<circle cx="' + cx.toFixed(1) + '" cy="' + (y + h * .5).toFixed(1) + '" r="' + (m * q).toFixed(1) + '" fill="none" stroke="' + (j === 1 ? '#ffffff' : c1) + '" stroke-width="' + (m * .012).toFixed(1) + '" filter="url(#pglow)" opacity="' + (.95 - j * .15) + '"/>'; }); s += C(cx, y + h * .5, m * .09, c1) + C(cx, y + h * .5, m * .09, 'url(#psph)');
       }
-      var cap = String(f.visual || t.hero || 'your picture').replace(/\s+/g, ' '), room = Math.floor((w - u * 16) / (u * .9)); cap = cap.length > room ? cap.slice(0, Math.max(10, room - 1)) + '…' : cap;
+      var cap = hr ? 'your image ' + (REFS.indexOf(hr) + 1) + ' (' + refRole(hr.role)[1].toLowerCase() + ')' : String(f.visual || t.hero || 'your picture').replace(/\s+/g, ' '), room = Math.floor((w - u * 16) / (u * .9)); cap = cap.length > room ? cap.slice(0, Math.max(10, room - 1)) + '…' : cap;
       var capY = capTop ? y + capTop : y + h - u * 5;
       return s + R(x + u * 1.6, capY, cap.length * u * .9 + u * 11.5, u * 3.2, '#000000', ' fill-opacity=".5" rx="' + (u * 1.6).toFixed(1) + '"') + tx(x + u * 3, capY + u * 2.1, 'PICTURE · ' + cap, u * 1.4, '#ffffff', { o: .92, f: mono }) + '</g>';
     };
@@ -1086,6 +1089,93 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-o]'), function (x) { x.onclick = function () { var b = saved.filter(function (y) { return String(y.id) === x.dataset.o; })[0]; if (b) { S = JSON.parse(JSON.stringify(b.s)); S.f = Object.assign({}, DEFAULT.f, S.f); $('#fields').dataset.type = ''; save(); renderAll(); window.scrollTo({ top: 0, behavior: 'smooth' }); toast('Brief opened'); } }; });
     Array.prototype.forEach.call(document.querySelectorAll('[data-d]'), function (x) { x.onclick = function () { saved = saved.filter(function (y) { return String(y.id) !== x.dataset.d; }); store.set('pbb_saved', saved); renderSaved(); }; });
   }
+  /* ---------- your own reference images: kept in this browser, numbered, each with one job; they go into the prompt and the live preview ---------- */
+  var REF_ROLES = [
+    ['subject', 'Main subject', 'the main subject: keep it exactly as it is (shape, colours, details and any text on it) and make it the hero of the picture'],
+    ['product', 'Product or pack', 'the product: keep the pack, its shape, colours and label exactly as they are, with the label readable'],
+    ['face', 'Face / likeness', 'the person: keep the face and likeness exactly (only use photos of people who agreed)'],
+    ['outfit', 'Outfit only', 'the outfit: copy the clothing only, not the person or the place'],
+    ['pose', 'Pose only', 'the pose: copy the body pose only'],
+    ['style', 'Style and mood', 'the style and mood only: copy the lighting, colour grade and finish, not the content'],
+    ['layout', 'Layout only', 'the layout only: copy where the headline, picture and details sit, not the words, logos or people'],
+    ['background', 'Background / place', 'the background or place: use it as the setting behind the subject'],
+    ['logo', 'My logo', 'my logo: place it small and unchanged, never redraw or restyle it']
+  ];
+  var REF_MAX = 6, REFS = store.get('zas_refs', []); if (!Array.isArray(REFS)) REFS = [];
+  function refRole(id) { return REF_ROLES.filter(function (r) { return r[0] === id; })[0] || REF_ROLES[0]; }
+  function saveRefs() { try { store.set('zas_refs', REFS); } catch (e) { toast('Too big to keep after a reload, but it works for now'); } }
+  function refHero() { return REFS.filter(function (r) { return /subject|product|face|background/.test(r.role); })[0] || null; }
+  function refBlock() {
+    if (!REFS.length) return '';
+    return 'REFERENCE IMAGES (attach them to your message in this order)\n' + REFS.map(function (r, i) { return 'Image ' + (i + 1) + ': ' + refRole(r.role)[2] + '.'; }).join('\n') + '\nUse each image only for the job written next to it and copy nothing else from it.';
+  }
+  function composePrompt() { var base = composePromptBase(); return REFS.length ? refBlock() + '\n\n' + base : base; }
+  function composeJSON() {
+    var j = composeJSONBase(); if (!REFS.length) return j;
+    try { var o = JSON.parse(j); o.reference_images = REFS.map(function (r, i) { return { order: i + 1, file: r.name, use_for: refRole(r.role)[2] }; }); return JSON.stringify(o, null, 2); } catch (e) { return j; }
+  }
+  function shrinkImage(file, done) {
+    var rd = new FileReader();
+    rd.onload = function () {
+      var im = new Image();
+      im.onload = function () {
+        var m = 720, k = Math.min(1, m / Math.max(im.width, im.height)), cv = document.createElement('canvas');
+        cv.width = Math.round(im.width * k); cv.height = Math.round(im.height * k);
+        var cx = cv.getContext('2d'), png = /png|webp|gif/i.test(file.type);
+        if (!png) { cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); }
+        cx.drawImage(im, 0, 0, cv.width, cv.height);
+        done(png ? cv.toDataURL('image/webp', .86) : cv.toDataURL('image/jpeg', .84), cv.width, cv.height);
+      };
+      im.onerror = function () { done(null); };
+      im.src = rd.result;
+    };
+    rd.onerror = function () { done(null); };
+    rd.readAsDataURL(file);
+  }
+  function addRefFiles(list) {
+    var files = Array.prototype.filter.call(list || [], function (f) { return /^image\//.test(f.type); });
+    if (!files.length) { toast('Pick an image file'); return; }
+    var room = REF_MAX - REFS.length; if (room <= 0) { toast('Up to ' + REF_MAX + ' reference images'); return; }
+    if (files.length > room) toast('Only the first ' + room + ' were added (up to ' + REF_MAX + ')');
+    var left = Math.min(room, files.length);
+    files.slice(0, room).forEach(function (f) {
+      shrinkImage(f, function (url, w, h) {
+        if (url) {
+          var guess = /logo/i.test(f.name) ? 'logo' : REFS.length ? 'style' : (isProduct() || /launch|food|promo/.test(S.type) ? 'product' : (/portrait/.test(S.type) ? 'face' : 'subject'));
+          REFS.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: f.name.slice(0, 60), url: url, w: w, h: h, role: guess });
+        } else toast('Could not read ' + f.name);
+        if (--left === 0) { saveRefs(); renderRefs(); renderOutput(); toast('Reference added. Pick what each image is for'); }
+      });
+    });
+  }
+  function renderRefs() {
+    var box = $('#refList'); if (!box) return;
+    $('#refCount').textContent = REFS.length ? REFS.length + ' of ' + REF_MAX : '';
+    $('#refDrop').classList.toggle('has', REFS.length > 0);
+    box.innerHTML = REFS.map(function (r, i) {
+      return '<li class="ref" data-id="' + r.id + '"><span class="ref-img"><img src="' + r.url + '" alt="Reference ' + (i + 1) + ': ' + esc(r.name) + '"><b>' + (i + 1) + '</b></span><span class="ref-txt"><small title="' + esc(r.name) + '">' + esc(r.name) + '</small><select aria-label="What image ' + (i + 1) + ' is for">' + REF_ROLES.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === r.role ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></span><span class="ref-act">' + (i ? '<button type="button" class="ref-up" aria-label="Move image ' + (i + 1) + ' up" title="Move up">↑</button>' : '') + '<button type="button" class="ref-x" aria-label="Remove image ' + (i + 1) + '" title="Remove">×</button></span></li>';
+    }).join('');
+    Array.prototype.forEach.call(box.querySelectorAll('.ref'), function (li) {
+      var id = li.dataset.id, idx = function () { return REFS.map(function (r) { return r.id; }).indexOf(id); };
+      li.querySelector('select').onchange = function () { REFS[idx()].role = this.value; saveRefs(); renderOutput(); };
+      li.querySelector('.ref-x').onclick = function () { REFS.splice(idx(), 1); saveRefs(); renderRefs(); renderOutput(); };
+      var up = li.querySelector('.ref-up'); if (up) up.onclick = function () { var i = idx(), t = REFS[i - 1]; REFS[i - 1] = REFS[i]; REFS[i] = t; saveRefs(); renderRefs(); renderOutput(); };
+    });
+  }
+  (function () {
+    var inp = $('#refIn'), drop = $('#refDrop'); if (!inp || !drop) return;
+    inp.onchange = function () { addRefFiles(this.files); this.value = ''; };
+    ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+    drop.addEventListener('drop', function (e) { addRefFiles(e.dataTransfer && e.dataTransfer.files); });
+    $('#refClear').onclick = function () { if (!REFS.length) return; REFS = []; saveRefs(); renderRefs(); renderOutput(); toast('References cleared'); };
+    $('#refDl').onclick = function () {
+      if (!REFS.length) { toast('Add a reference first'); return; }
+      REFS.forEach(function (r, i) { setTimeout(function () { var a = document.createElement('a'); a.href = r.url; a.download = (i + 1) + '-' + r.name.replace(/\.[a-z0-9]+$/i, '') + (/webp/.test(r.url.slice(0, 20)) ? '.webp' : '.jpg'); document.body.appendChild(a); a.click(); a.remove(); }, i * 350); });
+    };
+    renderRefs();
+  })();
+
   function renderAll() { renderChips(); renderStyleDetail(); renderFields(); renderPhotoUI(); renderSetUI(); renderConcepts(); renderOutput(); }
 
   /* motion: reveal + pointer glow */

@@ -6,11 +6,12 @@
 <title>Zairul AI Art Studio</title>
 <meta name="description" content="Fill in a short brief and get a precise, ready-to-paste poster prompt for Flow, ChatGPT, Seedream and more, with a live layout preview.">
 <meta name="theme-color" content="#0b0806">
+<script>try{if(localStorage.getItem("zas_theme")==="light"){document.documentElement.setAttribute("data-theme","light");document.querySelector('meta[name="theme-color"]').content="#eef0f8"}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffd58a'/%3E%3Cstop offset='1' stop-color='%23e8642a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Crect x='18' y='14' width='28' height='36' rx='4' fill='white' opacity='.95'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Anton&family=Caveat:wght@700&family=Fredoka:wght@700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261113">
-<link rel="stylesheet" href="luxe.css?v=20261113">
+<link rel="stylesheet" href="styles.css?v=20261113d">
+<link rel="stylesheet" href="luxe.css?v=20261113d">
 <link rel="preload" as="image" href="img/hero-golden.jpg">
 </head>
 <body>
@@ -19,9 +20,11 @@
 <header class="top">
   <div class="logo"><i aria-hidden="true"></i><span>Zairul <b>AI Art Studio</b></span></div>
   <nav class="actions">
+    <button class="theme-sw" id="themeSw" type="button" role="switch" aria-checked="false" title="Switch between the golden dark theme and the light glass theme"><i aria-hidden="true"></i><span>Light glass</span></button>
     <button class="btn" id="sample" type="button">Try a sample</button>
     <button class="btn" id="resetAll" type="button">Clear</button>
     <button class="btn hot" id="saveBrief" type="button">Save brief</button>
+    <a class="btn" id="logoutBtn" href="/art-studio/logout/" hidden>Log out</a>
   </nav>
 </header>
 
@@ -111,6 +114,14 @@
           <button data-t="set" id="tabSet" type="button" hidden>The set</button>
         </div>
         <pre id="output" class="output" tabindex="0"></pre>
+        <div class="refs" id="refDrop">
+          <div class="refs-head">
+            <label class="btn mini hot refs-add"><input type="file" id="refIn" accept="image/*" multiple hidden><span aria-hidden="true">＋</span> Upload reference images</label>
+            <span class="refs-meta"><b id="refCount"></b><button type="button" class="linkbtn" id="refDl">Download numbered</button><button type="button" class="linkbtn" id="refClear">Clear</button></span>
+          </div>
+          <p class="refs-note">Add your own photo, product, logo or a look you like (up to 6), or drop them here. Choose what each one is for: the prompt gets a numbered list, and the first main subject, product, face or place fills the picture in the live preview. Attach them in the same order when you paste the prompt. They stay in this browser.</p>
+          <ol class="refs-list" id="refList"></ol>
+        </div>
         <div class="setcopies" id="setCopies" hidden></div>
         <div class="obar"><span id="wordCount"></span><div><button class="btn mini" id="dl" type="button">Download .md</button><button class="btn mini hot" id="copy" type="button">Copy</button></div></div>
       </section>
@@ -123,9 +134,9 @@
 <footer class="foot">Zairul AI Art Studio · designed and built by Zairul MD TY · your briefs stay in this browser</footer>
 <div id="lightbox" class="lightbox" role="dialog" aria-label="Style example"></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="data.js?v=20261113c"></script>
-<script src="app.js?v=20261113c"></script>
-<script src="luxe.js?v=20261113"></script>
+<script src="data.js?v=20261113d"></script>
+<script src="app.js?v=20261113d"></script>
+<script src="luxe.js?v=20261113d"></script>
 </body>
 </html>
 

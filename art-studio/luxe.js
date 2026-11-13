@@ -21,6 +21,13 @@
     });
     stage.addEventListener('pointerleave', function () { cv.style.setProperty('--ry', '0deg'); cv.style.setProperty('--rx', '0deg'); cv.style.setProperty('--gx', '30%'); cv.style.setProperty('--gy', '0%'); });
   }
+  /* light glass theme switch (remembered in this browser) */
+  var sw = document.getElementById('themeSw'), root = document.documentElement, tc = document.querySelector('meta[name="theme-color"]');
+  var setTheme = function (light) { if (light) root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme'); if (sw) sw.setAttribute('aria-checked', light ? 'true' : 'false'); if (tc) tc.content = light ? '#eef0f8' : '#0b0806'; try { localStorage.setItem('zas_theme', light ? 'light' : 'dark'); } catch (e) {} };
+  if (sw) { sw.setAttribute('aria-checked', root.getAttribute('data-theme') === 'light' ? 'true' : 'false'); sw.addEventListener('click', function () { setTheme(root.getAttribute('data-theme') !== 'light'); }); }
+  /* show "Log out" only when the studio login is switched on and you are signed in */
+  var lo = document.getElementById('logoutBtn');
+  if (lo && window.fetch && location.protocol === 'https:') fetch('/art-studio/__auth/', { credentials: 'same-origin', cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j && j.signedIn) lo.hidden = false; }).catch(function () {});
   var art = document.getElementById('lxArt');
   if (art && !reduce) { var tick = false; window.addEventListener('scroll', function () { if (tick) return; tick = true; requestAnimationFrame(function () { art.style.transform = 'scale(1.06) translate3d(0,' + Math.min(40, window.scrollY * .06).toFixed(1) + 'px,0)'; tick = false; }); }, { passive: true }); }
 })();
