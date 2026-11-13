@@ -133,10 +133,13 @@
       st.burst = 0; var key = API.FLAVOURS[i] && API.FLAVOURS[i].key, c3 = API.use3d && key;
       inner.classList.remove('has3d');
       inner.innerHTML = (window.BrandArt ? window.BrandArt.scene(i) : fruitSVG(i)) + (c3 ? '<canvas class="f3c" width="760" height="760"></canvas>' : '');
+      if (c3) sizeCanvas(inner.querySelector('canvas'));
       st.cv = c3 ? inner.querySelector('canvas') : null; st.c2 = st.cv ? st.cv.getContext('2d') : null; st.fr = st.cv ? frames(key) : null; st.fri = -1; st.a3 = null; st.av = 0;
       if (st.fr && API.FLAVOURS[i + 1]) frames(API.FLAVOURS[i + 1].key);   /* warm the next brand */
       buildSats(i, st.mix); st.shown = i; document.documentElement.style.setProperty('--fruit', 'rgb(' + API.FLAVOURS[i].c1.map(function (v) { return Math.round(v * 255); }).join(',') + ')'); }
-    function layout() { var r = stage.getBoundingClientRect(); W = r.width || 1; H = r.height || 1; portrait = W / H < 0.95; size = portrait ? Math.min(W * 0.62, H * 0.34) : Math.min(H * 0.62, W * 0.40); cx = portrait ? W * 0.5 : W * 0.70; cy = portrait ? H * 0.70 : H * 0.54; main.style.width = main.style.height = size + 'px'; shadow.style.width = size * 0.9 + 'px'; shadow.style.height = size * 0.16 + 'px'; }
+    /* the canvas is drawn at the size it shows on screen (device pixels, up to 1600) with high-quality smoothing, so the browser never stretches a small bitmap */
+    function sizeCanvas(cv) { if (!cv) return; var b = Math.round(Math.max(760, Math.min(1600, size * 1.18 * (window.devicePixelRatio || 1)))); if (cv.width !== b) { cv.width = cv.height = b; st.fri = -1; } }
+    function layout() { var r = stage.getBoundingClientRect(); W = r.width || 1; H = r.height || 1; portrait = W / H < 0.95; size = portrait ? Math.min(W * 0.62, H * 0.34) : Math.min(H * 0.62, W * 0.40); cx = portrait ? W * 0.5 : W * 0.70; cy = portrait ? H * 0.70 : H * 0.54; main.style.width = main.style.height = size + 'px'; shadow.style.width = size * 0.9 + 'px'; shadow.style.height = size * 0.16 + 'px'; if (st.cv) sizeCanvas(st.cv); }
     layout(); addEventListener('resize', layout); showFruit(0);
 
     function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
@@ -164,18 +167,15 @@
         var ff = Math.max(0, Math.min(NF - 1, (st.a3 + SPAN) / (2 * SPAN) * (NF - 1))), i0 = Math.floor(ff), i1 = Math.min(NF - 1, i0 + 1), w3 = ff - i0;
         var A3 = st.fr.imgs[i0], B3 = st.fr.imgs[i1], okA = A3.complete && A3.naturalWidth, okB = B3.complete && B3.naturalWidth;
         if (!okA) { var M3 = st.fr.imgs[(NF - 1) / 2]; if (M3.complete && M3.naturalWidth) { A3 = M3; okA = true; okB = false; } }
-        var k3 = okA ? (okB ? ff.toFixed(3) : 'a' + i0) : null;
+        /* show the single nearest turntable frame: blending two angles made a soft double image while it turned */
+        var PICK = (okB && w3 >= .5) ? B3 : A3, k3 = okA ? 'n' + (PICK === B3 ? i1 : i0) + ':' + st.cv.width : null;
         if (okA && k3 !== st.fri) {
-          var c2 = st.c2; c2.clearRect(0, 0, 760, 760);
-          if (okB && w3 > .003 && w3 < .997) {
-            /* (1 - w) * A + w * B, exact for images with transparency because 'lighter' adds premultiplied colour */
-            c2.globalAlpha = 1 - w3; c2.drawImage(A3, 0, 0, 760, 760);
-            c2.globalCompositeOperation = 'lighter'; c2.globalAlpha = w3; c2.drawImage(B3, 0, 0, 760, 760);
-            c2.globalCompositeOperation = 'source-over'; c2.globalAlpha = 1;
-          } else c2.drawImage(okB && w3 >= .997 ? B3 : A3, 0, 0, 760, 760);
+          var c2 = st.c2, cb = st.cv.width; c2.clearRect(0, 0, cb, cb);
+          c2.imageSmoothingEnabled = true; c2.imageSmoothingQuality = 'high';
+          c2.drawImage(PICK, 0, 0, cb, cb);
           st.fri = k3; inner.classList.add('has3d');
         }
-        if (inner.classList.contains('has3d')) ry = flipAng + st.px * 4 + Math.max(-3, Math.min(3, st.av * .05));   /* the render itself turns; the card leans a touch into the motion */
+        if (inner.classList.contains('has3d')) { ry = flipAng; rx = 0; rz *= 0.35; }   /* the render itself turns; tilting the bitmap again only resamples it and softens it */   /* the render itself turns; the card leans a touch into the motion */
       }
       main.style.transform = 'translate3d(' + (cx - size / 2 + st.px * -14) + 'px,' + (cy - size / 2 + bob + st.py * -8) + 'px,0) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) rotateZ(' + rz + 'deg) scale(' + ((1 + sq) * pop * flipScale * (1 - fin)) + ',' + ((1 - sq) * pop * flipScale * (1 - fin)) + ')'; main.style.opacity = 1 - fin;
       shadow.style.transform = 'translate3d(' + (cx - size * 0.45 + st.px * -10) + 'px,' + (cy + size * 0.5 + bob * -0.4) + 'px,0) scale(' + (1 - bob / size * 1.5) + ',1)'; shadow.style.opacity = flipScale * 0.9 * (1 - fin);
