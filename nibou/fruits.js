@@ -162,22 +162,27 @@
            2. a damped spring eases the shown angle toward it, so it starts softly, glides and settles with no snapping;
            3. the canvas blends the two nearest turntable frames by the fractional position, so there are no visible steps. */
         var seg = (st.scroll * (API.FLAVOURS.length + 1)) % 1;
-        var tgt = Math.max(-SPAN + .5, Math.min(SPAN - .5, st.px * 34 + Math.sin(st.t * 0.45) * 9 + Math.sin(st.t * 1.13 + 1) * 2.5 + (seg - .5) * 40));
+        var tgt = Math.max(-SPAN + .5, Math.min(SPAN - .5, st.px * 30 + Math.sin(st.t * 0.42) * 20 + Math.sin(st.t * 0.97 + 1) * 5 + (seg - .5) * 26));   /* a wider, livelier idle sway across the whole turntable */
         if (st.a3 == null) { st.a3 = tgt; st.av = 0; }
-        st.av += ((tgt - st.a3) * 22 - st.av * 9) * dt; st.a3 += st.av * dt;
+        st.av += ((tgt - st.a3) * 30 - st.av * 6.5) * dt; st.a3 += st.av * dt;   /* a softer spring: it eases in, swings slightly past and settles, like a real object */
         var ff = Math.max(0, Math.min(NF - 1, (st.a3 + SPAN) / (2 * SPAN) * (NF - 1))), i0 = Math.floor(ff), i1 = Math.min(NF - 1, i0 + 1), w3 = ff - i0;
         var A3 = st.fr.imgs[i0], B3 = st.fr.imgs[i1], okA = A3.complete && A3.naturalWidth, okB = B3.complete && B3.naturalWidth;
         if (!okA) { var M3 = st.fr.imgs[(NF - 1) / 2]; if (M3.complete && M3.naturalWidth) { A3 = M3; okA = true; okB = false; } }
         /* show the single nearest turntable frame: blending two angles made a soft double image while it turned */
-        var PI = (okB && w3 >= .5) ? i1 : i0, PICK = (okB && w3 >= .5) ? B3 : A3, H3 = st.fr.hd[PI], hdOk = H3 && H3.complete && H3.naturalWidth; if (hdOk) PICK = H3;
-        var k3 = okA ? 'n' + PI + (hdOk ? 'h' : '') + ':' + st.cv.width : null;
+        /* frames are only ~1 degree apart now, so a cross-fade between the two nearest gives a continuous turn with no visible ghosting */
+        var HA = st.fr.hd[i0], HB = st.fr.hd[i1], hdOk = HA && HA.complete && HA.naturalWidth && HB && HB.complete && HB.naturalWidth;
+        if (hdOk) { A3 = HA; B3 = HB; }
+        var wq = okB ? Math.round(w3 * 16) / 16 : 0;
+        var k3 = okA ? i0 + ':' + wq + (hdOk ? 'h' : '') + ':' + st.cv.width : null;
         if (okA && k3 !== st.fri) {
           var c2 = st.c2, cb = st.cv.width; c2.clearRect(0, 0, cb, cb);
           c2.imageSmoothingEnabled = true; c2.imageSmoothingQuality = 'high';
-          c2.drawImage(PICK, 0, 0, cb, cb);
+          c2.globalAlpha = 1; c2.drawImage(wq >= 1 ? B3 : A3, 0, 0, cb, cb);
+          if (wq > 0 && wq < 1) { c2.globalAlpha = wq; c2.drawImage(B3, 0, 0, cb, cb); c2.globalAlpha = 1; }
           st.fri = k3; inner.classList.add('has3d');
         }
-        if (inner.classList.contains('has3d')) { ry = flipAng; rx = 0; rz *= 0.35; }   /* the render itself turns; tilting the bitmap again only resamples it and softens it */   /* the render itself turns; the card leans a touch into the motion */
+        /* the render does the turning; the product also leans into its own motion and the pointer, so it feels alive rather than rigid */
+        if (inner.classList.contains('has3d')) { var lean = Math.max(-7, Math.min(7, st.av * 0.2)); ry = flipAng + st.px * 5; rx = -st.py * 5 + Math.sin(st.t * 0.8) * 1.5; rz = rz * 0.5 + lean; }
       }
       main.style.transform = 'translate3d(' + (cx - size / 2 + st.px * -14) + 'px,' + (cy - size / 2 + bob + st.py * -8) + 'px,0) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) rotateZ(' + rz + 'deg) scale(' + ((1 + sq) * pop * flipScale * (1 - fin)) + ',' + ((1 - sq) * pop * flipScale * (1 - fin)) + ')'; main.style.opacity = 1 - fin;
       shadow.style.transform = 'translate3d(' + (cx - size * 0.45 + st.px * -10) + 'px,' + (cy + size * 0.5 + bob * -0.4) + 'px,0) scale(' + (1 - bob / size * 1.5) + ',1)'; shadow.style.opacity = flipScale * 0.9 * (1 - fin);
