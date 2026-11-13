@@ -135,7 +135,7 @@
       inner.classList.remove('has3d');
       inner.innerHTML = (window.BrandArt ? window.BrandArt.scene(i) : fruitSVG(i)) + (c3 ? '<canvas class="f3c" width="760" height="760"></canvas>' : '');
       if (c3) sizeCanvas(inner.querySelector('canvas'));
-      st.cv = c3 ? inner.querySelector('canvas') : null; st.c2 = st.cv ? st.cv.getContext('2d') : null; st.fr = st.cv ? frames(key) : null; st.fri = -1; st.a3 = null; st.av = 0;
+      st.cv = c3 ? inner.querySelector('canvas') : null; st.c2 = st.cv ? st.cv.getContext('2d') : null; st.fr = st.cv ? frames(key) : null; st.fri = -1; st.a3 = null; st.av = 0; dropBm();
       if (st.fr && API.FLAVOURS[i + 1]) frames(API.FLAVOURS[i + 1].key);   /* warm the next brand */
       buildSats(i, st.mix); st.shown = i; document.documentElement.style.setProperty('--fruit', 'rgb(' + API.FLAVOURS[i].c1.map(function (v) { return Math.round(v * 255); }).join(',') + ')'); }
     /* the canvas is drawn at the size it shows on screen (device pixels, up to 1600) with high-quality smoothing, so the browser never stretches a small bitmap */
@@ -143,6 +143,22 @@
     function layout() { var r = stage.getBoundingClientRect(); W = r.width || 1; H = r.height || 1; portrait = W / H < 0.95; size = portrait ? Math.min(W * 0.62, H * 0.34) : Math.min(H * 0.62, W * 0.40); cx = portrait ? W * 0.5 : W * 0.70; cy = portrait ? H * 0.70 : H * 0.54; main.style.width = main.style.height = size + 'px'; shadow.style.width = size * 0.9 + 'px'; shadow.style.height = size * 0.16 + 'px'; if (st.cv) sizeCanvas(st.cv); }
     layout(); addEventListener('resize', layout); showFruit(0);
 
+    /* decoded-frame cache: the frames around the current angle are decoded ahead of time, off the main thread, at the canvas size,
+       so each screen refresh is a cheap copy. Without it the browser kept re-decoding big frames mid-turn and the motion hitched. */
+    var BM = {}, BMR = 9;
+    function dropBm() { for (var k in BM) { if (BM[k].b && BM[k].b.close) BM[k].b.close(); } BM = {}; }
+    function srcOf(i) { var h = st.fr.hd[i]; if (h && h.complete && h.naturalWidth) return { im: h, hd: 1 }; var m = st.fr.imgs[i]; if (m && m.complete && m.naturalWidth) return { im: m, hd: 0 }; return null; }
+    function want(i, cb) {
+      if (i < 0 || i >= NF || !window.createImageBitmap) return;
+      var c = BM[i], src = srcOf(i); if (!src) return;
+      if (c && (c.busy || (c.w === cb && c.hd >= src.hd))) return;
+      var fr = st.fr, ent = { busy: 1, w: cb, hd: src.hd, b: c && c.b, fr: fr }; BM[i] = ent;
+      createImageBitmap(src.im, { resizeWidth: cb, resizeHeight: cb, resizeQuality: 'high' }).then(function (b) {
+        if (BM[i] !== ent || st.fr !== fr) { b.close && b.close(); return; }
+        if (c && c.b && c.b.close) c.b.close(); ent.b = b; ent.busy = 0; st.fri = -1;
+      }, function () { ent.busy = 0; });
+    }
+    function bmAt(i, cb) { var c = BM[i]; return c && c.b && c.b.width === cb ? c.b : null; }
     function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
     function frame(now) {
       requestAnimationFrame(frame); if (!st.active || document.hidden) { st.last = now; return; }
@@ -162,7 +178,7 @@
            2. a damped spring eases the shown angle toward it, so it starts softly, glides and settles with no snapping;
            3. the canvas blends the two nearest turntable frames by the fractional position, so there are no visible steps. */
         var seg = (st.scroll * (API.FLAVOURS.length + 1)) % 1;
-        var tgt = Math.max(-SPAN + .5, Math.min(SPAN - .5, st.px * 30 + Math.sin(st.t * 0.42) * 20 + Math.sin(st.t * 0.97 + 1) * 5 + (seg - .5) * 26));   /* a wider, livelier idle sway across the whole turntable */
+        var tgt = Math.max(-SPAN + .5, Math.min(SPAN - .5, st.px * 30 + Math.sin(st.t * 0.42) * 20 + Math.sin(st.t * 0.97 + 1) * 5 + Math.sin(seg * Math.PI * 2) * 12));   /* a wider, livelier idle sway across the whole turntable */
         if (st.a3 == null) { st.a3 = tgt; st.av = 0; }
         st.av += ((tgt - st.a3) * 30 - st.av * 6.5) * dt; st.a3 += st.av * dt;   /* a softer spring: it eases in, swings slightly past and settles, like a real object */
         var ff = Math.max(0, Math.min(NF - 1, (st.a3 + SPAN) / (2 * SPAN) * (NF - 1))), i0 = Math.floor(ff), i1 = Math.min(NF - 1, i0 + 1), w3 = ff - i0;
@@ -170,12 +186,16 @@
         if (!okA) { var M3 = st.fr.imgs[(NF - 1) / 2]; if (M3.complete && M3.naturalWidth) { A3 = M3; okA = true; okB = false; } }
         /* show the single nearest turntable frame: blending two angles made a soft double image while it turned */
         /* frames are only ~1 degree apart now, so a cross-fade between the two nearest gives a continuous turn with no visible ghosting */
-        var HA = st.fr.hd[i0], HB = st.fr.hd[i1], hdOk = HA && HA.complete && HA.naturalWidth && HB && HB.complete && HB.naturalWidth;
-        if (hdOk) { A3 = HA; B3 = HB; }
-        var wq = okB ? Math.round(w3 * 16) / 16 : 0;
-        var k3 = okA ? i0 + ':' + wq + (hdOk ? 'h' : '') + ':' + st.cv.width : null;
-        if (okA && k3 !== st.fri) {
-          var c2 = st.c2, cb = st.cv.width; c2.clearRect(0, 0, cb, cb);
+        var cb = st.cv.width, ic = Math.round(ff), q;
+        /* keep the frames around the current angle decoded (nearest first, a little further in the direction it is turning) and let go of far ones */
+        want(i0, cb); want(i1, cb);
+        for (q = 1; q <= BMR; q++) { want(ic + (st.av >= 0 ? q : -q), cb); if (q <= 4) want(ic + (st.av >= 0 ? -q : q), cb); }
+        for (q in BM) { if (Math.abs(q - ic) > BMR + 3) { if (BM[q].b && BM[q].b.close) BM[q].b.close(); delete BM[q]; } }
+        var bA = bmAt(i0, cb), bB = bmAt(i1, cb), wq = Math.round(w3 * 24) / 24, k3;
+        if (bA && bB) { A3 = bA; B3 = bB; k3 = 'b' + i0 + ':' + wq + ':' + cb; }
+        else { var near = null; for (q = 0; q <= 3 && !near; q++) near = bmAt(ic + q, cb) || bmAt(ic - q, cb); if (near) { A3 = B3 = near; wq = 0; k3 = 'n' + ic + ':' + cb; } else { wq = okB ? wq : 0; k3 = okA ? 'i' + i0 + ':' + wq + ':' + cb : null; } }
+        if (okA && k3 && k3 !== st.fri) {
+          var c2 = st.c2; c2.clearRect(0, 0, cb, cb);
           c2.imageSmoothingEnabled = true; c2.imageSmoothingQuality = 'high';
           c2.globalAlpha = 1; c2.drawImage(wq >= 1 ? B3 : A3, 0, 0, cb, cb);
           if (wq > 0 && wq < 1) { c2.globalAlpha = wq; c2.drawImage(B3, 0, 0, cb, cb); c2.globalAlpha = 1; }
