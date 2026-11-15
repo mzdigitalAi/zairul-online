@@ -261,3 +261,24 @@ html[data-theme="light"]{--neon:#16b800;--neon-soft:rgba(22,184,0,.1);--neon-glo
 .sdet .sd-img img{width:100%;height:auto}
 .sdet .sd-txt{width:100%;min-width:0}
 .sdet .sd-txt h3{margin-top:4px}
+/* ===== Facebook seamless grid: preview guides + slicer ===== */
+.gridov{position:absolute;inset:0;pointer-events:none;z-index:2}
+.gridov svg{width:100%;height:100%;display:block;animation:none}
+.gridov .gl line{stroke:var(--neon,#39ff14);stroke-width:3;stroke-dasharray:14 10;filter:drop-shadow(0 0 4px var(--neon-glow,rgba(57,255,20,.55)))}
+.gridov .gn circle{fill:rgba(10,10,14,.72);stroke:var(--neon,#39ff14);stroke-width:2.5}
+.gridov .gn text{fill:#fff;font:700 26px 'Plus Jakarta Sans',sans-serif}
+.gridkit{display:flex;flex-direction:column;gap:12px;margin:4px 0 14px;padding:14px;border:1px solid var(--neon,#39ff14);border-radius:14px;background:var(--neon-soft,rgba(57,255,20,.08))}
+.gridkit .note{margin:0}
+.gk-row{display:flex;flex-wrap:wrap;gap:10px}
+.gk-row .btn{cursor:pointer}
+.gk-row .btn[disabled]{opacity:.45;cursor:not-allowed}
+.gridtiles{display:grid;gap:2px;background:#fff;border-radius:8px;overflow:hidden;max-width:420px}
+.gridtiles:empty{display:none}
+.gridtiles.g2x2{grid-template-columns:1fr 1fr}
+.gridtiles.g2p3{grid-template-columns:repeat(6,1fr)}
+.gridtiles.g2p3 .gt:nth-child(-n+2){grid-column:span 3}
+.gridtiles.g2p3 .gt:nth-child(n+3){grid-column:span 2}
+.gridtiles .gt{position:relative;aspect-ratio:1;background:#222 center/cover no-repeat;display:block}
+.gridtiles .gt b{position:absolute;left:6px;top:6px;min-width:22px;height:22px;border-radius:11px;background:rgba(10,10,14,.75);color:#fff;font:700 12px/22px 'Plus Jakarta Sans',sans-serif;text-align:center;border:1.5px solid var(--neon,#39ff14)}
+.gridtiles .gt:hover{outline:2px solid var(--neon,#39ff14);outline-offset:-2px}
+.gridkit[hidden]{display:none}

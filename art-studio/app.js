@@ -207,7 +207,7 @@
     chips($('#aspects'), ASPECTS.map(function (a) { return { label: a.label, id: a.id }; }), function (x) { return S.aspect === x.id; }, function (x) { S.aspect = x.id; save(); renderAll(); });
     chips($('#tools'), TOOLS, function (x, i) { return S.tool === i; }, function (x, i) { S.tool = i; save(); renderAll(); });
     chips($('#variants'), [{ label: 'A · Type-led' }, { label: 'B · Image-led' }, { label: 'C · Framed' }], function (x, i) { return S.variant === i; }, function (x, i) { S.variant = i; save(); renderAll(); }, 'small');
-    $('#aspectUse').textContent = 'Best for: ' + aspect().use + '.' + (S.tool === 0 && (aspect().id === '4:5' || aspect().id === '1:1.414') ? ' Note: Flow does not offer ' + aspect().id + '. Ask for 3:4 and crop afterwards.' : '');
+    $('#aspectUse').textContent = 'Best for: ' + aspect().use + '.' + (aspect().grid ? (aspect().grid === '2+3' ? ' Most image tools have no 6:5: ask for 4:3 and the slicer below crops it for you.' : ' Generate it as a 1:1 square.') : S.tool === 0 && (aspect().id === '4:5' || aspect().id === '1:1.414') ? ' Note: Flow does not offer ' + aspect().id + '. Ask for 3:4 and crop afterwards.' : '');
     $('#real').checked = S.real;
     Array.prototype.forEach.call(document.querySelectorAll('.type'), function (b) { b.classList.toggle('on', sameCard(S.type, b.dataset.id)); });
     Array.prototype.forEach.call(document.querySelectorAll('.style'), function (b) { b.classList.toggle('on', b.dataset.id === S.style); });
@@ -937,6 +937,7 @@
   function afterPreview() {
     var cv = $('#canvas'), ar = String(cv.style.aspectRatio || '4/5').split('/'), ratio = (+ar[0] || 4) / (+ar[1] || 5), a = aspect(), meta = $('#pvMeta');
     cv.style.width = 'min(100%, ' + Math.round(560 * ratio) + 'px)';
+    gridOverlay(cv, a);
     if (meta) { var poster = !isPhoto(); meta.innerHTML = (poster && a ? '<span class="pm-size"><b>' + esc(a.id) + '</b>' + esc(a.use) + '</span>' : '') + (poster ? '<span class="pm-sw">' + pal().c.map(function (x) { return '<i style="background:' + x + '"></i>'; }).join('') + '</span><span class="pm-style">' + esc(style().name) + '</span>' : '<span class="pm-style">' + esc(type().name) + '</span><span>' + esc((lookObj() || {}).n || 'Sketch') + '</span>'); }
   }
 
@@ -1109,9 +1110,9 @@
     if (!REFS.length) return '';
     return 'REFERENCE IMAGES (attach them to your message in this order)\n' + REFS.map(function (r, i) { return 'Image ' + (i + 1) + ': ' + refRole(r.role)[2] + '.'; }).join('\n') + '\nUse each image only for the job written next to it and copy nothing else from it.';
   }
-  function composePrompt() { var base = composePromptBase(); return REFS.length ? refBlock() + '\n\n' + base : base; }
+  function composePrompt() { var base = composePromptBase() + (isGrid() ? '\n\n' + gridBlock() : ''); return REFS.length ? refBlock() + '\n\n' + base : base; }
   function composeJSON() {
-    var j = composeJSONBase(); if (!REFS.length) return j;
+    var j = composeJSONBase(); if (isGrid()) { try { var og = JSON.parse(j); og.facebook_grid = gridJSON(); j = JSON.stringify(og, null, 2); } catch (e) {} } if (!REFS.length) return j;
     try { var o = JSON.parse(j); o.reference_images = REFS.map(function (r, i) { return { order: i + 1, file: r.name, use_for: refRole(r.role)[2] }; }); return JSON.stringify(o, null, 2); } catch (e) { return j; }
   }
   function shrinkImage(file, done) {
@@ -1180,7 +1181,63 @@
     renderRefs();
   })();
 
-  function renderAll() { renderChips(); renderStyleDetail(); renderFields(); renderPhotoUI(); renderSetUI(); renderConcepts(); renderOutput(); }
+  /* ---------- Facebook seamless grid: prompt block, preview guides and tile slicer ---------- */
+  function isGrid() { var a = aspect(); return !!(a && a.grid); }
+  function gridBlock() {
+    var a = aspect(), G = FB_GRIDS[a.grid], two = a.grid === '2x2';
+    return 'FACEBOOK SEAMLESS GRID\nThis is one master image that will be cut into ' + G.n + ' square photos and posted together in one post, so in the feed they join back into a single picture. ' +
+      (two ? 'The cuts are one vertical line down the exact centre and one horizontal line across the exact middle, making four equal squares.' : 'The image is 6:5. The cuts make two large squares across the top and three smaller squares across the bottom: one horizontal cut at 60% of the height, one vertical cut at the centre of the top part, and two vertical cuts at one third and two thirds across the bottom part.') +
+      ' Let the background, the surface, light and the hero product flow across the cut lines so the joins disappear. Keep every word, face, logo and small detail well clear of the cut lines (at least 4% of the width away). Give each square its own point of interest so it still looks good when it is opened on its own' + (two ? '' : ', especially the three small bottom squares, which suit one product, ingredient or short label each') + '. Do not draw grid lines, gaps, borders or frames between the squares: it must read as one continuous picture.' +
+      (two ? '' : ' If the tool cannot make 6:5, generate at 4:3 and keep the outer 5% on the left and right free of anything important, because it is cropped to 6:5 before slicing.');
+  }
+  function gridJSON() {
+    var a = aspect(), G = FB_GRIDS[a.grid];
+    return { layout: a.grid, master_ratio: a.w + ':' + a.h, generate_at: a.gen, photos: G.n, upload_order: G.names, cut_lines: a.grid === '2x2' ? ['vertical at 50% width', 'horizontal at 50% height'] : ['horizontal at 60% height', 'vertical at 50% width (top row)', 'vertical at 33.3% and 66.7% width (bottom row)'], keep_clear_of_cuts: ['text', 'faces', 'logos', 'small details'], no_visible_grid_lines: true };
+  }
+  function gridOverlay(cv, a) {
+    var old = cv.querySelector('.gridov'); if (old) old.remove();
+    if (!a || !a.grid || cv.style.aspectRatio.replace(/\s/g, '') !== a.w + '/' + a.h) return;
+    var G = FB_GRIDS[a.grid], W = 1000, H = Math.round(1000 * a.h / a.w), ln = '', nb = '';
+    var L = function (x1, y1, x2, y2) { ln += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '"/>'; };
+    if (a.grid === '2x2') { L(500, 0, 500, H); L(0, 500, W, 500); } else { L(0, 500, W, 500); L(500, 0, 500, 500); L(W / 3, 500, W / 3, H); L(W * 2 / 3, 500, W * 2 / 3, H); }
+    G.cells.forEach(function (c, i) { var cx = (c[0] + c[2] / 2) * W, cy = (c[1] + c[2] / 2) * W; nb += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="26"/><text x="' + cx.toFixed(1) + '" y="' + (cy + 9).toFixed(1) + '" text-anchor="middle">' + (i + 1) + '</text>'; });
+    var d = document.createElement('div'); d.className = 'gridov'; d.setAttribute('aria-hidden', 'true');
+    d.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none"><g class="gl">' + ln + '</g><g class="gn">' + nb + '</g></svg>';
+    cv.appendChild(d);
+  }
+  var gridImg = null, gridURLs = [], gridKey = '', gridTok = 0;
+  function renderGridKit() {
+    var k = $('#gridKit'); if (!k) return; var on = isGrid(); k.hidden = !on; if (!on) return;
+    var a = aspect(), G = FB_GRIDS[a.grid];
+    $('#gridHow').innerHTML = '<b>How to post it:</b> generate one master image' + (a.grid === '2x2' ? ' (1:1)' : ' (6:5, or 4:3)') + ', drop it below, then upload the ' + G.n + ' numbered tiles together in one Facebook post, in number order. Leave Facebook on its default layout, and never add a 6th photo: Facebook then covers the last tile with "+1".';
+    $('#gridGap').checked = !!S.gridGap;
+    if (!gridImg) $('#gridAll').disabled = true; else if (gridKey !== a.id + S.gridGap) sliceGrid();
+  }
+  function sliceGrid() {
+    var a = aspect(); if (!a || !a.grid || !gridImg) return; gridKey = a.id + S.gridGap; var tok = ++gridTok;
+    var G = FB_GRIDS[a.grid], iw = gridImg.naturalWidth, ih = gridImg.naturalHeight, tr = a.w / a.h, cw, ch, ox = 0, oy = 0;
+    if (iw / ih > tr) { ch = ih; cw = ih * tr; ox = (iw - cw) / 2; } else { cw = iw; ch = iw / tr; oy = (ih - ch) / 2; }
+    var inset = S.gridGap ? cw * .00085 : 0, cropped = Math.abs(iw / ih - tr) > .01;
+    gridURLs.forEach(function (u) { URL.revokeObjectURL(u); }); gridURLs = [];
+    var host = $('#gridTiles'); host.className = 'gridtiles g' + a.grid.replace('+', 'p'); host.innerHTML = '';
+    var left = G.n; $('#gridAll').disabled = true;
+    G.cells.forEach(function (c, i) {
+      var sx = ox + c[0] * cw + inset, sy = oy + c[1] * cw + inset, ss = c[2] * cw - inset * 2, out = Math.min(2048, Math.max(1080, Math.round(ss)));
+      var cv = document.createElement('canvas'); cv.width = cv.height = out; var cx = cv.getContext('2d'); cx.imageSmoothingQuality = 'high';
+      cx.drawImage(gridImg, sx, sy, ss, ss, 0, 0, out, out);
+      var name = 'fbgrid-' + ('0' + (i + 1)).slice(-2) + '-' + G.names[i].replace(/\s+/g, '-') + '.jpg';
+      var slot = document.createElement('a'); slot.className = 'gt'; slot.download = name; slot.title = 'Photo ' + (i + 1) + ' · ' + G.names[i] + ' · ' + out + '×' + out + ' px'; slot.innerHTML = '<b>' + (i + 1) + '</b>'; host.appendChild(slot);
+      cv.toBlob(function (bl) { var u = URL.createObjectURL(bl); gridURLs.push(u); slot.href = u; slot.style.backgroundImage = 'url(' + u + ')'; if (tok === gridTok && --left === 0) $('#gridAll').disabled = false; }, 'image/jpeg', .95);
+    });
+    $('#gridInfo').textContent = 'Master ' + iw + '×' + ih + ' px' + (cropped ? ', centre-cropped to ' + a.w + ':' + a.h : '') + '. This is how the tiles sit in the feed. Click a tile to save it, or save them all.';
+  }
+  (function () {
+    var f = $('#gridFile'); if (!f) return;
+    f.addEventListener('change', function () { var file = f.files && f.files[0]; if (!file) return; var rd = new FileReader(); rd.onload = function () { var im = new Image(); im.onload = function () { gridImg = im; gridKey = ''; sliceGrid(); toast('Sliced into ' + FB_GRIDS[aspect().grid].n + ' tiles'); }; im.src = rd.result; }; rd.readAsDataURL(file); f.value = ''; });
+    $('#gridGap').addEventListener('change', function () { S.gridGap = this.checked; save(); sliceGrid(); });
+    $('#gridAll').addEventListener('click', function () { var ts = document.querySelectorAll('#gridTiles .gt'); Array.prototype.forEach.call(ts, function (t, i) { setTimeout(function () { t.click(); }, i * 450); }); });
+  })();
+  function renderAll() { renderChips(); renderStyleDetail(); renderFields(); renderPhotoUI(); renderSetUI(); renderConcepts(); renderGridKit(); renderOutput(); }
 
   /* motion: reveal + pointer glow */
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0, rootMargin: '0px 0px -6% 0px' }) : null;

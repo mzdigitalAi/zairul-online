@@ -73,8 +73,15 @@ const ASPECTS = [
   { id: '9:16', label: '9:16 Story', w: 9, h: 16, use: 'Stories, Reels cover, TikTok, WhatsApp status' },
   { id: '3:4', label: '3:4 Poster', w: 3, h: 4, use: 'Print and general posters' },
   { id: '16:9', label: '16:9 Banner', w: 16, h: 9, use: 'Screens, YouTube, web banners' },
-  { id: '1:1.414', label: 'A-series print', w: 1, h: 1.414, use: 'A4, A3 and A2 print (use the highest resolution available)' }
+  { id: '1:1.414', label: 'A-series print', w: 1, h: 1.414, use: 'A4, A3 and A2 print (use the highest resolution available)' },
+  { id: '1:1 (2×2 grid)', label: 'FB grid 2×2', w: 1, h: 1, grid: '2x2', gen: '1:1', use: 'Facebook seamless 4-photo post: one design sliced into 4 squares' },
+  { id: '6:5 (2+3 grid)', label: 'FB grid 2+3', w: 6, h: 5, grid: '2+3', gen: '4:3', use: 'Facebook seamless 5-photo post: 2 big squares on top, 3 small squares below' }
 ];
+/* Facebook seamless grid cells, as fractions of the master width (x, y, side) in upload order */
+const FB_GRIDS = {
+  '2x2': { n: 4, cells: [[0, 0, .5], [.5, 0, .5], [0, .5, .5], [.5, .5, .5]], names: ['top left', 'top right', 'bottom left', 'bottom right'] },
+  '2+3': { n: 5, cells: [[0, 0, .5], [.5, 0, .5], [0, .5, 1 / 3], [1 / 3, .5, 1 / 3], [2 / 3, .5, 1 / 3]], names: ['top left', 'top right', 'bottom left', 'bottom middle', 'bottom right'] }
+};
 const TOOLS = ['Flow / Nano Banana', 'ChatGPT image', 'Seedream 5.0', 'Generic'];
 const SAMPLES = {
   food: { headline: 'Nasi Lemak Ayam Berempah', sub: 'Fresh every morning, still piping hot', price: 'RM 8.90', dates: '', address: 'Jalan Ampang, Kuala Lumpur', contact: 'WhatsApp 012-345 6789', cta: 'Order now', brand: 'Kedai Mak Cik', points: '' },
