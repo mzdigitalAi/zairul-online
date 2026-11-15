@@ -282,3 +282,8 @@ html[data-theme="light"]{--neon:#16b800;--neon-soft:rgba(22,184,0,.1);--neon-glo
 .gridtiles .gt b{position:absolute;left:6px;top:6px;min-width:22px;height:22px;border-radius:11px;background:rgba(10,10,14,.75);color:#fff;font:700 12px/22px 'Plus Jakarta Sans',sans-serif;text-align:center;border:1.5px solid var(--neon,#39ff14)}
 .gridtiles .gt:hover{outline:2px solid var(--neon,#39ff14);outline-offset:-2px}
 .gridkit[hidden]{display:none}
+.gridov .gl rect.safe{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.5;stroke-dasharray:4 6}
+.gridov .gn text.m{font:700 22px 'Plus Jakarta Sans',sans-serif;paint-order:stroke;stroke:rgba(10,10,14,.75);stroke-width:5px}
+.gridmsgs{display:grid;gap:8px}
+.gridtiles.g1p3{grid-template-columns:2fr 1fr}
+.gridtiles.g1p3 .gt:first-child{grid-row:span 3;aspect-ratio:auto}

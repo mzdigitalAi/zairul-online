@@ -75,12 +75,17 @@ const ASPECTS = [
   { id: '16:9', label: '16:9 Banner', w: 16, h: 9, use: 'Screens, YouTube, web banners' },
   { id: '1:1.414', label: 'A-series print', w: 1, h: 1.414, use: 'A4, A3 and A2 print (use the highest resolution available)' },
   { id: '1:1 (2×2 grid)', label: 'FB grid 2×2', w: 1, h: 1, grid: '2x2', gen: '1:1', use: 'Facebook seamless 4-photo post: one design sliced into 4 squares' },
+  { id: '1:1 (1+3 grid)', label: 'FB grid 1+3', w: 1, h: 1, grid: '1+3', gen: '1:1', use: 'Facebook seamless 4-photo post: one tall 2:3 panel on the left, 3 small squares stacked on the right' },
   { id: '6:5 (2+3 grid)', label: 'FB grid 2+3', w: 6, h: 5, grid: '2+3', gen: '4:3', use: 'Facebook seamless 5-photo post: 2 big squares on top, 3 small squares below' }
 ];
-/* Facebook seamless grid cells, as fractions of the master width (x, y, side) in upload order */
+/* Facebook seamless grid panels in upload order: [x, y, width, height] as fractions of the master width, plus a plain name and a default role */
 const FB_GRIDS = {
-  '2x2': { n: 4, cells: [[0, 0, .5], [.5, 0, .5], [0, .5, .5], [.5, .5, .5]], names: ['top left', 'top right', 'bottom left', 'bottom right'] },
-  '2+3': { n: 5, cells: [[0, 0, .5], [.5, 0, .5], [0, .5, 1 / 3], [1 / 3, .5, 1 / 3], [2 / 3, .5, 1 / 3]], names: ['top left', 'top right', 'bottom left', 'bottom middle', 'bottom right'] }
+  '2x2': { n: 4, cells: [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]], names: ['top left square', 'top right square', 'bottom left square', 'bottom right square'],
+    roles: ['the main headline and brand', 'the first benefit or moment', 'the second benefit or moment', 'the third benefit or moment, or the call to action'] },
+  '1+3': { n: 4, cells: [[0, 0, 2 / 3, 1], [2 / 3, 0, 1 / 3, 1 / 3], [2 / 3, 1 / 3, 1 / 3, 1 / 3], [2 / 3, 2 / 3, 1 / 3, 1 / 3]], names: ['big tall panel on the left (2:3)', 'top right square', 'middle right square', 'bottom right square'],
+    roles: ['the main headline, brand and hero product', 'the first feature or benefit', 'the second feature or benefit', 'the third feature or benefit'] },
+  '2+3': { n: 5, cells: [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, 1 / 3, 1 / 3], [1 / 3, .5, 1 / 3, 1 / 3], [2 / 3, .5, 1 / 3, 1 / 3]], names: ['top left square', 'top right square', 'bottom left square', 'bottom middle square', 'bottom right square'],
+    roles: ['the hero scene with the product', 'the main headline and brand', 'the first way to use it', 'the second way to use it', 'the third way to use it'] }
 };
 const TOOLS = ['Flow / Nano Banana', 'ChatGPT image', 'Seedream 5.0', 'Generic'];
 const SAMPLES = {

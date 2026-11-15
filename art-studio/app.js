@@ -258,9 +258,9 @@
     var hero = f.visual && f.visual.trim() ? f.visual.trim() : t.hero;
     var mood = S.moods.length ? S.moods.join(', ').toLowerCase() : t.tone;
     var textBlock = S.textIn
-      ? (tl.length ? 'Render exactly this text and nothing else. Spell every word precisely as written. ' + tl.map(function (x) { return x[0] + ': "' + x[1] + '"'; }).join('; ') + '. ' + langText() + ' Use ' + TYPEFACES[S.face] + ', with the headline clearly largest, strong contrast, and nothing touching the edges.' : 'No text has been supplied: leave clean areas for text.')
+      ? (tl.length ? 'Render exactly this text and nothing else. Spell every word precisely as written. ' + tl.map(function (x) { return x[0] + ': "' + x[1] + '"'; }).join('; ') + '. ' + langText() + ' Use ' + TYPEFACES[S.face] + ', with the headline clearly largest, strong contrast, and nothing touching the edges.' : (isGrid() && gridMsgs().some(Boolean) ? 'Render only the panel messages listed in the panel plan below, spelt exactly as written. ' + langText() + ' Use ' + TYPEFACES[S.face] + ', large and clear inside each panel.' : 'No text has been supplied: leave clean areas for text.'))
       : 'Do not render any words or letters. Leave clean, uncluttered areas for the headline, the supporting line' + (t.zones.indexOf('badge') > -1 ? ', a price badge' : '') + (t.zones.indexOf('cta') > -1 ? ', a button' : '') + ' and a contact strip, so the type can be added afterwards.';
-    return { intro: 'A ' + a.id + ' ' + t.name.toLowerCase() + ' poster' + (f.brand ? ' for ' + f.brand : '') + '. It must communicate ' + t.focus + '.' + (S.concept ? ' Creative concept: ' + S.concept.name.toLowerCase() + ': ' + S.concept.pitch.charAt(0).toLowerCase() + S.concept.pitch.slice(1) : ''), hero: 'Hero visual: ' + hero + '.', style: 'Style: ' + st.name + ': ' + st.t + '. Mood: ' + mood + '.' + (st.id === 'crew' ? ' ' + crewStyleLine() : ''), layout: layoutText(S.variant), text: textBlock, pal: palText(), real: realismText(), avoid: AVOID, att: attachText(), tl: tl };
+    return { intro: 'A ' + a.id + ' ' + t.name.toLowerCase() + ' poster' + (f.brand ? ' for ' + f.brand : '') + '. It must communicate ' + t.focus + '.' + (S.concept ? ' Creative concept: ' + S.concept.name.toLowerCase() + ': ' + S.concept.pitch.charAt(0).toLowerCase() + S.concept.pitch.slice(1) : ''), hero: 'Hero visual: ' + hero + '.', style: 'Style: ' + st.name + ': ' + st.t + '. Mood: ' + mood + '.' + (st.id === 'crew' ? ' ' + crewStyleLine() : ''), layout: isGrid() ? 'Layout: one picture split into separate panels, as set out in FACEBOOK SEAMLESS GRID below.' : layoutText(S.variant), text: textBlock, pal: palText(), real: realismText(), avoid: AVOID, att: attachText(), tl: tl };
   }
   function composePromptBase() {
     if (isPhoto()) return composePhoto();
@@ -838,6 +838,7 @@
   function star8(px, py, rr, attrs) { var d = '', k; for (k = 0; k < 16; k++) { var an = Math.PI * k / 8, q = k % 2 ? rr * .765 : rr; d += (k ? 'L' : 'M') + (px + Math.cos(an) * q).toFixed(1) + ' ' + (py + Math.sin(an) * q).toFixed(1); } return '<path d="' + d + 'Z" ' + attrs + '/>'; }
   function drawPreview() {
     if (isPhoto()) return drawPhotoPreview();
+    if (isGrid()) return drawGridPreview();
     var a = aspect(), W = 1000, H = Math.round(1000 * a.h / a.w), c = pal().c, t = type(), f = S.f, v = S.variant;
     var sk = SKIN[S.style] || ['land', 0], o = sk[2] || {}, dark = !!sk[1], has = function (k) { return t.zones.indexOf(k) > -1; };
     var c0 = c[0], c1 = c[1], c2 = c[2], wide = W / H > 1.25, u = Math.min(H * (wide ? 1.45 : 1), W * 1.3) / 100, P = Math.round(wide ? u * 9 : W * .07);
@@ -1181,35 +1182,71 @@
     renderRefs();
   })();
 
-  /* ---------- Facebook seamless grid: prompt block, preview guides and tile slicer ---------- */
+  /* ---------- Facebook seamless grid: panel plan, prompt block, preview guides and tile slicer ---------- */
   function isGrid() { var a = aspect(); return !!(a && a.grid); }
+  function gridMsgs() { var G = FB_GRIDS[aspect().grid], m = (S.gridMsg && S.gridMsg[aspect().grid]) || []; return G.cells.map(function (c, i) { return (m[i] || '').trim(); }); }
+  function gridCuts(g) { return g === '2x2' ? 'one vertical cut down the exact centre and one horizontal cut across the exact middle' : g === '1+3' ? 'one vertical cut at two thirds of the width (the left part is a tall 2:3 panel), and two horizontal cuts at one third and two thirds of the height in the right-hand strip only' : 'one horizontal cut at 60% of the height, one vertical cut at the centre of the top part, and two vertical cuts at one third and two thirds of the width in the bottom part'; }
   function gridBlock() {
-    var a = aspect(), G = FB_GRIDS[a.grid], two = a.grid === '2x2';
-    return 'FACEBOOK SEAMLESS GRID\nThis is one master image that will be cut into ' + G.n + ' square photos and posted together in one post, so in the feed they join back into a single picture. ' +
-      (two ? 'The cuts are one vertical line down the exact centre and one horizontal line across the exact middle, making four equal squares.' : 'The image is 6:5. The cuts make two large squares across the top and three smaller squares across the bottom: one horizontal cut at 60% of the height, one vertical cut at the centre of the top part, and two vertical cuts at one third and two thirds across the bottom part.') +
-      ' Let the background, the surface, light and the hero product flow across the cut lines so the joins disappear. Keep every word, face, logo and small detail well clear of the cut lines (at least 4% of the width away). Give each square its own point of interest so it still looks good when it is opened on its own' + (two ? '' : ', especially the three small bottom squares, which suit one product, ingredient or short label each') + '. Do not draw grid lines, gaps, borders or frames between the squares: it must read as one continuous picture.' +
-      (two ? '' : ' If the tool cannot make 6:5, generate at 4:3 and keep the outer 5% on the left and right free of anything important, because it is cropped to 6:5 before slicing.');
+    var a = aspect(), G = FB_GRIDS[a.grid], m = gridMsgs(), any = m.some(Boolean);
+    var plan = G.names.map(function (n, i) { return (i + 1) + '. ' + n.charAt(0).toUpperCase() + n.slice(1) + ': ' + (m[i] ? 'its message is "' + m[i] + '", written exactly like this, with a visual that shows it' : 'carries ' + G.roles[i]) + '.'; }).join('\n');
+    return 'FACEBOOK SEAMLESS GRID: ONE PICTURE, ' + G.n + ' PANELS, ONE MESSAGE EACH\nThis master image is cut into ' + G.n + ' photos that are posted together, so in the feed they join back into one picture. The cuts are ' + gridCuts(a.grid) + '.\n\nPANEL PLAN (in upload order)\n' + plan +
+      '\n\nRULES FOR THE PANELS\n- Design every panel as its own small poster: its words, its main subject and any product sit completely inside that panel, at least 6% clear of every cut line, and it makes sense when it is opened on its own.\n- Nothing important crosses a cut: no words, faces, people, hands, products or packs are split between panels, and no panel\'s text or subject spills into a neighbour.\n- Each panel has one message only and does not repeat another panel\'s words.' + (any ? ' The panel messages are part of the text to render, in addition to the text listed above.' : '') + ' The headline, brand and call to action from the text above go in the panel whose role is the headline.\n- Only the background, light, colour and soft decorative flow (a stream of liquid, a ribbon of colour, petals, steam, sparkle or bokeh) continue across the cuts, so the panels still join into one calm scene.\n- Do not draw grid lines, gaps, borders or frames between the panels.' +
+      (a.grid === '2+3' ? '\n- If the tool cannot make 6:5, generate at 4:3 and keep the outer 5% on the left and right empty, because it is cropped to 6:5 before slicing.' : '');
   }
   function gridJSON() {
-    var a = aspect(), G = FB_GRIDS[a.grid];
-    return { layout: a.grid, master_ratio: a.w + ':' + a.h, generate_at: a.gen, photos: G.n, upload_order: G.names, cut_lines: a.grid === '2x2' ? ['vertical at 50% width', 'horizontal at 50% height'] : ['horizontal at 60% height', 'vertical at 50% width (top row)', 'vertical at 33.3% and 66.7% width (bottom row)'], keep_clear_of_cuts: ['text', 'faces', 'logos', 'small details'], no_visible_grid_lines: true };
+    var a = aspect(), G = FB_GRIDS[a.grid], m = gridMsgs();
+    return { layout: a.grid, master_ratio: a.w + ':' + a.h, generate_at: a.gen, photos: G.n, cuts: gridCuts(a.grid), panels: G.names.map(function (n, i) { var c = G.cells[i]; return { order: i + 1, position: n, ratio: (c[2] === c[3] ? '1:1' : '2:3'), message: m[i] || null, role: G.roles[i] }; }), rules: ['each panel is a self-contained poster with one message', 'text, faces, hands and products stay at least 6% clear of every cut', 'only background, light and decorative flow cross the cuts', 'no visible grid lines'] };
   }
   function gridOverlay(cv, a) {
     var old = cv.querySelector('.gridov'); if (old) old.remove();
     if (!a || !a.grid || cv.style.aspectRatio.replace(/\s/g, '') !== a.w + '/' + a.h) return;
-    var G = FB_GRIDS[a.grid], W = 1000, H = Math.round(1000 * a.h / a.w), ln = '', nb = '';
-    var L = function (x1, y1, x2, y2) { ln += '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '"/>'; };
-    if (a.grid === '2x2') { L(500, 0, 500, H); L(0, 500, W, 500); } else { L(0, 500, W, 500); L(500, 0, 500, 500); L(W / 3, 500, W / 3, H); L(W * 2 / 3, 500, W * 2 / 3, H); }
-    G.cells.forEach(function (c, i) { var cx = (c[0] + c[2] / 2) * W, cy = (c[1] + c[2] / 2) * W; nb += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="26"/><text x="' + cx.toFixed(1) + '" y="' + (cy + 9).toFixed(1) + '" text-anchor="middle">' + (i + 1) + '</text>'; });
+    var G = FB_GRIDS[a.grid], W = 1000, H = Math.round(1000 * a.h / a.w), ln = '', nb = '', e = 0.5;
+    G.cells.forEach(function (c, i) {
+      var x0 = c[0] * W, y0 = c[1] * W, x1 = (c[0] + c[2]) * W, y1 = (c[1] + c[3]) * W, L = function (a1, b1, a2, b2) { ln += '<line x1="' + a1.toFixed(1) + '" y1="' + b1.toFixed(1) + '" x2="' + a2.toFixed(1) + '" y2="' + b2.toFixed(1) + '"/>'; };
+      if (x1 < W - e) L(x1, y0, x1, y1); if (y1 < H - e) L(x0, y1, x1, y1);
+      var pad = Math.min(x1 - x0, y1 - y0) * .06; ln += '<rect class="safe" x="' + (x0 + pad).toFixed(1) + '" y="' + (y0 + pad).toFixed(1) + '" width="' + (x1 - x0 - pad * 2).toFixed(1) + '" height="' + (y1 - y0 - pad * 2).toFixed(1) + '" rx="8"/>';
+      var cx = x0 + 34, cy = y0 + 34;
+      nb += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="22"/><text x="' + cx.toFixed(1) + '" y="' + (cy + 9).toFixed(1) + '" text-anchor="middle">' + (i + 1) + '</text>';
+    });
     var d = document.createElement('div'); d.className = 'gridov'; d.setAttribute('aria-hidden', 'true');
     d.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none"><g class="gl">' + ln + '</g><g class="gn">' + nb + '</g></svg>';
     cv.appendChild(d);
+  }
+  /* grid mock-up: one continuous background, every panel laid out as its own small poster */
+  function drawGridPreview() {
+    var a = aspect(), G = FB_GRIDS[a.grid], W = 1000, H = Math.round(1000 * a.h / a.w), c = pal().c, f = S.f, m = gridMsgs();
+    var F = PFONT[S.face] || PFONT.bold, ink = lum(c[2]) > .5 ? mix(c[0], '#000000', .55) : '#ffffff', acc = c[1];
+    var hi = -1; G.roles.forEach(function (r, i) { if (hi < 0 && /headline/.test(r)) hi = i; });
+    var g = '<defs><linearGradient id="gbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + c[2] + '"/><stop offset="1" stop-color="' + mix(c[2], c[1], .35) + '"/></linearGradient><radialGradient id="glt" cx=".3" cy=".15" r=".8"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs>';
+    g += '<rect width="' + W + '" height="' + H + '" fill="url(#gbg)"/><rect width="' + W + '" height="' + H + '" fill="url(#glt)"/>';
+    g += '<path d="M-20 ' + (H * .78).toFixed(0) + ' C ' + (W * .25).toFixed(0) + ' ' + (H * .62).toFixed(0) + ', ' + (W * .55).toFixed(0) + ' ' + (H * .95).toFixed(0) + ', ' + (W + 20) + ' ' + (H * .7).toFixed(0) + '" stroke="' + acc + '" stroke-opacity=".45" stroke-width="22" fill="none" stroke-linecap="round"/>';
+    for (var k = 0; k < 26; k++) { var px = (k * 389) % W, py = (k * 241) % H; g += '<circle cx="' + px + '" cy="' + py + '" r="' + (2 + k % 4) + '" fill="#ffffff" fill-opacity=".5"/>'; }
+    var wrap = function (s, n) { var w = s.split(' '), L = [], cur = ''; w.forEach(function (x) { if (cur && (cur + ' ' + x).length > n) { L.push(cur); cur = x; } else cur = cur ? cur + ' ' + x : x; }); if (cur) L.push(cur); return L.slice(0, 3); };
+    G.cells.forEach(function (cl, i) {
+      var x0 = cl[0] * W, y0 = cl[1] * W, w = cl[2] * W, h = cl[3] * W, pad = Math.min(w, h) * .09, tall = h > w * 1.2;
+      var txt = m[i] || (i === hi ? (f.headline || 'Your headline here') : ''), fs = Math.min(w, h) * (i === hi ? .13 : .1), lines = txt ? wrap(txt, Math.max(6, Math.floor((w - pad * 2) / (fs * F[2])))) : [];
+      while (lines.length && Math.max.apply(null, lines.map(function (l) { return l.length; })) * fs * F[2] > w - pad * 2 && fs > 10) { fs *= .9; lines = wrap(txt, Math.max(6, Math.floor((w - pad * 2) / (fs * F[2])))); }
+      var ty = y0 + Math.max(pad, 62) + fs * .85;
+      lines.forEach(function (l, j) { g += '<text x="' + (x0 + w / 2).toFixed(1) + '" y="' + (ty + j * fs * 1.05).toFixed(1) + '" text-anchor="middle" font-family="' + F[0] + '" font-weight="' + F[1] + '" font-size="' + fs.toFixed(1) + '" fill="' + (i === hi ? mix(c[0], '#000000', .25) : ink) + '">' + esc(l) + '</text>'; });
+      if (i === hi && f.sub) g += '<text x="' + (x0 + w / 2).toFixed(1) + '" y="' + (ty + lines.length * fs * 1.05 + fs * .2).toFixed(1) + '" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="600" font-size="' + (fs * .36).toFixed(1) + '" fill="' + ink + '" fill-opacity=".8">' + esc(f.sub.slice(0, 40)) + '</text>';
+      var top = ty + Math.max(1, lines.length) * fs * 1.05 + (i === hi && f.sub ? fs * .6 : 0), bot = y0 + h - pad, vh = Math.max(h * .25, bot - top), vw = Math.min(w - pad * 2, vh * (tall ? .62 : 1.1)), vx = x0 + (w - vw) / 2, vy = bot - vh;
+      if (i === hi || tall || /product/.test(G.roles[i])) { var jw = vw * .5, jh = vh * .82; g += '<ellipse cx="' + (x0 + w / 2).toFixed(1) + '" cy="' + (bot - vh * .03).toFixed(1) + '" rx="' + (jw * .7).toFixed(1) + '" ry="' + (vh * .04).toFixed(1) + '" fill="#000" fill-opacity=".18"/><rect x="' + (x0 + w / 2 - jw / 2).toFixed(1) + '" y="' + (bot - jh).toFixed(1) + '" width="' + jw.toFixed(1) + '" height="' + (jh - vh * .03).toFixed(1) + '" rx="' + (jw * .28).toFixed(1) + '" fill="' + c[0] + '" fill-opacity=".9"/><rect x="' + (x0 + w / 2 - jw * .32).toFixed(1) + '" y="' + (bot - jh * .7).toFixed(1) + '" width="' + (jw * .64).toFixed(1) + '" height="' + (jh * .34).toFixed(1) + '" rx="6" fill="' + c[2] + '" fill-opacity=".9"/>'; }
+      else g += '<rect x="' + vx.toFixed(1) + '" y="' + vy.toFixed(1) + '" width="' + vw.toFixed(1) + '" height="' + vh.toFixed(1) + '" rx="' + (Math.min(vw, vh) * .14).toFixed(1) + '" fill="' + c[0] + '" fill-opacity=".22"/><circle cx="' + (vx + vw / 2).toFixed(1) + '" cy="' + (vy + vh * .55).toFixed(1) + '" r="' + (Math.min(vw, vh) * .26).toFixed(1) + '" fill="' + acc + '" fill-opacity=".75"/>';
+    });
+    var cv = $('#canvas'); cv.style.aspectRatio = a.w + '/' + a.h; cv.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Facebook grid mock-up: one background, one message per panel">' + g + '</svg>';
+    $('#layoutNote').textContent = 'One picture, ' + G.n + ' panels: each panel holds its own message and subject inside the dotted safe area. Only the background, light and the flowing ribbon cross the cuts.';
   }
   var gridImg = null, gridURLs = [], gridKey = '', gridTok = 0;
   function renderGridKit() {
     var k = $('#gridKit'); if (!k) return; var on = isGrid(); k.hidden = !on; if (!on) return;
     var a = aspect(), G = FB_GRIDS[a.grid];
-    $('#gridHow').innerHTML = '<b>How to post it:</b> generate one master image' + (a.grid === '2x2' ? ' (1:1)' : ' (6:5, or 4:3)') + ', drop it below, then upload the ' + G.n + ' numbered tiles together in one Facebook post, in number order. Leave Facebook on its default layout, and never add a 6th photo: Facebook then covers the last tile with "+1".';
+    $('#gridHow').innerHTML = '<b>How it works:</b> one picture, ' + G.n + ' panels, one message per panel. Words, people and products stay inside their own panel; only the background, light and soft flourishes run across the cuts. Generate one master image' + (a.grid === '2+3' ? ' (6:5, or 4:3)' : ' (1:1)') + ', slice it below, then post the ' + G.n + ' tiles together in number order. Leave Facebook on its default layout and never add a ' + (G.n + 1) + 'th photo.';
+    var host = $('#gridMsgs');
+    if (host.dataset.g !== a.grid) {
+      host.dataset.g = a.grid; var m = gridMsgs();
+      host.innerHTML = G.names.map(function (n, i) { return '<label class="fld"><span>Panel ' + (i + 1) + ' · ' + esc(n) + '</span><input type="text" data-gm="' + i + '" maxlength="80" placeholder="' + esc('e.g. ' + ['Sip It Better', 'Spread It Better', 'Cook It Better', 'Bake It Better', 'Share It Better'][i % 5] + ' (empty: ' + G.roles[i] + ')') + '"></label>'; }).join('');
+      Array.prototype.forEach.call(host.querySelectorAll('[data-gm]'), function (n) { n.value = m[+n.dataset.gm] || ''; n.addEventListener('input', function () { S.gridMsg = S.gridMsg || {}; var arr = S.gridMsg[a.grid] = S.gridMsg[a.grid] || []; arr[+n.dataset.gm] = n.value; save(); renderOutput(); }); });
+    }
     $('#gridGap').checked = !!S.gridGap;
     if (!gridImg) $('#gridAll').disabled = true; else if (gridKey !== a.id + S.gridGap) sliceGrid();
   }
@@ -1222,14 +1259,15 @@
     var host = $('#gridTiles'); host.className = 'gridtiles g' + a.grid.replace('+', 'p'); host.innerHTML = '';
     var left = G.n; $('#gridAll').disabled = true;
     G.cells.forEach(function (c, i) {
-      var sx = ox + c[0] * cw + inset, sy = oy + c[1] * cw + inset, ss = c[2] * cw - inset * 2, out = Math.min(2048, Math.max(1080, Math.round(ss)));
-      var cv = document.createElement('canvas'); cv.width = cv.height = out; var cx = cv.getContext('2d'); cx.imageSmoothingQuality = 'high';
-      cx.drawImage(gridImg, sx, sy, ss, ss, 0, 0, out, out);
-      var name = 'fbgrid-' + ('0' + (i + 1)).slice(-2) + '-' + G.names[i].replace(/\s+/g, '-') + '.jpg';
-      var slot = document.createElement('a'); slot.className = 'gt'; slot.download = name; slot.title = 'Photo ' + (i + 1) + ' · ' + G.names[i] + ' · ' + out + '×' + out + ' px'; slot.innerHTML = '<b>' + (i + 1) + '</b>'; host.appendChild(slot);
+      var sx = ox + c[0] * cw + inset, sy = oy + c[1] * cw + inset, sw = c[2] * cw - inset * 2, sh = c[3] * cw - inset * 2;
+      var k = Math.min(Math.max(1, 1080 / Math.min(sw, sh)), 2048 / Math.max(sw, sh)), ow = Math.round(sw * k), oh = Math.round(sh * k);
+      var cv = document.createElement('canvas'); cv.width = ow; cv.height = oh; var cx = cv.getContext('2d'); cx.imageSmoothingQuality = 'high';
+      cx.drawImage(gridImg, sx, sy, sw, sh, 0, 0, ow, oh);
+      var name = 'fbgrid-' + ('0' + (i + 1)).slice(-2) + '-' + G.names[i].replace(/\s*\(.*\)/, '').replace(/[^a-z0-9]+/gi, '-').replace(/-+$/, '').toLowerCase() + '.jpg';
+      var slot = document.createElement('a'); slot.className = 'gt'; slot.download = name; slot.title = 'Photo ' + (i + 1) + ' · ' + G.names[i] + ' · ' + ow + '×' + oh + ' px'; slot.innerHTML = '<b>' + (i + 1) + '</b>'; host.appendChild(slot);
       cv.toBlob(function (bl) { var u = URL.createObjectURL(bl); gridURLs.push(u); slot.href = u; slot.style.backgroundImage = 'url(' + u + ')'; if (tok === gridTok && --left === 0) $('#gridAll').disabled = false; }, 'image/jpeg', .95);
     });
-    $('#gridInfo').textContent = 'Master ' + iw + '×' + ih + ' px' + (cropped ? ', centre-cropped to ' + a.w + ':' + a.h : '') + '. This is how the tiles sit in the feed. Click a tile to save it, or save them all.';
+    $('#gridInfo').textContent = 'Master ' + iw + '×' + ih + ' px' + (cropped ? ', centre-cropped to ' + a.w + ':' + a.h : '') + '. This is how the tiles sit in the feed. Check that no words or products are cut, then click a tile to save it, or save them all.';
   }
   (function () {
     var f = $('#gridFile'); if (!f) return;
